@@ -9,11 +9,11 @@
 [![Contributors](https://img.shields.io/github/contributors/PS-Wizard/VotingSystem)](https://github.com/PS-Wizard/VotingSystem/graphs/contributors)
 [![Build Status](https://img.shields.io/github/actions/workflow/status/PS-Wizard/VotingSystem/build.yml)](https://github.com/PS-Wizard/VotingSystem/actions)
 
-![GoLang](https://img.shields.io/badge/Backend-Golang)
-![tailwind](https://img.shields.io/badge/styling-tailwindcss)
-![htmx](https://img.shields.io/badge/interactivity-htmx)
-![alpine](https://img.shields.io/badge/interactivity-alpine)
-![ahTempl](https://img.shields.io/badge/templating-a/h_templ)
+![GoLang](https://img.shields.io/badge/Golang-red)
+![tailwind](https://img.shields.io/badge/tailwindcss-blue)
+![htmx](https://img.shields.io/badge/htmx-violet)
+![alpine](https://img.shields.io/badge/alpine-purple)
+![ahTempl](https://img.shields.io/badge/h_templ-yellow)
 
 Only Approved Members Are To Push In This Branch. Any and all code pushed in this branch is to be first: 
 
