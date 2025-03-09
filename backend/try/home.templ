@@ -1,0 +1,113 @@
+package try
+
+templ Base(title string) {
+	<!DOCTYPE html>
+	<html lang="en">
+		<head>
+			<meta charset="UTF-8"/>
+			<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+			<title>{ title }</title>
+			<link rel="stylesheet" href="/static/output.css"/>
+		</head>
+		<body>
+			{ children... }
+			<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+		</body>
+	</html>
+}
+
+templ Graph() {
+	<div class="p-6 bg-black rounded-2xl shadow-lg w-full max-w-lg border-2 border-stone-800">
+		<h2 class="text-gray-200 text-lg font-semibold mb-4">Analytics</h2>
+		<div class="relative w-full h-64">
+			<canvas id="analyticsChart" class="absolute top-0 left-0 w-full h-full"></canvas>
+		</div>
+	</div>
+	<script>
+        document.addEventListener("DOMContentLoaded", function () {
+            const chartData = {
+                labels: ["", "", "", "", "", ""], // Empty labels to remove months
+                dataPoints: [200, 450, 300, 600, 800, 1200]
+            };
+
+            const ctx = document.getElementById("analyticsChart").getContext("2d");
+
+            new Chart(ctx, {
+                type: "line",
+                data: {
+                    labels: chartData.labels,
+                    datasets: [{
+                        data: chartData.dataPoints,
+                        borderColor: "#62c073", // Green plot line
+                        backgroundColor: "#62c073", // Green plot background
+                        fill: false,
+                        tension: 0.4,
+                        pointRadius: 3,
+                        pointBackgroundColor: "#fff", // White dots
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: true,
+                    plugins: {
+                        legend: { display: false }, // Hide legend
+                        tooltip: {
+                            backgroundColor: "#1F2937",
+                            titleColor: "#F9FAFB",
+                            bodyColor: "#D1D5DB",
+                            displayColors: false,
+                            padding: 10,
+                            callbacks: {
+                                label: (tooltipItem) => ` ${tooltipItem.raw} visitors` // Tooltip shows exact value
+                            }
+                        },
+                    },
+                    layout: {
+                        backgroundColor: "#000000", // Chart background black
+                    },
+                    scales: {
+                        x: {
+                            grid: { display: false },
+                            ticks: { display: false }, // Hide X-axis labels
+                        },
+                        y: {
+                            grid: { color: "rgba(255, 255, 255, 0.1)" },
+                            ticks: { color: "#9CA3AF" },
+                        },
+                    },
+                },
+            });
+        });
+    </script>
+}
+
+templ SignupForm() {
+	@Base("Login") {
+		<form class="flex flex-col gap-4 p-6 bg-black text-white shadow-lg rounded-xl w-96 border border-gray-800 absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2" method="POST" action="/auth/newuser">
+			<h2 class="text-2xl font-semibold text-center">Create Account</h2>
+			<input class="p-3 bg-gray-950 border border-gray-700 rounded-lg focus:outline-none focus:ring-2 focus:ring-gray-500" type="text" name="voterid" placeholder="Voter ID" required/>
+			<input class="p-3 bg-gray-950 border border-gray-700 rounded-lg focus:outline-none focus:ring-2 focus:ring-gray-500" type="password" name="password" placeholder="Password" required/>
+			<button class="bg-white text-black py-2 rounded-lg hover:opacity-80 transition" type="submit">Sign Up</button>
+			<p class="text-gray-500 text-center text-sm">Already have an account? <a href="/login" class="text-gray-300 hover:underline">Log in</a></p>
+		</form>
+	}
+}
+
+templ LoginForm() {
+	@Base("Login") {
+		<form class="flex flex-col gap-4 p-6 bg-black text-white shadow-lg rounded-xl w-96 border border-gray-800 absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2" method="POST" action="/auth/login">
+			<h2 class="text-2xl font-semibold text-center">Sign In</h2>
+			<input class="p-3 bg-gray-950 border border-gray-700 rounded-lg focus:outline-none focus:ring-2 focus:ring-gray-500" type="text" name="voterid" placeholder="Voter ID" required/>
+			<input class="p-3 bg-gray-950 border border-gray-700 rounded-lg focus:outline-none focus:ring-2 focus:ring-gray-500" type="password" name="password" placeholder="Password" required/>
+			<button class="bg-white text-black py-2 rounded-lg hover:opacity-80 transition" type="submit">Login</button>
+			<p class="text-gray-500 text-center text-sm">New here? <a href="/signup" class="text-gray-300 hover:underline">Create an account</a></p>
+		</form>
+	}
+}
+
+templ Home() {
+	@Base("Home Page") {
+        <h1 class="text-center font-6xl"> Welcome Back G! </h1>
+        @Graph()
+	}
+}
