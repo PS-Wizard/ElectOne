@@ -11,6 +11,7 @@ type LoginRequest struct {
 	Password string `json:"password"`
 }
 
+// TODO: Need More Validation
 type SignUpRequest struct {
 	VoterID  string `json:"voterid"`
 	Phone    string `json:"phone"`
