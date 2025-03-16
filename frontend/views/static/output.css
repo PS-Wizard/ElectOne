@@ -7,7 +7,6 @@
     'Noto Color Emoji';
     --font-mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, 'Liberation Mono', 'Courier New',
     monospace;
-    --color-blue-200: oklch(0.882 0.059 254.128);
     --color-blue-500: oklch(0.623 0.214 259.815);
     --color-blue-600: oklch(0.546 0.245 262.881);
     --color-indigo-600: oklch(0.511 0.262 276.966);
@@ -35,8 +34,6 @@
     --text-5xl--line-height: 1;
     --text-7xl: 4.5rem;
     --text-7xl--line-height: 1;
-    --text-8xl: 6rem;
-    --text-8xl--line-height: 1;
     --font-weight-medium: 500;
     --font-weight-semibold: 600;
     --font-weight-bold: 700;
@@ -259,9 +256,6 @@
   .-m-1\.5 {
     margin: calc(var(--spacing) * -1.5);
   }
-  .m-4 {
-    margin: calc(var(--spacing) * 4);
-  }
   .mx-auto {
     margin-inline: auto;
   }
@@ -338,9 +332,6 @@
   .cursor-pointer {
     cursor: pointer;
   }
-  .flex-col {
-    flex-direction: column;
-  }
   .items-center {
     align-items: center;
   }
@@ -350,9 +341,6 @@
   .justify-center {
     justify-content: center;
   }
-  .gap-10 {
-    gap: calc(var(--spacing) * 10);
-  }
   .gap-x-6 {
     column-gap: calc(var(--spacing) * 6);
   }
@@ -361,9 +349,6 @@
   }
   .rounded {
     border-radius: 0.25rem;
-  }
-  .rounded-full {
-    border-radius: calc(infinity * 1px);
   }
   .rounded-lg {
     border-radius: var(--radius-lg);
@@ -380,9 +365,6 @@
   }
   .bg-black {
     background-color: var(--color-black);
-  }
-  .bg-blue-200 {
-    background-color: var(--color-blue-200);
   }
   .bg-blue-500 {
     background-color: var(--color-blue-500);
@@ -413,9 +395,6 @@
   }
   .p-3 {
     padding: calc(var(--spacing) * 3);
-  }
-  .p-4 {
-    padding: calc(var(--spacing) * 4);
   }
   .p-6 {
     padding: calc(var(--spacing) * 6);
@@ -454,10 +433,6 @@
   .text-5xl {
     font-size: var(--text-5xl);
     line-height: var(--tw-leading, var(--text-5xl--line-height));
-  }
-  .text-8xl {
-    font-size: var(--text-8xl);
-    line-height: var(--tw-leading, var(--text-8xl--line-height));
   }
   .text-lg {
     font-size: var(--text-lg);
@@ -499,9 +474,6 @@
   }
   .text-black {
     color: var(--color-black);
-  }
-  .text-blue-200 {
-    color: var(--color-blue-200);
   }
   .text-gray-300 {
     color: var(--color-gray-300);

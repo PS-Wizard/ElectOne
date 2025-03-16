@@ -54,7 +54,8 @@ func HandleLogin(w http.ResponseWriter, r *http.Request) {
 				HttpOnly: true,
 			})
 
-			http.Redirect(w, r, "/dashboard", http.StatusFound)
+			w.Write([]byte("Success"))
+			w.WriteHeader(http.StatusOK)
 			return
 		}
 	}
