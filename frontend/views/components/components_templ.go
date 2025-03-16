@@ -60,7 +60,7 @@ func Base(title string, nav bool) templ.Component {
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
-		templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 4, "</div><script src=\"https://unpkg.com/swup@4\"></script><script src=\"/static/static.js\"></script></body></html>")
+		templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 4, "</div><script src=\"https://cdnjs.cloudflare.com/ajax/libs/swup/4.8.1/Swup.umd.js\"></script><script src=\"/static/static.js\"></script></body></html>")
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
