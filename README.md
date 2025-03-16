@@ -4,12 +4,10 @@ Any feature anyone is working on is to be pushed here. Later after review from t
 
 # 1st Sprint Concerns:
 
-## Business Analyst:
 - [ ] Research On How Elections Are Actually Done.
 - [ ] UML Diagrams
 - [ ] Scoping
-- [ ] Sanity checks on each design made for functional testing.
-- [ ] Challenge any & all members on their work.
+- [] Sanity checks on each design made for functional testing.
 
 
 ## FrontEnd :
@@ -26,7 +24,4 @@ Any feature anyone is working on is to be pushed here. Later after review from t
 - [x] Basic Authentication API 
 - [] Database Schema From Business Analyst
 - [ ] Figure out websockets for real-time counts
-
-## Project Manager:
-- [ ] Validate And Port Over Any Components Made By The Designers to the tech stack.
 
