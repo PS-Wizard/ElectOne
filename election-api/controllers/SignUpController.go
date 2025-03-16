@@ -10,7 +10,6 @@ import (
 )
 
 var db = []models.SignUpRequest{}
-
 func HandleSignup(w http.ResponseWriter, r *http.Request) {
 	var req models.SignUpRequest
 	err := json.NewDecoder(r.Body).Decode(&req)

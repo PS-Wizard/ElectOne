@@ -54,12 +54,13 @@ func HandleLogin(w http.ResponseWriter, r *http.Request) {
 				HttpOnly: true,
 			})
 
+			w.Write([]byte("Success"))
 			w.WriteHeader(http.StatusOK)
-			w.Write([]byte("login successful"))
 			return
 		}
 	}
 	http.Error(w, "Invalid Credentials", http.StatusUnauthorized)
+	http.Redirect(w, r, "/login?error=invalid", http.StatusUnauthorized)
 }
 
 func generateJWT(voterID string) (string, error) {

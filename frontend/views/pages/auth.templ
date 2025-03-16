@@ -1,0 +1,15 @@
+package pages
+
+import "github.com/PS-Wizard/Plugs/views/components"
+
+templ Authentication(login bool) {
+	if login {
+		@components.Base("Login", false) {
+			@components.Auth(login)
+		}
+	} else {
+		@components.Base("Sign Up", false) {
+			@components.Auth(login)
+		}
+	}
+}
