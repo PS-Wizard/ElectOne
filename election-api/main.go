@@ -10,7 +10,7 @@ import (
 func main() {
 	mux := http.NewServeMux()
 	routes.HandleAPIRoutes(mux)
-	fmt.Println("Listening On Port :8080")
-	http.ListenAndServe(":8080", mux)
+	fmt.Println("Listening On Port :8081")
+	http.ListenAndServe(":8081", mux)
 
 }
