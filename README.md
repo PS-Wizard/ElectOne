@@ -22,12 +22,11 @@ Any feature anyone is working on is to be pushed here. Later after review from t
 - [ ] Mock Mobile & Tablet view ( i.e just make it responsive )
 
 ## Backend:
-- [ ] Basic Routes
-- [ ] Basic Authentication API 
-- [ ] Database Schema From Business Analyst
+- [x] Basic Routes
+- [x] Basic Authentication API 
+- [] Database Schema From Business Analyst
 - [ ] Figure out websockets for real-time counts
 
 ## Project Manager:
 - [ ] Validate And Port Over Any Components Made By The Designers to the tech stack.
-- [ ] Challenge any & all members on their work.
 
