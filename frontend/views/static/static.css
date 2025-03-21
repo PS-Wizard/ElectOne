@@ -1,0 +1,23 @@
+@import url('https://fonts.googleapis.com/css2?family=Geist:wght@100..900&display=swap');
+@import "tailwindcss";
+@theme{
+    --color-bg-primary: #000000;
+    --color-bg-secondary: #0a0a0a;
+    --color-fg-primary: #FFFFFF;
+    --color-fg-secondary: #EDEDED;
+    --color-accent-1: #FFB224;
+}
+
+html {
+    background-color:#000;
+    color:#fff;
+    font-family: "Geist",sans-serif;
+}
+
+.grid-bg {
+  background-color: #000;
+  background-image: linear-gradient(rgba(255, 255, 255, 0.1) 1px, transparent 1px), linear-gradient(90deg, rgba(255, 255, 255, 0.1) 1px, transparent 1px);
+  background-size: 40px 40px;
+  position: relative;
+  overflow: hidden;
+}
