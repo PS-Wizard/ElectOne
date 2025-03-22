@@ -12,7 +12,7 @@ import (
 )
 
 type SignupRequest struct {
-	CitizenID string `json:"citizenid"`
+	CitizenID string `json:"citizen_id"`
 	Password  string `json:"password"`
 	Phone     string `json:"phone"`
 }
@@ -22,7 +22,7 @@ func (sr *SignupRequest) NewUser() error {
 	if err != nil {
 		return fmt.Errorf("failed to hash password: %v", err)
 	}
-	query := `INSERT INTO users (citizenid, password, phone) VALUES (?, ?, ?)`
+	query := `INSERT INTO users (citizen_id, password, phone) VALUES (?, ?, ?)`
 	_, err = db.DB.Exec(query, sr.CitizenID, hashedPassword, sr.Phone)
 	if err != nil {
 		if strings.Contains(err.Error(), "UNIQUE constraint failed") {

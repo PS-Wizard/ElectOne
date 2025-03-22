@@ -13,7 +13,7 @@ import (
 )
 
 type LoginRequest struct {
-	CitizenID string `json:"citizenid"`
+	CitizenID string `json:"citizen_id"`
 	Password  string `json:"password"`
 }
 
@@ -25,7 +25,7 @@ var jwtSecret = []byte("supersecret69420")
 
 func (lr *LoginRequest) GenerateJWT() (string, error) {
 	claims := jwt.MapClaims{
-		"citizenid": lr.CitizenID,
+		"citizen_id": lr.CitizenID,
 		"exp":       time.Now().Add(time.Hour * 24).Unix(),
 	}
 	token := jwt.NewWithClaims(jwt.SigningMethodHS256, claims)
@@ -35,7 +35,7 @@ func (lr *LoginRequest) GenerateJWT() (string, error) {
 
 func (lr *LoginRequest) LoginUser() error {
 	var hashedPassword string
-	query := "SELECT password FROM users WHERE citizenid = ?"
+	query := "SELECT password FROM users WHERE citizen_id = ?"
 	err := db.DB.QueryRow(query, lr.CitizenID).Scan(&hashedPassword)
 	if err != nil {
 		if err == sql.ErrNoRows {
