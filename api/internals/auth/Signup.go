@@ -7,6 +7,7 @@ import (
 	"strings"
 
 	"github.com/PS-Wizard/VotingSystem/db"
+	"github.com/PS-Wizard/VotingSystem/utils"
 	_ "github.com/tursodatabase/libsql-client-go/libsql"
 	"golang.org/x/crypto/bcrypt"
 )
@@ -40,13 +41,13 @@ func SignupHandler(w http.ResponseWriter, r *http.Request) {
 	var signUpReq SignupRequest
 	err := json.NewDecoder(r.Body).Decode(&signUpReq)
 	if err != nil {
-		jsonError(w, "Invalid Request Body", http.StatusBadRequest)
+		utils.JsonError(w, "Invalid Request Body", http.StatusBadRequest)
 		return
 	}
 
 	err = signUpReq.NewUser()
 	if err != nil {
-		jsonError(w, err.Error(), http.StatusUnauthorized)
+		utils.JsonError(w, err.Error(), http.StatusUnauthorized)
 		return
 	}
 

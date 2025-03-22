@@ -4,12 +4,14 @@ import (
 	"database/sql"
 	"encoding/json"
 	"fmt"
+	"net/http"
+	"time"
+
 	"github.com/PS-Wizard/VotingSystem/db"
+	"github.com/PS-Wizard/VotingSystem/utils"
 	"github.com/golang-jwt/jwt/v5"
 	_ "github.com/tursodatabase/libsql-client-go/libsql"
 	"golang.org/x/crypto/bcrypt"
-	"net/http"
-	"time"
 )
 
 type LoginRequest struct {
@@ -26,7 +28,7 @@ var jwtSecret = []byte("supersecret69420")
 func (lr *LoginRequest) GenerateJWT() (string, error) {
 	claims := jwt.MapClaims{
 		"citizen_id": lr.CitizenID,
-		"exp":       time.Now().Add(time.Hour * 24).Unix(),
+		"exp":        time.Now().Add(time.Hour * 24).Unix(),
 	}
 	token := jwt.NewWithClaims(jwt.SigningMethodHS256, claims)
 	return token.SignedString(jwtSecret)
@@ -52,30 +54,24 @@ func (lr *LoginRequest) LoginUser() error {
 	return nil
 }
 
-func jsonError(w http.ResponseWriter, message string, code int) {
-	w.Header().Set("Content-Type", "application/json")
-	w.WriteHeader(code)
-	json.NewEncoder(w).Encode(map[string]string{"error": message})
-}
-
 func LoginHandler(w http.ResponseWriter, r *http.Request) {
 
 	var loginRequest LoginRequest
 	err := json.NewDecoder(r.Body).Decode(&loginRequest)
 	if err != nil {
-		jsonError(w, "Invalid Request Body", http.StatusBadRequest)
+		utils.JsonError(w, "Invalid Request Body", http.StatusBadRequest)
 		return
 	}
 
 	err = loginRequest.LoginUser()
 	if err != nil {
-		jsonError(w, err.Error(), http.StatusUnauthorized)
+		utils.JsonError(w, err.Error(), http.StatusUnauthorized)
 		return
 	}
 
 	tokenResponse, err := loginRequest.GenerateJWT()
 	if err != nil {
-		jsonError(w, "Can't Produce JWT", http.StatusInternalServerError)
+		utils.JsonError(w, "Can't Produce JWT", http.StatusInternalServerError)
 		return
 	}
 
