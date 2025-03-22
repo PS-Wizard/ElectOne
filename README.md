@@ -12,4 +12,4 @@
 ![alpine](https://img.shields.io/badge/alpine-purple)
 ![ahTempl](https://img.shields.io/badge/h_templ-yellow)
 
-Only Approved Members Are To Push In This Branch. Any and all code pushed in this branch is to be first: 
+Only approved code is to be pushed in this branch, 
