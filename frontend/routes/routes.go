@@ -11,4 +11,11 @@ func HandleRoutes(app *fiber.App) {
 		Graph := pages.Graph()
 		return views.Render(c, Graph)
 	})
+
+	app.Get("/", func(c *fiber.Ctx) error {
+		homePage := pages.Home()
+		return views.Render(c, homePage)
+
+	})
+
 }

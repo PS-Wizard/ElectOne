@@ -42,7 +42,7 @@ func Base(title string) templ.Component {
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
-		templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 2, "</title><!-- For stability in production, it's recommended that you hardcode the latest version in the CDN link. --><link rel=\"stylesheet\" href=\"https://unpkg.com/franken-ui@internal/dist/css/core.min.css\"><link rel=\"stylesheet\" href=\"https://unpkg.com/franken-ui@internal/dist/css/utilities.min.css\"><script>\n              const htmlElement = document.documentElement;\n\n              const __FRANKEN__ = JSON.parse(\n                localStorage.getItem(\"__FRANKEN__\") || \"{}\"\n              );\n\n              if (\n                __FRANKEN__.mode === \"dark\" ||\n                (!__FRANKEN__.mode &&\n                  window.matchMedia(\"(prefers-color-scheme: dark)\").matches)\n              ) {\n                htmlElement.classList.add(\"dark\");\n              } else {\n                htmlElement.classList.remove(\"dark\");\n              }\n\n              htmlElement.classList.add(__FRANKEN__.theme || \"uk-theme-zinc\");\n              htmlElement.classList.add(__FRANKEN__.radii || \"uk-radii-md\");\n              htmlElement.classList.add(__FRANKEN__.shadows || \"uk-shadows-sm\");\n              htmlElement.classList.add(__FRANKEN__.font || \"uk-font-sm\");\n              htmlElement.classList.add(__FRANKEN__.chart || \"uk-chart-default\");\n            </script><script type=\"module\" src=\"https://unpkg.com/franken-ui@internal/dist/js/core.iife.js\"></script><script type=\"module\" src=\"https://unpkg.com/franken-ui@internal/dist/js/icon.iife.js\"></script><script type=\"module\" src=\"https://unpkg.com/franken-ui@internal/dist/js/chart.iife.js\"></script></head><body class=\"bg-background text-foreground\">")
+		templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 2, "</title><!-- For stability in production, it's recommended that you hardcode the latest version in the CDN link. --><link rel=\"stylesheet\" href=\"https://unpkg.com/franken-ui@internal/dist/css/core.min.css\"><link href=\"https://cdn.jsdelivr.net/npm/flowbite@3.1.2/dist/flowbite.min.css\" rel=\"stylesheet\"><script>\n              const htmlElement = document.documentElement;\n\n              const __FRANKEN__ = JSON.parse(\n                localStorage.getItem(\"__FRANKEN__\") || \"{}\"\n              );\n\n              if (\n                __FRANKEN__.mode === \"dark\" ||\n                (!__FRANKEN__.mode &&\n                  window.matchMedia(\"(prefers-color-scheme: dark)\").matches)\n              ) {\n                htmlElement.classList.add(\"dark\");\n              } else {\n                htmlElement.classList.remove(\"dark\");\n              }\n\n              htmlElement.classList.add(__FRANKEN__.theme || \"uk-theme-zinc\");\n              htmlElement.classList.add(__FRANKEN__.radii || \"uk-radii-md\");\n              htmlElement.classList.add(__FRANKEN__.shadows || \"uk-shadows-sm\");\n              htmlElement.classList.add(__FRANKEN__.font || \"uk-font-sm\");\n              htmlElement.classList.add(__FRANKEN__.chart || \"uk-chart-default\");\n            </script><script type=\"module\" src=\"https://unpkg.com/franken-ui@internal/dist/js/core.iife.js\"></script><script type=\"module\" src=\"https://unpkg.com/franken-ui@internal/dist/js/icon.iife.js\"></script><script type=\"module\" src=\"https://unpkg.com/franken-ui@internal/dist/js/chart.iife.js\"></script></head><body class=\"bg-background text-foreground\">")
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
@@ -50,7 +50,62 @@ func Base(title string) templ.Component {
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
-		templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 3, "<!-- END --></body></html>")
+		templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 3, "</body></html>")
+		if templ_7745c5c3_Err != nil {
+			return templ_7745c5c3_Err
+		}
+		return nil
+	})
+}
+
+func Card(title, content string) templ.Component {
+	return templruntime.GeneratedTemplate(func(templ_7745c5c3_Input templruntime.GeneratedComponentInput) (templ_7745c5c3_Err error) {
+		templ_7745c5c3_W, ctx := templ_7745c5c3_Input.Writer, templ_7745c5c3_Input.Context
+		if templ_7745c5c3_CtxErr := ctx.Err(); templ_7745c5c3_CtxErr != nil {
+			return templ_7745c5c3_CtxErr
+		}
+		templ_7745c5c3_Buffer, templ_7745c5c3_IsBuffer := templruntime.GetBuffer(templ_7745c5c3_W)
+		if !templ_7745c5c3_IsBuffer {
+			defer func() {
+				templ_7745c5c3_BufErr := templruntime.ReleaseBuffer(templ_7745c5c3_Buffer)
+				if templ_7745c5c3_Err == nil {
+					templ_7745c5c3_Err = templ_7745c5c3_BufErr
+				}
+			}()
+		}
+		ctx = templ.InitializeContext(ctx)
+		templ_7745c5c3_Var3 := templ.GetChildren(ctx)
+		if templ_7745c5c3_Var3 == nil {
+			templ_7745c5c3_Var3 = templ.NopComponent
+		}
+		ctx = templ.ClearChildren(ctx)
+		templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 4, "<div class=\"uk-card uk-card-body max-w-sm\"><h3 class=\"uk-card-title\">")
+		if templ_7745c5c3_Err != nil {
+			return templ_7745c5c3_Err
+		}
+		var templ_7745c5c3_Var4 string
+		templ_7745c5c3_Var4, templ_7745c5c3_Err = templ.JoinStringErrs(title)
+		if templ_7745c5c3_Err != nil {
+			return templ.Error{Err: templ_7745c5c3_Err, FileName: `views/components/components.templ`, Line: 51, Col: 35}
+		}
+		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(templ_7745c5c3_Var4))
+		if templ_7745c5c3_Err != nil {
+			return templ_7745c5c3_Err
+		}
+		templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 5, "</h3><p class=\"mt-4\">")
+		if templ_7745c5c3_Err != nil {
+			return templ_7745c5c3_Err
+		}
+		var templ_7745c5c3_Var5 string
+		templ_7745c5c3_Var5, templ_7745c5c3_Err = templ.JoinStringErrs(content)
+		if templ_7745c5c3_Err != nil {
+			return templ.Error{Err: templ_7745c5c3_Err, FileName: `views/components/components.templ`, Line: 53, Col: 12}
+		}
+		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(templ_7745c5c3_Var5))
+		if templ_7745c5c3_Err != nil {
+			return templ_7745c5c3_Err
+		}
+		templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 6, "</p></div>")
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
