@@ -1,0 +1,51 @@
+package components
+
+templ Base(title string) {
+	<!DOCTYPE html>
+	<html lang="en">
+		<head>
+			<meta charset="utf-8"/>
+			<meta name="viewport" content="width=device-width"/>
+			<title>{ title }</title>
+			<!-- For stability in production, it's recommended that you hardcode the latest version in the CDN link. -->
+			<link
+				rel="stylesheet"
+				href="https://unpkg.com/franken-ui@internal/dist/css/core.min.css"
+			/>
+			<link
+				rel="stylesheet"
+				href="https://unpkg.com/franken-ui@internal/dist/css/utilities.min.css"
+			/>
+			<script>
+              const htmlElement = document.documentElement;
+
+              const __FRANKEN__ = JSON.parse(
+                localStorage.getItem("__FRANKEN__") || "{}"
+              );
+
+              if (
+                __FRANKEN__.mode === "dark" ||
+                (!__FRANKEN__.mode &&
+                  window.matchMedia("(prefers-color-scheme: dark)").matches)
+              ) {
+                htmlElement.classList.add("dark");
+              } else {
+                htmlElement.classList.remove("dark");
+              }
+
+              htmlElement.classList.add(__FRANKEN__.theme || "uk-theme-zinc");
+              htmlElement.classList.add(__FRANKEN__.radii || "uk-radii-md");
+              htmlElement.classList.add(__FRANKEN__.shadows || "uk-shadows-sm");
+              htmlElement.classList.add(__FRANKEN__.font || "uk-font-sm");
+              htmlElement.classList.add(__FRANKEN__.chart || "uk-chart-default");
+            </script>
+			<script type="module" src="https://unpkg.com/franken-ui@internal/dist/js/core.iife.js"></script>
+			<script type="module" src="https://unpkg.com/franken-ui@internal/dist/js/icon.iife.js"></script>
+			<script type="module" src="https://unpkg.com/franken-ui@internal/dist/js/chart.iife.js"></script>
+		</head>
+		<body class="bg-background text-foreground">
+			{ children... }
+			<!-- END -->
+		</body>
+	</html>
+}

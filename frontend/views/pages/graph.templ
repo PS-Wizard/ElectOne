@@ -1,0 +1,164 @@
+package pages
+
+import "github.com/PS-Wizard/VotingSystemUI/views/components"
+
+templ Graph() {
+	@components.Base("Graph") {
+		<div class="uk-container mt-40 gap-5">
+			<div class="uk-chart-container max-w-md">
+				<div class="p-4">
+					<div class="uk-card-title">Area Chart - Smooth</div>
+					<div class="uk-text-sm mt-2">January - June 2024</div>
+				</div>
+				<div class="px-4">
+					<uk-chart reactive>
+						<script type="application/json" id="chartData">
+        {
+          "series": [
+            {
+              "name": "Desktops",
+              "data": [186, 305, 237, 73, 209, 214]
+            }
+          ],
+          "chart": {
+            "type": "area",
+            "zoom": {
+              "enabled": false
+            },
+            "toolbar": {
+              "show": false
+            }
+          },
+          "dataLabels": {
+            "enabled": false
+          },
+          "stroke": {
+            "curve": "smooth",
+            "width": 2
+          },
+          "colors": ["hsl(var(--chart-1))"],
+          "grid": {
+            "row": {
+              "colors": []
+            },
+            "borderColor": "hsl(var(--border))"
+          },
+          "xaxis": {
+            "categories": ["Jan", "Feb", "Mar", "Apr", "May", "Jun"],
+            "tooltip": {
+              "enabled": false
+            },
+            "labels": {
+              "style": {
+                "colors": "hsl(var(--muted-foreground))"
+              }
+            },
+            "axisBorder": {
+              "show": false
+            },
+            "axisTicks": {
+              "show": false
+            }
+          },
+          "yaxis": {
+            "labels": {
+              "show": false
+            }
+          },
+          "tooltip": {
+            "title": {
+              "show": false
+            }
+          }
+        }
+      </script>
+					</uk-chart>
+				</div>
+				<div class="p-4">
+					<div class="flex items-center gap-x-2 font-medium leading-none">
+						Trending up by 5.2% this month
+						<uk-icon icon="trending-up"></uk-icon>
+					</div>
+					<div class="text-muted-foreground mt-2 leading-none">
+						Showing total visitors for the last 6 months
+					</div>
+				</div>
+			</div>
+		</div>
+		<script>
+			// Function to generate random data
+			function generateRandomData() {
+				return Array.from({ length: 6 }, () => Math.floor(Math.random() * 500)); // 6 random values between 0 and 500
+			}
+
+			// Function to update chart data with new random data
+			function updateChartData() {
+				const newChartData = {
+					"series": [
+						{
+							"name": "Desktops",
+							"data": generateRandomData() // Get random data
+						}
+					],
+					"chart": {
+						"type": "area",
+						"zoom": {
+							"enabled": false
+						},
+						"toolbar": {
+							"show": false
+						}
+					},
+					"dataLabels": {
+						"enabled": false
+					},
+					"stroke": {
+						"curve": "smooth",
+						"width": 2
+					},
+					"colors": ["hsl(var(--chart-1))"],
+					"grid": {
+						"row": {
+							"colors": []
+						},
+						"borderColor": "hsl(var(--border))"
+					},
+					"xaxis": {
+						"categories": ["Jan", "Feb", "Mar", "Apr", "May", "Jun"],
+						"tooltip": {
+							"enabled": false
+						},
+						"labels": {
+							"style": {
+								"colors": "hsl(var(--muted-foreground))"
+							}
+						},
+						"axisBorder": {
+							"show": false
+						},
+						"axisTicks": {
+							"show": false
+						}
+					},
+					"yaxis": {
+						"labels": {
+							"show": false
+						}
+					},
+					"tooltip": {
+						"title": {
+							"show": false
+						}
+					}
+				};
+
+				// Update the chart data in the <script> tag
+				const chartDataScript = document.getElementById('chartData');
+				chartDataScript.textContent = JSON.stringify(newChartData);
+			}
+
+			// Poll every 3 seconds (3000 milliseconds)
+			setInterval(updateChartData, 3000);
+		</script>
+	}
+}
