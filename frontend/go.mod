@@ -3,7 +3,7 @@ module github.com/PS-Wizard/VotingSystemUI
 go 1.24.1
 
 require (
-	github.com/a-h/templ v0.3.850
+	github.com/a-h/templ v0.3.856
 	github.com/gofiber/fiber/v2 v2.52.6
 )
 
