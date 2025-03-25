@@ -1,0 +1,11 @@
+18:29:59 | 200 |  229.857898ms |  | GET | /api/secure/citizens/12-123-12345 | -
+18:30:02 | 200 |    55.96578ms |  | GET | /api/secure/citizensPaginated/0 | -
+18:31:39 | 405 |      37.951µs |  | GET | /api/secure/citizens | Method Not Allowed
+18:31:45 | 400 |       75.21µs |  | POST | /api/secure/citizens | -
+18:32:34 | 201 |  232.465795ms |  | POST | /api/secure/citizens | -
+2025/03/25 18:32:56 Invalid Token
+18:32:56 | 401 |      82.664µs |  | POST | /api/secure/citizens | -
+18:34:32 | 200 |  207.179088ms |  | PUT | /api/secure/citizens/12-123-12334 | -
+18:35:12 | 200 |  101.079109ms |  | DELETE | /api/secure/citizens/12-123-12345 | -
+2025/03/25 18:35:20 Shutting Down Server ...
+2025/03/25 18:35:20 Server Stopped.

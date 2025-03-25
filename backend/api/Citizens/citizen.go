@@ -9,7 +9,7 @@ import (
 	"github.com/PS-Wizard/ElectOneAPI/api"
 )
 
-func GetCitizenByID(citizenID string, db *sql.DB) (*citizen, error) {
+func getCitizenById(citizenID string, db *sql.DB) (*citizen, error) {
 	var citizen citizen
 	query := "SELECT citizenID, fullName, dateOfBirth, placeOfResidence FROM citizens WHERE citizenID = ?"
 	row := db.QueryRow(query, citizenID)
@@ -24,10 +24,10 @@ func GetCitizenByID(citizenID string, db *sql.DB) (*citizen, error) {
 	return &citizen, nil
 }
 
-func GetCitizensPaginated(limit, offset int) ([]citizen, error) {
+func getCitizensPaginated(offset int) ([]citizen, error) {
 	var citizens []citizen
-	query := "SELECT citizenID, fullName, dateOfBirth, placeOfResidence FROM citizens LIMIT $1 OFFSET $2"
-	rows, err := api.DB.Query(query, limit, offset)
+	query := "SELECT citizenID, fullName, dateOfBirth, placeOfResidence FROM citizens LIMIT ? OFFSET ?"
+	rows, err := api.DB.Query(query, 10, offset) // The 10 here is the limit of citizens to fetch each time .
 	if err != nil {
 		return nil, fmt.Errorf("failed to fetch citizens: %v", err)
 	}
