@@ -162,5 +162,4 @@ USERS }|--|| ADMINS : is_admin
 
 ---
 
-
 ![RoutesAndStuff](assets/routesAndStuff.png)

@@ -9,10 +9,10 @@ import (
 	"github.com/PS-Wizard/ElectOneAPI/api"
 )
 
-func getCitizenById(citizenID string, db *sql.DB) (*citizen, error) {
+func getCitizenById(citizenID string) (*citizen, error) {
 	var citizen citizen
 	query := "SELECT citizenID, fullName, dateOfBirth, placeOfResidence FROM citizens WHERE citizenID = ?"
-	row := db.QueryRow(query, citizenID)
+	row := api.DB.QueryRow(query, citizenID)
 	err := row.Scan(&citizen.CitizenID, &citizen.Name, &citizen.DOB, &citizen.POR)
 	if err != nil {
 		if err == sql.ErrNoRows {
@@ -46,4 +46,31 @@ func getCitizensPaginated(offset int) ([]citizen, error) {
 	}
 	return citizens, nil
 
+}
+
+func createNewCitizen(citizen citizen) error {
+	query := "INSERT INTO citizens (citizenID, fullName, dateOfBirth, placeOfResidence) VALUES (?, ?, ?, ?)"
+	_, err := api.DB.Exec(query, citizen.CitizenID, citizen.Name, citizen.DOB, citizen.POR)
+	if err != nil {
+		return fmt.Errorf("Failed to insert citizen details: %v", err)
+	}
+	return nil
+}
+
+func updateCitizenDetails(citizen citizen, citizenID string) error {
+	query := "UPDATE citizens SET fullName = ?, dateOfBirth = ?, placeOfResidence = ? WHERE citizenID = ?"
+	_, err := api.DB.Exec(query, citizen.Name, citizen.DOB, citizen.POR, citizenID)
+	if err != nil {
+		return fmt.Errorf("Failed to update citizen details: %v", err)
+	}
+	return nil
+}
+
+func deleteCitizen(citizenID string) error {
+	query := "DELETE FROM citizens WHERE citizenID = ?"
+	_, err := api.DB.Exec(query, citizenID)
+	if err != nil {
+		return fmt.Errorf("Failed to delete citizen: %v", err)
+	}
+	return nil
 }

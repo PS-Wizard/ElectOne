@@ -3,7 +3,6 @@ package citizens
 import (
 	"log"
 
-	"github.com/PS-Wizard/ElectOneAPI/api"
 	"github.com/gofiber/fiber/v2"
 )
 
@@ -15,7 +14,7 @@ func HandleSearch(ctx *fiber.Ctx) error {
 		})
 	}
 
-	citizen, err := getCitizenById(citizenID, api.DB)
+	citizen, err := getCitizenById(citizenID)
 	if err != nil {
 		log.Println("Error Fetching Citizen: ", err)
 		return ctx.Status(fiber.StatusBadRequest).JSON(fiber.Map{
@@ -45,15 +44,13 @@ func HandleCreate(ctx *fiber.Ctx) error {
 			"error": "Invalid request body",
 		})
 	}
-
-	query := "INSERT INTO citizens (citizenID, fullName, dateOfBirth, placeOfResidence) VALUES (?, ?, ?, ?)"
-	_, err := api.DB.Exec(query, citizen.CitizenID, citizen.Name, citizen.DOB, citizen.POR)
+	err := createNewCitizen(citizen)
 	if err != nil {
+		log.Printf("Error in HandleCreate: %v", err)
 		return ctx.Status(fiber.StatusInternalServerError).JSON(fiber.Map{
 			"error": "Failed to create citizen",
 		})
 	}
-
 	return ctx.Status(fiber.StatusCreated).JSON(fiber.Map{
 		"message": "Citizen created successfully",
 	})
@@ -74,9 +71,9 @@ func HandleUpdate(ctx *fiber.Ctx) error {
 		})
 	}
 
-	query := "UPDATE citizens SET fullName = ?, dateOfBirth = ?, placeOfResidence = ? WHERE citizenID = ?"
-	_, err := api.DB.Exec(query, citizen.Name, citizen.DOB, citizen.POR, citizenID)
+	err := updateCitizenDetails(citizen, citizenID)
 	if err != nil {
+		log.Printf("Error in updateCitizenDetails: %v", err)
 		return ctx.Status(fiber.StatusInternalServerError).JSON(fiber.Map{
 			"error": "Failed to update citizen",
 		})
@@ -94,16 +91,15 @@ func HandleDelete(ctx *fiber.Ctx) error {
 			"error": "Citizen ID is required",
 		})
 	}
-
-	query := "DELETE FROM citizens WHERE citizenID = ?"
-	_, err := api.DB.Exec(query, citizenID)
+	err := deleteCitizen(citizenID)
 	if err != nil {
+		log.Printf("Error in deleteCitizen: %v", err)
 		return ctx.Status(fiber.StatusInternalServerError).JSON(fiber.Map{
 			"error": "Failed to delete citizen",
 		})
 	}
-
 	return ctx.JSON(fiber.Map{
 		"message": "Citizen deleted successfully",
 	})
 }
+
