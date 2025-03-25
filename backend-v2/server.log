@@ -1,0 +1,8 @@
+09:49:35 | 200 |       4.088µs |  | GET | /api/secure/citizens | -
+2025/03/25 09:49:40 Error Fetching Citizen:  citizen not found
+09:49:39 | 400 |  222.373229ms |  | GET | /api/secure/citizens/1 | -
+09:49:52 | 200 |   89.147919ms |  | GET | /api/secure/citizens/12-123-12345 | -
+2025/03/25 09:50:01 Invalid Token
+09:50:01 | 401 |      83.848µs |  | GET | /api/secure/citizens/12-123-12345 | -
+2025/03/25 09:50:33 Shutting Down Server ...
+2025/03/25 09:50:33 Server Stopped.

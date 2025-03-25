@@ -4,6 +4,7 @@
 
 Dependencies:
     - `a-h/templ`: (Check Here For Installation)[https://templ.guide/quick-start/installation], Grab the latest binary (available here)[https://github.com/a-h/templ/releases/tag/v0.3.856]
+    - Install Golang
 
 To Run:
     Try: `make run`, if windows based, in a terminal run 
