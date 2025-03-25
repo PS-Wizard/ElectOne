@@ -1,12 +1,39 @@
-# Main Branch
+A more secure, and performant port of the previous API.
 
-### Installation Guide:
+```mermaid
+erDiagram
+    CITIZENS {
+        VARCHAR citizenID PK "Citizen ID"
+        VARCHAR fullName "Full Name"
+        DATE dateOfBirth "Date of Birth"
+        TEXT placeOfResidence "Place of Residence"
+    }
+    USERS {
+        INTEGER userID PK "User ID"
+        VARCHAR citizenID FK "Citizen ID"
+        VARCHAR password "Password"
+    }
+    ADMINS {
+        INTEGER adminID PK "Admin ID"
+        VARCHAR email "Email"
+        VARCHAR password "Password"
+    }
+    ELECTIONS {
+        INTEGER electionID PK "Election ID"
+        VARCHAR title "Title"
+        DATE startDate "Start Date"
+        DATE endDate "End Date"
+        VARCHAR votingRestrictions "Voting Restrictions"
+    }
+    CANDIDATES {
+        INTEGER candidateID PK "Candidate ID"
+        VARCHAR citizenID FK "Citizen ID"
+        VARCHAR post "Post"
+        INTEGER electionID FK "Election ID"
+    }
 
-Dependencies:
-    - `a-h/templ`: (Check Here For Installation)[https://templ.guide/quick-start/installation], Grab the latest binary (available here)[https://github.com/a-h/templ/releases/tag/v0.3.856]
-    - Install Golang
-
-To Run:
-    Try: `make run`, if windows based, in a terminal run 
-    `templ generate --watch --proxybind="http://0.0.0.0:3000" --cmd="go run ." & tailwindcss -i ./views/static/static.css -o ./views/static/output.css --watch`
-
+    CITIZENS ||--o| USERS : has
+    CITIZENS ||--o| CANDIDATES : is_citizen_of
+    ELECTIONS ||--o| CANDIDATES : has_election
+    USERS }|--|| ADMINS : is_admin
+```
