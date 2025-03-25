@@ -1,5 +1,6 @@
-18:29:59 | 200 |  229.857898ms |  | GET | /api/secure/citizens/12-123-12345 | -
-18:30:02 | 200 |    55.96578ms |  | GET | /api/secure/citizensPaginated/0 | -
+2025/03/25 18:53:51 Shutting Down Server ...
+2025/03/25 18:53:51 Server Stopped.
+8:30:02 | 200 |    55.96578ms |  | GET | /api/secure/citizensPaginated/0 | -
 18:31:39 | 405 |      37.951µs |  | GET | /api/secure/citizens | Method Not Allowed
 18:31:45 | 400 |       75.21µs |  | POST | /api/secure/citizens | -
 18:32:34 | 201 |  232.465795ms |  | POST | /api/secure/citizens | -
