@@ -93,4 +93,4 @@ USERS }|--|| ADMINS : is_admin
 
 # API Routes:
 [Postman Collection](./rester-export-postman.json)
-![routes](assets/routes.png)
+![routes](./images/routes.png)
