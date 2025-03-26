@@ -1,0 +1,24 @@
+2025/03/25 22:10:08 Shutting Down Server ...
+2025/03/25 22:10:08 Server Stopped.
+:05:43 Shutting Down Server ...
+2025/03/25 22:05:43 Server Stopped.
+  501.033974ms |  | POST | /api/secure/user | -
+21:57:53 | 201 |  129.358162ms |  | POST | /api/secure/user | -
+21:58:03 | 200 |    52.11495ms |  | GET | /api/secure/usersPaginated/0 | -
+21:59:25 | 405 |      44.143µs |  | POST | /api/secure/user/12-123-12334 | Method Not Allowed
+21:59:31 | 200 |   49.533427ms |  | PUT | /api/secure/user/12-123-12334 | -
+22:00:36 | 200 |   50.404838ms |  | PUT | /api/secure/user/12-123-12334 | -
+2025/03/25 22:01:40 Error in HandleUpdate: failed to update user: failed to execute SQL:
+SQLite error: FOREIGN KEY constraint failed
+22:01:40 | 500 |   53.179556ms |  | PUT | /api/secure/user/1 | -
+2025/03/25 22:02:05 Error in HandleUpdate: failed to update user: failed to execute SQL:
+SQLite error: FOREIGN KEY constraint failed
+22:02:04 | 500 |  394.034478ms |  | PUT | /api/secure/user/1 | -
+22:02:39 | 200 |  140.495256ms |  | PUT | /api/secure/user/1 | -
+22:04:37 | 200 |  213.119153ms |  | GET | /api/secure/user/1 | -
+22:04:42 | 404 |   95.032757ms |  | GET | /api/secure/user/2 | -
+22:04:45 | 200 |    54.16262ms |  | GET | /api/secure/user/1 | -
+22:05:07 | 200 |   55.686738ms |  | GET | /api/secure/user/1 | -
+22:05:26 | 405 |      41.267µs |  | DELETE | /api/secure/user/1 | Method Not Allowed
+2025/03/25 22:05:36 Shutting Down Server ...
+2025/03/25 22:05:36 Server Stopped.

@@ -1,0 +1,3504 @@
+{
+    "info": {
+        "name": "RESTer",
+        "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+    },
+    "item": [
+        {
+            "name": "ElectOne",
+            "item": [
+                {
+                    "request": {
+                        "url": "0.0.0.0:3000/api/secure/citizens",
+                        "method": "POST",
+                        "header": [
+                            {
+                                "key": "Authorization",
+                                "value": "Bearer adminsecrettoken"
+                            },
+                            {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\n    \"citizenID\": \"12-123-12334\",\n    \"fullName\": \"Alice Johnson\",\n    \"dateOfBirth\": \"1995-03-22\",\n    \"placeOfResidence\": \"Chicago\"\n}\n\n"
+                        }
+                    },
+                    "id": "rester-10",
+                    "name": "CreateCitizen",
+                    "response": [
+                        {
+                            "id": "rester-47",
+                            "name": "2025-03-25T15:41:18.969Z CreateCitizen",
+                            "originalRequest": {
+                                "url": "0.0.0.0:3000/api/secure/citizens",
+                                "method": "POST",
+                                "header": [
+                                    {
+                                        "key": "Authorization",
+                                        "value": "Bearer adminsecrettoken"
+                                    },
+                                    {
+                                        "key": "Content-Type",
+                                        "value": "application/json"
+                                    }
+                                ],
+                                "body": {
+                                    "mode": "raw",
+                                    "raw": "{\n    \"citizenID\": \"62-123-12334\",\n    \"fullName\": \"Alice Johnson\",\n    \"dateOfBirth\": \"1995-03-22\",\n    \"placeOfResidence\": \"Chicago\"\n}\n\n"
+                                }
+                            },
+                            "responseTime": 131,
+                            "header": [
+                                {
+                                    "key": "Server",
+                                    "value": "ElectOneAPI"
+                                },
+                                {
+                                    "key": "Date",
+                                    "value": "Tue, 25 Mar 2025 15:41:18 GMT"
+                                },
+                                {
+                                    "key": "Content-Type",
+                                    "value": "application/json"
+                                },
+                                {
+                                    "key": "Content-Length",
+                                    "value": "42"
+                                }
+                            ],
+                            "body": "{\"message\":\"Citizen created successfully\"}",
+                            "status": "Created",
+                            "code": 201
+                        },
+                        {
+                            "id": "rester-46",
+                            "name": "2025-03-25T15:40:42.879Z CreateCitizen",
+                            "originalRequest": {
+                                "url": "0.0.0.0:3000/api/secure/citizens",
+                                "method": "POST",
+                                "header": [
+                                    {
+                                        "key": "Authorization",
+                                        "value": "Bearer adminsecrettoken"
+                                    },
+                                    {
+                                        "key": "Content-Type",
+                                        "value": "application/json"
+                                    }
+                                ],
+                                "body": {
+                                    "mode": "raw",
+                                    "raw": "{\n    \"citizenID\": \"12-123-12334\",\n    \"fullName\": \"Alice Johnson\",\n    \"dateOfBirth\": \"1995-03-22\",\n    \"placeOfResidence\": \"Chicago\"\n}\n\n"
+                                }
+                            },
+                            "responseTime": 717,
+                            "header": [
+                                {
+                                    "key": "Server",
+                                    "value": "ElectOneAPI"
+                                },
+                                {
+                                    "key": "Date",
+                                    "value": "Tue, 25 Mar 2025 15:40:43 GMT"
+                                },
+                                {
+                                    "key": "Content-Type",
+                                    "value": "application/json"
+                                },
+                                {
+                                    "key": "Content-Length",
+                                    "value": "36"
+                                }
+                            ],
+                            "body": "{\"error\":\"Failed to create citizen\"}",
+                            "status": "Internal Server Error",
+                            "code": 500
+                        },
+                        {
+                            "id": "rester-43",
+                            "name": "2025-03-25T12:47:56.514Z CreateCitizen",
+                            "originalRequest": {
+                                "url": "0.0.0.0:3000/api/secure/citizens",
+                                "method": "POST",
+                                "header": [
+                                    {
+                                        "key": "Authorization",
+                                        "value": "Bearer adminsecrettoke"
+                                    },
+                                    {
+                                        "key": "Content-Type",
+                                        "value": "application/json"
+                                    }
+                                ],
+                                "body": {
+                                    "mode": "raw",
+                                    "raw": "{\n    \"citizenID\": \"12-123-12334\",\n    \"fullName\": \"Alice Johnson\",\n    \"dateOfBirth\": \"1995-03-22\",\n    \"placeOfResidence\": \"Chicago\"\n}\n\n"
+                                }
+                            },
+                            "responseTime": 10,
+                            "header": [
+                                {
+                                    "key": "Server",
+                                    "value": "ElectOneAPI"
+                                },
+                                {
+                                    "key": "Date",
+                                    "value": "Tue, 25 Mar 2025 12:47:56 GMT"
+                                },
+                                {
+                                    "key": "Content-Type",
+                                    "value": "application/json"
+                                },
+                                {
+                                    "key": "Content-Length",
+                                    "value": "46"
+                                }
+                            ],
+                            "body": "{\"error\":\"Unauthorized access, invalid token\"}",
+                            "status": "Unauthorized",
+                            "code": 401
+                        },
+                        {
+                            "id": "rester-42",
+                            "name": "2025-03-25T12:47:34.784Z CreateCitizen",
+                            "originalRequest": {
+                                "url": "0.0.0.0:3000/api/secure/citizens",
+                                "method": "POST",
+                                "header": [
+                                    {
+                                        "key": "Authorization",
+                                        "value": "Bearer adminsecrettoken"
+                                    },
+                                    {
+                                        "key": "Content-Type",
+                                        "value": "application/json"
+                                    }
+                                ],
+                                "body": {
+                                    "mode": "raw",
+                                    "raw": "{\n    \"citizenID\": \"12-123-12334\",\n    \"fullName\": \"Alice Johnson\",\n    \"dateOfBirth\": \"1995-03-22\",\n    \"placeOfResidence\": \"Chicago\"\n}\n\n"
+                                }
+                            },
+                            "responseTime": 241,
+                            "header": [
+                                {
+                                    "key": "Server",
+                                    "value": "ElectOneAPI"
+                                },
+                                {
+                                    "key": "Date",
+                                    "value": "Tue, 25 Mar 2025 12:47:34 GMT"
+                                },
+                                {
+                                    "key": "Content-Type",
+                                    "value": "application/json"
+                                },
+                                {
+                                    "key": "Content-Length",
+                                    "value": "42"
+                                }
+                            ],
+                            "body": "{\"message\":\"Citizen created successfully\"}",
+                            "status": "Created",
+                            "code": 201
+                        },
+                        {
+                            "id": "rester-41",
+                            "name": "2025-03-25T12:46:45.178Z CreateCitizen",
+                            "originalRequest": {
+                                "url": "0.0.0.0:3000/api/secure/citizens",
+                                "method": "POST",
+                                "header": [
+                                    {
+                                        "key": "Authorization",
+                                        "value": "Bearer adminsecrettoken"
+                                    }
+                                ],
+                                "body": {
+                                    "mode": "raw",
+                                    "raw": "{\n    \"citizenID\": \"12-123-12334\",\n    \"fullName\": \"Alice Johnson\",\n    \"dateOfBirth\": \"1995-03-22\",\n    \"placeOfResidence\": \"Chicago\"\n}\n\n"
+                                }
+                            },
+                            "responseTime": 10,
+                            "header": [
+                                {
+                                    "key": "Server",
+                                    "value": "ElectOneAPI"
+                                },
+                                {
+                                    "key": "Date",
+                                    "value": "Tue, 25 Mar 2025 12:46:44 GMT"
+                                },
+                                {
+                                    "key": "Content-Type",
+                                    "value": "application/json"
+                                },
+                                {
+                                    "key": "Content-Length",
+                                    "value": "32"
+                                }
+                            ],
+                            "body": "{\"error\":\"Invalid request body\"}",
+                            "status": "Bad Request",
+                            "code": 400
+                        },
+                        {
+                            "id": "rester-40",
+                            "name": "2025-03-25T12:46:39.142Z CreateCitizen",
+                            "originalRequest": {
+                                "url": "0.0.0.0:3000/api/secure/citizens",
+                                "method": "GET",
+                                "header": [
+                                    {
+                                        "key": "Authorization",
+                                        "value": "Bearer adminsecrettoken"
+                                    }
+                                ],
+                                "body": {
+                                    "mode": "raw",
+                                    "raw": "{\n    \"citizenID\": \"12-123-12334\",\n    \"fullName\": \"Alice Johnson\",\n    \"dateOfBirth\": \"1995-03-22\",\n    \"placeOfResidence\": \"Chicago\"\n}\n\n"
+                                }
+                            },
+                            "responseTime": 5,
+                            "header": [
+                                {
+                                    "key": "Server",
+                                    "value": "ElectOneAPI"
+                                },
+                                {
+                                    "key": "Date",
+                                    "value": "Tue, 25 Mar 2025 12:46:38 GMT"
+                                },
+                                {
+                                    "key": "Content-Type",
+                                    "value": "text/plain; charset=utf-8"
+                                },
+                                {
+                                    "key": "Content-Length",
+                                    "value": "18"
+                                },
+                                {
+                                    "key": "Allow",
+                                    "value": "POST"
+                                }
+                            ],
+                            "body": "Method Not Allowed",
+                            "status": "Method Not Allowed",
+                            "code": 405
+                        }
+                    ]
+                },
+                {
+                    "request": {
+                        "url": "0.0.0.0:3000/api/secure/user",
+                        "method": "POST",
+                        "header": [
+                            {
+                                "key": "Authorization",
+                                "value": "Bearer adminsecrettoken"
+                            },
+                            {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\n    \"citizenID\": \"12-123-12334\",\n    \"password\": \"somepassword123\"\n}"
+                        }
+                    },
+                    "id": "rester-14",
+                    "name": "createNewUser",
+                    "response": [
+                        {
+                            "id": "rester-58",
+                            "name": "2025-03-25T16:12:53.415Z createNewUser",
+                            "originalRequest": {
+                                "url": "0.0.0.0:3000/api/secure/user",
+                                "method": "POST",
+                                "header": [
+                                    {
+                                        "key": "Authorization",
+                                        "value": "Bearer adminsecrettoken"
+                                    },
+                                    {
+                                        "key": "Content-Type",
+                                        "value": "application/json"
+                                    }
+                                ],
+                                "body": {
+                                    "mode": "raw",
+                                    "raw": "{\n    \"citizenID\": \"12-123-12334\",\n    \"password\": \"somepassword123\"\n}"
+                                }
+                            },
+                            "responseTime": 139,
+                            "header": [
+                                {
+                                    "key": "Server",
+                                    "value": "ElectOneAPI"
+                                },
+                                {
+                                    "key": "Date",
+                                    "value": "Tue, 25 Mar 2025 16:12:52 GMT"
+                                },
+                                {
+                                    "key": "Content-Type",
+                                    "value": "application/json"
+                                },
+                                {
+                                    "key": "Content-Length",
+                                    "value": "39"
+                                }
+                            ],
+                            "body": "{\"message\":\"User created successfully\"}",
+                            "status": "Created",
+                            "code": 201
+                        },
+                        {
+                            "id": "rester-57",
+                            "name": "2025-03-25T16:12:20.209Z createNewUser",
+                            "originalRequest": {
+                                "url": "0.0.0.0:3000/api/secure/user",
+                                "method": "POST",
+                                "header": [
+                                    {
+                                        "key": "Authorization",
+                                        "value": "Bearer adminsecrettoken"
+                                    },
+                                    {
+                                        "key": "Content-Type",
+                                        "value": "application/json"
+                                    }
+                                ],
+                                "body": {
+                                    "mode": "raw",
+                                    "raw": "{\n    \"citizenID\": \"12-123-1000\",\n    \"password\": \"somepassword123\"\n}"
+                                }
+                            },
+                            "responseTime": 508,
+                            "header": [
+                                {
+                                    "key": "Server",
+                                    "value": "ElectOneAPI"
+                                },
+                                {
+                                    "key": "Date",
+                                    "value": "Tue, 25 Mar 2025 16:12:20 GMT"
+                                },
+                                {
+                                    "key": "Content-Type",
+                                    "value": "application/json"
+                                },
+                                {
+                                    "key": "Content-Length",
+                                    "value": "102"
+                                }
+                            ],
+                            "body": "{\"error\":\"failed to insert user: failed to execute SQL:\\nSQLite error: FOREIGN KEY constraint failed\"}",
+                            "status": "Internal Server Error",
+                            "code": 500
+                        },
+                        {
+                            "id": "rester-56",
+                            "name": "2025-03-25T16:11:22.315Z createNewUser",
+                            "originalRequest": {
+                                "url": "0.0.0.0:3000/api/secure/user",
+                                "method": "POST",
+                                "header": [
+                                    {
+                                        "key": "Authorization",
+                                        "value": "Bearer adminsecrettoken"
+                                    },
+                                    {
+                                        "key": "Content-Type",
+                                        "value": "application/json"
+                                    }
+                                ],
+                                "body": {
+                                    "mode": "raw",
+                                    "raw": "{\n    \"citizenID\": \"12-123-1000\",\n    \"password\": \"somepassword123\"\n}"
+                                }
+                            },
+                            "responseTime": 10,
+                            "header": [
+                                {
+                                    "key": "Server",
+                                    "value": "ElectOneAPI"
+                                },
+                                {
+                                    "key": "Date",
+                                    "value": "Tue, 25 Mar 2025 16:11:22 GMT"
+                                },
+                                {
+                                    "key": "Content-Type",
+                                    "value": "application/json"
+                                },
+                                {
+                                    "key": "Content-Length",
+                                    "value": "25"
+                                }
+                            ],
+                            "body": "{\"error\":\"Invalid input\"}",
+                            "status": "Bad Request",
+                            "code": 400
+                        },
+                        {
+                            "id": "rester-55",
+                            "name": "2025-03-25T16:10:40.919Z createNewUser",
+                            "originalRequest": {
+                                "url": "0.0.0.0:3000/api/secure/user",
+                                "method": "POST",
+                                "header": [
+                                    {
+                                        "key": "Authorization",
+                                        "value": "Bearer adminsecrettoken"
+                                    },
+                                    {
+                                        "key": "Content-Type",
+                                        "value": "application/json"
+                                    }
+                                ],
+                                "body": {
+                                    "mode": "raw",
+                                    "raw": "{\n    \"citizenID\": \"12-123-1000\",\n    \"password\": \"somepassword123\"\n}"
+                                }
+                            },
+                            "responseTime": 11,
+                            "header": [
+                                {
+                                    "key": "Server",
+                                    "value": "ElectOneAPI"
+                                },
+                                {
+                                    "key": "Date",
+                                    "value": "Tue, 25 Mar 2025 16:10:40 GMT"
+                                },
+                                {
+                                    "key": "Content-Type",
+                                    "value": "application/json"
+                                },
+                                {
+                                    "key": "Content-Length",
+                                    "value": "25"
+                                }
+                            ],
+                            "body": "{\"error\":\"Invalid input\"}",
+                            "status": "Bad Request",
+                            "code": 400
+                        }
+                    ]
+                },
+                {
+                    "request": {
+                        "url": "0.0.0.0:3000/api/secure/citizens/12-123-12345",
+                        "method": "DELETE",
+                        "header": [
+                            {
+                                "key": "Authorization",
+                                "value": "Bearer adminsecrettoken"
+                            }
+                        ]
+                    },
+                    "id": "rester-12",
+                    "name": "DeleteCitizenByID",
+                    "response": [
+                        {
+                            "id": "rester-48",
+                            "name": "2025-03-25T15:42:04.687Z DeleteCitizenByID",
+                            "originalRequest": {
+                                "url": "0.0.0.0:3000/api/secure/citizens/62-123-12334",
+                                "method": "DELETE",
+                                "header": [
+                                    {
+                                        "key": "Authorization",
+                                        "value": "Bearer adminsecrettoken"
+                                    }
+                                ]
+                            },
+                            "responseTime": 261,
+                            "header": [
+                                {
+                                    "key": "Server",
+                                    "value": "ElectOneAPI"
+                                },
+                                {
+                                    "key": "Date",
+                                    "value": "Tue, 25 Mar 2025 15:42:04 GMT"
+                                },
+                                {
+                                    "key": "Content-Type",
+                                    "value": "application/json"
+                                },
+                                {
+                                    "key": "Content-Length",
+                                    "value": "42"
+                                }
+                            ],
+                            "body": "{\"message\":\"Citizen deleted successfully\"}",
+                            "status": "OK",
+                            "code": 200
+                        },
+                        {
+                            "id": "rester-45",
+                            "name": "2025-03-25T12:50:12.971Z DeleteCitizenByID",
+                            "originalRequest": {
+                                "url": "0.0.0.0:3000/api/secure/citizens/12-123-12345",
+                                "method": "DELETE",
+                                "header": [
+                                    {
+                                        "key": "Authorization",
+                                        "value": "Bearer adminsecrettoken"
+                                    }
+                                ]
+                            },
+                            "responseTime": 113,
+                            "header": [
+                                {
+                                    "key": "Server",
+                                    "value": "ElectOneAPI"
+                                },
+                                {
+                                    "key": "Date",
+                                    "value": "Tue, 25 Mar 2025 12:50:12 GMT"
+                                },
+                                {
+                                    "key": "Content-Type",
+                                    "value": "application/json"
+                                },
+                                {
+                                    "key": "Content-Length",
+                                    "value": "42"
+                                }
+                            ],
+                            "body": "{\"message\":\"Citizen deleted successfully\"}",
+                            "status": "OK",
+                            "code": 200
+                        }
+                    ]
+                },
+                {
+                    "request": {
+                        "url": "0.0.0.0:3000/api/secure/user/1",
+                        "method": "DELETE",
+                        "header": [
+                            {
+                                "key": "Authorization",
+                                "value": "Bearer adminsecrettoken"
+                            }
+                        ]
+                    },
+                    "id": "rester-17",
+                    "name": "deleteUser",
+                    "response": [
+                        {
+                            "id": "rester-71",
+                            "name": "2025-03-25T16:20:39.165Z deleteUser",
+                            "originalRequest": {
+                                "url": "0.0.0.0:3000/api/secure/user/1",
+                                "method": "DELETE",
+                                "header": [
+                                    {
+                                        "key": "Authorization",
+                                        "value": "Bearer adminsecrettoken"
+                                    }
+                                ]
+                            },
+                            "responseTime": 328,
+                            "header": [
+                                {
+                                    "key": "Server",
+                                    "value": "ElectOneAPI"
+                                },
+                                {
+                                    "key": "Date",
+                                    "value": "Tue, 25 Mar 2025 16:20:39 GMT"
+                                },
+                                {
+                                    "key": "Content-Type",
+                                    "value": "application/json"
+                                },
+                                {
+                                    "key": "Content-Length",
+                                    "value": "39"
+                                }
+                            ],
+                            "body": "{\"message\":\"User deleted successfully\"}",
+                            "status": "OK",
+                            "code": 200
+                        },
+                        {
+                            "id": "rester-70",
+                            "name": "2025-03-25T16:20:26.737Z deleteUser",
+                            "originalRequest": {
+                                "url": "0.0.0.0:3000/api/secure/user/1",
+                                "method": "DELETE",
+                                "header": [
+                                    {
+                                        "key": "Authorization",
+                                        "value": "Bearer adminsecrettoken"
+                                    }
+                                ]
+                            },
+                            "responseTime": 11,
+                            "header": [
+                                {
+                                    "key": "Server",
+                                    "value": "ElectOneAPI"
+                                },
+                                {
+                                    "key": "Date",
+                                    "value": "Tue, 25 Mar 2025 16:20:25 GMT"
+                                },
+                                {
+                                    "key": "Content-Type",
+                                    "value": "text/plain; charset=utf-8"
+                                },
+                                {
+                                    "key": "Content-Length",
+                                    "value": "18"
+                                },
+                                {
+                                    "key": "Allow",
+                                    "value": "GET, HEAD, PUT"
+                                }
+                            ],
+                            "body": "Method Not Allowed",
+                            "status": "Method Not Allowed",
+                            "code": 405
+                        },
+                        {
+                            "id": "rester-69",
+                            "name": "2025-03-25T16:20:07.145Z deleteUser",
+                            "originalRequest": {
+                                "url": "0.0.0.0:3000/api/secure/user/1",
+                                "method": "GET",
+                                "header": [
+                                    {
+                                        "key": "Authorization",
+                                        "value": "Bearer adminsecrettoken"
+                                    }
+                                ]
+                            },
+                            "responseTime": 64,
+                            "header": [
+                                {
+                                    "key": "Server",
+                                    "value": "ElectOneAPI"
+                                },
+                                {
+                                    "key": "Date",
+                                    "value": "Tue, 25 Mar 2025 16:20:06 GMT"
+                                },
+                                {
+                                    "key": "Content-Type",
+                                    "value": "application/json"
+                                },
+                                {
+                                    "key": "Content-Length",
+                                    "value": "68"
+                                }
+                            ],
+                            "body": "{\"userID\":1,\"citizenID\":\"12-123-12334\",\"password\":\"somepassword124\"}",
+                            "status": "OK",
+                            "code": 200
+                        }
+                    ]
+                },
+                {
+                    "request": {
+                        "url": "0.0.0.0:3000/api/secure/citizens/12-123-12345",
+                        "method": "GET",
+                        "header": [
+                            {
+                                "key": "Authorization",
+                                "value": "Bearer adminsecrettoken"
+                            }
+                        ]
+                    },
+                    "id": "rester-8",
+                    "name": "GetCitizenByID",
+                    "response": [
+                        {
+                            "id": "rester-51",
+                            "name": "2025-03-25T15:42:27.365Z GetCitizenByID",
+                            "originalRequest": {
+                                "url": "0.0.0.0:3000/api/secure/citizens/12-123-12334",
+                                "method": "GET",
+                                "header": [
+                                    {
+                                        "key": "Authorization",
+                                        "value": "Bearer adminsecrettoken"
+                                    }
+                                ]
+                            },
+                            "responseTime": 74,
+                            "header": [
+                                {
+                                    "key": "Server",
+                                    "value": "ElectOneAPI"
+                                },
+                                {
+                                    "key": "Date",
+                                    "value": "Tue, 25 Mar 2025 15:42:26 GMT"
+                                },
+                                {
+                                    "key": "Content-Type",
+                                    "value": "application/json"
+                                },
+                                {
+                                    "key": "Content-Length",
+                                    "value": "120"
+                                }
+                            ],
+                            "body": "{\"citizenID\":\"12-123-12334\",\"fullName\":\"Alice Johnson\",\"dateOfBirth\":\"1995-03-22\",\"placeOfResidence\":\"Some Other Place\"}",
+                            "status": "OK",
+                            "code": 200
+                        },
+                        {
+                            "id": "rester-50",
+                            "name": "2025-03-25T15:42:11.949Z GetCitizenByID",
+                            "originalRequest": {
+                                "url": "0.0.0.0:3000/api/secure/citizens/12-123-12335",
+                                "method": "GET",
+                                "header": [
+                                    {
+                                        "key": "Authorization",
+                                        "value": "Bearer adminsecrettoken"
+                                    }
+                                ]
+                            },
+                            "responseTime": 85,
+                            "header": [
+                                {
+                                    "key": "Server",
+                                    "value": "ElectOneAPI"
+                                },
+                                {
+                                    "key": "Date",
+                                    "value": "Tue, 25 Mar 2025 15:42:11 GMT"
+                                },
+                                {
+                                    "key": "Content-Type",
+                                    "value": "application/json"
+                                },
+                                {
+                                    "key": "Content-Length",
+                                    "value": "42"
+                                }
+                            ],
+                            "body": "{\"error\":\"Citizen with that ID not found\"}",
+                            "status": "Bad Request",
+                            "code": 400
+                        },
+                        {
+                            "id": "rester-49",
+                            "name": "2025-03-25T15:42:07.808Z GetCitizenByID",
+                            "originalRequest": {
+                                "url": "0.0.0.0:3000/api/secure/citizens/12-123-12345",
+                                "method": "GET",
+                                "header": [
+                                    {
+                                        "key": "Authorization",
+                                        "value": "Bearer adminsecrettoken"
+                                    }
+                                ]
+                            },
+                            "responseTime": 85,
+                            "header": [
+                                {
+                                    "key": "Server",
+                                    "value": "ElectOneAPI"
+                                },
+                                {
+                                    "key": "Date",
+                                    "value": "Tue, 25 Mar 2025 15:42:07 GMT"
+                                },
+                                {
+                                    "key": "Content-Type",
+                                    "value": "application/json"
+                                },
+                                {
+                                    "key": "Content-Length",
+                                    "value": "42"
+                                }
+                            ],
+                            "body": "{\"error\":\"Citizen with that ID not found\"}",
+                            "status": "Bad Request",
+                            "code": 400
+                        },
+                        {
+                            "id": "rester-38",
+                            "name": "2025-03-25T12:44:59.193Z GetCitizenByID",
+                            "originalRequest": {
+                                "url": "0.0.0.0:3000/api/secure/citizens/12-123-12345",
+                                "method": "GET",
+                                "header": [
+                                    {
+                                        "key": "Authorization",
+                                        "value": "Bearer adminsecrettoken"
+                                    }
+                                ]
+                            },
+                            "responseTime": 238,
+                            "header": [
+                                {
+                                    "key": "Server",
+                                    "value": "ElectOneAPI"
+                                },
+                                {
+                                    "key": "Date",
+                                    "value": "Tue, 25 Mar 2025 12:44:59 GMT"
+                                },
+                                {
+                                    "key": "Content-Type",
+                                    "value": "application/json"
+                                },
+                                {
+                                    "key": "Content-Length",
+                                    "value": "107"
+                                }
+                            ],
+                            "body": "{\"citizenID\":\"12-123-12345\",\"fullName\":\"John Doe\",\"dateOfBirth\":\"1990-01-01\",\"placeOfResidence\":\"New York\"}",
+                            "status": "OK",
+                            "code": 200
+                        },
+                        {
+                            "id": "rester-34",
+                            "name": "2025-03-25T04:05:01.569Z GetCitizensPaginated",
+                            "originalRequest": {
+                                "url": "0.0.0.0:3000/api/secure/citizens/12-123-12345",
+                                "method": "GET",
+                                "header": [
+                                    {
+                                        "key": "Authorization",
+                                        "value": "Bearer adminsecrettoke"
+                                    }
+                                ]
+                            },
+                            "responseTime": 9,
+                            "header": [
+                                {
+                                    "key": "Server",
+                                    "value": "ElectOneAPI"
+                                },
+                                {
+                                    "key": "Date",
+                                    "value": "Tue, 25 Mar 2025 04:05:01 GMT"
+                                },
+                                {
+                                    "key": "Content-Type",
+                                    "value": "application/json"
+                                },
+                                {
+                                    "key": "Content-Length",
+                                    "value": "46"
+                                }
+                            ],
+                            "body": "{\"error\":\"Unauthorized access, invalid token\"}",
+                            "status": "Unauthorized",
+                            "code": 401
+                        }
+                    ]
+                },
+                {
+                    "request": {
+                        "url": "0.0.0.0:3000/api/secure/citizensPaginated/0",
+                        "method": "GET",
+                        "header": [
+                            {
+                                "key": "Authorization",
+                                "value": "Bearer adminsecrettoken"
+                            }
+                        ]
+                    },
+                    "id": "rester-9",
+                    "name": "GetCitizensPaginated",
+                    "response": [
+                        {
+                            "id": "rester-52",
+                            "name": "2025-03-25T15:42:30.679Z GetCitizensPaginated",
+                            "originalRequest": {
+                                "url": "0.0.0.0:3000/api/secure/citizensPaginated/0",
+                                "method": "GET",
+                                "header": [
+                                    {
+                                        "key": "Authorization",
+                                        "value": "Bearer adminsecrettoken"
+                                    }
+                                ]
+                            },
+                            "responseTime": 80,
+                            "header": [
+                                {
+                                    "key": "Server",
+                                    "value": "ElectOneAPI"
+                                },
+                                {
+                                    "key": "Date",
+                                    "value": "Tue, 25 Mar 2025 15:42:30 GMT"
+                                },
+                                {
+                                    "key": "Content-Type",
+                                    "value": "application/json"
+                                },
+                                {
+                                    "key": "Content-Length",
+                                    "value": "122"
+                                }
+                            ],
+                            "body": "[{\"citizenID\":\"12-123-12334\",\"fullName\":\"Alice Johnson\",\"dateOfBirth\":\"1995-03-22\",\"placeOfResidence\":\"Some Other Place\"}]",
+                            "status": "OK",
+                            "code": 200
+                        },
+                        {
+                            "id": "rester-39",
+                            "name": "2025-03-25T12:45:03.074Z GetCitizensPaginated",
+                            "originalRequest": {
+                                "url": "0.0.0.0:3000/api/secure/citizensPaginated/0",
+                                "method": "GET",
+                                "header": [
+                                    {
+                                        "key": "Authorization",
+                                        "value": "Bearer adminsecrettoken"
+                                    }
+                                ]
+                            },
+                            "responseTime": 66,
+                            "header": [
+                                {
+                                    "key": "Server",
+                                    "value": "ElectOneAPI"
+                                },
+                                {
+                                    "key": "Date",
+                                    "value": "Tue, 25 Mar 2025 12:45:02 GMT"
+                                },
+                                {
+                                    "key": "Content-Type",
+                                    "value": "application/json"
+                                },
+                                {
+                                    "key": "Content-Length",
+                                    "value": "109"
+                                }
+                            ],
+                            "body": "[{\"citizenID\":\"12-123-12345\",\"fullName\":\"John Doe\",\"dateOfBirth\":\"1990-01-01\",\"placeOfResidence\":\"New York\"}]",
+                            "status": "OK",
+                            "code": 200
+                        },
+                        {
+                            "id": "rester-37",
+                            "name": "2025-03-25T12:41:23.247Z GetCitizensPaginated",
+                            "originalRequest": {
+                                "url": "0.0.0.0:3000/api/secure/citizensPaginated/0",
+                                "method": "GET",
+                                "header": [
+                                    {
+                                        "key": "Authorization",
+                                        "value": "Bearer adminsecrettoken"
+                                    }
+                                ]
+                            },
+                            "responseTime": 67,
+                            "header": [
+                                {
+                                    "key": "Server",
+                                    "value": "ElectOneAPI"
+                                },
+                                {
+                                    "key": "Date",
+                                    "value": "Tue, 25 Mar 2025 12:41:22 GMT"
+                                },
+                                {
+                                    "key": "Content-Type",
+                                    "value": "application/json"
+                                },
+                                {
+                                    "key": "Content-Length",
+                                    "value": "109"
+                                }
+                            ],
+                            "body": "[{\"CitizenID\":\"12-123-12345\",\"fullName\":\"John Doe\",\"dateOfBirth\":\"1990-01-01\",\"placeOfResidence\":\"New York\"}]",
+                            "status": "OK",
+                            "code": 200
+                        },
+                        {
+                            "id": "rester-36",
+                            "name": "2025-03-25T12:41:19.054Z GetCitizensPaginated",
+                            "originalRequest": {
+                                "url": "0.0.0.0:3000/api/secure/citizensPaginated/1",
+                                "method": "GET",
+                                "header": [
+                                    {
+                                        "key": "Authorization",
+                                        "value": "Bearer adminsecrettoken"
+                                    }
+                                ]
+                            },
+                            "responseTime": 329,
+                            "header": [
+                                {
+                                    "key": "Server",
+                                    "value": "ElectOneAPI"
+                                },
+                                {
+                                    "key": "Date",
+                                    "value": "Tue, 25 Mar 2025 12:41:19 GMT"
+                                },
+                                {
+                                    "key": "Content-Type",
+                                    "value": "application/json"
+                                },
+                                {
+                                    "key": "Content-Length",
+                                    "value": "4"
+                                }
+                            ],
+                            "body": "null",
+                            "status": "OK",
+                            "code": 200
+                        },
+                        {
+                            "id": "rester-35",
+                            "name": "2025-03-25T12:39:36.704Z GetCitizensPaginated",
+                            "originalRequest": {
+                                "url": "0.0.0.0:3000/api/secure/citizensPaginated/1",
+                                "method": "GET",
+                                "header": [
+                                    {
+                                        "key": "Authorization",
+                                        "value": "Bearer adminsecrettoken"
+                                    }
+                                ]
+                            },
+                            "responseTime": 275,
+                            "header": [
+                                {
+                                    "key": "Server",
+                                    "value": "ElectOneAPI"
+                                },
+                                {
+                                    "key": "Date",
+                                    "value": "Tue, 25 Mar 2025 12:39:36 GMT"
+                                },
+                                {
+                                    "key": "Content-Type",
+                                    "value": "application/json"
+                                },
+                                {
+                                    "key": "Content-Length",
+                                    "value": "93"
+                                }
+                            ],
+                            "body": "{\"error\":\"failed to fetch citizens: failed to execute SQL:\\nSQLite error: datatype mismatch\"}",
+                            "status": "Internal Server Error",
+                            "code": 500
+                        }
+                    ]
+                },
+                {
+                    "request": {
+                        "url": "0.0.0.0:3000/api/secure/user/1",
+                        "method": "GET",
+                        "header": [
+                            {
+                                "key": "Authorization",
+                                "value": "Bearer adminsecrettoken"
+                            },
+                            {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\n    \"citizenID\": \"12-123-12334\",\n    \"password\": \"somepassword124\"\n}"
+                        }
+                    },
+                    "id": "rester-16",
+                    "name": "getUser",
+                    "response": [
+                        {
+                            "id": "rester-68",
+                            "name": "2025-03-25T16:19:46.018Z getUser",
+                            "originalRequest": {
+                                "url": "0.0.0.0:3000/api/secure/user/1",
+                                "method": "GET",
+                                "header": [
+                                    {
+                                        "key": "Authorization",
+                                        "value": "Bearer adminsecrettoken"
+                                    },
+                                    {
+                                        "key": "Content-Type",
+                                        "value": "application/json"
+                                    }
+                                ],
+                                "body": {
+                                    "mode": "raw",
+                                    "raw": "{\n    \"citizenID\": \"12-123-12334\",\n    \"password\": \"somepassword124\"\n}"
+                                }
+                            },
+                            "responseTime": 65,
+                            "header": [
+                                {
+                                    "key": "Server",
+                                    "value": "ElectOneAPI"
+                                },
+                                {
+                                    "key": "Date",
+                                    "value": "Tue, 25 Mar 2025 16:19:45 GMT"
+                                },
+                                {
+                                    "key": "Content-Type",
+                                    "value": "application/json"
+                                },
+                                {
+                                    "key": "Content-Length",
+                                    "value": "68"
+                                }
+                            ],
+                            "body": "{\"userID\":1,\"citizenID\":\"12-123-12334\",\"password\":\"somepassword124\"}",
+                            "status": "OK",
+                            "code": 200
+                        },
+                        {
+                            "id": "rester-67",
+                            "name": "2025-03-25T16:19:42.763Z getUser",
+                            "originalRequest": {
+                                "url": "0.0.0.0:3000/api/secure/user/2",
+                                "method": "GET",
+                                "header": [
+                                    {
+                                        "key": "Authorization",
+                                        "value": "Bearer adminsecrettoken"
+                                    },
+                                    {
+                                        "key": "Content-Type",
+                                        "value": "application/json"
+                                    }
+                                ],
+                                "body": {
+                                    "mode": "raw",
+                                    "raw": "{\n    \"citizenID\": \"12-123-12334\",\n    \"password\": \"somepassword124\"\n}"
+                                }
+                            },
+                            "responseTime": 107,
+                            "header": [
+                                {
+                                    "key": "Server",
+                                    "value": "ElectOneAPI"
+                                },
+                                {
+                                    "key": "Date",
+                                    "value": "Tue, 25 Mar 2025 16:19:41 GMT"
+                                },
+                                {
+                                    "key": "Content-Type",
+                                    "value": "application/json"
+                                },
+                                {
+                                    "key": "Content-Length",
+                                    "value": "26"
+                                }
+                            ],
+                            "body": "{\"error\":\"User not found\"}",
+                            "status": "Not Found",
+                            "code": 404
+                        },
+                        {
+                            "id": "rester-66",
+                            "name": "2025-03-25T16:19:38.083Z getUser",
+                            "originalRequest": {
+                                "url": "0.0.0.0:3000/api/secure/user/1",
+                                "method": "GET",
+                                "header": [
+                                    {
+                                        "key": "Authorization",
+                                        "value": "Bearer adminsecrettoken"
+                                    },
+                                    {
+                                        "key": "Content-Type",
+                                        "value": "application/json"
+                                    }
+                                ],
+                                "body": {
+                                    "mode": "raw",
+                                    "raw": "{\n    \"citizenID\": \"12-123-12334\",\n    \"password\": \"somepassword124\"\n}"
+                                }
+                            },
+                            "responseTime": 224,
+                            "header": [
+                                {
+                                    "key": "Server",
+                                    "value": "ElectOneAPI"
+                                },
+                                {
+                                    "key": "Date",
+                                    "value": "Tue, 25 Mar 2025 16:19:37 GMT"
+                                },
+                                {
+                                    "key": "Content-Type",
+                                    "value": "application/json"
+                                },
+                                {
+                                    "key": "Content-Length",
+                                    "value": "68"
+                                }
+                            ],
+                            "body": "{\"userID\":1,\"citizenID\":\"12-123-12334\",\"password\":\"somepassword124\"}",
+                            "status": "OK",
+                            "code": 200
+                        },
+                        {
+                            "id": "rester-65",
+                            "name": "2025-03-25T16:17:39.621Z updateUserDetails",
+                            "originalRequest": {
+                                "url": "0.0.0.0:3000/api/secure/user/1",
+                                "method": "PUT",
+                                "header": [
+                                    {
+                                        "key": "Authorization",
+                                        "value": "Bearer adminsecrettoken"
+                                    },
+                                    {
+                                        "key": "Content-Type",
+                                        "value": "application/json"
+                                    }
+                                ],
+                                "body": {
+                                    "mode": "raw",
+                                    "raw": "{\n    \"citizenID\": \"12-123-12334\",\n    \"password\": \"somepassword124\"\n}"
+                                }
+                            },
+                            "responseTime": 153,
+                            "header": [
+                                {
+                                    "key": "Server",
+                                    "value": "ElectOneAPI"
+                                },
+                                {
+                                    "key": "Date",
+                                    "value": "Tue, 25 Mar 2025 16:17:38 GMT"
+                                },
+                                {
+                                    "key": "Content-Type",
+                                    "value": "application/json"
+                                },
+                                {
+                                    "key": "Content-Length",
+                                    "value": "39"
+                                }
+                            ],
+                            "body": "{\"message\":\"User updated successfully\"}",
+                            "status": "OK",
+                            "code": 200
+                        },
+                        {
+                            "id": "rester-64",
+                            "name": "2025-03-25T16:17:04.780Z updateUserDetails",
+                            "originalRequest": {
+                                "url": "0.0.0.0:3000/api/secure/user/1",
+                                "method": "PUT",
+                                "header": [
+                                    {
+                                        "key": "Authorization",
+                                        "value": "Bearer adminsecrettoken"
+                                    },
+                                    {
+                                        "key": "Content-Type",
+                                        "value": "application/json"
+                                    }
+                                ],
+                                "body": {
+                                    "mode": "raw",
+                                    "raw": "{\n    \"citiznID\": \"12-123-12334\",\n    \"password\": \"somepassword124\"\n}"
+                                }
+                            },
+                            "responseTime": 405,
+                            "header": [
+                                {
+                                    "key": "Server",
+                                    "value": "ElectOneAPI"
+                                },
+                                {
+                                    "key": "Date",
+                                    "value": "Tue, 25 Mar 2025 16:17:04 GMT"
+                                },
+                                {
+                                    "key": "Content-Type",
+                                    "value": "application/json"
+                                },
+                                {
+                                    "key": "Content-Length",
+                                    "value": "102"
+                                }
+                            ],
+                            "body": "{\"error\":\"failed to update user: failed to execute SQL:\\nSQLite error: FOREIGN KEY constraint failed\"}",
+                            "status": "Internal Server Error",
+                            "code": 500
+                        },
+                        {
+                            "id": "rester-63",
+                            "name": "2025-03-25T16:16:40.803Z updateUserDetails",
+                            "originalRequest": {
+                                "url": "0.0.0.0:3000/api/secure/user/1",
+                                "method": "PUT",
+                                "header": [
+                                    {
+                                        "key": "Authorization",
+                                        "value": "Bearer adminsecrettoken"
+                                    },
+                                    {
+                                        "key": "Content-Type",
+                                        "value": "application/json"
+                                    }
+                                ],
+                                "body": {
+                                    "mode": "raw",
+                                    "raw": "{\n    \"citizenID\": \"19-123-12334\",\n    \"password\": \"somepassword124\"\n}"
+                                }
+                            },
+                            "responseTime": 62,
+                            "header": [
+                                {
+                                    "key": "Server",
+                                    "value": "ElectOneAPI"
+                                },
+                                {
+                                    "key": "Date",
+                                    "value": "Tue, 25 Mar 2025 16:16:40 GMT"
+                                },
+                                {
+                                    "key": "Content-Type",
+                                    "value": "application/json"
+                                },
+                                {
+                                    "key": "Content-Length",
+                                    "value": "102"
+                                }
+                            ],
+                            "body": "{\"error\":\"failed to update user: failed to execute SQL:\\nSQLite error: FOREIGN KEY constraint failed\"}",
+                            "status": "Internal Server Error",
+                            "code": 500
+                        },
+                        {
+                            "id": "rester-62",
+                            "name": "2025-03-25T16:15:37.333Z updateUserDetails",
+                            "originalRequest": {
+                                "url": "0.0.0.0:3000/api/secure/user/12-123-12334",
+                                "method": "PUT",
+                                "header": [
+                                    {
+                                        "key": "Authorization",
+                                        "value": "Bearer adminsecrettoken"
+                                    },
+                                    {
+                                        "key": "Content-Type",
+                                        "value": "application/json"
+                                    }
+                                ],
+                                "body": {
+                                    "mode": "raw",
+                                    "raw": "{\n    \"citizenID\": \"19-123-12334\",\n    \"password\": \"somepassword124\"\n}"
+                                }
+                            },
+                            "responseTime": 63,
+                            "header": [
+                                {
+                                    "key": "Server",
+                                    "value": "ElectOneAPI"
+                                },
+                                {
+                                    "key": "Date",
+                                    "value": "Tue, 25 Mar 2025 16:15:36 GMT"
+                                },
+                                {
+                                    "key": "Content-Type",
+                                    "value": "application/json"
+                                },
+                                {
+                                    "key": "Content-Length",
+                                    "value": "39"
+                                }
+                            ],
+                            "body": "{\"message\":\"User updated successfully\"}",
+                            "status": "OK",
+                            "code": 200
+                        },
+                        {
+                            "id": "rester-61",
+                            "name": "2025-03-25T16:14:31.536Z updateUserDetails",
+                            "originalRequest": {
+                                "url": "0.0.0.0:3000/api/secure/user/12-123-12334",
+                                "method": "PUT",
+                                "header": [
+                                    {
+                                        "key": "Authorization",
+                                        "value": "Bearer adminsecrettoken"
+                                    },
+                                    {
+                                        "key": "Content-Type",
+                                        "value": "application/json"
+                                    }
+                                ],
+                                "body": {
+                                    "mode": "raw",
+                                    "raw": "{\n    \"citizenID\": \"19-123-12334\",\n    \"password\": \"somepassword123\"\n}"
+                                }
+                            },
+                            "responseTime": 61,
+                            "header": [
+                                {
+                                    "key": "Server",
+                                    "value": "ElectOneAPI"
+                                },
+                                {
+                                    "key": "Date",
+                                    "value": "Tue, 25 Mar 2025 16:14:30 GMT"
+                                },
+                                {
+                                    "key": "Content-Type",
+                                    "value": "application/json"
+                                },
+                                {
+                                    "key": "Content-Length",
+                                    "value": "39"
+                                }
+                            ],
+                            "body": "{\"message\":\"User updated successfully\"}",
+                            "status": "OK",
+                            "code": 200
+                        },
+                        {
+                            "id": "rester-60",
+                            "name": "2025-03-25T16:14:25.359Z updateUserDetails",
+                            "originalRequest": {
+                                "url": "0.0.0.0:3000/api/secure/user/12-123-12334",
+                                "method": "POST",
+                                "header": [
+                                    {
+                                        "key": "Authorization",
+                                        "value": "Bearer adminsecrettoken"
+                                    },
+                                    {
+                                        "key": "Content-Type",
+                                        "value": "application/json"
+                                    }
+                                ],
+                                "body": {
+                                    "mode": "raw",
+                                    "raw": "{\n    \"citizenID\": \"19-123-12334\",\n    \"password\": \"somepassword123\"\n}"
+                                }
+                            },
+                            "responseTime": 5,
+                            "header": [
+                                {
+                                    "key": "Server",
+                                    "value": "ElectOneAPI"
+                                },
+                                {
+                                    "key": "Date",
+                                    "value": "Tue, 25 Mar 2025 16:14:24 GMT"
+                                },
+                                {
+                                    "key": "Content-Type",
+                                    "value": "text/plain; charset=utf-8"
+                                },
+                                {
+                                    "key": "Content-Length",
+                                    "value": "18"
+                                },
+                                {
+                                    "key": "Allow",
+                                    "value": "GET, HEAD, PUT"
+                                }
+                            ],
+                            "body": "Method Not Allowed",
+                            "status": "Method Not Allowed",
+                            "code": 405
+                        }
+                    ]
+                },
+                {
+                    "request": {
+                        "url": "0.0.0.0:3000/api/secure/usersPaginated/0",
+                        "method": "GET",
+                        "header": [
+                            {
+                                "key": "Authorization",
+                                "value": "Bearer adminsecrettoken"
+                            }
+                        ]
+                    },
+                    "id": "rester-13",
+                    "name": "getUsersPaginated",
+                    "response": [
+                        {
+                            "id": "rester-59",
+                            "name": "2025-03-25T16:13:03.682Z getUsersPaginated",
+                            "originalRequest": {
+                                "url": "0.0.0.0:3000/api/secure/usersPaginated/0",
+                                "method": "GET",
+                                "header": [
+                                    {
+                                        "key": "Authorization",
+                                        "value": "Bearer adminsecrettoken"
+                                    }
+                                ]
+                            },
+                            "responseTime": 64,
+                            "header": [
+                                {
+                                    "key": "Server",
+                                    "value": "ElectOneAPI"
+                                },
+                                {
+                                    "key": "Date",
+                                    "value": "Tue, 25 Mar 2025 16:13:03 GMT"
+                                },
+                                {
+                                    "key": "Content-Type",
+                                    "value": "application/json"
+                                },
+                                {
+                                    "key": "Content-Length",
+                                    "value": "70"
+                                }
+                            ],
+                            "body": "[{\"userID\":1,\"citizenID\":\"12-123-12334\",\"password\":\"somepassword123\"}]",
+                            "status": "OK",
+                            "code": 200
+                        }
+                    ]
+                },
+                {
+                    "request": {
+                        "url": "0.0.0.0:3000/api/secure/citizens/12-123-12334",
+                        "method": "PUT",
+                        "header": [
+                            {
+                                "key": "Authorization",
+                                "value": "Bearer adminsecrettoken"
+                            },
+                            {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\n    \"citizenID\": \"12-123-12334\",\n    \"fullName\": \"Alice Johnson\",\n    \"dateOfBirth\": \"1995-03-22\",\n    \"placeOfResidence\": \"Some Other Place\"\n}\n\n"
+                        }
+                    },
+                    "id": "rester-11",
+                    "name": "UpdateCitizenDetails",
+                    "response": [
+                        {
+                            "id": "rester-53",
+                            "name": "2025-03-25T15:42:34.891Z UpdateCitizenDetails",
+                            "originalRequest": {
+                                "url": "0.0.0.0:3000/api/secure/citizens/12-123-12334",
+                                "method": "PUT",
+                                "header": [
+                                    {
+                                        "key": "Authorization",
+                                        "value": "Bearer adminsecrettoken"
+                                    },
+                                    {
+                                        "key": "Content-Type",
+                                        "value": "application/json"
+                                    }
+                                ],
+                                "body": {
+                                    "mode": "raw",
+                                    "raw": "{\n    \"citizenID\": \"12-123-12334\",\n    \"fullName\": \"Alice Johnson\",\n    \"dateOfBirth\": \"1995-03-22\",\n    \"placeOfResidence\": \"Some Other Place\"\n}\n\n"
+                                }
+                            },
+                            "responseTime": 66,
+                            "header": [
+                                {
+                                    "key": "Server",
+                                    "value": "ElectOneAPI"
+                                },
+                                {
+                                    "key": "Date",
+                                    "value": "Tue, 25 Mar 2025 15:42:34 GMT"
+                                },
+                                {
+                                    "key": "Content-Type",
+                                    "value": "application/json"
+                                },
+                                {
+                                    "key": "Content-Length",
+                                    "value": "42"
+                                }
+                            ],
+                            "body": "{\"message\":\"Citizen updated successfully\"}",
+                            "status": "OK",
+                            "code": 200
+                        },
+                        {
+                            "id": "rester-44",
+                            "name": "2025-03-25T12:49:32.776Z UpdateCitizenDetails",
+                            "originalRequest": {
+                                "url": "0.0.0.0:3000/api/secure/citizens/12-123-12334",
+                                "method": "PUT",
+                                "header": [
+                                    {
+                                        "key": "Authorization",
+                                        "value": "Bearer adminsecrettoken"
+                                    },
+                                    {
+                                        "key": "Content-Type",
+                                        "value": "application/json"
+                                    }
+                                ],
+                                "body": {
+                                    "mode": "raw",
+                                    "raw": "{\n    \"citizenID\": \"12-123-12334\",\n    \"fullName\": \"Alice Johnson\",\n    \"dateOfBirth\": \"1995-03-22\",\n    \"placeOfResidence\": \"Some Other Place\"\n}\n\n"
+                                }
+                            },
+                            "responseTime": 215,
+                            "header": [
+                                {
+                                    "key": "Server",
+                                    "value": "ElectOneAPI"
+                                },
+                                {
+                                    "key": "Date",
+                                    "value": "Tue, 25 Mar 2025 12:49:32 GMT"
+                                },
+                                {
+                                    "key": "Content-Type",
+                                    "value": "application/json"
+                                },
+                                {
+                                    "key": "Content-Length",
+                                    "value": "42"
+                                }
+                            ],
+                            "body": "{\"message\":\"Citizen updated successfully\"}",
+                            "status": "OK",
+                            "code": 200
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "name": "History_xwzo1zo3",
+            "item": [
+                {
+                    "request": {
+                        "url": "0.0.0.0:3000/api/secure/usersPaginated/0",
+                        "method": "GET",
+                        "header": [
+                            {
+                                "key": "Authorization",
+                                "value": "Bearer adminsecrettoken"
+                            }
+                        ]
+                    },
+                    "id": "rester-history-0",
+                    "name": "History_xwzo1zo3 0",
+                    "response": [
+                        {
+                            "id": "rester-54",
+                            "name": "2025-03-25T16:08:57.579Z History_xwzo1zo3 0",
+                            "originalRequest": {
+                                "url": "0.0.0.0:3000/api/secure/usersPaginated/0",
+                                "method": "GET",
+                                "header": [
+                                    {
+                                        "key": "Authorization",
+                                        "value": "Bearer adminsecrettoken"
+                                    }
+                                ]
+                            },
+                            "responseTime": 487,
+                            "header": [
+                                {
+                                    "key": "Server",
+                                    "value": "ElectOneAPI"
+                                },
+                                {
+                                    "key": "Date",
+                                    "value": "Tue, 25 Mar 2025 16:08:58 GMT"
+                                },
+                                {
+                                    "key": "Content-Type",
+                                    "value": "application/json"
+                                },
+                                {
+                                    "key": "Content-Length",
+                                    "value": "4"
+                                }
+                            ],
+                            "body": "null",
+                            "status": "OK",
+                            "code": 200
+                        }
+                    ]
+                },
+                {
+                    "request": {
+                        "url": "0.0.0.0:3000/api/secure/citizens/12-123-12345",
+                        "method": "GET",
+                        "header": [
+                            {
+                                "key": "Authorization",
+                                "value": "Bearer adminsecrettoken"
+                            }
+                        ]
+                    },
+                    "id": "rester-history-1",
+                    "name": "History_xwzo1zo3 1",
+                    "response": [
+                        {
+                            "id": "rester-33",
+                            "name": "2025-03-25T04:04:53.059Z History_xwzo1zo3 1",
+                            "originalRequest": {
+                                "url": "0.0.0.0:3000/api/secure/citizens/12-123-12345",
+                                "method": "GET",
+                                "header": [
+                                    {
+                                        "key": "Authorization",
+                                        "value": "Bearer adminsecrettoken"
+                                    }
+                                ]
+                            },
+                            "responseTime": 99,
+                            "header": [
+                                {
+                                    "key": "Server",
+                                    "value": "ElectOneAPI"
+                                },
+                                {
+                                    "key": "Date",
+                                    "value": "Tue, 25 Mar 2025 04:04:52 GMT"
+                                },
+                                {
+                                    "key": "Content-Type",
+                                    "value": "application/json"
+                                },
+                                {
+                                    "key": "Content-Length",
+                                    "value": "107"
+                                }
+                            ],
+                            "body": "{\"CitizenID\":\"12-123-12345\",\"fullName\":\"John Doe\",\"dateOfBirth\":\"1990-01-01\",\"placeOfResidence\":\"New York\"}",
+                            "status": "OK",
+                            "code": 200
+                        }
+                    ]
+                },
+                {
+                    "request": {
+                        "url": "0.0.0.0:8080/api/createCitizen",
+                        "method": "POST",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\n    \"citizen_id\": \"27018002205\",\n    \"full_name\": \"Swoyam Pokharel\",\n    \"dob\": \"2006-12-10\",\n    \"pob\": \"Kathmandu, Kathmandu, 3\",\n    \"permanent_address\": \"Kathmandu, Kathmandu, 7\"\n}\n"
+                        }
+                    },
+                    "id": "rester-history-10",
+                    "name": "History_xwzo1zo3 10",
+                    "response": [
+                        {
+                            "id": "rester-24",
+                            "name": "2025-03-22T11:49:49.328Z History_xwzo1zo3 10",
+                            "originalRequest": {
+                                "url": "0.0.0.0:8080/api/createCitizen",
+                                "method": "POST",
+                                "header": [
+                                    {
+                                        "key": "Content-Type",
+                                        "value": "application/json"
+                                    }
+                                ],
+                                "body": {
+                                    "mode": "raw",
+                                    "raw": "{\n    \"citizen_id\": \"27018002205\",\n    \"full_name\": \"Swoyam Pokharel\",\n    \"dob\": \"2006-12-10\",\n    \"pob\": \"Kathmandu, Kathmandu, 3\",\n    \"permanent_address\": \"Kathmandu, Kathmandu, 7\"\n}\n"
+                                }
+                            },
+                            "responseTime": 11,
+                            "header": [
+                                {
+                                    "key": "Content-Type",
+                                    "value": "application/json"
+                                },
+                                {
+                                    "key": "Date",
+                                    "value": "Sat, 22 Mar 2025 11:49:49 GMT"
+                                },
+                                {
+                                    "key": "Content-Length",
+                                    "value": "33"
+                                }
+                            ],
+                            "body": "{\"error\":\"Invalid Request Body\"}\n",
+                            "status": "Bad Request",
+                            "code": 400
+                        }
+                    ]
+                },
+                {
+                    "request": {
+                        "url": "0.0.0.0:8080/api/createCitizen",
+                        "method": "POST",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\n    \"citizen_id\": \"27018002205\",\n    \"full_name\": \"Swoyam Pokharel\",\n    \"dob\": \"2006-12-10\",\n    \"pob\": \"Kathmandu, Kathmandu, 3\",\n    \"permanent_address\": \"Kathmandu, Kathmandu, 7\"\n}\n"
+                        }
+                    },
+                    "id": "rester-history-11",
+                    "name": "History_xwzo1zo3 11",
+                    "response": [
+                        {
+                            "id": "rester-23",
+                            "name": "2025-03-22T11:48:39.423Z History_xwzo1zo3 11",
+                            "originalRequest": {
+                                "url": "0.0.0.0:8080/api/createCitizen",
+                                "method": "POST",
+                                "header": [
+                                    {
+                                        "key": "Content-Type",
+                                        "value": "application/json"
+                                    }
+                                ],
+                                "body": {
+                                    "mode": "raw",
+                                    "raw": "{\n    \"citizen_id\": \"27018002205\",\n    \"full_name\": \"Swoyam Pokharel\",\n    \"dob\": \"2006-12-10\",\n    \"pob\": \"Kathmandu, Kathmandu, 3\",\n    \"permanent_address\": \"Kathmandu, Kathmandu, 7\"\n}\n"
+                                }
+                            },
+                            "responseTime": 10,
+                            "header": [
+                                {
+                                    "key": "Content-Type",
+                                    "value": "text/plain; charset=utf-8"
+                                },
+                                {
+                                    "key": "X-Content-Type-Options",
+                                    "value": "nosniff"
+                                },
+                                {
+                                    "key": "Date",
+                                    "value": "Sat, 22 Mar 2025 11:48:39 GMT"
+                                },
+                                {
+                                    "key": "Content-Length",
+                                    "value": "19"
+                                }
+                            ],
+                            "body": "404 page not found\n",
+                            "status": "Not Found",
+                            "code": 404
+                        }
+                    ]
+                },
+                {
+                    "request": {
+                        "url": "0.0.0.0:8080/api/getElections",
+                        "method": "GET",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                            }
+                        ]
+                    },
+                    "id": "rester-history-12",
+                    "name": "History_xwzo1zo3 12",
+                    "response": [
+                        {
+                            "id": "rester-22",
+                            "name": "2025-03-22T11:47:52.862Z History_xwzo1zo3 12",
+                            "originalRequest": {
+                                "url": "0.0.0.0:8080/api/getElections",
+                                "method": "GET",
+                                "header": [
+                                    {
+                                        "key": "Content-Type",
+                                        "value": "application/json"
+                                    }
+                                ]
+                            },
+                            "responseTime": 59,
+                            "header": [
+                                {
+                                    "key": "Content-Type",
+                                    "value": "application/json"
+                                },
+                                {
+                                    "key": "Date",
+                                    "value": "Sat, 22 Mar 2025 11:47:52 GMT"
+                                },
+                                {
+                                    "key": "Content-Length",
+                                    "value": "427"
+                                }
+                            ],
+                            "body": "[{\"election_id\":0,\"name\":\"Provincial Election 2025\",\"start_date\":\"2025-06-01T00:00:00Z\",\"end_date\":\"2025-06-15T00:00:00Z\",\"vote_restriction\":\"@provincial\"},{\"election_id\":1,\"name\":\"0\",\"start_date\":\"Provincial Election 2026\",\"end_date\":\"2026-06-01T00:00:00Z\",\"vote_restriction\":\"2026-06-15\"},{\"election_id\":2,\"name\":\"0\",\"start_date\":\"Provincial Election 2025\",\"end_date\":\"2025-06-01T00:00:00Z\",\"vote_restriction\":\"2025-06-15\"}]\n",
+                            "status": "OK",
+                            "code": 200
+                        }
+                    ]
+                },
+                {
+                    "request": {
+                        "url": "0.0.0.0:8080/api/getElections",
+                        "method": "GET",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                            }
+                        ]
+                    },
+                    "id": "rester-history-13",
+                    "name": "History_xwzo1zo3 13",
+                    "response": [
+                        {
+                            "id": "rester-21",
+                            "name": "2025-03-22T11:47:43.579Z History_xwzo1zo3 13",
+                            "originalRequest": {
+                                "url": "0.0.0.0:8080/api/getElections",
+                                "method": "GET",
+                                "header": [
+                                    {
+                                        "key": "Content-Type",
+                                        "value": "application/json"
+                                    }
+                                ]
+                            },
+                            "responseTime": 139,
+                            "header": [
+                                {
+                                    "key": "Content-Type",
+                                    "value": "application/json"
+                                },
+                                {
+                                    "key": "Date",
+                                    "value": "Sat, 22 Mar 2025 11:47:43 GMT"
+                                },
+                                {
+                                    "key": "Content-Length",
+                                    "value": "427"
+                                }
+                            ],
+                            "body": "[{\"election_id\":0,\"name\":\"Provincial Election 2025\",\"start_date\":\"2025-06-01T00:00:00Z\",\"end_date\":\"2025-06-15T00:00:00Z\",\"vote_restriction\":\"@provincial\"},{\"election_id\":1,\"name\":\"0\",\"start_date\":\"Provincial Election 2026\",\"end_date\":\"2026-06-01T00:00:00Z\",\"vote_restriction\":\"2026-06-15\"},{\"election_id\":2,\"name\":\"0\",\"start_date\":\"Provincial Election 2025\",\"end_date\":\"2025-06-01T00:00:00Z\",\"vote_restriction\":\"2025-06-15\"}]\n",
+                            "status": "OK",
+                            "code": 200
+                        }
+                    ]
+                },
+                {
+                    "request": {
+                        "url": "0.0.0.0:8080/api/createElection",
+                        "method": "POST",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\n    \"name\": \"Provincial Election 2025\",\n    \"start_date\": \"2025-06-01\",\n    \"end_date\": \"2025-06-15\",\n    \"vote_restriction\": \"@provincial\"\n}"
+                        }
+                    },
+                    "id": "rester-history-14",
+                    "name": "History_xwzo1zo3 14",
+                    "response": [
+                        {
+                            "id": "rester-20",
+                            "name": "2025-03-22T11:47:12.312Z History_xwzo1zo3 14",
+                            "originalRequest": {
+                                "url": "0.0.0.0:8080/api/createElection",
+                                "method": "POST",
+                                "header": [
+                                    {
+                                        "key": "Content-Type",
+                                        "value": "application/json"
+                                    }
+                                ],
+                                "body": {
+                                    "mode": "raw",
+                                    "raw": "{\n    \"name\": \"Provincial Election 2025\",\n    \"start_date\": \"2025-06-01\",\n    \"end_date\": \"2025-06-15\",\n    \"vote_restriction\": \"@provincial\"\n}"
+                                }
+                            },
+                            "responseTime": 164,
+                            "header": [
+                                {
+                                    "key": "Content-Type",
+                                    "value": "application/json"
+                                },
+                                {
+                                    "key": "Date",
+                                    "value": "Sat, 22 Mar 2025 11:47:12 GMT"
+                                },
+                                {
+                                    "key": "Content-Length",
+                                    "value": "44"
+                                }
+                            ],
+                            "body": "{\"message\":\"Election Successfully Created\"}\n",
+                            "status": "OK",
+                            "code": 200
+                        }
+                    ]
+                },
+                {
+                    "request": {
+                        "url": "0.0.0.0:8080/api/createCitizen",
+                        "method": "GET",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\n    \"name\": \"Provincial Election 2026\",\n    \"start_date\": \"2026-06-01\",\n    \"end_date\": \"2026-06-15\",\n    \"vote_restriction\": \"@provincial\"\n}"
+                        }
+                    },
+                    "id": "rester-history-15",
+                    "name": "History_xwzo1zo3 15",
+                    "response": [
+                        {
+                            "id": "rester-19",
+                            "name": "2025-03-22T11:46:42.507Z History_xwzo1zo3 15",
+                            "originalRequest": {
+                                "url": "0.0.0.0:8080/api/createCitizen",
+                                "method": "GET",
+                                "header": [
+                                    {
+                                        "key": "Content-Type",
+                                        "value": "application/json"
+                                    }
+                                ],
+                                "body": {
+                                    "mode": "raw",
+                                    "raw": "{\n    \"name\": \"Provincial Election 2026\",\n    \"start_date\": \"2026-06-01\",\n    \"end_date\": \"2026-06-15\",\n    \"vote_restriction\": \"@provincial\"\n}"
+                                }
+                            },
+                            "responseTime": 9,
+                            "header": [
+                                {
+                                    "key": "Content-Type",
+                                    "value": "text/plain; charset=utf-8"
+                                },
+                                {
+                                    "key": "X-Content-Type-Options",
+                                    "value": "nosniff"
+                                },
+                                {
+                                    "key": "Date",
+                                    "value": "Sat, 22 Mar 2025 11:46:42 GMT"
+                                },
+                                {
+                                    "key": "Content-Length",
+                                    "value": "19"
+                                }
+                            ],
+                            "body": "404 page not found\n",
+                            "status": "Not Found",
+                            "code": 404
+                        }
+                    ]
+                },
+                {
+                    "request": {
+                        "url": "0.0.0.0:8080/api/getElections",
+                        "method": "GET",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                            }
+                        ]
+                    },
+                    "id": "rester-history-16",
+                    "name": "History_xwzo1zo3 16",
+                    "response": [
+                        {
+                            "id": "rester-18",
+                            "name": "2025-03-22T11:45:43.108Z History_xwzo1zo3 16",
+                            "originalRequest": {
+                                "url": "0.0.0.0:8080/api/getElections",
+                                "method": "GET",
+                                "header": [
+                                    {
+                                        "key": "Content-Type",
+                                        "value": "application/json"
+                                    }
+                                ]
+                            },
+                            "responseTime": 57,
+                            "header": [
+                                {
+                                    "key": "Content-Type",
+                                    "value": "application/json"
+                                },
+                                {
+                                    "key": "Date",
+                                    "value": "Sat, 22 Mar 2025 11:45:43 GMT"
+                                },
+                                {
+                                    "key": "Content-Length",
+                                    "value": "292"
+                                }
+                            ],
+                            "body": "[{\"election_id\":0,\"name\":\"Provincial Election 2025\",\"start_date\":\"2025-06-01T00:00:00Z\",\"end_date\":\"2025-06-15T00:00:00Z\",\"vote_restriction\":\"@provincial\"},{\"election_id\":1,\"name\":\"0\",\"start_date\":\"Provincial Election 2026\",\"end_date\":\"2026-06-01T00:00:00Z\",\"vote_restriction\":\"2026-06-15\"}]\n",
+                            "status": "OK",
+                            "code": 200
+                        }
+                    ]
+                },
+                {
+                    "request": {
+                        "url": "0.0.0.0:8080/api/createElection",
+                        "method": "POST",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\n    \"name\": \"Provincial Election 2026\",\n    \"start_date\": \"2026-06-01\",\n    \"end_date\": \"2026-06-15\",\n    \"vote_restriction\": \"@everyone\"\n}"
+                        }
+                    },
+                    "id": "rester-history-17",
+                    "name": "History_xwzo1zo3 17",
+                    "response": [
+                        {
+                            "id": "rester-17",
+                            "name": "2025-03-22T11:45:36.438Z History_xwzo1zo3 17",
+                            "originalRequest": {
+                                "url": "0.0.0.0:8080/api/createElection",
+                                "method": "POST",
+                                "header": [
+                                    {
+                                        "key": "Content-Type",
+                                        "value": "application/json"
+                                    }
+                                ],
+                                "body": {
+                                    "mode": "raw",
+                                    "raw": "{\n    \"name\": \"Provincial Election 2026\",\n    \"start_date\": \"2026-06-01\",\n    \"end_date\": \"2026-06-15\",\n    \"vote_restriction\": \"@everyone\"\n}"
+                                }
+                            },
+                            "responseTime": 508,
+                            "header": [
+                                {
+                                    "key": "Content-Type",
+                                    "value": "application/json"
+                                },
+                                {
+                                    "key": "Date",
+                                    "value": "Sat, 22 Mar 2025 11:45:36 GMT"
+                                },
+                                {
+                                    "key": "Content-Length",
+                                    "value": "44"
+                                }
+                            ],
+                            "body": "{\"message\":\"Election Successfully Created\"}\n",
+                            "status": "OK",
+                            "code": 200
+                        }
+                    ]
+                },
+                {
+                    "request": {
+                        "url": "0.0.0.0:8080/api/createElection",
+                        "method": "POST",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\n    \"name\": \"Provincial Election 2026\",\n    \"start_date\": \"2026-06-01\",\n    \"end_date\": \"2026-06-15\",\n    \"vote_restriction\": \"@everyone\"\n}"
+                        }
+                    },
+                    "id": "rester-history-18",
+                    "name": "History_xwzo1zo3 18",
+                    "response": [
+                        {
+                            "id": "rester-16",
+                            "name": "2025-03-22T11:43:49.879Z History_xwzo1zo3 18",
+                            "originalRequest": {
+                                "url": "0.0.0.0:8080/api/createElection",
+                                "method": "POST",
+                                "header": [
+                                    {
+                                        "key": "Content-Type",
+                                        "value": "application/json"
+                                    }
+                                ],
+                                "body": {
+                                    "mode": "raw",
+                                    "raw": "{\n    \"name\": \"Provincial Election 2026\",\n    \"start_date\": \"2026-06-01\",\n    \"end_date\": \"2026-06-15\",\n    \"vote_restriction\": \"@everyone\"\n}"
+                                }
+                            },
+                            "responseTime": 57,
+                            "header": [
+                                {
+                                    "key": "Content-Type",
+                                    "value": "application/json"
+                                },
+                                {
+                                    "key": "Date",
+                                    "value": "Sat, 22 Mar 2025 11:43:49 GMT"
+                                },
+                                {
+                                    "key": "Content-Length",
+                                    "value": "49"
+                                }
+                            ],
+                            "body": "{\"error\":\"election with this ID already exists\"}\n",
+                            "status": "Unauthorized",
+                            "code": 401
+                        }
+                    ]
+                },
+                {
+                    "request": {
+                        "url": "0.0.0.0:8080/api/getElections",
+                        "method": "GET",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                            }
+                        ]
+                    },
+                    "id": "rester-history-19",
+                    "name": "History_xwzo1zo3 19",
+                    "response": [
+                        {
+                            "id": "rester-15",
+                            "name": "2025-03-22T11:43:02.051Z History_xwzo1zo3 19",
+                            "originalRequest": {
+                                "url": "0.0.0.0:8080/api/getElections",
+                                "method": "GET",
+                                "header": [
+                                    {
+                                        "key": "Content-Type",
+                                        "value": "application/json"
+                                    }
+                                ]
+                            },
+                            "responseTime": 57,
+                            "header": [
+                                {
+                                    "key": "Content-Type",
+                                    "value": "application/json"
+                                },
+                                {
+                                    "key": "Date",
+                                    "value": "Sat, 22 Mar 2025 11:43:02 GMT"
+                                },
+                                {
+                                    "key": "Content-Length",
+                                    "value": "157"
+                                }
+                            ],
+                            "body": "[{\"election_id\":0,\"name\":\"Provincial Election 2025\",\"start_date\":\"2025-06-01T00:00:00Z\",\"end_date\":\"2025-06-15T00:00:00Z\",\"vote_restriction\":\"@provincial\"}]\n",
+                            "status": "OK",
+                            "code": 200
+                        }
+                    ]
+                },
+                {
+                    "request": {
+                        "url": "0.0.0.0:3000/api/secure/citizens/1",
+                        "method": "GET",
+                        "header": [
+                            {
+                                "key": "Authorization",
+                                "value": "Bearer adminsecrettoken"
+                            }
+                        ]
+                    },
+                    "id": "rester-history-2",
+                    "name": "History_xwzo1zo3 2",
+                    "response": [
+                        {
+                            "id": "rester-32",
+                            "name": "2025-03-25T04:04:39.985Z History_xwzo1zo3 2",
+                            "originalRequest": {
+                                "url": "0.0.0.0:3000/api/secure/citizens/1",
+                                "method": "GET",
+                                "header": [
+                                    {
+                                        "key": "Authorization",
+                                        "value": "Bearer adminsecrettoken"
+                                    }
+                                ]
+                            },
+                            "responseTime": 231,
+                            "header": [
+                                {
+                                    "key": "Server",
+                                    "value": "ElectOneAPI"
+                                },
+                                {
+                                    "key": "Date",
+                                    "value": "Tue, 25 Mar 2025 04:04:40 GMT"
+                                },
+                                {
+                                    "key": "Content-Type",
+                                    "value": "application/json"
+                                },
+                                {
+                                    "key": "Content-Length",
+                                    "value": "42"
+                                }
+                            ],
+                            "body": "{\"error\":\"Citizen with that ID not found\"}",
+                            "status": "Bad Request",
+                            "code": 400
+                        }
+                    ]
+                },
+                {
+                    "request": {
+                        "url": "0.0.0.0:8080/api/createElection",
+                        "method": "POST",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\n    \"name\": \"Provincial Election 2025\",\n    \"start_date\": \"2025-06-01\",\n    \"end_date\": \"2025-06-15\",\n    \"vote_restriction\": \"@provincial\"\n}"
+                        }
+                    },
+                    "id": "rester-history-20",
+                    "name": "History_xwzo1zo3 20",
+                    "response": [
+                        {
+                            "id": "rester-14",
+                            "name": "2025-03-22T11:42:58.265Z History_xwzo1zo3 20",
+                            "originalRequest": {
+                                "url": "0.0.0.0:8080/api/createElection",
+                                "method": "POST",
+                                "header": [
+                                    {
+                                        "key": "Content-Type",
+                                        "value": "application/json"
+                                    }
+                                ],
+                                "body": {
+                                    "mode": "raw",
+                                    "raw": "{\n    \"name\": \"Provincial Election 2025\",\n    \"start_date\": \"2025-06-01\",\n    \"end_date\": \"2025-06-15\",\n    \"vote_restriction\": \"@provincial\"\n}"
+                                }
+                            },
+                            "responseTime": 124,
+                            "header": [
+                                {
+                                    "key": "Content-Type",
+                                    "value": "application/json"
+                                },
+                                {
+                                    "key": "Date",
+                                    "value": "Sat, 22 Mar 2025 11:42:58 GMT"
+                                },
+                                {
+                                    "key": "Content-Length",
+                                    "value": "44"
+                                }
+                            ],
+                            "body": "{\"message\":\"Election Successfully Created\"}\n",
+                            "status": "OK",
+                            "code": 200
+                        }
+                    ]
+                },
+                {
+                    "request": {
+                        "url": "0.0.0.0:8080/api/getElections",
+                        "method": "GET",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                            }
+                        ]
+                    },
+                    "id": "rester-history-21",
+                    "name": "History_xwzo1zo3 21",
+                    "response": [
+                        {
+                            "id": "rester-13",
+                            "name": "2025-03-22T11:41:50.869Z History_xwzo1zo3 21",
+                            "originalRequest": {
+                                "url": "0.0.0.0:8080/api/getElections",
+                                "method": "GET",
+                                "header": [
+                                    {
+                                        "key": "Content-Type",
+                                        "value": "application/json"
+                                    }
+                                ]
+                            },
+                            "responseTime": 669,
+                            "header": [
+                                {
+                                    "key": "Content-Type",
+                                    "value": "application/json"
+                                },
+                                {
+                                    "key": "Date",
+                                    "value": "Sat, 22 Mar 2025 11:41:51 GMT"
+                                },
+                                {
+                                    "key": "Content-Length",
+                                    "value": "5"
+                                }
+                            ],
+                            "body": "null\n",
+                            "status": "OK",
+                            "code": 200
+                        }
+                    ]
+                },
+                {
+                    "request": {
+                        "url": "0.0.0.0:8080/api/login",
+                        "method": "POST",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\n  \"citizen_id\": \"27018002205\",\n  \"password\": \"YourPassword123\"\n}\n"
+                        }
+                    },
+                    "id": "rester-history-22",
+                    "name": "History_xwzo1zo3 22",
+                    "response": [
+                        {
+                            "id": "rester-12",
+                            "name": "2025-03-22T11:12:00.991Z History_xwzo1zo3 22",
+                            "originalRequest": {
+                                "url": "0.0.0.0:8080/api/login",
+                                "method": "POST",
+                                "header": [
+                                    {
+                                        "key": "Content-Type",
+                                        "value": "application/json"
+                                    }
+                                ],
+                                "body": {
+                                    "mode": "raw",
+                                    "raw": "{\n  \"citizen_id\": \"27018002205\",\n  \"password\": \"YourPassword123\"\n}\n"
+                                }
+                            },
+                            "responseTime": 221,
+                            "header": [
+                                {
+                                    "key": "Content-Type",
+                                    "value": "application/json"
+                                },
+                                {
+                                    "key": "Date",
+                                    "value": "Sat, 22 Mar 2025 11:12:01 GMT"
+                                },
+                                {
+                                    "key": "Content-Length",
+                                    "value": "152"
+                                }
+                            ],
+                            "body": "{\"jwt\":\"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJjaXRpemVuX2lkIjoiMjcwMTgwMDIyMDUiLCJleHAiOjE3NDI3MjgzMjF9.pdPwvabKCUmx29C4Sfl3vv-CTo3ScuRLi4MMBIlpzyE\"}\n",
+                            "status": "OK",
+                            "code": 200
+                        }
+                    ]
+                },
+                {
+                    "request": {
+                        "url": "0.0.0.0:8080/api/signup",
+                        "method": "POST",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\n  \"citizen_id\": \"27018002205\",\n  \"password\": \"YourPassword123\",\n  \"phone\": \"9749343509\"\n}\n"
+                        }
+                    },
+                    "id": "rester-history-23",
+                    "name": "History_xwzo1zo3 23",
+                    "response": [
+                        {
+                            "id": "rester-11",
+                            "name": "2025-03-22T11:11:51.106Z History_xwzo1zo3 23",
+                            "originalRequest": {
+                                "url": "0.0.0.0:8080/api/signup",
+                                "method": "POST",
+                                "header": [
+                                    {
+                                        "key": "Content-Type",
+                                        "value": "application/json"
+                                    }
+                                ],
+                                "body": {
+                                    "mode": "raw",
+                                    "raw": "{\n  \"citizen_id\": \"27018002205\",\n  \"password\": \"YourPassword123\",\n  \"phone\": \"9749343509\"\n}\n"
+                                }
+                            },
+                            "responseTime": 314,
+                            "header": [
+                                {
+                                    "key": "Content-Type",
+                                    "value": "application/json"
+                                },
+                                {
+                                    "key": "Date",
+                                    "value": "Sat, 22 Mar 2025 11:11:51 GMT"
+                                },
+                                {
+                                    "key": "Content-Length",
+                                    "value": "32"
+                                }
+                            ],
+                            "body": "{\"error\":\"user already exists\"}\n",
+                            "status": "Unauthorized",
+                            "code": 401
+                        }
+                    ]
+                },
+                {
+                    "request": {
+                        "url": "0.0.0.0:8080/api/login",
+                        "method": "POST",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\n  \"citizenid\": \"27018002205\",\n  \"password\": \"YourPassword123\"\n}\n"
+                        }
+                    },
+                    "id": "rester-history-24",
+                    "name": "History_xwzo1zo3 24",
+                    "response": [
+                        {
+                            "id": "rester-10",
+                            "name": "2025-03-22T11:10:30.839Z History_xwzo1zo3 24",
+                            "originalRequest": {
+                                "url": "0.0.0.0:8080/api/login",
+                                "method": "POST",
+                                "header": [
+                                    {
+                                        "key": "Content-Type",
+                                        "value": "application/json"
+                                    }
+                                ],
+                                "body": {
+                                    "mode": "raw",
+                                    "raw": "{\n  \"citizenid\": \"27018002205\",\n  \"password\": \"YourPassword123\"\n}\n"
+                                }
+                            },
+                            "responseTime": 61,
+                            "header": [
+                                {
+                                    "key": "Content-Type",
+                                    "value": "application/json"
+                                },
+                                {
+                                    "key": "Date",
+                                    "value": "Sat, 22 Mar 2025 11:10:30 GMT"
+                                },
+                                {
+                                    "key": "Content-Length",
+                                    "value": "121"
+                                }
+                            ],
+                            "body": "{\"error\":\"failed to query user: failed to execute SQL:\\nSQLite input error: no such column: citizenid (at offset 33)\\n\"}\n",
+                            "status": "Unauthorized",
+                            "code": 401
+                        }
+                    ]
+                },
+                {
+                    "request": {
+                        "url": "0.0.0.0:8080/api/signup",
+                        "method": "POST",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\n  \"citizenid\": \"27018002205\",\n  \"password\": \"YourPassword123\",\n  \"phone\": \"9749343509\"\n}\n"
+                        }
+                    },
+                    "id": "rester-history-25",
+                    "name": "History_xwzo1zo3 25",
+                    "response": [
+                        {
+                            "id": "rester-9",
+                            "name": "2025-03-22T11:10:03.806Z History_xwzo1zo3 25",
+                            "originalRequest": {
+                                "url": "0.0.0.0:8080/api/signup",
+                                "method": "POST",
+                                "header": [
+                                    {
+                                        "key": "Content-Type",
+                                        "value": "application/json"
+                                    }
+                                ],
+                                "body": {
+                                    "mode": "raw",
+                                    "raw": "{\n  \"citizenid\": \"27018002205\",\n  \"password\": \"YourPassword123\",\n  \"phone\": \"9749343509\"\n}\n"
+                                }
+                            },
+                            "responseTime": 308,
+                            "header": [
+                                {
+                                    "key": "Content-Type",
+                                    "value": "application/json"
+                                },
+                                {
+                                    "key": "Date",
+                                    "value": "Sat, 22 Mar 2025 11:10:04 GMT"
+                                },
+                                {
+                                    "key": "Content-Length",
+                                    "value": "40"
+                                }
+                            ],
+                            "body": "{\"message\":\"User Successfully Created\"}\n",
+                            "status": "OK",
+                            "code": 200
+                        }
+                    ]
+                },
+                {
+                    "request": {
+                        "url": "0.0.0.0:8080/api/signup",
+                        "method": "POST",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\n    \"citizenid\": \"123459\",\n    \"password\": \"supersecurepassword\",\n    \"phone\": \"1234567890\"\n}\n"
+                        }
+                    },
+                    "id": "rester-history-26",
+                    "name": "History_xwzo1zo3 26",
+                    "response": [
+                        {
+                            "id": "rester-8",
+                            "name": "2025-03-22T11:07:43.110Z History_xwzo1zo3 26",
+                            "originalRequest": {
+                                "url": "0.0.0.0:8080/api/signup",
+                                "method": "POST",
+                                "header": [
+                                    {
+                                        "key": "Content-Type",
+                                        "value": "application/json"
+                                    }
+                                ],
+                                "body": {
+                                    "mode": "raw",
+                                    "raw": "{\n    \"citizenid\": \"123459\",\n    \"password\": \"supersecurepassword\",\n    \"phone\": \"1234567890\"\n}\n"
+                                }
+                            },
+                            "responseTime": 291,
+                            "header": [
+                                {
+                                    "key": "Content-Type",
+                                    "value": "application/json"
+                                },
+                                {
+                                    "key": "Date",
+                                    "value": "Sat, 22 Mar 2025 11:07:43 GMT"
+                                },
+                                {
+                                    "key": "Content-Length",
+                                    "value": "117"
+                                }
+                            ],
+                            "body": "{\"error\":\"failed to insert user into database: failed to execute SQL:\\nSQLite error: FOREIGN KEY constraint failed\"}\n",
+                            "status": "Unauthorized",
+                            "code": 401
+                        }
+                    ]
+                },
+                {
+                    "request": {
+                        "url": "0.0.0.0:8080/api/signup",
+                        "method": "POST",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\n    \"citizenid\": \"123459\",\n    \"password\": \"supersecurepassword\",\n    \"phone\": \"1234567890\"\n}\n"
+                        }
+                    },
+                    "id": "rester-history-27",
+                    "name": "History_xwzo1zo3 27",
+                    "response": [
+                        {
+                            "id": "rester-7",
+                            "name": "2025-03-22T11:06:24.505Z History_xwzo1zo3 27",
+                            "originalRequest": {
+                                "url": "0.0.0.0:8080/api/signup",
+                                "method": "POST",
+                                "header": [
+                                    {
+                                        "key": "Content-Type",
+                                        "value": "application/json"
+                                    }
+                                ],
+                                "body": {
+                                    "mode": "raw",
+                                    "raw": "{\n    \"citizenid\": \"123459\",\n    \"password\": \"supersecurepassword\",\n    \"phone\": \"1234567890\"\n}\n"
+                                }
+                            },
+                            "responseTime": 312,
+                            "header": [
+                                {
+                                    "key": "Content-Type",
+                                    "value": "application/json"
+                                },
+                                {
+                                    "key": "Date",
+                                    "value": "Sat, 22 Mar 2025 11:06:24 GMT"
+                                },
+                                {
+                                    "key": "Content-Length",
+                                    "value": "125"
+                                }
+                            ],
+                            "body": "{\"error\":\"failed to insert user into database: failed to execute SQL:\\nSQLite error: table users has no column named phone\"}\n",
+                            "status": "Unauthorized",
+                            "code": 401
+                        }
+                    ]
+                },
+                {
+                    "request": {
+                        "url": "0.0.0.0:8080/api/signup",
+                        "method": "POST",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\n    \"citizenid\": \"123459\",\n    \"password\": \"supersecurepassword\",\n    \"phone\": \"1234567890\"\n}\n"
+                        }
+                    },
+                    "id": "rester-history-28",
+                    "name": "History_xwzo1zo3 28",
+                    "response": [
+                        {
+                            "id": "rester-6",
+                            "name": "2025-03-22T11:05:51.540Z History_xwzo1zo3 28",
+                            "originalRequest": {
+                                "url": "0.0.0.0:8080/api/signup",
+                                "method": "POST",
+                                "header": [
+                                    {
+                                        "key": "Content-Type",
+                                        "value": "application/json"
+                                    }
+                                ],
+                                "body": {
+                                    "mode": "raw",
+                                    "raw": "{\n    \"citizenid\": \"123459\",\n    \"password\": \"supersecurepassword\",\n    \"phone\": \"1234567890\"\n}\n"
+                                }
+                            },
+                            "responseTime": 281,
+                            "header": [
+                                {
+                                    "key": "Content-Type",
+                                    "value": "application/json"
+                                },
+                                {
+                                    "key": "Date",
+                                    "value": "Sat, 22 Mar 2025 11:05:51 GMT"
+                                },
+                                {
+                                    "key": "Content-Length",
+                                    "value": "129"
+                                }
+                            ],
+                            "body": "{\"error\":\"failed to insert user into database: failed to execute SQL:\\nSQLite error: table users has no column named citizenid\"}\n",
+                            "status": "Unauthorized",
+                            "code": 401
+                        }
+                    ]
+                },
+                {
+                    "request": {
+                        "url": "0.0.0.0:8080/api/signup",
+                        "method": "POST",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\n    \"citizenid\": \"123459\",\n    \"password\": \"supersecurepassword\",\n    \"phone\": \"1234567890\"\n}\n"
+                        }
+                    },
+                    "id": "rester-history-29",
+                    "name": "History_xwzo1zo3 29",
+                    "response": [
+                        {
+                            "id": "rester-5",
+                            "name": "2025-03-22T08:38:01.049Z History_xwzo1zo3 29",
+                            "originalRequest": {
+                                "url": "0.0.0.0:8080/api/signup",
+                                "method": "POST",
+                                "header": [
+                                    {
+                                        "key": "Content-Type",
+                                        "value": "application/json"
+                                    }
+                                ],
+                                "body": {
+                                    "mode": "raw",
+                                    "raw": "{\n    \"citizenid\": \"123459\",\n    \"password\": \"supersecurepassword\",\n    \"phone\": \"1234567890\"\n}\n"
+                                }
+                            },
+                            "responseTime": 295,
+                            "header": [
+                                {
+                                    "key": "Content-Type",
+                                    "value": "application/json"
+                                },
+                                {
+                                    "key": "Date",
+                                    "value": "Sat, 22 Mar 2025 08:38:01 GMT"
+                                },
+                                {
+                                    "key": "Content-Length",
+                                    "value": "32"
+                                }
+                            ],
+                            "body": "{\"error\":\"user already exists\"}\n",
+                            "status": "Unauthorized",
+                            "code": 401
+                        }
+                    ]
+                },
+                {
+                    "request": {
+                        "url": "0.0.0.0:3000/api/secure/citizens",
+                        "method": "GET",
+                        "header": [
+                            {
+                                "key": "Authorization",
+                                "value": "Bearer adminsecrettoken"
+                            }
+                        ]
+                    },
+                    "id": "rester-history-3",
+                    "name": "History_xwzo1zo3 3",
+                    "response": [
+                        {
+                            "id": "rester-31",
+                            "name": "2025-03-25T04:04:35.146Z History_xwzo1zo3 3",
+                            "originalRequest": {
+                                "url": "0.0.0.0:3000/api/secure/citizens",
+                                "method": "GET",
+                                "header": [
+                                    {
+                                        "key": "Authorization",
+                                        "value": "Bearer adminsecrettoken"
+                                    }
+                                ]
+                            },
+                            "responseTime": 6,
+                            "header": [
+                                {
+                                    "key": "Server",
+                                    "value": "ElectOneAPI"
+                                },
+                                {
+                                    "key": "Date",
+                                    "value": "Tue, 25 Mar 2025 04:04:35 GMT"
+                                },
+                                {
+                                    "key": "Content-Length",
+                                    "value": "0"
+                                }
+                            ],
+                            "body": "",
+                            "status": "OK",
+                            "code": 200
+                        }
+                    ]
+                },
+                {
+                    "request": {
+                        "url": "0.0.0.0:8080/api/signup",
+                        "method": "POST",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\n    \"citizenid\": \"123459\",\n    \"password\": \"supersecurepassword\",\n    \"phone\": \"1234567890\"\n}\n"
+                        }
+                    },
+                    "id": "rester-history-30",
+                    "name": "History_xwzo1zo3 30",
+                    "response": [
+                        {
+                            "id": "rester-4",
+                            "name": "2025-03-22T08:37:09.018Z History_xwzo1zo3 30",
+                            "originalRequest": {
+                                "url": "0.0.0.0:8080/api/signup",
+                                "method": "POST",
+                                "header": [
+                                    {
+                                        "key": "Content-Type",
+                                        "value": "application/json"
+                                    }
+                                ],
+                                "body": {
+                                    "mode": "raw",
+                                    "raw": "{\n    \"citizenid\": \"123459\",\n    \"password\": \"supersecurepassword\",\n    \"phone\": \"1234567890\"\n}\n"
+                                }
+                            },
+                            "responseTime": 311,
+                            "header": [
+                                {
+                                    "key": "Content-Type",
+                                    "value": "application/json"
+                                },
+                                {
+                                    "key": "Date",
+                                    "value": "Sat, 22 Mar 2025 08:37:09 GMT"
+                                },
+                                {
+                                    "key": "Content-Length",
+                                    "value": "129"
+                                }
+                            ],
+                            "body": "{\"error\":\"failed to insert user into database: failed to execute SQL:\\nSQLite error: UNIQUE constraint failed: users.CitizenID\"}\n",
+                            "status": "Unauthorized",
+                            "code": 401
+                        }
+                    ]
+                },
+                {
+                    "request": {
+                        "url": "0.0.0.0:8080/api/login",
+                        "method": "POST",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\n    \"citizenid\": \"123459\",\n    \"password\": \"supersecurepassword\"\n}"
+                        }
+                    },
+                    "id": "rester-history-31",
+                    "name": "History_xwzo1zo3 31",
+                    "response": [
+                        {
+                            "id": "rester-3",
+                            "name": "2025-03-22T08:35:10.395Z History_xwzo1zo3 31",
+                            "originalRequest": {
+                                "url": "0.0.0.0:8080/api/login",
+                                "method": "POST",
+                                "header": [
+                                    {
+                                        "key": "Content-Type",
+                                        "value": "application/json"
+                                    }
+                                ],
+                                "body": {
+                                    "mode": "raw",
+                                    "raw": "{\n    \"citizenid\": \"123459\",\n    \"password\": \"supersecurepassword\"\n}"
+                                }
+                            },
+                            "responseTime": 153,
+                            "header": [
+                                {
+                                    "key": "Content-Type",
+                                    "value": "application/json"
+                                },
+                                {
+                                    "key": "Date",
+                                    "value": "Sat, 22 Mar 2025 08:35:10 GMT"
+                                },
+                                {
+                                    "key": "Content-Length",
+                                    "value": "144"
+                                }
+                            ],
+                            "body": "{\"jwt\":\"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJjaXRpemVuaWQiOiIxMjM0NTkiLCJleHAiOjE3NDI3MTg5MTB9.gG9oE4kvndovtq6nmj2KOcB7EG9N1IBzZm789RhMLS0\"}\n",
+                            "status": "OK",
+                            "code": 200
+                        }
+                    ]
+                },
+                {
+                    "request": {
+                        "url": "0.0.0.0:8080/api/signup",
+                        "method": "POST",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\n    \"citizenid\": \"123459\",\n    \"password\": \"supersecurepassword\",\n    \"phone\": \"1234567890\"\n}\n"
+                        }
+                    },
+                    "id": "rester-history-32",
+                    "name": "History_xwzo1zo3 32",
+                    "response": [
+                        {
+                            "id": "rester-2",
+                            "name": "2025-03-22T08:33:43.130Z History_xwzo1zo3 32",
+                            "originalRequest": {
+                                "url": "0.0.0.0:8080/api/signup",
+                                "method": "POST",
+                                "header": [
+                                    {
+                                        "key": "Content-Type",
+                                        "value": "application/json"
+                                    }
+                                ],
+                                "body": {
+                                    "mode": "raw",
+                                    "raw": "{\n    \"citizenid\": \"123459\",\n    \"password\": \"supersecurepassword\",\n    \"phone\": \"1234567890\"\n}\n"
+                                }
+                            },
+                            "responseTime": 362,
+                            "header": [
+                                {
+                                    "key": "Content-Type",
+                                    "value": "application/json"
+                                },
+                                {
+                                    "key": "Date",
+                                    "value": "Sat, 22 Mar 2025 08:33:43 GMT"
+                                },
+                                {
+                                    "key": "Content-Length",
+                                    "value": "40"
+                                }
+                            ],
+                            "body": "{\"message\":\"User Successfully Created\"}\n",
+                            "status": "OK",
+                            "code": 200
+                        }
+                    ]
+                },
+                {
+                    "request": {
+                        "url": "0.0.0.0:8080/api/signup",
+                        "method": "POST",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\n    \"citizenid\": \"123459\",\n    \"password\": \"supersecurepassword\",\n    \"phone\": \"1234567890\"\n}\n"
+                        }
+                    },
+                    "id": "rester-history-33",
+                    "name": "History_xwzo1zo3 33",
+                    "response": [
+                        {
+                            "id": "rester-1",
+                            "name": "2025-03-22T08:33:06.503Z History_xwzo1zo3 33",
+                            "originalRequest": {
+                                "url": "0.0.0.0:8080/api/signup",
+                                "method": "POST",
+                                "header": [
+                                    {
+                                        "key": "Content-Type",
+                                        "value": "application/json"
+                                    }
+                                ],
+                                "body": {
+                                    "mode": "raw",
+                                    "raw": "{\n    \"citizenid\": \"123459\",\n    \"password\": \"supersecurepassword\",\n    \"phone\": \"1234567890\"\n}\n"
+                                }
+                            },
+                            "responseTime": 748,
+                            "header": [
+                                {
+                                    "key": "Content-Type",
+                                    "value": "application/json"
+                                },
+                                {
+                                    "key": "Date",
+                                    "value": "Sat, 22 Mar 2025 08:33:07 GMT"
+                                },
+                                {
+                                    "key": "Content-Length",
+                                    "value": "29"
+                                }
+                            ],
+                            "body": "{\"error\":\"user not found\\n\"}\n",
+                            "status": "Unauthorized",
+                            "code": 401
+                        }
+                    ]
+                },
+                {
+                    "request": {
+                        "url": "0.0.0.0:8080/api/getCandidates",
+                        "method": "GET",
+                        "header": []
+                    },
+                    "id": "rester-history-4",
+                    "name": "History_xwzo1zo3 4",
+                    "response": [
+                        {
+                            "id": "rester-30",
+                            "name": "2025-03-22T12:01:32.134Z History_xwzo1zo3 4",
+                            "originalRequest": {
+                                "url": "0.0.0.0:8080/api/getCandidates",
+                                "method": "GET",
+                                "header": []
+                            },
+                            "responseTime": 59,
+                            "header": [
+                                {
+                                    "key": "Content-Type",
+                                    "value": "application/json"
+                                },
+                                {
+                                    "key": "Date",
+                                    "value": "Sat, 22 Mar 2025 12:01:32 GMT"
+                                },
+                                {
+                                    "key": "Content-Length",
+                                    "value": "80"
+                                }
+                            ],
+                            "body": "[{\"citizen_id\":27018002205,\"election_id\":1,\"post\":\"President\",\"total_votes\":0}]\n",
+                            "status": "OK",
+                            "code": 200
+                        }
+                    ]
+                },
+                {
+                    "request": {
+                        "url": "0.0.0.0:8080/api/createCandidate",
+                        "method": "POST",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\n    \"citizen_id\": 27018002205,\n    \"election_id\": 1,\n    \"post\": \"President\",\n    \"total_votes\": 0\n}\n"
+                        }
+                    },
+                    "id": "rester-history-5",
+                    "name": "History_xwzo1zo3 5",
+                    "response": [
+                        {
+                            "id": "rester-29",
+                            "name": "2025-03-22T12:01:19.128Z History_xwzo1zo3 5",
+                            "originalRequest": {
+                                "url": "0.0.0.0:8080/api/createCandidate",
+                                "method": "POST",
+                                "header": [
+                                    {
+                                        "key": "Content-Type",
+                                        "value": "application/json"
+                                    }
+                                ],
+                                "body": {
+                                    "mode": "raw",
+                                    "raw": "{\n    \"citizen_id\": 27018002205,\n    \"election_id\": 1,\n    \"post\": \"President\",\n    \"total_votes\": 0\n}\n"
+                                }
+                            },
+                            "responseTime": 98,
+                            "header": [
+                                {
+                                    "key": "Content-Type",
+                                    "value": "application/json"
+                                },
+                                {
+                                    "key": "Date",
+                                    "value": "Sat, 22 Mar 2025 12:01:19 GMT"
+                                },
+                                {
+                                    "key": "Content-Length",
+                                    "value": "42"
+                                }
+                            ],
+                            "body": "{\"message\":\"Runner Successfully Created\"}\n",
+                            "status": "OK",
+                            "code": 200
+                        }
+                    ]
+                },
+                {
+                    "request": {
+                        "url": "0.0.0.0:8080/api/getCandidates",
+                        "method": "GET",
+                        "header": []
+                    },
+                    "id": "rester-history-6",
+                    "name": "History_xwzo1zo3 6",
+                    "response": [
+                        {
+                            "id": "rester-28",
+                            "name": "2025-03-22T12:01:12.700Z History_xwzo1zo3 6",
+                            "originalRequest": {
+                                "url": "0.0.0.0:8080/api/getCandidates",
+                                "method": "GET",
+                                "header": []
+                            },
+                            "responseTime": 379,
+                            "header": [
+                                {
+                                    "key": "Content-Type",
+                                    "value": "application/json"
+                                },
+                                {
+                                    "key": "Date",
+                                    "value": "Sat, 22 Mar 2025 12:01:13 GMT"
+                                },
+                                {
+                                    "key": "Content-Length",
+                                    "value": "5"
+                                }
+                            ],
+                            "body": "null\n",
+                            "status": "OK",
+                            "code": 200
+                        }
+                    ]
+                },
+                {
+                    "request": {
+                        "url": "0.0.0.0:8080/api/getCandidates",
+                        "method": "GET",
+                        "header": []
+                    },
+                    "id": "rester-history-7",
+                    "name": "History_xwzo1zo3 7",
+                    "response": [
+                        {
+                            "id": "rester-27",
+                            "name": "2025-03-22T12:01:02.887Z History_xwzo1zo3 7",
+                            "originalRequest": {
+                                "url": "0.0.0.0:8080/api/getCandidates",
+                                "method": "GET",
+                                "header": []
+                            },
+                            "responseTime": 15,
+                            "header": [
+                                {
+                                    "key": "Allow",
+                                    "value": "POST"
+                                },
+                                {
+                                    "key": "Content-Type",
+                                    "value": "text/plain; charset=utf-8"
+                                },
+                                {
+                                    "key": "X-Content-Type-Options",
+                                    "value": "nosniff"
+                                },
+                                {
+                                    "key": "Date",
+                                    "value": "Sat, 22 Mar 2025 12:01:02 GMT"
+                                },
+                                {
+                                    "key": "Content-Length",
+                                    "value": "19"
+                                }
+                            ],
+                            "body": "Method Not Allowed\n",
+                            "status": "Method Not Allowed",
+                            "code": 405
+                        }
+                    ]
+                },
+                {
+                    "request": {
+                        "url": "0.0.0.0:8080/api/createCitizen",
+                        "method": "POST",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\n    \"citizen_id\": \"67018002205\",\n    \"full_name\": \"Someone Else\",\n    \"dob\": \"2006-12-10\",\n    \"pob\": \"Kathmandu, Kathmandu, 3\",\n    \"permanent_address\": \"Kathmandu, Kathmandu, 7\"\n}\n"
+                        }
+                    },
+                    "id": "rester-history-8",
+                    "name": "History_xwzo1zo3 8",
+                    "response": [
+                        {
+                            "id": "rester-26",
+                            "name": "2025-03-22T11:52:22.244Z History_xwzo1zo3 8",
+                            "originalRequest": {
+                                "url": "0.0.0.0:8080/api/createCitizen",
+                                "method": "POST",
+                                "header": [
+                                    {
+                                        "key": "Content-Type",
+                                        "value": "application/json"
+                                    }
+                                ],
+                                "body": {
+                                    "mode": "raw",
+                                    "raw": "{\n    \"citizen_id\": \"67018002205\",\n    \"full_name\": \"Someone Else\",\n    \"dob\": \"2006-12-10\",\n    \"pob\": \"Kathmandu, Kathmandu, 3\",\n    \"permanent_address\": \"Kathmandu, Kathmandu, 7\"\n}\n"
+                                }
+                            },
+                            "responseTime": 151,
+                            "header": [
+                                {
+                                    "key": "Content-Type",
+                                    "value": "application/json"
+                                },
+                                {
+                                    "key": "Date",
+                                    "value": "Sat, 22 Mar 2025 11:52:22 GMT"
+                                },
+                                {
+                                    "key": "Content-Length",
+                                    "value": "43"
+                                }
+                            ],
+                            "body": "{\"message\":\"Citizen Successfully Created\"}\n",
+                            "status": "OK",
+                            "code": 200
+                        }
+                    ]
+                },
+                {
+                    "request": {
+                        "url": "0.0.0.0:8080/api/createCitizen",
+                        "method": "POST",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\n    \"citizen_id\": \"27018002205\",\n    \"full_name\": \"Swoyam Pokharel\",\n    \"dob\": \"2006-12-10\",\n    \"pob\": \"Kathmandu, Kathmandu, 3\",\n    \"permanent_address\": \"Kathmandu, Kathmandu, 7\"\n}\n"
+                        }
+                    },
+                    "id": "rester-history-9",
+                    "name": "History_xwzo1zo3 9",
+                    "response": [
+                        {
+                            "id": "rester-25",
+                            "name": "2025-03-22T11:52:02.021Z History_xwzo1zo3 9",
+                            "originalRequest": {
+                                "url": "0.0.0.0:8080/api/createCitizen",
+                                "method": "POST",
+                                "header": [
+                                    {
+                                        "key": "Content-Type",
+                                        "value": "application/json"
+                                    }
+                                ],
+                                "body": {
+                                    "mode": "raw",
+                                    "raw": "{\n    \"citizen_id\": \"27018002205\",\n    \"full_name\": \"Swoyam Pokharel\",\n    \"dob\": \"2006-12-10\",\n    \"pob\": \"Kathmandu, Kathmandu, 3\",\n    \"permanent_address\": \"Kathmandu, Kathmandu, 7\"\n}\n"
+                                }
+                            },
+                            "responseTime": 301,
+                            "header": [
+                                {
+                                    "key": "Content-Type",
+                                    "value": "application/json"
+                                },
+                                {
+                                    "key": "Date",
+                                    "value": "Sat, 22 Mar 2025 11:52:02 GMT"
+                                },
+                                {
+                                    "key": "Content-Length",
+                                    "value": "48"
+                                }
+                            ],
+                            "body": "{\"error\":\"citizen with this ID already exists\"}\n",
+                            "status": "Unauthorized",
+                            "code": 401
+                        }
+                    ]
+                }
+            ]
+        }
+    ]
+}
