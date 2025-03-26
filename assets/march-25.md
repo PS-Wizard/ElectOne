@@ -1,5 +1,3 @@
-A more secure, and performant port of the previous API.
-
 ```mermaid
 erDiagram
 CITIZENS {

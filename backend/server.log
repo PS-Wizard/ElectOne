@@ -1,5 +1,6 @@
-16:49:04 | 200 |  557.932982ms |  | GET | /api/secure/citizens/12-123-12334 | -
-16:49:43 | 200 |   57.428967ms |  | GET | /api/secure/usersPaginated/0 | -
+2025/03/26 17:00:14 Shutting Down Server ...
+2025/03/26 17:00:14 Server Stopped.
+6:49:43 | 200 |   57.428967ms |  | GET | /api/secure/usersPaginated/0 | -
 16:49:56 | 201 |  118.737982ms |  | POST | /api/secure/user | -
 16:49:59 | 200 |   51.460422ms |  | GET | /api/secure/usersPaginated/0 | -
 16:50:57 | 200 |   53.987272ms |  | GET | /api/secure/candidatesPaginated/0 | -
