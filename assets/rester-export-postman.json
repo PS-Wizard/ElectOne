@@ -9,16 +9,336 @@
             "item": [
                 {
                     "request": {
-                        "url": "0.0.0.0:3000/api/secure/candidate",
+                        "url": "0.0.0.0:3000/api/admin/login",
+                        "method": "POST",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\n    \"email\": \"newadmin@electone.com\",\n    \"password\": \"newadminpassword\"\n}\n"
+                        }
+                    },
+                    "id": "rester-29",
+                    "name": "AdminLogin",
+                    "response": [
+                        {
+                            "id": "rester-109",
+                            "name": "2025-03-26T14:08:39.538Z AdminLogin",
+                            "originalRequest": {
+                                "url": "0.0.0.0:3000/api/admin/login",
+                                "method": "POST",
+                                "header": [
+                                    {
+                                        "key": "Content-Type",
+                                        "value": "application/json"
+                                    }
+                                ],
+                                "body": {
+                                    "mode": "raw",
+                                    "raw": "{\n    \"email\": \"newadmin@electone.com\",\n    \"password\": \"newadminpassword\"\n}\n"
+                                }
+                            },
+                            "responseTime": 176,
+                            "header": [
+                                {
+                                    "key": "Server",
+                                    "value": "ElectOneAPI"
+                                },
+                                {
+                                    "key": "Date",
+                                    "value": "Wed, 26 Mar 2025 14:08:39 GMT"
+                                },
+                                {
+                                    "key": "Content-Type",
+                                    "value": "application/json"
+                                },
+                                {
+                                    "key": "Content-Length",
+                                    "value": "31"
+                                },
+                                {
+                                    "key": "Set-Cookie",
+                                    "value": "admin_token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhZG1pbklEIjoxLCJlbWFpbCI6Im5ld2FkbWluQGVsZWN0b25lLmNvbSIsImV4cCI6MTc0MzA4NDUxOSwicm9sZSI6ImFkbWluIn0.SGCbUGXAZ0Bar3FwcgK7Fo4feVp2jY_48OWXn1HQptg; expires=Thu, 27 Mar 2025 14:08:39 GMT; path=/; HttpOnly; secure; SameSite=Strict"
+                                }
+                            ],
+                            "body": "{\"message\":\"Login Successfull\"}",
+                            "status": "OK",
+                            "code": 200
+                        },
+                        {
+                            "id": "rester-106",
+                            "name": "2025-03-26T14:07:07.097Z AdminLogin",
+                            "originalRequest": {
+                                "url": "0.0.0.0:3000/api/admin/login",
+                                "method": "POST",
+                                "header": [
+                                    {
+                                        "key": "Content-Type",
+                                        "value": "application/json"
+                                    }
+                                ],
+                                "body": {
+                                    "mode": "raw",
+                                    "raw": "{\n    \"email\": \"newadmin@electone.com\",\n    \"password\": \"newadminpassword\"\n}\n"
+                                }
+                            },
+                            "responseTime": 367,
+                            "header": [
+                                {
+                                    "key": "Server",
+                                    "value": "ElectOneAPI"
+                                },
+                                {
+                                    "key": "Date",
+                                    "value": "Wed, 26 Mar 2025 14:07:07 GMT"
+                                },
+                                {
+                                    "key": "Content-Type",
+                                    "value": "application/json"
+                                },
+                                {
+                                    "key": "Content-Length",
+                                    "value": "31"
+                                },
+                                {
+                                    "key": "Set-Cookie",
+                                    "value": "admin_token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhZG1pbklEIjoxLCJlbWFpbCI6Im5ld2FkbWluQGVsZWN0b25lLmNvbSIsImV4cCI6MTc0MzA4NDQyNywicm9sZSI6ImFkbWluIn0.bVqb3mgbbHQfr41C05ojhazhSECAayW-AXEAEPI2gOM; expires=Thu, 27 Mar 2025 14:07:07 GMT; path=/; HttpOnly; secure; SameSite=Strict"
+                                }
+                            ],
+                            "body": "{\"message\":\"Login Successfull\"}",
+                            "status": "OK",
+                            "code": 200
+                        },
+                        {
+                            "id": "rester-103",
+                            "name": "2025-03-26T13:54:10.785Z AdminLogin",
+                            "originalRequest": {
+                                "url": "0.0.0.0:3000/api/admin/login",
+                                "method": "POST",
+                                "header": [
+                                    {
+                                        "key": "Authorization",
+                                        "value": "Bearer superadmin-token"
+                                    },
+                                    {
+                                        "key": "Content-Type",
+                                        "value": "application/json"
+                                    }
+                                ],
+                                "body": {
+                                    "mode": "raw",
+                                    "raw": "{\n    \"email\": \"newadmin@electone.com\",\n    \"password\": \"newadminpassword\"\n}\n"
+                                }
+                            },
+                            "responseTime": 177,
+                            "header": [
+                                {
+                                    "key": "Server",
+                                    "value": "ElectOneAPI"
+                                },
+                                {
+                                    "key": "Date",
+                                    "value": "Wed, 26 Mar 2025 13:54:10 GMT"
+                                },
+                                {
+                                    "key": "Content-Type",
+                                    "value": "application/json"
+                                },
+                                {
+                                    "key": "Content-Length",
+                                    "value": "31"
+                                },
+                                {
+                                    "key": "Set-Cookie",
+                                    "value": "admin_token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhZG1pbklEIjoxLCJlbWFpbCI6Im5ld2FkbWluQGVsZWN0b25lLmNvbSIsImV4cCI6MTc0MzA4MzY1MCwicm9sZSI6ImFkbWluIn0.KJrxLf9QBd3jWTTqi2wbFiLXtxHHZKtiCLMborPPajY; expires=Thu, 27 Mar 2025 13:54:10 GMT; path=/; HttpOnly; secure; SameSite=Strict"
+                                }
+                            ],
+                            "body": "{\"message\":\"Login Successfull\"}",
+                            "status": "OK",
+                            "code": 200
+                        },
+                        {
+                            "id": "rester-101",
+                            "name": "2025-03-26T13:53:34.271Z AdminLogin",
+                            "originalRequest": {
+                                "url": "0.0.0.0:3000/api/admin/login",
+                                "method": "POST",
+                                "header": [
+                                    {
+                                        "key": "Authorization",
+                                        "value": "Bearer superadmin-token"
+                                    },
+                                    {
+                                        "key": "Content-Type",
+                                        "value": "application/json"
+                                    }
+                                ],
+                                "body": {
+                                    "mode": "raw",
+                                    "raw": "{\n    \"email\": \"newadmin@electone.com\",\n    \"password\": \"newadminpassword\"\n}\n"
+                                }
+                            },
+                            "responseTime": 452,
+                            "header": [
+                                {
+                                    "key": "Server",
+                                    "value": "ElectOneAPI"
+                                },
+                                {
+                                    "key": "Date",
+                                    "value": "Wed, 26 Mar 2025 13:53:34 GMT"
+                                },
+                                {
+                                    "key": "Content-Type",
+                                    "value": "application/json"
+                                },
+                                {
+                                    "key": "Content-Length",
+                                    "value": "31"
+                                },
+                                {
+                                    "key": "Set-Cookie",
+                                    "value": "admin_token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhZG1pbklEIjoxLCJlbWFpbCI6Im5ld2FkbWluQGVsZWN0b25lLmNvbSIsImV4cCI6MTc0MzA4MzYxNCwicm9sZSI6ImFkbWluIn0.T6mRAcVZB2EPx82n9ymUlmifYoVdHDXuVO5gOIDiiHI; expires=Thu, 27 Mar 2025 13:53:34 GMT; path=/; HttpOnly; secure; SameSite=Strict"
+                                }
+                            ],
+                            "body": "{\"message\":\"Login Successfull\"}",
+                            "status": "OK",
+                            "code": 200
+                        },
+                        {
+                            "id": "rester-100",
+                            "name": "2025-03-26T13:48:45.129Z AdminLogin",
+                            "originalRequest": {
+                                "url": "0.0.0.0:3000/api/admin/login",
+                                "method": "POST",
+                                "header": [
+                                    {
+                                        "key": "Authorization",
+                                        "value": "Bearer superadmin-token"
+                                    },
+                                    {
+                                        "key": "Content-Type",
+                                        "value": "application/json"
+                                    }
+                                ],
+                                "body": {
+                                    "mode": "raw",
+                                    "raw": "{\n    \"email\": \"newadmin@electone.com\",\n    \"password\": \"newadminpassword\"\n}\n"
+                                }
+                            },
+                            "responseTime": 424,
+                            "header": [
+                                {
+                                    "key": "Server",
+                                    "value": "ElectOneAPI"
+                                },
+                                {
+                                    "key": "Date",
+                                    "value": "Wed, 26 Mar 2025 13:48:45 GMT"
+                                },
+                                {
+                                    "key": "Content-Type",
+                                    "value": "application/json"
+                                },
+                                {
+                                    "key": "Content-Length",
+                                    "value": "31"
+                                },
+                                {
+                                    "key": "Set-Cookie",
+                                    "value": "admin_token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhZG1pbklEIjoxLCJlbWFpbCI6Im5ld2FkbWluQGVsZWN0b25lLmNvbSIsImV4cCI6MTc0MzA4MzMyNSwicm9sZSI6ImFkbWluIn0.u5ylKhx1_XVrqxHF4ZbwOHHWWYNr57ZkeqrDOtaddAw; expires=Thu, 27 Mar 2025 13:48:45 GMT; path=/; HttpOnly; secure; SameSite=Strict"
+                                }
+                            ],
+                            "body": "{\"message\":\"Login Successfull\"}",
+                            "status": "OK",
+                            "code": 200
+                        }
+                    ]
+                },
+                {
+                    "request": {
+                        "url": "0.0.0.0:3000/api/admin/signup",
                         "method": "POST",
                         "header": [
                             {
                                 "key": "Authorization",
-                                "value": "Bearer adminsecrettoken"
+                                "value": "Bearer superadmin-token"
                             },
                             {
                                 "key": "Content-Type",
                                 "value": "application/json"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\n    \"email\": \"newadmin@electone.com\",\n    \"password\": \"newadminpassword\"\n}\n"
+                        }
+                    },
+                    "id": "rester-28",
+                    "name": "createAdmin",
+                    "response": [
+                        {
+                            "id": "rester-99",
+                            "name": "2025-03-26T13:48:17.586Z createAdmin",
+                            "originalRequest": {
+                                "url": "0.0.0.0:3000/api/admin/signup",
+                                "method": "POST",
+                                "header": [
+                                    {
+                                        "key": "Authorization",
+                                        "value": "Bearer superadmin-token"
+                                    },
+                                    {
+                                        "key": "Content-Type",
+                                        "value": "application/json"
+                                    }
+                                ],
+                                "body": {
+                                    "mode": "raw",
+                                    "raw": "{\n    \"email\": \"newadmin@electone.com\",\n    \"password\": \"newadminpassword\"\n}\n"
+                                }
+                            },
+                            "responseTime": 497,
+                            "header": [
+                                {
+                                    "key": "Server",
+                                    "value": "ElectOneAPI"
+                                },
+                                {
+                                    "key": "Date",
+                                    "value": "Wed, 26 Mar 2025 13:48:18 GMT"
+                                },
+                                {
+                                    "key": "Content-Type",
+                                    "value": "application/json"
+                                },
+                                {
+                                    "key": "Content-Length",
+                                    "value": "40"
+                                }
+                            ],
+                            "body": "{\"message\":\"Admin created successfully\"}",
+                            "status": "OK",
+                            "code": 200
+                        }
+                    ]
+                },
+                {
+                    "request": {
+                        "url": "0.0.0.0:3000/api/secure/candidate",
+                        "method": "POST",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                            },
+                            {
+                                "key": "Cookie",
+                                "value": "admin_token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhZG1pbklEIjoxLCJlbWFpbCI6Im5ld2FkbWluQGVsZWN0b25lLmNvbSIsImV4cCI6MTc0MzA4MzY1MCwicm9sZSI6ImFkbWluIn0.KJrxLf9QBd3jWTTqi2wbFiLXtxHHZKtiCLMborPPajY; expires=Thu, 27 Mar 2025 13:54:10 GMT; path=/; HttpOnly; secure; SameSite=Strict"
                             }
                         ],
                         "body": {
@@ -389,10 +709,6 @@
                         "method": "POST",
                         "header": [
                             {
-                                "key": "Authorization",
-                                "value": "Bearer adminsecrettoken"
-                            },
-                            {
                                 "key": "Content-Type",
                                 "value": "application/json"
                             }
@@ -405,6 +721,182 @@
                     "id": "rester-10",
                     "name": "CreateCitizen",
                     "response": [
+                        {
+                            "id": "rester-111",
+                            "name": "2025-03-26T14:09:46.255Z CreateCitizen",
+                            "originalRequest": {
+                                "url": "0.0.0.0:3000/api/secure/citizens",
+                                "method": "POST",
+                                "header": [
+                                    {
+                                        "key": "Content-Type",
+                                        "value": "application/json"
+                                    },
+                                    {
+                                        "key": "Cookie",
+                                        "value": "admin_token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhZG1pbklEIjoxLCJlbWFpbCI6Im5ld2FkbWluQGVsZWN0b25lLmNvbSIsImV4cCI6MTc0MzA4NDUxOSwicm9sZSI6ImFkbWluIn0.SGCbUGXAZ0Bar3FwcgK7Fo4feVp2jY_48OWXn1HQptg; expires=Thu, 27 Mar 2025 14:08:39 GMT; path=/; HttpOnly; secure; SameSite=Strict"
+                                    }
+                                ],
+                                "body": {
+                                    "mode": "raw",
+                                    "raw": "{\n    \"citizenID\": \"12-123-12334\",\n    \"fullName\": \"Alice Johnson\",\n    \"dateOfBirth\": \"1995-03-22\",\n    \"placeOfResidence\": \"Chicago\"\n}\n\n"
+                                }
+                            },
+                            "responseTime": 269,
+                            "header": [
+                                {
+                                    "key": "Server",
+                                    "value": "ElectOneAPI"
+                                },
+                                {
+                                    "key": "Date",
+                                    "value": "Wed, 26 Mar 2025 14:09:45 GMT"
+                                },
+                                {
+                                    "key": "Content-Type",
+                                    "value": "application/json"
+                                },
+                                {
+                                    "key": "Content-Length",
+                                    "value": "42"
+                                }
+                            ],
+                            "body": "{\"message\":\"Citizen created successfully\"}",
+                            "status": "Created",
+                            "code": 201
+                        },
+                        {
+                            "id": "rester-105",
+                            "name": "2025-03-26T13:55:49.557Z CreateCitizen",
+                            "originalRequest": {
+                                "url": "0.0.0.0:3000/api/secure/citizens",
+                                "method": "POST",
+                                "header": [
+                                    {
+                                        "key": "Content-Type",
+                                        "value": "application/json"
+                                    },
+                                    {
+                                        "key": "Cookie",
+                                        "value": "admin_token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhZG1pbklEIjoxLCJlbWFpbCI6Im5ld2FkbWluQGVsZWN0b25lLmNvbSIsImV4cCI6MTc0MzA4MzY1MCwicm9sZSI6ImFkbWluIn0.KJrxLf9QBd3jWTTqi2wbFiLXtxHHZKtiCLMborPPajY; expires=Thu, 27 Mar 2025 13:54:10 GMT; path=/; HttpOnly; secure; SameSite=Strict"
+                                    }
+                                ],
+                                "body": {
+                                    "mode": "raw",
+                                    "raw": "{\n    \"citizenID\": \"12-123-12335\",\n    \"fullName\": \"Alice Johnson\",\n    \"dateOfBirth\": \"1995-03-22\",\n    \"placeOfResidence\": \"Chicago\"\n}\n\n"
+                                }
+                            },
+                            "responseTime": 309,
+                            "header": [
+                                {
+                                    "key": "Server",
+                                    "value": "ElectOneAPI"
+                                },
+                                {
+                                    "key": "Date",
+                                    "value": "Wed, 26 Mar 2025 13:55:49 GMT"
+                                },
+                                {
+                                    "key": "Content-Type",
+                                    "value": "application/json"
+                                },
+                                {
+                                    "key": "Content-Length",
+                                    "value": "42"
+                                }
+                            ],
+                            "body": "{\"message\":\"Citizen created successfully\"}",
+                            "status": "Created",
+                            "code": 201
+                        },
+                        {
+                            "id": "rester-104",
+                            "name": "2025-03-26T13:54:20.802Z CreateCitizen",
+                            "originalRequest": {
+                                "url": "0.0.0.0:3000/api/secure/citizens",
+                                "method": "POST",
+                                "header": [
+                                    {
+                                        "key": "Authorization",
+                                        "value": "Bearer adminsecrettoken"
+                                    },
+                                    {
+                                        "key": "Content-Type",
+                                        "value": "application/json"
+                                    }
+                                ],
+                                "body": {
+                                    "mode": "raw",
+                                    "raw": "{\n    \"citizenID\": \"12-123-12335\",\n    \"fullName\": \"Alice Johnson\",\n    \"dateOfBirth\": \"1995-03-22\",\n    \"placeOfResidence\": \"Chicago\"\n}\n\n"
+                                }
+                            },
+                            "responseTime": 11,
+                            "header": [
+                                {
+                                    "key": "Server",
+                                    "value": "ElectOneAPI"
+                                },
+                                {
+                                    "key": "Date",
+                                    "value": "Wed, 26 Mar 2025 13:54:20 GMT"
+                                },
+                                {
+                                    "key": "Content-Type",
+                                    "value": "application/json"
+                                },
+                                {
+                                    "key": "Content-Length",
+                                    "value": "43"
+                                }
+                            ],
+                            "body": "{\"error\":\"Authorization cookie is missing\"}",
+                            "status": "Unauthorized",
+                            "code": 401
+                        },
+                        {
+                            "id": "rester-102",
+                            "name": "2025-03-26T13:53:46.837Z CreateCitizen",
+                            "originalRequest": {
+                                "url": "0.0.0.0:3000/api/secure/citizens",
+                                "method": "POST",
+                                "header": [
+                                    {
+                                        "key": "Authorization",
+                                        "value": "Bearer adminsecrettoken"
+                                    },
+                                    {
+                                        "key": "Content-Type",
+                                        "value": "application/json"
+                                    }
+                                ],
+                                "body": {
+                                    "mode": "raw",
+                                    "raw": "{\n    \"citizenID\": \"12-123-12335\",\n    \"fullName\": \"Alice Johnson\",\n    \"dateOfBirth\": \"1995-03-22\",\n    \"placeOfResidence\": \"Chicago\"\n}\n\n"
+                                }
+                            },
+                            "responseTime": 4,
+                            "header": [
+                                {
+                                    "key": "Server",
+                                    "value": "ElectOneAPI"
+                                },
+                                {
+                                    "key": "Date",
+                                    "value": "Wed, 26 Mar 2025 13:53:46 GMT"
+                                },
+                                {
+                                    "key": "Content-Type",
+                                    "value": "application/json"
+                                },
+                                {
+                                    "key": "Content-Length",
+                                    "value": "43"
+                                }
+                            ],
+                            "body": "{\"error\":\"Authorization cookie is missing\"}",
+                            "status": "Unauthorized",
+                            "code": 401
+                        },
                         {
                             "id": "rester-47",
                             "name": "2025-03-25T15:41:18.969Z CreateCitizen",
@@ -673,10 +1165,6 @@
                         "method": "POST",
                         "header": [
                             {
-                                "key": "Authorization",
-                                "value": "Bearer adminsecrettoken"
-                            },
-                            {
                                 "key": "Content-Type",
                                 "value": "application/json"
                             }
@@ -741,10 +1229,6 @@
                         "method": "POST",
                         "header": [
                             {
-                                "key": "Authorization",
-                                "value": "Bearer adminsecrettoken"
-                            },
-                            {
                                 "key": "Content-Type",
                                 "value": "application/json"
                             }
@@ -757,6 +1241,138 @@
                     "id": "rester-14",
                     "name": "createNewUser",
                     "response": [
+                        {
+                            "id": "rester-113",
+                            "name": "2025-03-26T14:10:26.536Z createNewUser",
+                            "originalRequest": {
+                                "url": "0.0.0.0:3000/api/secure/user",
+                                "method": "POST",
+                                "header": [
+                                    {
+                                        "key": "Content-Type",
+                                        "value": "application/json"
+                                    },
+                                    {
+                                        "key": "Cookie",
+                                        "value": "admin_token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhZG1pbklEIjoxLCJlbWFpbCI6Im5ld2FkbWluQGVsZWN0b25lLmNvbSIsImV4cCI6MTc0MzA4NDUxOSwicm9sZSI6ImFkbWluIn0.SGCbUGXAZ0Bar3FwcgK7Fo4feVp2jY_48OWXn1HQptg; expires=Thu, 27 Mar 2025 14:08:39 GMT; path=/; HttpOnly; secure; SameSite=Strict"
+                                    }
+                                ],
+                                "body": {
+                                    "mode": "raw",
+                                    "raw": "{\n    \"citizenID\": \"12-123-12334\",\n    \"password\": \"somepassword123\"\n}"
+                                }
+                            },
+                            "responseTime": 216,
+                            "header": [
+                                {
+                                    "key": "Server",
+                                    "value": "ElectOneAPI"
+                                },
+                                {
+                                    "key": "Date",
+                                    "value": "Wed, 26 Mar 2025 14:10:26 GMT"
+                                },
+                                {
+                                    "key": "Content-Type",
+                                    "value": "application/json"
+                                },
+                                {
+                                    "key": "Content-Length",
+                                    "value": "39"
+                                }
+                            ],
+                            "body": "{\"message\":\"User created successfully\"}",
+                            "status": "Created",
+                            "code": 201
+                        },
+                        {
+                            "id": "rester-112",
+                            "name": "2025-03-26T14:10:22.587Z createNewUser",
+                            "originalRequest": {
+                                "url": "0.0.0.0:3000/api/secure/user",
+                                "method": "POST",
+                                "header": [
+                                    {
+                                        "key": "Content-Type",
+                                        "value": "application/json"
+                                    },
+                                    {
+                                        "key": "Cookie",
+                                        "value": ""
+                                    }
+                                ],
+                                "body": {
+                                    "mode": "raw",
+                                    "raw": "{\n    \"citizenID\": \"12-123-12334\",\n    \"password\": \"somepassword123\"\n}"
+                                }
+                            },
+                            "responseTime": 11,
+                            "header": [
+                                {
+                                    "key": "Server",
+                                    "value": "ElectOneAPI"
+                                },
+                                {
+                                    "key": "Date",
+                                    "value": "Wed, 26 Mar 2025 14:10:22 GMT"
+                                },
+                                {
+                                    "key": "Content-Type",
+                                    "value": "application/json"
+                                },
+                                {
+                                    "key": "Content-Length",
+                                    "value": "43"
+                                }
+                            ],
+                            "body": "{\"error\":\"Authorization cookie is missing\"}",
+                            "status": "Unauthorized",
+                            "code": 401
+                        },
+                        {
+                            "id": "rester-107",
+                            "name": "2025-03-26T14:07:19.186Z createNewUser",
+                            "originalRequest": {
+                                "url": "0.0.0.0:3000/api/secure/user",
+                                "method": "POST",
+                                "header": [
+                                    {
+                                        "key": "Content-Type",
+                                        "value": "application/json"
+                                    },
+                                    {
+                                        "key": "Cookie",
+                                        "value": "admin_token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhZG1pbklEIjoxLCJlbWFpbCI6Im5ld2FkbWluQGVsZWN0b25lLmNvbSIsImV4cCI6MTc0MzA4NDQyNywicm9sZSI6ImFkbWluIn0.bVqb3mgbbHQfr41C05ojhazhSECAayW-AXEAEPI2gOM; expires=Thu, 27 Mar 2025 14:07:07 GMT; path=/; HttpOnly; secure; SameSite=Strict"
+                                    }
+                                ],
+                                "body": {
+                                    "mode": "raw",
+                                    "raw": "{\n    \"citizenID\": \"12-123-12334\",\n    \"password\": \"somepassword123\"\n}"
+                                }
+                            },
+                            "responseTime": 223,
+                            "header": [
+                                {
+                                    "key": "Server",
+                                    "value": "ElectOneAPI"
+                                },
+                                {
+                                    "key": "Date",
+                                    "value": "Wed, 26 Mar 2025 14:07:18 GMT"
+                                },
+                                {
+                                    "key": "Content-Type",
+                                    "value": "application/json"
+                                },
+                                {
+                                    "key": "Content-Length",
+                                    "value": "39"
+                                }
+                            ],
+                            "body": "{\"message\":\"User created successfully\"}",
+                            "status": "Created",
+                            "code": 201
+                        },
                         {
                             "id": "rester-93",
                             "name": "2025-03-26T11:04:56.445Z createNewUser",
@@ -985,10 +1601,6 @@
                         "method": "DELETE",
                         "header": [
                             {
-                                "key": "Authorization",
-                                "value": "Bearer adminsecrettoken"
-                            },
-                            {
                                 "key": "Content-Type",
                                 "value": "application/json"
                             }
@@ -1043,16 +1655,47 @@
                     "request": {
                         "url": "0.0.0.0:3000/api/secure/citizens/12-123-12345",
                         "method": "DELETE",
-                        "header": [
-                            {
-                                "key": "Authorization",
-                                "value": "Bearer adminsecrettoken"
-                            }
-                        ]
+                        "header": []
                     },
                     "id": "rester-12",
                     "name": "DeleteCitizenByID",
                     "response": [
+                        {
+                            "id": "rester-110",
+                            "name": "2025-03-26T14:09:19.143Z DeleteCitizenByID",
+                            "originalRequest": {
+                                "url": "0.0.0.0:3000/api/secure/citizens/12-123-12334",
+                                "method": "DELETE",
+                                "header": [
+                                    {
+                                        "key": "Cookie",
+                                        "value": "admin_token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhZG1pbklEIjoxLCJlbWFpbCI6Im5ld2FkbWluQGVsZWN0b25lLmNvbSIsImV4cCI6MTc0MzA4NDUxOSwicm9sZSI6ImFkbWluIn0.SGCbUGXAZ0Bar3FwcgK7Fo4feVp2jY_48OWXn1HQptg; expires=Thu, 27 Mar 2025 14:08:39 GMT; path=/; HttpOnly; secure; SameSite=Strict"
+                                    }
+                                ]
+                            },
+                            "responseTime": 244,
+                            "header": [
+                                {
+                                    "key": "Server",
+                                    "value": "ElectOneAPI"
+                                },
+                                {
+                                    "key": "Date",
+                                    "value": "Wed, 26 Mar 2025 14:09:18 GMT"
+                                },
+                                {
+                                    "key": "Content-Type",
+                                    "value": "application/json"
+                                },
+                                {
+                                    "key": "Content-Length",
+                                    "value": "42"
+                                }
+                            ],
+                            "body": "{\"message\":\"Citizen deleted successfully\"}",
+                            "status": "OK",
+                            "code": 200
+                        },
                         {
                             "id": "rester-48",
                             "name": "2025-03-25T15:42:04.687Z DeleteCitizenByID",
@@ -1133,10 +1776,6 @@
                         "method": "DELETE",
                         "header": [
                             {
-                                "key": "Authorization",
-                                "value": "Bearer adminsecrettoken"
-                            },
-                            {
                                 "key": "Content-Type",
                                 "value": "application/json"
                             }
@@ -1191,12 +1830,7 @@
                     "request": {
                         "url": "0.0.0.0:3000/api/secure/user/1",
                         "method": "DELETE",
-                        "header": [
-                            {
-                                "key": "Authorization",
-                                "value": "Bearer adminsecrettoken"
-                            }
-                        ]
+                        "header": []
                     },
                     "id": "rester-17",
                     "name": "deleteUser",
@@ -1321,10 +1955,6 @@
                         "method": "GET",
                         "header": [
                             {
-                                "key": "Authorization",
-                                "value": "Bearer adminsecrettoken"
-                            },
-                            {
                                 "key": "Content-Type",
                                 "value": "application/json"
                             }
@@ -1380,10 +2010,6 @@
                         "url": "0.0.0.0:3000/api/secure/candidatesPaginated/0",
                         "method": "GET",
                         "header": [
-                            {
-                                "key": "Authorization",
-                                "value": "Bearer adminsecrettoken"
-                            },
                             {
                                 "key": "Content-Type",
                                 "value": "application/json"
@@ -1519,12 +2145,7 @@
                     "request": {
                         "url": "0.0.0.0:3000/api/secure/citizens/12-123-12345",
                         "method": "GET",
-                        "header": [
-                            {
-                                "key": "Authorization",
-                                "value": "Bearer adminsecrettoken"
-                            }
-                        ]
+                        "header": []
                     },
                     "id": "rester-8",
                     "name": "GetCitizenByID",
@@ -1751,12 +2372,7 @@
                     "request": {
                         "url": "0.0.0.0:3000/api/secure/citizensPaginated/0",
                         "method": "GET",
-                        "header": [
-                            {
-                                "key": "Authorization",
-                                "value": "Bearer adminsecrettoken"
-                            }
-                        ]
+                        "header": []
                     },
                     "id": "rester-9",
                     "name": "GetCitizensPaginated",
@@ -1949,10 +2565,6 @@
                         "method": "GET",
                         "header": [
                             {
-                                "key": "Authorization",
-                                "value": "Bearer adminsecrettoken"
-                            },
-                            {
                                 "key": "Content-Type",
                                 "value": "application/json"
                             }
@@ -2049,10 +2661,6 @@
                         "method": "GET",
                         "header": [
                             {
-                                "key": "Authorization",
-                                "value": "Bearer adminsecrettoken"
-                            },
-                            {
                                 "key": "Content-Type",
                                 "value": "application/json"
                             }
@@ -2148,10 +2756,6 @@
                         "url": "0.0.0.0:3000/api/secure/user/1",
                         "method": "GET",
                         "header": [
-                            {
-                                "key": "Authorization",
-                                "value": "Bearer adminsecrettoken"
-                            },
                             {
                                 "key": "Content-Type",
                                 "value": "application/json"
@@ -2571,12 +3175,7 @@
                     "request": {
                         "url": "0.0.0.0:3000/api/secure/usersPaginated/0",
                         "method": "GET",
-                        "header": [
-                            {
-                                "key": "Authorization",
-                                "value": "Bearer adminsecrettoken"
-                            }
-                        ]
+                        "header": []
                     },
                     "id": "rester-13",
                     "name": "getUsersPaginated",
@@ -2697,10 +3296,6 @@
                         "method": "PUT",
                         "header": [
                             {
-                                "key": "Authorization",
-                                "value": "Bearer adminsecrettoken"
-                            },
-                            {
                                 "key": "Content-Type",
                                 "value": "application/json"
                             }
@@ -2813,10 +3408,6 @@
                         "method": "PUT",
                         "header": [
                             {
-                                "key": "Authorization",
-                                "value": "Bearer adminsecrettoken"
-                            },
-                            {
                                 "key": "Content-Type",
                                 "value": "application/json"
                             }
@@ -2925,10 +3516,6 @@
                         "method": "PUT",
                         "header": [
                             {
-                                "key": "Authorization",
-                                "value": "Bearer adminsecrettoken"
-                            },
-                            {
                                 "key": "Content-Type",
                                 "value": "application/json"
                             }
@@ -3030,11 +3617,115 @@
                             "code": 201
                         }
                     ]
+                },
+                {
+                    "request": {
+                        "url": "0.0.0.0:3000/api/userlogin",
+                        "method": "POST",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\n    \"citizenID\": \"12-123-12334\",\n    \"password\": \"somepassword123\"\n}"
+                        }
+                    },
+                    "id": "rester-30",
+                    "name": "UserLogin",
+                    "response": [
+                        {
+                            "id": "rester-114",
+                            "name": "2025-03-26T14:10:46.961Z UserLogin",
+                            "originalRequest": {
+                                "url": "0.0.0.0:3000/api/userlogin",
+                                "method": "POST",
+                                "header": [
+                                    {
+                                        "key": "Content-Type",
+                                        "value": "application/json"
+                                    }
+                                ],
+                                "body": {
+                                    "mode": "raw",
+                                    "raw": "{\n    \"citizenID\": \"12-123-12334\",\n    \"password\": \"somepassword123\"\n}"
+                                }
+                            },
+                            "responseTime": 155,
+                            "header": [
+                                {
+                                    "key": "Server",
+                                    "value": "ElectOneAPI"
+                                },
+                                {
+                                    "key": "Date",
+                                    "value": "Wed, 26 Mar 2025 14:10:46 GMT"
+                                },
+                                {
+                                    "key": "Content-Type",
+                                    "value": "application/json"
+                                },
+                                {
+                                    "key": "Content-Length",
+                                    "value": "30"
+                                },
+                                {
+                                    "key": "Set-Cookie",
+                                    "value": "user_token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJjaXRpemVuSUQiOiIxMi0xMjMtMTIzMzQiLCJleHAiOjE3NDMwODQ2NDcsInJvbGUiOiJ1c2VyIiwidXNlcklEIjo0fQ.TXWSUA8wYIU_QsICSsrXkQUukBo_kTxV9A-0tAH8TaI; expires=Thu, 27 Mar 2025 14:10:47 GMT; path=/; HttpOnly; secure; SameSite=Strict"
+                                }
+                            ],
+                            "body": "{\"message\":\"Login successful\"}",
+                            "status": "OK",
+                            "code": 200
+                        },
+                        {
+                            "id": "rester-108",
+                            "name": "2025-03-26T14:08:17.479Z UserLogin",
+                            "originalRequest": {
+                                "url": "0.0.0.0:3000/api/userlogin",
+                                "method": "POST",
+                                "header": [
+                                    {
+                                        "key": "Content-Type",
+                                        "value": "application/json"
+                                    }
+                                ],
+                                "body": {
+                                    "mode": "raw",
+                                    "raw": "{\n    \"citizenID\": \"12-123-12334\",\n    \"password\": \"somepassword123\"\n}"
+                                }
+                            },
+                            "responseTime": 60,
+                            "header": [
+                                {
+                                    "key": "Server",
+                                    "value": "ElectOneAPI"
+                                },
+                                {
+                                    "key": "Date",
+                                    "value": "Wed, 26 Mar 2025 14:08:17 GMT"
+                                },
+                                {
+                                    "key": "Content-Type",
+                                    "value": "application/json"
+                                },
+                                {
+                                    "key": "Content-Length",
+                                    "value": "31"
+                                }
+                            ],
+                            "body": "{\"error\":\"Invalid credentials\"}",
+                            "status": "Unauthorized",
+                            "code": 401
+                        }
+                    ]
                 }
             ]
         },
         {
-            "name": "History_yzyma5ew",
+            "name": "History_bewg2l2q",
             "item": [
                 {
                     "request": {
@@ -3048,11 +3739,11 @@
                         ]
                     },
                     "id": "rester-history-0",
-                    "name": "History_yzyma5ew 0",
+                    "name": "History_bewg2l2q 0",
                     "response": [
                         {
                             "id": "rester-54",
-                            "name": "2025-03-25T16:08:57.579Z History_yzyma5ew 0",
+                            "name": "2025-03-25T16:08:57.579Z History_bewg2l2q 0",
                             "originalRequest": {
                                 "url": "0.0.0.0:3000/api/secure/usersPaginated/0",
                                 "method": "GET",
@@ -3100,11 +3791,11 @@
                         ]
                     },
                     "id": "rester-history-1",
-                    "name": "History_yzyma5ew 1",
+                    "name": "History_bewg2l2q 1",
                     "response": [
                         {
                             "id": "rester-33",
-                            "name": "2025-03-25T04:04:53.059Z History_yzyma5ew 1",
+                            "name": "2025-03-25T04:04:53.059Z History_bewg2l2q 1",
                             "originalRequest": {
                                 "url": "0.0.0.0:3000/api/secure/citizens/12-123-12345",
                                 "method": "GET",
@@ -3156,11 +3847,11 @@
                         }
                     },
                     "id": "rester-history-10",
-                    "name": "History_yzyma5ew 10",
+                    "name": "History_bewg2l2q 10",
                     "response": [
                         {
                             "id": "rester-24",
-                            "name": "2025-03-22T11:49:49.328Z History_yzyma5ew 10",
+                            "name": "2025-03-22T11:49:49.328Z History_bewg2l2q 10",
                             "originalRequest": {
                                 "url": "0.0.0.0:8080/api/createCitizen",
                                 "method": "POST",
@@ -3212,11 +3903,11 @@
                         }
                     },
                     "id": "rester-history-11",
-                    "name": "History_yzyma5ew 11",
+                    "name": "History_bewg2l2q 11",
                     "response": [
                         {
                             "id": "rester-23",
-                            "name": "2025-03-22T11:48:39.423Z History_yzyma5ew 11",
+                            "name": "2025-03-22T11:48:39.423Z History_bewg2l2q 11",
                             "originalRequest": {
                                 "url": "0.0.0.0:8080/api/createCitizen",
                                 "method": "POST",
@@ -3268,11 +3959,11 @@
                         ]
                     },
                     "id": "rester-history-12",
-                    "name": "History_yzyma5ew 12",
+                    "name": "History_bewg2l2q 12",
                     "response": [
                         {
                             "id": "rester-22",
-                            "name": "2025-03-22T11:47:52.862Z History_yzyma5ew 12",
+                            "name": "2025-03-22T11:47:52.862Z History_bewg2l2q 12",
                             "originalRequest": {
                                 "url": "0.0.0.0:8080/api/getElections",
                                 "method": "GET",
@@ -3316,11 +4007,11 @@
                         ]
                     },
                     "id": "rester-history-13",
-                    "name": "History_yzyma5ew 13",
+                    "name": "History_bewg2l2q 13",
                     "response": [
                         {
                             "id": "rester-21",
-                            "name": "2025-03-22T11:47:43.579Z History_yzyma5ew 13",
+                            "name": "2025-03-22T11:47:43.579Z History_bewg2l2q 13",
                             "originalRequest": {
                                 "url": "0.0.0.0:8080/api/getElections",
                                 "method": "GET",
@@ -3368,11 +4059,11 @@
                         }
                     },
                     "id": "rester-history-14",
-                    "name": "History_yzyma5ew 14",
+                    "name": "History_bewg2l2q 14",
                     "response": [
                         {
                             "id": "rester-20",
-                            "name": "2025-03-22T11:47:12.312Z History_yzyma5ew 14",
+                            "name": "2025-03-22T11:47:12.312Z History_bewg2l2q 14",
                             "originalRequest": {
                                 "url": "0.0.0.0:8080/api/createElection",
                                 "method": "POST",
@@ -3424,11 +4115,11 @@
                         }
                     },
                     "id": "rester-history-15",
-                    "name": "History_yzyma5ew 15",
+                    "name": "History_bewg2l2q 15",
                     "response": [
                         {
                             "id": "rester-19",
-                            "name": "2025-03-22T11:46:42.507Z History_yzyma5ew 15",
+                            "name": "2025-03-22T11:46:42.507Z History_bewg2l2q 15",
                             "originalRequest": {
                                 "url": "0.0.0.0:8080/api/createCitizen",
                                 "method": "GET",
@@ -3480,11 +4171,11 @@
                         ]
                     },
                     "id": "rester-history-16",
-                    "name": "History_yzyma5ew 16",
+                    "name": "History_bewg2l2q 16",
                     "response": [
                         {
                             "id": "rester-18",
-                            "name": "2025-03-22T11:45:43.108Z History_yzyma5ew 16",
+                            "name": "2025-03-22T11:45:43.108Z History_bewg2l2q 16",
                             "originalRequest": {
                                 "url": "0.0.0.0:8080/api/getElections",
                                 "method": "GET",
@@ -3532,11 +4223,11 @@
                         }
                     },
                     "id": "rester-history-17",
-                    "name": "History_yzyma5ew 17",
+                    "name": "History_bewg2l2q 17",
                     "response": [
                         {
                             "id": "rester-17",
-                            "name": "2025-03-22T11:45:36.438Z History_yzyma5ew 17",
+                            "name": "2025-03-22T11:45:36.438Z History_bewg2l2q 17",
                             "originalRequest": {
                                 "url": "0.0.0.0:8080/api/createElection",
                                 "method": "POST",
@@ -3588,11 +4279,11 @@
                         }
                     },
                     "id": "rester-history-18",
-                    "name": "History_yzyma5ew 18",
+                    "name": "History_bewg2l2q 18",
                     "response": [
                         {
                             "id": "rester-16",
-                            "name": "2025-03-22T11:43:49.879Z History_yzyma5ew 18",
+                            "name": "2025-03-22T11:43:49.879Z History_bewg2l2q 18",
                             "originalRequest": {
                                 "url": "0.0.0.0:8080/api/createElection",
                                 "method": "POST",
@@ -3640,11 +4331,11 @@
                         ]
                     },
                     "id": "rester-history-19",
-                    "name": "History_yzyma5ew 19",
+                    "name": "History_bewg2l2q 19",
                     "response": [
                         {
                             "id": "rester-15",
-                            "name": "2025-03-22T11:43:02.051Z History_yzyma5ew 19",
+                            "name": "2025-03-22T11:43:02.051Z History_bewg2l2q 19",
                             "originalRequest": {
                                 "url": "0.0.0.0:8080/api/getElections",
                                 "method": "GET",
@@ -3688,11 +4379,11 @@
                         ]
                     },
                     "id": "rester-history-2",
-                    "name": "History_yzyma5ew 2",
+                    "name": "History_bewg2l2q 2",
                     "response": [
                         {
                             "id": "rester-32",
-                            "name": "2025-03-25T04:04:39.985Z History_yzyma5ew 2",
+                            "name": "2025-03-25T04:04:39.985Z History_bewg2l2q 2",
                             "originalRequest": {
                                 "url": "0.0.0.0:3000/api/secure/citizens/1",
                                 "method": "GET",
@@ -3744,11 +4435,11 @@
                         }
                     },
                     "id": "rester-history-20",
-                    "name": "History_yzyma5ew 20",
+                    "name": "History_bewg2l2q 20",
                     "response": [
                         {
                             "id": "rester-14",
-                            "name": "2025-03-22T11:42:58.265Z History_yzyma5ew 20",
+                            "name": "2025-03-22T11:42:58.265Z History_bewg2l2q 20",
                             "originalRequest": {
                                 "url": "0.0.0.0:8080/api/createElection",
                                 "method": "POST",
@@ -3796,11 +4487,11 @@
                         ]
                     },
                     "id": "rester-history-21",
-                    "name": "History_yzyma5ew 21",
+                    "name": "History_bewg2l2q 21",
                     "response": [
                         {
                             "id": "rester-13",
-                            "name": "2025-03-22T11:41:50.869Z History_yzyma5ew 21",
+                            "name": "2025-03-22T11:41:50.869Z History_bewg2l2q 21",
                             "originalRequest": {
                                 "url": "0.0.0.0:8080/api/getElections",
                                 "method": "GET",
@@ -3848,11 +4539,11 @@
                         }
                     },
                     "id": "rester-history-22",
-                    "name": "History_yzyma5ew 22",
+                    "name": "History_bewg2l2q 22",
                     "response": [
                         {
                             "id": "rester-12",
-                            "name": "2025-03-22T11:12:00.991Z History_yzyma5ew 22",
+                            "name": "2025-03-22T11:12:00.991Z History_bewg2l2q 22",
                             "originalRequest": {
                                 "url": "0.0.0.0:8080/api/login",
                                 "method": "POST",
@@ -3904,11 +4595,11 @@
                         }
                     },
                     "id": "rester-history-23",
-                    "name": "History_yzyma5ew 23",
+                    "name": "History_bewg2l2q 23",
                     "response": [
                         {
                             "id": "rester-11",
-                            "name": "2025-03-22T11:11:51.106Z History_yzyma5ew 23",
+                            "name": "2025-03-22T11:11:51.106Z History_bewg2l2q 23",
                             "originalRequest": {
                                 "url": "0.0.0.0:8080/api/signup",
                                 "method": "POST",
@@ -3960,11 +4651,11 @@
                         }
                     },
                     "id": "rester-history-24",
-                    "name": "History_yzyma5ew 24",
+                    "name": "History_bewg2l2q 24",
                     "response": [
                         {
                             "id": "rester-10",
-                            "name": "2025-03-22T11:10:30.839Z History_yzyma5ew 24",
+                            "name": "2025-03-22T11:10:30.839Z History_bewg2l2q 24",
                             "originalRequest": {
                                 "url": "0.0.0.0:8080/api/login",
                                 "method": "POST",
@@ -4016,11 +4707,11 @@
                         }
                     },
                     "id": "rester-history-25",
-                    "name": "History_yzyma5ew 25",
+                    "name": "History_bewg2l2q 25",
                     "response": [
                         {
                             "id": "rester-9",
-                            "name": "2025-03-22T11:10:03.806Z History_yzyma5ew 25",
+                            "name": "2025-03-22T11:10:03.806Z History_bewg2l2q 25",
                             "originalRequest": {
                                 "url": "0.0.0.0:8080/api/signup",
                                 "method": "POST",
@@ -4072,11 +4763,11 @@
                         }
                     },
                     "id": "rester-history-26",
-                    "name": "History_yzyma5ew 26",
+                    "name": "History_bewg2l2q 26",
                     "response": [
                         {
                             "id": "rester-8",
-                            "name": "2025-03-22T11:07:43.110Z History_yzyma5ew 26",
+                            "name": "2025-03-22T11:07:43.110Z History_bewg2l2q 26",
                             "originalRequest": {
                                 "url": "0.0.0.0:8080/api/signup",
                                 "method": "POST",
@@ -4128,11 +4819,11 @@
                         }
                     },
                     "id": "rester-history-27",
-                    "name": "History_yzyma5ew 27",
+                    "name": "History_bewg2l2q 27",
                     "response": [
                         {
                             "id": "rester-7",
-                            "name": "2025-03-22T11:06:24.505Z History_yzyma5ew 27",
+                            "name": "2025-03-22T11:06:24.505Z History_bewg2l2q 27",
                             "originalRequest": {
                                 "url": "0.0.0.0:8080/api/signup",
                                 "method": "POST",
@@ -4184,11 +4875,11 @@
                         }
                     },
                     "id": "rester-history-28",
-                    "name": "History_yzyma5ew 28",
+                    "name": "History_bewg2l2q 28",
                     "response": [
                         {
                             "id": "rester-6",
-                            "name": "2025-03-22T11:05:51.540Z History_yzyma5ew 28",
+                            "name": "2025-03-22T11:05:51.540Z History_bewg2l2q 28",
                             "originalRequest": {
                                 "url": "0.0.0.0:8080/api/signup",
                                 "method": "POST",
@@ -4240,11 +4931,11 @@
                         }
                     },
                     "id": "rester-history-29",
-                    "name": "History_yzyma5ew 29",
+                    "name": "History_bewg2l2q 29",
                     "response": [
                         {
                             "id": "rester-5",
-                            "name": "2025-03-22T08:38:01.049Z History_yzyma5ew 29",
+                            "name": "2025-03-22T08:38:01.049Z History_bewg2l2q 29",
                             "originalRequest": {
                                 "url": "0.0.0.0:8080/api/signup",
                                 "method": "POST",
@@ -4292,11 +4983,11 @@
                         ]
                     },
                     "id": "rester-history-3",
-                    "name": "History_yzyma5ew 3",
+                    "name": "History_bewg2l2q 3",
                     "response": [
                         {
                             "id": "rester-31",
-                            "name": "2025-03-25T04:04:35.146Z History_yzyma5ew 3",
+                            "name": "2025-03-25T04:04:35.146Z History_bewg2l2q 3",
                             "originalRequest": {
                                 "url": "0.0.0.0:3000/api/secure/citizens",
                                 "method": "GET",
@@ -4344,11 +5035,11 @@
                         }
                     },
                     "id": "rester-history-30",
-                    "name": "History_yzyma5ew 30",
+                    "name": "History_bewg2l2q 30",
                     "response": [
                         {
                             "id": "rester-4",
-                            "name": "2025-03-22T08:37:09.018Z History_yzyma5ew 30",
+                            "name": "2025-03-22T08:37:09.018Z History_bewg2l2q 30",
                             "originalRequest": {
                                 "url": "0.0.0.0:8080/api/signup",
                                 "method": "POST",
@@ -4400,11 +5091,11 @@
                         }
                     },
                     "id": "rester-history-31",
-                    "name": "History_yzyma5ew 31",
+                    "name": "History_bewg2l2q 31",
                     "response": [
                         {
                             "id": "rester-3",
-                            "name": "2025-03-22T08:35:10.395Z History_yzyma5ew 31",
+                            "name": "2025-03-22T08:35:10.395Z History_bewg2l2q 31",
                             "originalRequest": {
                                 "url": "0.0.0.0:8080/api/login",
                                 "method": "POST",
@@ -4456,11 +5147,11 @@
                         }
                     },
                     "id": "rester-history-32",
-                    "name": "History_yzyma5ew 32",
+                    "name": "History_bewg2l2q 32",
                     "response": [
                         {
                             "id": "rester-2",
-                            "name": "2025-03-22T08:33:43.130Z History_yzyma5ew 32",
+                            "name": "2025-03-22T08:33:43.130Z History_bewg2l2q 32",
                             "originalRequest": {
                                 "url": "0.0.0.0:8080/api/signup",
                                 "method": "POST",
@@ -4512,11 +5203,11 @@
                         }
                     },
                     "id": "rester-history-33",
-                    "name": "History_yzyma5ew 33",
+                    "name": "History_bewg2l2q 33",
                     "response": [
                         {
                             "id": "rester-1",
-                            "name": "2025-03-22T08:33:06.503Z History_yzyma5ew 33",
+                            "name": "2025-03-22T08:33:06.503Z History_bewg2l2q 33",
                             "originalRequest": {
                                 "url": "0.0.0.0:8080/api/signup",
                                 "method": "POST",
@@ -4559,11 +5250,11 @@
                         "header": []
                     },
                     "id": "rester-history-4",
-                    "name": "History_yzyma5ew 4",
+                    "name": "History_bewg2l2q 4",
                     "response": [
                         {
                             "id": "rester-30",
-                            "name": "2025-03-22T12:01:32.134Z History_yzyma5ew 4",
+                            "name": "2025-03-22T12:01:32.134Z History_bewg2l2q 4",
                             "originalRequest": {
                                 "url": "0.0.0.0:8080/api/getCandidates",
                                 "method": "GET",
@@ -4606,11 +5297,11 @@
                         }
                     },
                     "id": "rester-history-5",
-                    "name": "History_yzyma5ew 5",
+                    "name": "History_bewg2l2q 5",
                     "response": [
                         {
                             "id": "rester-29",
-                            "name": "2025-03-22T12:01:19.128Z History_yzyma5ew 5",
+                            "name": "2025-03-22T12:01:19.128Z History_bewg2l2q 5",
                             "originalRequest": {
                                 "url": "0.0.0.0:8080/api/createCandidate",
                                 "method": "POST",
@@ -4653,11 +5344,11 @@
                         "header": []
                     },
                     "id": "rester-history-6",
-                    "name": "History_yzyma5ew 6",
+                    "name": "History_bewg2l2q 6",
                     "response": [
                         {
                             "id": "rester-28",
-                            "name": "2025-03-22T12:01:12.700Z History_yzyma5ew 6",
+                            "name": "2025-03-22T12:01:12.700Z History_bewg2l2q 6",
                             "originalRequest": {
                                 "url": "0.0.0.0:8080/api/getCandidates",
                                 "method": "GET",
@@ -4691,11 +5382,11 @@
                         "header": []
                     },
                     "id": "rester-history-7",
-                    "name": "History_yzyma5ew 7",
+                    "name": "History_bewg2l2q 7",
                     "response": [
                         {
                             "id": "rester-27",
-                            "name": "2025-03-22T12:01:02.887Z History_yzyma5ew 7",
+                            "name": "2025-03-22T12:01:02.887Z History_bewg2l2q 7",
                             "originalRequest": {
                                 "url": "0.0.0.0:8080/api/getCandidates",
                                 "method": "GET",
@@ -4746,11 +5437,11 @@
                         }
                     },
                     "id": "rester-history-8",
-                    "name": "History_yzyma5ew 8",
+                    "name": "History_bewg2l2q 8",
                     "response": [
                         {
                             "id": "rester-26",
-                            "name": "2025-03-22T11:52:22.244Z History_yzyma5ew 8",
+                            "name": "2025-03-22T11:52:22.244Z History_bewg2l2q 8",
                             "originalRequest": {
                                 "url": "0.0.0.0:8080/api/createCitizen",
                                 "method": "POST",
@@ -4802,11 +5493,11 @@
                         }
                     },
                     "id": "rester-history-9",
-                    "name": "History_yzyma5ew 9",
+                    "name": "History_bewg2l2q 9",
                     "response": [
                         {
                             "id": "rester-25",
-                            "name": "2025-03-22T11:52:02.021Z History_yzyma5ew 9",
+                            "name": "2025-03-22T11:52:02.021Z History_bewg2l2q 9",
                             "originalRequest": {
                                 "url": "0.0.0.0:8080/api/createCitizen",
                                 "method": "POST",
