@@ -1,5 +1,16 @@
 A more secure, and performant port of the previous API.
 
+# TODO: 
+- some routes need to be exposed to the user too.
+- The `getCandidate`, currently responds with the `citizenID` too, if its admin thats fine, but if the request is from the user, that field needs to stay hidden
+- Authentication for `user` and `admin` seperately
+    - Different JWT tokens probably
+        - After which need to update the middlewares `TokenValidationAdmin` & `TokenValidationUser`
+            - Validation of the JWT will probably include:
+                - Expiration validation
+                - Claims validation
+                    - Which although, will probably also be handeled in the "frontend's backend", the one that's gonna handle the routes
+
 ```mermaid
 erDiagram
 CITIZENS {
