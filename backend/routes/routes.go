@@ -1,6 +1,7 @@
 package routes
 
 import (
+	candidates "github.com/PS-Wizard/ElectOneAPI/api/Candidates"
 	citizens "github.com/PS-Wizard/ElectOneAPI/api/Citizens"
 	elections "github.com/PS-Wizard/ElectOneAPI/api/Elections"
 	users "github.com/PS-Wizard/ElectOneAPI/api/Users"
@@ -22,9 +23,17 @@ func HandleRoutes(app *fiber.App) {
 	app.Put("/api/secure/user/:id", users.HandleUpdateUserDetails)
 	app.Delete("/api/secure/user/:id", users.HandleDeleteUser)
 
+	// Election Routes
 	app.Get("/api/secure/election/:id", elections.HandleGetElection)
 	app.Get("/api/secure/electionsPaginated/:offset", elections.HandleGetElectionsPaginated)
 	app.Post("/api/secure/election", elections.HandleCreateNewElection)
 	app.Put("/api/secure/election/:id", elections.HandleUpdateElectionDetails)
 	app.Delete("/api/secure/election/:id", elections.HandleDeleteElection)
+
+	//Candidate Routes
+	app.Get("/api/secure/candidate/:id", candidates.HandleGetCandidate)
+	app.Get("/api/secure/candidatesPaginated/:offset", candidates.HandleGetCandidatesPaginated)
+	app.Post("/api/secure/candidate", candidates.HandleCreateCandidate)
+	app.Put("/api/secure/candidate/:id", candidates.HandleUpdateCandidate)
+	app.Delete("/api/secure/candidate/:id", candidates.HandleDeleteCandidate)
 }

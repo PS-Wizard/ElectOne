@@ -9,6 +9,382 @@
             "item": [
                 {
                     "request": {
+                        "url": "0.0.0.0:3000/api/secure/candidate",
+                        "method": "POST",
+                        "header": [
+                            {
+                                "key": "Authorization",
+                                "value": "Bearer adminsecrettoken"
+                            },
+                            {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\n  \"citizenID\": \"12-123-12334\",\n  \"post\": \"President\",\n  \"electionID\": \"2\",\n  \"group\": \"Independent\"\n}\n"
+                        }
+                    },
+                    "id": "rester-23",
+                    "name": "createCandidate",
+                    "response": [
+                        {
+                            "id": "rester-96",
+                            "name": "2025-03-26T11:06:06.031Z createCandidate",
+                            "originalRequest": {
+                                "url": "0.0.0.0:3000/api/secure/candidate",
+                                "method": "POST",
+                                "header": [
+                                    {
+                                        "key": "Authorization",
+                                        "value": "Bearer adminsecrettoken"
+                                    },
+                                    {
+                                        "key": "Content-Type",
+                                        "value": "application/json"
+                                    }
+                                ],
+                                "body": {
+                                    "mode": "raw",
+                                    "raw": "{\n  \"citizenID\": \"12-123-12334\",\n  \"post\": \"President\",\n  \"electionID\": \"2\",\n  \"group\": \"Independent\"\n}\n"
+                                }
+                            },
+                            "responseTime": 120,
+                            "header": [
+                                {
+                                    "key": "Server",
+                                    "value": "ElectOneAPI"
+                                },
+                                {
+                                    "key": "Date",
+                                    "value": "Wed, 26 Mar 2025 11:06:05 GMT"
+                                },
+                                {
+                                    "key": "Content-Type",
+                                    "value": "application/json"
+                                },
+                                {
+                                    "key": "Content-Length",
+                                    "value": "44"
+                                }
+                            ],
+                            "body": "{\"message\":\"Candidate successfully created\"}",
+                            "status": "Created",
+                            "code": 201
+                        },
+                        {
+                            "id": "rester-85",
+                            "name": "2025-03-26T11:00:31.442Z createCandidate",
+                            "originalRequest": {
+                                "url": "0.0.0.0:3000/api/secure/candidate",
+                                "method": "POST",
+                                "header": [
+                                    {
+                                        "key": "Authorization",
+                                        "value": "Bearer adminsecrettoken"
+                                    },
+                                    {
+                                        "key": "Content-Type",
+                                        "value": "application/json"
+                                    }
+                                ],
+                                "body": {
+                                    "mode": "raw",
+                                    "raw": "{\n  \"citizenID\": \"12-123-12334\",\n  \"post\": \"President\",\n  \"electionID\": \"2\",\n  \"group\": \"Independent\"\n}\n"
+                                }
+                            },
+                            "responseTime": 124,
+                            "header": [
+                                {
+                                    "key": "Server",
+                                    "value": "ElectOneAPI"
+                                },
+                                {
+                                    "key": "Date",
+                                    "value": "Wed, 26 Mar 2025 11:00:30 GMT"
+                                },
+                                {
+                                    "key": "Content-Type",
+                                    "value": "application/json"
+                                },
+                                {
+                                    "key": "Content-Length",
+                                    "value": "44"
+                                }
+                            ],
+                            "body": "{\"message\":\"Candidate successfully created\"}",
+                            "status": "Created",
+                            "code": 201
+                        },
+                        {
+                            "id": "rester-84",
+                            "name": "2025-03-26T10:59:36.520Z createCandidate",
+                            "originalRequest": {
+                                "url": "0.0.0.0:3000/api/secure/candidate",
+                                "method": "POST",
+                                "header": [
+                                    {
+                                        "key": "Authorization",
+                                        "value": "Bearer adminsecrettoken"
+                                    },
+                                    {
+                                        "key": "Content-Type",
+                                        "value": "application/json"
+                                    }
+                                ],
+                                "body": {
+                                    "mode": "raw",
+                                    "raw": "{\n  \"citizenID\": \"12-123-12334\",\n  \"post\": \"President\",\n  \"electionID\": \"1\",\n  \"group\": \"Independent\"\n}\n"
+                                }
+                            },
+                            "responseTime": 66,
+                            "header": [
+                                {
+                                    "key": "Server",
+                                    "value": "ElectOneAPI"
+                                },
+                                {
+                                    "key": "Date",
+                                    "value": "Wed, 26 Mar 2025 10:59:35 GMT"
+                                },
+                                {
+                                    "key": "Content-Type",
+                                    "value": "application/json"
+                                },
+                                {
+                                    "key": "Content-Length",
+                                    "value": "107"
+                                }
+                            ],
+                            "body": "{\"error\":\"failed to insert candidate: failed to execute SQL:\\nSQLite error: FOREIGN KEY constraint failed\"}",
+                            "status": "Internal Server Error",
+                            "code": 500
+                        },
+                        {
+                            "id": "rester-83",
+                            "name": "2025-03-26T10:59:13.685Z createCandidate",
+                            "originalRequest": {
+                                "url": "0.0.0.0:3000/api/secure/candidate",
+                                "method": "POST",
+                                "header": [
+                                    {
+                                        "key": "Authorization",
+                                        "value": "Bearer adminsecrettoken"
+                                    },
+                                    {
+                                        "key": "Content-Type",
+                                        "value": "application/json"
+                                    }
+                                ],
+                                "body": {
+                                    "mode": "raw",
+                                    "raw": "{\n  \"citizenID\": \"12-123-12334\",\n  \"post\": \"President\",\n  \"electionID\": \"1\",\n  \"group\": \"Independent\"\n}\n"
+                                }
+                            },
+                            "responseTime": 58,
+                            "header": [
+                                {
+                                    "key": "Server",
+                                    "value": "ElectOneAPI"
+                                },
+                                {
+                                    "key": "Date",
+                                    "value": "Wed, 26 Mar 2025 10:59:12 GMT"
+                                },
+                                {
+                                    "key": "Content-Type",
+                                    "value": "application/json"
+                                },
+                                {
+                                    "key": "Content-Length",
+                                    "value": "107"
+                                }
+                            ],
+                            "body": "{\"error\":\"failed to insert candidate: failed to execute SQL:\\nSQLite error: FOREIGN KEY constraint failed\"}",
+                            "status": "Internal Server Error",
+                            "code": 500
+                        },
+                        {
+                            "id": "rester-82",
+                            "name": "2025-03-26T10:58:47.323Z createCandidate",
+                            "originalRequest": {
+                                "url": "0.0.0.0:3000/api/secure/candidate",
+                                "method": "POST",
+                                "header": [
+                                    {
+                                        "key": "Authorization",
+                                        "value": "Bearer adminsecrettoken"
+                                    },
+                                    {
+                                        "key": "Content-Type",
+                                        "value": "application/json"
+                                    }
+                                ],
+                                "body": {
+                                    "mode": "raw",
+                                    "raw": "{\n  \"citizenID\": \"12345\",\n  \"post\": \"President\",\n  \"electionID\": \"1\",\n  \"group\": \"Independent\"\n}\n"
+                                }
+                            },
+                            "responseTime": 64,
+                            "header": [
+                                {
+                                    "key": "Server",
+                                    "value": "ElectOneAPI"
+                                },
+                                {
+                                    "key": "Date",
+                                    "value": "Wed, 26 Mar 2025 10:58:46 GMT"
+                                },
+                                {
+                                    "key": "Content-Type",
+                                    "value": "application/json"
+                                },
+                                {
+                                    "key": "Content-Length",
+                                    "value": "107"
+                                }
+                            ],
+                            "body": "{\"error\":\"failed to insert candidate: failed to execute SQL:\\nSQLite error: FOREIGN KEY constraint failed\"}",
+                            "status": "Internal Server Error",
+                            "code": 500
+                        },
+                        {
+                            "id": "rester-81",
+                            "name": "2025-03-26T10:58:38.459Z createCandidate",
+                            "originalRequest": {
+                                "url": "0.0.0.0:3000/api/secure/candidate",
+                                "method": "POST",
+                                "header": [
+                                    {
+                                        "key": "Authorization",
+                                        "value": "Bearer adminsecrettoken"
+                                    },
+                                    {
+                                        "key": "Content-Type",
+                                        "value": "application/json"
+                                    }
+                                ],
+                                "body": {
+                                    "mode": "raw",
+                                    "raw": "{\n  \"citizenID\": \"12345\",\n  \"post\": \"President\",\n  \"electionID\": \"10\",\n  \"group\": \"Independent\"\n}\n"
+                                }
+                            },
+                            "responseTime": 274,
+                            "header": [
+                                {
+                                    "key": "Server",
+                                    "value": "ElectOneAPI"
+                                },
+                                {
+                                    "key": "Date",
+                                    "value": "Wed, 26 Mar 2025 10:58:38 GMT"
+                                },
+                                {
+                                    "key": "Content-Type",
+                                    "value": "application/json"
+                                },
+                                {
+                                    "key": "Content-Length",
+                                    "value": "107"
+                                }
+                            ],
+                            "body": "{\"error\":\"failed to insert candidate: failed to execute SQL:\\nSQLite error: FOREIGN KEY constraint failed\"}",
+                            "status": "Internal Server Error",
+                            "code": 500
+                        },
+                        {
+                            "id": "rester-80",
+                            "name": "2025-03-26T10:58:24.882Z createCandidate",
+                            "originalRequest": {
+                                "url": "0.0.0.0:3000/api/secure/candidate",
+                                "method": "POST",
+                                "header": [
+                                    {
+                                        "key": "Authorization",
+                                        "value": "Bearer adminsecrettoken"
+                                    },
+                                    {
+                                        "key": "Content-Type",
+                                        "value": "application/json"
+                                    }
+                                ],
+                                "body": {
+                                    "mode": "raw",
+                                    "raw": "{\n  \"citizenID\": \"12345\",\n  \"post\": \"President\",\n  \"electionID\": \"10\",\n  \"group\": \"Independent\"\n}\n"
+                                }
+                            },
+                            "responseTime": 254,
+                            "header": [
+                                {
+                                    "key": "Server",
+                                    "value": "ElectOneAPI"
+                                },
+                                {
+                                    "key": "Date",
+                                    "value": "Wed, 26 Mar 2025 10:58:25 GMT"
+                                },
+                                {
+                                    "key": "Content-Type",
+                                    "value": "application/json"
+                                },
+                                {
+                                    "key": "Content-Length",
+                                    "value": "100"
+                                }
+                            ],
+                            "body": "{\"error\":\"failed to insert candidate: failed to execute SQL:\\nSQLite error: 5 values for 4 columns\"}",
+                            "status": "Internal Server Error",
+                            "code": 500
+                        },
+                        {
+                            "id": "rester-79",
+                            "name": "2025-03-26T10:57:50.188Z createCandidate",
+                            "originalRequest": {
+                                "url": "0.0.0.0:3000/api/secure/candidate",
+                                "method": "POST",
+                                "header": [
+                                    {
+                                        "key": "Authorization",
+                                        "value": "Bearer adminsecrettoken"
+                                    },
+                                    {
+                                        "key": "Content-Type",
+                                        "value": "application/json"
+                                    }
+                                ],
+                                "body": {
+                                    "mode": "raw",
+                                    "raw": "{\n  \"citizenID\": \"12345\",\n  \"post\": \"President\",\n  \"electionID\": \"10\",\n  \"group\": \"Independent\"\n}\n"
+                                }
+                            },
+                            "responseTime": 647,
+                            "header": [
+                                {
+                                    "key": "Server",
+                                    "value": "ElectOneAPI"
+                                },
+                                {
+                                    "key": "Date",
+                                    "value": "Wed, 26 Mar 2025 10:57:50 GMT"
+                                },
+                                {
+                                    "key": "Content-Type",
+                                    "value": "application/json"
+                                },
+                                {
+                                    "key": "Content-Length",
+                                    "value": "95"
+                                }
+                            ],
+                            "body": "{\"error\":\"failed to insert candidate: failed to execute SQL:\\nSQLite error: datatype mismatch\"}",
+                            "status": "Internal Server Error",
+                            "code": 500
+                        }
+                    ]
+                },
+                {
+                    "request": {
                         "url": "0.0.0.0:3000/api/secure/citizens",
                         "method": "POST",
                         "header": [
@@ -293,6 +669,74 @@
                 },
                 {
                     "request": {
+                        "url": "0.0.0.0:3000/api/secure/election",
+                        "method": "POST",
+                        "header": [
+                            {
+                                "key": "Authorization",
+                                "value": "Bearer adminsecrettoken"
+                            },
+                            {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\n  \"title\": \"Presidential Election 2025\",\n  \"startDate\": \"2025-11-04\",\n  \"endDate\": \"2025-11-05\",\n  \"votingRestrictions\": \"@everyone\"\n}\n"
+                        }
+                    },
+                    "id": "rester-18",
+                    "name": "createElection",
+                    "response": [
+                        {
+                            "id": "rester-72",
+                            "name": "2025-03-26T10:47:04.165Z createElection",
+                            "originalRequest": {
+                                "url": "0.0.0.0:3000/api/secure/election",
+                                "method": "POST",
+                                "header": [
+                                    {
+                                        "key": "Authorization",
+                                        "value": "Bearer adminsecrettoken"
+                                    },
+                                    {
+                                        "key": "Content-Type",
+                                        "value": "application/json"
+                                    }
+                                ],
+                                "body": {
+                                    "mode": "raw",
+                                    "raw": "{\n  \"title\": \"Presidential Election 2025\",\n  \"startDate\": \"2025-11-04\",\n  \"endDate\": \"2025-11-05\",\n  \"votingRestrictions\": \"@everyone\"\n}\n"
+                                }
+                            },
+                            "responseTime": 636,
+                            "header": [
+                                {
+                                    "key": "Server",
+                                    "value": "ElectOneAPI"
+                                },
+                                {
+                                    "key": "Date",
+                                    "value": "Wed, 26 Mar 2025 10:47:04 GMT"
+                                },
+                                {
+                                    "key": "Content-Type",
+                                    "value": "application/json"
+                                },
+                                {
+                                    "key": "Content-Length",
+                                    "value": "43"
+                                }
+                            ],
+                            "body": "{\"message\":\"Election successfully Created\"}",
+                            "status": "Created",
+                            "code": 201
+                        }
+                    ]
+                },
+                {
+                    "request": {
                         "url": "0.0.0.0:3000/api/secure/user",
                         "method": "POST",
                         "header": [
@@ -313,6 +757,50 @@
                     "id": "rester-14",
                     "name": "createNewUser",
                     "response": [
+                        {
+                            "id": "rester-93",
+                            "name": "2025-03-26T11:04:56.445Z createNewUser",
+                            "originalRequest": {
+                                "url": "0.0.0.0:3000/api/secure/user",
+                                "method": "POST",
+                                "header": [
+                                    {
+                                        "key": "Authorization",
+                                        "value": "Bearer adminsecrettoken"
+                                    },
+                                    {
+                                        "key": "Content-Type",
+                                        "value": "application/json"
+                                    }
+                                ],
+                                "body": {
+                                    "mode": "raw",
+                                    "raw": "{\n    \"citizenID\": \"12-123-12334\",\n    \"password\": \"somepassword123\"\n}"
+                                }
+                            },
+                            "responseTime": 130,
+                            "header": [
+                                {
+                                    "key": "Server",
+                                    "value": "ElectOneAPI"
+                                },
+                                {
+                                    "key": "Date",
+                                    "value": "Wed, 26 Mar 2025 11:04:56 GMT"
+                                },
+                                {
+                                    "key": "Content-Type",
+                                    "value": "application/json"
+                                },
+                                {
+                                    "key": "Content-Length",
+                                    "value": "39"
+                                }
+                            ],
+                            "body": "{\"message\":\"User created successfully\"}",
+                            "status": "Created",
+                            "code": 201
+                        },
                         {
                             "id": "rester-58",
                             "name": "2025-03-25T16:12:53.415Z createNewUser",
@@ -493,6 +981,66 @@
                 },
                 {
                     "request": {
+                        "url": "0.0.0.0:3000/api/secure/candidate/1",
+                        "method": "DELETE",
+                        "header": [
+                            {
+                                "key": "Authorization",
+                                "value": "Bearer adminsecrettoken"
+                            },
+                            {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                            }
+                        ]
+                    },
+                    "id": "rester-27",
+                    "name": "deleteCandidate",
+                    "response": [
+                        {
+                            "id": "rester-90",
+                            "name": "2025-03-26T11:02:19.881Z deleteCandidate",
+                            "originalRequest": {
+                                "url": "0.0.0.0:3000/api/secure/candidate/1",
+                                "method": "DELETE",
+                                "header": [
+                                    {
+                                        "key": "Authorization",
+                                        "value": "Bearer adminsecrettoken"
+                                    },
+                                    {
+                                        "key": "Content-Type",
+                                        "value": "application/json"
+                                    }
+                                ]
+                            },
+                            "responseTime": 120,
+                            "header": [
+                                {
+                                    "key": "Server",
+                                    "value": "ElectOneAPI"
+                                },
+                                {
+                                    "key": "Date",
+                                    "value": "Wed, 26 Mar 2025 11:02:19 GMT"
+                                },
+                                {
+                                    "key": "Content-Type",
+                                    "value": "application/json"
+                                },
+                                {
+                                    "key": "Content-Length",
+                                    "value": "31"
+                                }
+                            ],
+                            "body": "{\"message\":\"Candidate deleted\"}",
+                            "status": "OK",
+                            "code": 200
+                        }
+                    ]
+                },
+                {
+                    "request": {
                         "url": "0.0.0.0:3000/api/secure/citizens/12-123-12345",
                         "method": "DELETE",
                         "header": [
@@ -574,6 +1122,66 @@
                                 }
                             ],
                             "body": "{\"message\":\"Citizen deleted successfully\"}",
+                            "status": "OK",
+                            "code": 200
+                        }
+                    ]
+                },
+                {
+                    "request": {
+                        "url": "0.0.0.0:3000/api/secure/election/1",
+                        "method": "DELETE",
+                        "header": [
+                            {
+                                "key": "Authorization",
+                                "value": "Bearer adminsecrettoken"
+                            },
+                            {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                            }
+                        ]
+                    },
+                    "id": "rester-20",
+                    "name": "deleteElection",
+                    "response": [
+                        {
+                            "id": "rester-75",
+                            "name": "2025-03-26T10:49:04.235Z deleteElection",
+                            "originalRequest": {
+                                "url": "0.0.0.0:3000/api/secure/election/1",
+                                "method": "DELETE",
+                                "header": [
+                                    {
+                                        "key": "Authorization",
+                                        "value": "Bearer adminsecrettoken"
+                                    },
+                                    {
+                                        "key": "Content-Type",
+                                        "value": "application/json"
+                                    }
+                                ]
+                            },
+                            "responseTime": 120,
+                            "header": [
+                                {
+                                    "key": "Server",
+                                    "value": "ElectOneAPI"
+                                },
+                                {
+                                    "key": "Date",
+                                    "value": "Wed, 26 Mar 2025 10:49:03 GMT"
+                                },
+                                {
+                                    "key": "Content-Type",
+                                    "value": "application/json"
+                                },
+                                {
+                                    "key": "Content-Length",
+                                    "value": "30"
+                                }
+                            ],
+                            "body": "{\"message\":\"Election Deleted\"}",
                             "status": "OK",
                             "code": 200
                         }
@@ -709,6 +1317,206 @@
                 },
                 {
                     "request": {
+                        "url": "0.0.0.0:3000/api/secure/candidate/1",
+                        "method": "GET",
+                        "header": [
+                            {
+                                "key": "Authorization",
+                                "value": "Bearer adminsecrettoken"
+                            },
+                            {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                            }
+                        ]
+                    },
+                    "id": "rester-25",
+                    "name": "getCandidateDetails",
+                    "response": [
+                        {
+                            "id": "rester-88",
+                            "name": "2025-03-26T11:01:37.544Z getCandidateDetails",
+                            "originalRequest": {
+                                "url": "0.0.0.0:3000/api/secure/candidate/1",
+                                "method": "GET",
+                                "header": [
+                                    {
+                                        "key": "Authorization",
+                                        "value": "Bearer adminsecrettoken"
+                                    },
+                                    {
+                                        "key": "Content-Type",
+                                        "value": "application/json"
+                                    }
+                                ]
+                            },
+                            "responseTime": 66,
+                            "header": [
+                                {
+                                    "key": "Server",
+                                    "value": "ElectOneAPI"
+                                },
+                                {
+                                    "key": "Date",
+                                    "value": "Wed, 26 Mar 2025 11:01:36 GMT"
+                                },
+                                {
+                                    "key": "Content-Type",
+                                    "value": "application/json"
+                                },
+                                {
+                                    "key": "Content-Length",
+                                    "value": "100"
+                                }
+                            ],
+                            "body": "{\"candidateID\":\"1\",\"citizenID\":\"12-123-12334\",\"post\":\"Mayor\",\"electionID\":\"2\",\"group\":\"Independent\"}",
+                            "status": "OK",
+                            "code": 200
+                        }
+                    ]
+                },
+                {
+                    "request": {
+                        "url": "0.0.0.0:3000/api/secure/candidatesPaginated/0",
+                        "method": "GET",
+                        "header": [
+                            {
+                                "key": "Authorization",
+                                "value": "Bearer adminsecrettoken"
+                            },
+                            {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                            }
+                        ]
+                    },
+                    "id": "rester-26",
+                    "name": "getCandidatesPaginated",
+                    "response": [
+                        {
+                            "id": "rester-97",
+                            "name": "2025-03-26T11:06:09.756Z getCandidatesPaginated",
+                            "originalRequest": {
+                                "url": "0.0.0.0:3000/api/secure/candidatesPaginated/0",
+                                "method": "GET",
+                                "header": [
+                                    {
+                                        "key": "Authorization",
+                                        "value": "Bearer adminsecrettoken"
+                                    },
+                                    {
+                                        "key": "Content-Type",
+                                        "value": "application/json"
+                                    }
+                                ]
+                            },
+                            "responseTime": 63,
+                            "header": [
+                                {
+                                    "key": "Server",
+                                    "value": "ElectOneAPI"
+                                },
+                                {
+                                    "key": "Date",
+                                    "value": "Wed, 26 Mar 2025 11:06:09 GMT"
+                                },
+                                {
+                                    "key": "Content-Type",
+                                    "value": "application/json"
+                                },
+                                {
+                                    "key": "Content-Length",
+                                    "value": "106"
+                                }
+                            ],
+                            "body": "[{\"candidateID\":\"2\",\"citizenID\":\"12-123-12334\",\"post\":\"President\",\"electionID\":\"2\",\"group\":\"Independent\"}]",
+                            "status": "OK",
+                            "code": 200
+                        },
+                        {
+                            "id": "rester-95",
+                            "name": "2025-03-26T11:05:58.143Z getCandidatesPaginated",
+                            "originalRequest": {
+                                "url": "0.0.0.0:3000/api/secure/candidatesPaginated/0",
+                                "method": "GET",
+                                "header": [
+                                    {
+                                        "key": "Authorization",
+                                        "value": "Bearer adminsecrettoken"
+                                    },
+                                    {
+                                        "key": "Content-Type",
+                                        "value": "application/json"
+                                    }
+                                ]
+                            },
+                            "responseTime": 62,
+                            "header": [
+                                {
+                                    "key": "Server",
+                                    "value": "ElectOneAPI"
+                                },
+                                {
+                                    "key": "Date",
+                                    "value": "Wed, 26 Mar 2025 11:05:57 GMT"
+                                },
+                                {
+                                    "key": "Content-Type",
+                                    "value": "application/json"
+                                },
+                                {
+                                    "key": "Content-Length",
+                                    "value": "4"
+                                }
+                            ],
+                            "body": "null",
+                            "status": "OK",
+                            "code": 200
+                        },
+                        {
+                            "id": "rester-89",
+                            "name": "2025-03-26T11:01:56.447Z getCandidatesPaginated",
+                            "originalRequest": {
+                                "url": "0.0.0.0:3000/api/secure/candidatesPaginated/0",
+                                "method": "GET",
+                                "header": [
+                                    {
+                                        "key": "Authorization",
+                                        "value": "Bearer adminsecrettoken"
+                                    },
+                                    {
+                                        "key": "Content-Type",
+                                        "value": "application/json"
+                                    }
+                                ]
+                            },
+                            "responseTime": 67,
+                            "header": [
+                                {
+                                    "key": "Server",
+                                    "value": "ElectOneAPI"
+                                },
+                                {
+                                    "key": "Date",
+                                    "value": "Wed, 26 Mar 2025 11:01:55 GMT"
+                                },
+                                {
+                                    "key": "Content-Type",
+                                    "value": "application/json"
+                                },
+                                {
+                                    "key": "Content-Length",
+                                    "value": "102"
+                                }
+                            ],
+                            "body": "[{\"candidateID\":\"1\",\"citizenID\":\"12-123-12334\",\"post\":\"Mayor\",\"electionID\":\"2\",\"group\":\"Independent\"}]",
+                            "status": "OK",
+                            "code": 200
+                        }
+                    ]
+                },
+                {
+                    "request": {
                         "url": "0.0.0.0:3000/api/secure/citizens/12-123-12345",
                         "method": "GET",
                         "header": [
@@ -721,6 +1529,42 @@
                     "id": "rester-8",
                     "name": "GetCitizenByID",
                     "response": [
+                        {
+                            "id": "rester-91",
+                            "name": "2025-03-26T11:04:04.852Z GetCitizenByID",
+                            "originalRequest": {
+                                "url": "0.0.0.0:3000/api/secure/citizens/12-123-12334",
+                                "method": "GET",
+                                "header": [
+                                    {
+                                        "key": "Authorization",
+                                        "value": "Bearer adminsecrettoken"
+                                    }
+                                ]
+                            },
+                            "responseTime": 569,
+                            "header": [
+                                {
+                                    "key": "Server",
+                                    "value": "ElectOneAPI"
+                                },
+                                {
+                                    "key": "Date",
+                                    "value": "Wed, 26 Mar 2025 11:04:05 GMT"
+                                },
+                                {
+                                    "key": "Content-Type",
+                                    "value": "application/json"
+                                },
+                                {
+                                    "key": "Content-Length",
+                                    "value": "120"
+                                }
+                            ],
+                            "body": "{\"citizenID\":\"12-123-12334\",\"fullName\":\"Alice Johnson\",\"dateOfBirth\":\"1995-03-22\",\"placeOfResidence\":\"Some Other Place\"}",
+                            "status": "OK",
+                            "code": 200
+                        },
                         {
                             "id": "rester-51",
                             "name": "2025-03-25T15:42:27.365Z GetCitizenByID",
@@ -1096,6 +1940,206 @@
                             "body": "{\"error\":\"failed to fetch citizens: failed to execute SQL:\\nSQLite error: datatype mismatch\"}",
                             "status": "Internal Server Error",
                             "code": 500
+                        }
+                    ]
+                },
+                {
+                    "request": {
+                        "url": "0.0.0.0:3000/api/secure/election/2",
+                        "method": "GET",
+                        "header": [
+                            {
+                                "key": "Authorization",
+                                "value": "Bearer adminsecrettoken"
+                            },
+                            {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                            }
+                        ]
+                    },
+                    "id": "rester-21",
+                    "name": "getElectionDetails",
+                    "response": [
+                        {
+                            "id": "rester-77",
+                            "name": "2025-03-26T10:49:21.911Z getElectionDetails",
+                            "originalRequest": {
+                                "url": "0.0.0.0:3000/api/secure/election/2",
+                                "method": "GET",
+                                "header": [
+                                    {
+                                        "key": "Authorization",
+                                        "value": "Bearer adminsecrettoken"
+                                    },
+                                    {
+                                        "key": "Content-Type",
+                                        "value": "application/json"
+                                    }
+                                ]
+                            },
+                            "responseTime": 66,
+                            "header": [
+                                {
+                                    "key": "Server",
+                                    "value": "ElectOneAPI"
+                                },
+                                {
+                                    "key": "Date",
+                                    "value": "Wed, 26 Mar 2025 10:49:21 GMT"
+                                },
+                                {
+                                    "key": "Content-Type",
+                                    "value": "application/json"
+                                },
+                                {
+                                    "key": "Content-Length",
+                                    "value": "140"
+                                }
+                            ],
+                            "body": "{\"electionID\":\"2\",\"title\":\"Presidential Election 2025\",\"startDate\":\"2025-11-04\",\"endDate\":\"2025-11-05\",\"votingRestriction\":\"@parliamentary\"}",
+                            "status": "OK",
+                            "code": 200
+                        },
+                        {
+                            "id": "rester-76",
+                            "name": "2025-03-26T10:49:18.449Z getElectionDetails",
+                            "originalRequest": {
+                                "url": "0.0.0.0:3000/api/secure/election/1",
+                                "method": "GET",
+                                "header": [
+                                    {
+                                        "key": "Authorization",
+                                        "value": "Bearer adminsecrettoken"
+                                    },
+                                    {
+                                        "key": "Content-Type",
+                                        "value": "application/json"
+                                    }
+                                ]
+                            },
+                            "responseTime": 66,
+                            "header": [
+                                {
+                                    "key": "Server",
+                                    "value": "ElectOneAPI"
+                                },
+                                {
+                                    "key": "Date",
+                                    "value": "Wed, 26 Mar 2025 10:49:17 GMT"
+                                },
+                                {
+                                    "key": "Content-Type",
+                                    "value": "application/json"
+                                },
+                                {
+                                    "key": "Content-Length",
+                                    "value": "30"
+                                }
+                            ],
+                            "body": "{\"error\":\"election not found\"}",
+                            "status": "Not Found",
+                            "code": 404
+                        }
+                    ]
+                },
+                {
+                    "request": {
+                        "url": "0.0.0.0:3000/api/secure/electionsPaginated/0",
+                        "method": "GET",
+                        "header": [
+                            {
+                                "key": "Authorization",
+                                "value": "Bearer adminsecrettoken"
+                            },
+                            {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                            }
+                        ]
+                    },
+                    "id": "rester-22",
+                    "name": "getElectionsPaginated",
+                    "response": [
+                        {
+                            "id": "rester-98",
+                            "name": "2025-03-26T11:07:28.617Z getElectionsPaginated",
+                            "originalRequest": {
+                                "url": "0.0.0.0:3000/api/secure/electionsPaginated/0",
+                                "method": "GET",
+                                "header": [
+                                    {
+                                        "key": "Authorization",
+                                        "value": "Bearer adminsecrettoken"
+                                    },
+                                    {
+                                        "key": "Content-Type",
+                                        "value": "application/json"
+                                    }
+                                ]
+                            },
+                            "responseTime": 495,
+                            "header": [
+                                {
+                                    "key": "Server",
+                                    "value": "ElectOneAPI"
+                                },
+                                {
+                                    "key": "Date",
+                                    "value": "Wed, 26 Mar 2025 11:07:28 GMT"
+                                },
+                                {
+                                    "key": "Content-Type",
+                                    "value": "application/json"
+                                },
+                                {
+                                    "key": "Content-Length",
+                                    "value": "142"
+                                }
+                            ],
+                            "body": "[{\"electionID\":\"2\",\"title\":\"Presidential Election 2025\",\"startDate\":\"2025-11-04\",\"endDate\":\"2025-11-05\",\"votingRestriction\":\"@parliamentary\"}]",
+                            "status": "OK",
+                            "code": 200
+                        },
+                        {
+                            "id": "rester-78",
+                            "name": "2025-03-26T10:49:52.006Z getElectionsPaginated",
+                            "originalRequest": {
+                                "url": "0.0.0.0:3000/api/secure/electionsPaginated/0",
+                                "method": "GET",
+                                "header": [
+                                    {
+                                        "key": "Authorization",
+                                        "value": "Bearer adminsecrettoken"
+                                    },
+                                    {
+                                        "key": "Content-Type",
+                                        "value": "application/json"
+                                    }
+                                ]
+                            },
+                            "responseTime": 212,
+                            "header": [
+                                {
+                                    "key": "Server",
+                                    "value": "ElectOneAPI"
+                                },
+                                {
+                                    "key": "Date",
+                                    "value": "Wed, 26 Mar 2025 10:49:52 GMT"
+                                },
+                                {
+                                    "key": "Content-Type",
+                                    "value": "application/json"
+                                },
+                                {
+                                    "key": "Content-Length",
+                                    "value": "142"
+                                }
+                            ],
+                            "body": "[{\"electionID\":\"2\",\"title\":\"Presidential Election 2025\",\"startDate\":\"2025-11-04\",\"endDate\":\"2025-11-05\",\"votingRestriction\":\"@parliamentary\"}]",
+                            "status": "OK",
+                            "code": 200
                         }
                     ]
                 },
@@ -1538,6 +2582,78 @@
                     "name": "getUsersPaginated",
                     "response": [
                         {
+                            "id": "rester-94",
+                            "name": "2025-03-26T11:05:00.103Z getUsersPaginated",
+                            "originalRequest": {
+                                "url": "0.0.0.0:3000/api/secure/usersPaginated/0",
+                                "method": "GET",
+                                "header": [
+                                    {
+                                        "key": "Authorization",
+                                        "value": "Bearer adminsecrettoken"
+                                    }
+                                ]
+                            },
+                            "responseTime": 63,
+                            "header": [
+                                {
+                                    "key": "Server",
+                                    "value": "ElectOneAPI"
+                                },
+                                {
+                                    "key": "Date",
+                                    "value": "Wed, 26 Mar 2025 11:04:59 GMT"
+                                },
+                                {
+                                    "key": "Content-Type",
+                                    "value": "application/json"
+                                },
+                                {
+                                    "key": "Content-Length",
+                                    "value": "70"
+                                }
+                            ],
+                            "body": "[{\"userID\":2,\"citizenID\":\"12-123-12334\",\"password\":\"somepassword123\"}]",
+                            "status": "OK",
+                            "code": 200
+                        },
+                        {
+                            "id": "rester-92",
+                            "name": "2025-03-26T11:04:44.351Z getUsersPaginated",
+                            "originalRequest": {
+                                "url": "0.0.0.0:3000/api/secure/usersPaginated/0",
+                                "method": "GET",
+                                "header": [
+                                    {
+                                        "key": "Authorization",
+                                        "value": "Bearer adminsecrettoken"
+                                    }
+                                ]
+                            },
+                            "responseTime": 69,
+                            "header": [
+                                {
+                                    "key": "Server",
+                                    "value": "ElectOneAPI"
+                                },
+                                {
+                                    "key": "Date",
+                                    "value": "Wed, 26 Mar 2025 11:04:43 GMT"
+                                },
+                                {
+                                    "key": "Content-Type",
+                                    "value": "application/json"
+                                },
+                                {
+                                    "key": "Content-Length",
+                                    "value": "4"
+                                }
+                            ],
+                            "body": "null",
+                            "status": "OK",
+                            "code": 200
+                        },
+                        {
                             "id": "rester-59",
                             "name": "2025-03-25T16:13:03.682Z getUsersPaginated",
                             "originalRequest": {
@@ -1572,6 +2688,122 @@
                             "body": "[{\"userID\":1,\"citizenID\":\"12-123-12334\",\"password\":\"somepassword123\"}]",
                             "status": "OK",
                             "code": 200
+                        }
+                    ]
+                },
+                {
+                    "request": {
+                        "url": "0.0.0.0:3000/api/secure/candidate/1",
+                        "method": "PUT",
+                        "header": [
+                            {
+                                "key": "Authorization",
+                                "value": "Bearer adminsecrettoken"
+                            },
+                            {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\n  \"citizenID\": \"12-123-12334\",\n  \"post\": \"Mayor\",\n  \"electionID\": \"2\",\n  \"group\": \"Independent\"\n}\n"
+                        }
+                    },
+                    "id": "rester-24",
+                    "name": "updateCandidate",
+                    "response": [
+                        {
+                            "id": "rester-87",
+                            "name": "2025-03-26T11:01:11.255Z updateCandidate",
+                            "originalRequest": {
+                                "url": "0.0.0.0:3000/api/secure/candidate/1",
+                                "method": "PUT",
+                                "header": [
+                                    {
+                                        "key": "Authorization",
+                                        "value": "Bearer adminsecrettoken"
+                                    },
+                                    {
+                                        "key": "Content-Type",
+                                        "value": "application/json"
+                                    }
+                                ],
+                                "body": {
+                                    "mode": "raw",
+                                    "raw": "{\n  \"citizenID\": \"12-123-12334\",\n  \"post\": \"Mayor\",\n  \"electionID\": \"2\",\n  \"group\": \"Independent\"\n}\n"
+                                }
+                            },
+                            "responseTime": 386,
+                            "header": [
+                                {
+                                    "key": "Server",
+                                    "value": "ElectOneAPI"
+                                },
+                                {
+                                    "key": "Date",
+                                    "value": "Wed, 26 Mar 2025 11:01:10 GMT"
+                                },
+                                {
+                                    "key": "Content-Type",
+                                    "value": "application/json"
+                                },
+                                {
+                                    "key": "Content-Length",
+                                    "value": "44"
+                                }
+                            ],
+                            "body": "{\"message\":\"Candidate updated successfully\"}",
+                            "status": "OK",
+                            "code": 200
+                        },
+                        {
+                            "id": "rester-86",
+                            "name": "2025-03-26T11:01:07.004Z updateCandidate",
+                            "originalRequest": {
+                                "url": "0.0.0.0:3000/api/secure/candidate/1",
+                                "method": "POST",
+                                "header": [
+                                    {
+                                        "key": "Authorization",
+                                        "value": "Bearer adminsecrettoken"
+                                    },
+                                    {
+                                        "key": "Content-Type",
+                                        "value": "application/json"
+                                    }
+                                ],
+                                "body": {
+                                    "mode": "raw",
+                                    "raw": "{\n  \"citizenID\": \"12-123-12334\",\n  \"post\": \"Mayor\",\n  \"electionID\": \"2\",\n  \"group\": \"Independent\"\n}\n"
+                                }
+                            },
+                            "responseTime": 5,
+                            "header": [
+                                {
+                                    "key": "Server",
+                                    "value": "ElectOneAPI"
+                                },
+                                {
+                                    "key": "Date",
+                                    "value": "Wed, 26 Mar 2025 11:01:06 GMT"
+                                },
+                                {
+                                    "key": "Content-Type",
+                                    "value": "text/plain; charset=utf-8"
+                                },
+                                {
+                                    "key": "Content-Length",
+                                    "value": "18"
+                                },
+                                {
+                                    "key": "Allow",
+                                    "value": "GET, HEAD, PUT, DELETE"
+                                }
+                            ],
+                            "body": "Method Not Allowed",
+                            "status": "Method Not Allowed",
+                            "code": 405
                         }
                     ]
                 },
@@ -1686,11 +2918,123 @@
                             "code": 200
                         }
                     ]
+                },
+                {
+                    "request": {
+                        "url": "0.0.0.0:3000/api/secure/election/2",
+                        "method": "PUT",
+                        "header": [
+                            {
+                                "key": "Authorization",
+                                "value": "Bearer adminsecrettoken"
+                            },
+                            {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\n  \"title\": \"Presidential Election 2025\",\n  \"startDate\": \"2025-11-04\",\n  \"endDate\": \"2025-11-05\",\n  \"votingRestriction\": \"@parliamentary\"\n}\n"
+                        }
+                    },
+                    "id": "rester-19",
+                    "name": "updateElection",
+                    "response": [
+                        {
+                            "id": "rester-74",
+                            "name": "2025-03-26T10:48:39.059Z updateElection",
+                            "originalRequest": {
+                                "url": "0.0.0.0:3000/api/secure/election/2",
+                                "method": "PUT",
+                                "header": [
+                                    {
+                                        "key": "Authorization",
+                                        "value": "Bearer adminsecrettoken"
+                                    },
+                                    {
+                                        "key": "Content-Type",
+                                        "value": "application/json"
+                                    }
+                                ],
+                                "body": {
+                                    "mode": "raw",
+                                    "raw": "{\n  \"title\": \"Presidential Election 2025\",\n  \"startDate\": \"2025-11-04\",\n  \"endDate\": \"2025-11-05\",\n  \"votingRestriction\": \"@parliamentary\"\n}\n"
+                                }
+                            },
+                            "responseTime": 120,
+                            "header": [
+                                {
+                                    "key": "Server",
+                                    "value": "ElectOneAPI"
+                                },
+                                {
+                                    "key": "Date",
+                                    "value": "Wed, 26 Mar 2025 10:48:38 GMT"
+                                },
+                                {
+                                    "key": "Content-Type",
+                                    "value": "application/json"
+                                },
+                                {
+                                    "key": "Content-Length",
+                                    "value": "38"
+                                }
+                            ],
+                            "body": "{\"message\":\"Election Details Updated\"}",
+                            "status": "Created",
+                            "code": 201
+                        },
+                        {
+                            "id": "rester-73",
+                            "name": "2025-03-26T10:48:11.786Z updateElection",
+                            "originalRequest": {
+                                "url": "0.0.0.0:3000/api/secure/election",
+                                "method": "POST",
+                                "header": [
+                                    {
+                                        "key": "Authorization",
+                                        "value": "Bearer adminsecrettoken"
+                                    },
+                                    {
+                                        "key": "Content-Type",
+                                        "value": "application/json"
+                                    }
+                                ],
+                                "body": {
+                                    "mode": "raw",
+                                    "raw": "{\n  \"title\": \"Presidential Election 2025\",\n  \"startDate\": \"2025-11-04\",\n  \"endDate\": \"2025-11-05\",\n  \"votingRestriction\": \"@everyone\"\n}\n"
+                                }
+                            },
+                            "responseTime": 126,
+                            "header": [
+                                {
+                                    "key": "Server",
+                                    "value": "ElectOneAPI"
+                                },
+                                {
+                                    "key": "Date",
+                                    "value": "Wed, 26 Mar 2025 10:48:11 GMT"
+                                },
+                                {
+                                    "key": "Content-Type",
+                                    "value": "application/json"
+                                },
+                                {
+                                    "key": "Content-Length",
+                                    "value": "43"
+                                }
+                            ],
+                            "body": "{\"message\":\"Election successfully Created\"}",
+                            "status": "Created",
+                            "code": 201
+                        }
+                    ]
                 }
             ]
         },
         {
-            "name": "History_xwzo1zo3",
+            "name": "History_yzyma5ew",
             "item": [
                 {
                     "request": {
@@ -1704,11 +3048,11 @@
                         ]
                     },
                     "id": "rester-history-0",
-                    "name": "History_xwzo1zo3 0",
+                    "name": "History_yzyma5ew 0",
                     "response": [
                         {
                             "id": "rester-54",
-                            "name": "2025-03-25T16:08:57.579Z History_xwzo1zo3 0",
+                            "name": "2025-03-25T16:08:57.579Z History_yzyma5ew 0",
                             "originalRequest": {
                                 "url": "0.0.0.0:3000/api/secure/usersPaginated/0",
                                 "method": "GET",
@@ -1756,11 +3100,11 @@
                         ]
                     },
                     "id": "rester-history-1",
-                    "name": "History_xwzo1zo3 1",
+                    "name": "History_yzyma5ew 1",
                     "response": [
                         {
                             "id": "rester-33",
-                            "name": "2025-03-25T04:04:53.059Z History_xwzo1zo3 1",
+                            "name": "2025-03-25T04:04:53.059Z History_yzyma5ew 1",
                             "originalRequest": {
                                 "url": "0.0.0.0:3000/api/secure/citizens/12-123-12345",
                                 "method": "GET",
@@ -1812,11 +3156,11 @@
                         }
                     },
                     "id": "rester-history-10",
-                    "name": "History_xwzo1zo3 10",
+                    "name": "History_yzyma5ew 10",
                     "response": [
                         {
                             "id": "rester-24",
-                            "name": "2025-03-22T11:49:49.328Z History_xwzo1zo3 10",
+                            "name": "2025-03-22T11:49:49.328Z History_yzyma5ew 10",
                             "originalRequest": {
                                 "url": "0.0.0.0:8080/api/createCitizen",
                                 "method": "POST",
@@ -1868,11 +3212,11 @@
                         }
                     },
                     "id": "rester-history-11",
-                    "name": "History_xwzo1zo3 11",
+                    "name": "History_yzyma5ew 11",
                     "response": [
                         {
                             "id": "rester-23",
-                            "name": "2025-03-22T11:48:39.423Z History_xwzo1zo3 11",
+                            "name": "2025-03-22T11:48:39.423Z History_yzyma5ew 11",
                             "originalRequest": {
                                 "url": "0.0.0.0:8080/api/createCitizen",
                                 "method": "POST",
@@ -1924,11 +3268,11 @@
                         ]
                     },
                     "id": "rester-history-12",
-                    "name": "History_xwzo1zo3 12",
+                    "name": "History_yzyma5ew 12",
                     "response": [
                         {
                             "id": "rester-22",
-                            "name": "2025-03-22T11:47:52.862Z History_xwzo1zo3 12",
+                            "name": "2025-03-22T11:47:52.862Z History_yzyma5ew 12",
                             "originalRequest": {
                                 "url": "0.0.0.0:8080/api/getElections",
                                 "method": "GET",
@@ -1972,11 +3316,11 @@
                         ]
                     },
                     "id": "rester-history-13",
-                    "name": "History_xwzo1zo3 13",
+                    "name": "History_yzyma5ew 13",
                     "response": [
                         {
                             "id": "rester-21",
-                            "name": "2025-03-22T11:47:43.579Z History_xwzo1zo3 13",
+                            "name": "2025-03-22T11:47:43.579Z History_yzyma5ew 13",
                             "originalRequest": {
                                 "url": "0.0.0.0:8080/api/getElections",
                                 "method": "GET",
@@ -2024,11 +3368,11 @@
                         }
                     },
                     "id": "rester-history-14",
-                    "name": "History_xwzo1zo3 14",
+                    "name": "History_yzyma5ew 14",
                     "response": [
                         {
                             "id": "rester-20",
-                            "name": "2025-03-22T11:47:12.312Z History_xwzo1zo3 14",
+                            "name": "2025-03-22T11:47:12.312Z History_yzyma5ew 14",
                             "originalRequest": {
                                 "url": "0.0.0.0:8080/api/createElection",
                                 "method": "POST",
@@ -2080,11 +3424,11 @@
                         }
                     },
                     "id": "rester-history-15",
-                    "name": "History_xwzo1zo3 15",
+                    "name": "History_yzyma5ew 15",
                     "response": [
                         {
                             "id": "rester-19",
-                            "name": "2025-03-22T11:46:42.507Z History_xwzo1zo3 15",
+                            "name": "2025-03-22T11:46:42.507Z History_yzyma5ew 15",
                             "originalRequest": {
                                 "url": "0.0.0.0:8080/api/createCitizen",
                                 "method": "GET",
@@ -2136,11 +3480,11 @@
                         ]
                     },
                     "id": "rester-history-16",
-                    "name": "History_xwzo1zo3 16",
+                    "name": "History_yzyma5ew 16",
                     "response": [
                         {
                             "id": "rester-18",
-                            "name": "2025-03-22T11:45:43.108Z History_xwzo1zo3 16",
+                            "name": "2025-03-22T11:45:43.108Z History_yzyma5ew 16",
                             "originalRequest": {
                                 "url": "0.0.0.0:8080/api/getElections",
                                 "method": "GET",
@@ -2188,11 +3532,11 @@
                         }
                     },
                     "id": "rester-history-17",
-                    "name": "History_xwzo1zo3 17",
+                    "name": "History_yzyma5ew 17",
                     "response": [
                         {
                             "id": "rester-17",
-                            "name": "2025-03-22T11:45:36.438Z History_xwzo1zo3 17",
+                            "name": "2025-03-22T11:45:36.438Z History_yzyma5ew 17",
                             "originalRequest": {
                                 "url": "0.0.0.0:8080/api/createElection",
                                 "method": "POST",
@@ -2244,11 +3588,11 @@
                         }
                     },
                     "id": "rester-history-18",
-                    "name": "History_xwzo1zo3 18",
+                    "name": "History_yzyma5ew 18",
                     "response": [
                         {
                             "id": "rester-16",
-                            "name": "2025-03-22T11:43:49.879Z History_xwzo1zo3 18",
+                            "name": "2025-03-22T11:43:49.879Z History_yzyma5ew 18",
                             "originalRequest": {
                                 "url": "0.0.0.0:8080/api/createElection",
                                 "method": "POST",
@@ -2296,11 +3640,11 @@
                         ]
                     },
                     "id": "rester-history-19",
-                    "name": "History_xwzo1zo3 19",
+                    "name": "History_yzyma5ew 19",
                     "response": [
                         {
                             "id": "rester-15",
-                            "name": "2025-03-22T11:43:02.051Z History_xwzo1zo3 19",
+                            "name": "2025-03-22T11:43:02.051Z History_yzyma5ew 19",
                             "originalRequest": {
                                 "url": "0.0.0.0:8080/api/getElections",
                                 "method": "GET",
@@ -2344,11 +3688,11 @@
                         ]
                     },
                     "id": "rester-history-2",
-                    "name": "History_xwzo1zo3 2",
+                    "name": "History_yzyma5ew 2",
                     "response": [
                         {
                             "id": "rester-32",
-                            "name": "2025-03-25T04:04:39.985Z History_xwzo1zo3 2",
+                            "name": "2025-03-25T04:04:39.985Z History_yzyma5ew 2",
                             "originalRequest": {
                                 "url": "0.0.0.0:3000/api/secure/citizens/1",
                                 "method": "GET",
@@ -2400,11 +3744,11 @@
                         }
                     },
                     "id": "rester-history-20",
-                    "name": "History_xwzo1zo3 20",
+                    "name": "History_yzyma5ew 20",
                     "response": [
                         {
                             "id": "rester-14",
-                            "name": "2025-03-22T11:42:58.265Z History_xwzo1zo3 20",
+                            "name": "2025-03-22T11:42:58.265Z History_yzyma5ew 20",
                             "originalRequest": {
                                 "url": "0.0.0.0:8080/api/createElection",
                                 "method": "POST",
@@ -2452,11 +3796,11 @@
                         ]
                     },
                     "id": "rester-history-21",
-                    "name": "History_xwzo1zo3 21",
+                    "name": "History_yzyma5ew 21",
                     "response": [
                         {
                             "id": "rester-13",
-                            "name": "2025-03-22T11:41:50.869Z History_xwzo1zo3 21",
+                            "name": "2025-03-22T11:41:50.869Z History_yzyma5ew 21",
                             "originalRequest": {
                                 "url": "0.0.0.0:8080/api/getElections",
                                 "method": "GET",
@@ -2504,11 +3848,11 @@
                         }
                     },
                     "id": "rester-history-22",
-                    "name": "History_xwzo1zo3 22",
+                    "name": "History_yzyma5ew 22",
                     "response": [
                         {
                             "id": "rester-12",
-                            "name": "2025-03-22T11:12:00.991Z History_xwzo1zo3 22",
+                            "name": "2025-03-22T11:12:00.991Z History_yzyma5ew 22",
                             "originalRequest": {
                                 "url": "0.0.0.0:8080/api/login",
                                 "method": "POST",
@@ -2560,11 +3904,11 @@
                         }
                     },
                     "id": "rester-history-23",
-                    "name": "History_xwzo1zo3 23",
+                    "name": "History_yzyma5ew 23",
                     "response": [
                         {
                             "id": "rester-11",
-                            "name": "2025-03-22T11:11:51.106Z History_xwzo1zo3 23",
+                            "name": "2025-03-22T11:11:51.106Z History_yzyma5ew 23",
                             "originalRequest": {
                                 "url": "0.0.0.0:8080/api/signup",
                                 "method": "POST",
@@ -2616,11 +3960,11 @@
                         }
                     },
                     "id": "rester-history-24",
-                    "name": "History_xwzo1zo3 24",
+                    "name": "History_yzyma5ew 24",
                     "response": [
                         {
                             "id": "rester-10",
-                            "name": "2025-03-22T11:10:30.839Z History_xwzo1zo3 24",
+                            "name": "2025-03-22T11:10:30.839Z History_yzyma5ew 24",
                             "originalRequest": {
                                 "url": "0.0.0.0:8080/api/login",
                                 "method": "POST",
@@ -2672,11 +4016,11 @@
                         }
                     },
                     "id": "rester-history-25",
-                    "name": "History_xwzo1zo3 25",
+                    "name": "History_yzyma5ew 25",
                     "response": [
                         {
                             "id": "rester-9",
-                            "name": "2025-03-22T11:10:03.806Z History_xwzo1zo3 25",
+                            "name": "2025-03-22T11:10:03.806Z History_yzyma5ew 25",
                             "originalRequest": {
                                 "url": "0.0.0.0:8080/api/signup",
                                 "method": "POST",
@@ -2728,11 +4072,11 @@
                         }
                     },
                     "id": "rester-history-26",
-                    "name": "History_xwzo1zo3 26",
+                    "name": "History_yzyma5ew 26",
                     "response": [
                         {
                             "id": "rester-8",
-                            "name": "2025-03-22T11:07:43.110Z History_xwzo1zo3 26",
+                            "name": "2025-03-22T11:07:43.110Z History_yzyma5ew 26",
                             "originalRequest": {
                                 "url": "0.0.0.0:8080/api/signup",
                                 "method": "POST",
@@ -2784,11 +4128,11 @@
                         }
                     },
                     "id": "rester-history-27",
-                    "name": "History_xwzo1zo3 27",
+                    "name": "History_yzyma5ew 27",
                     "response": [
                         {
                             "id": "rester-7",
-                            "name": "2025-03-22T11:06:24.505Z History_xwzo1zo3 27",
+                            "name": "2025-03-22T11:06:24.505Z History_yzyma5ew 27",
                             "originalRequest": {
                                 "url": "0.0.0.0:8080/api/signup",
                                 "method": "POST",
@@ -2840,11 +4184,11 @@
                         }
                     },
                     "id": "rester-history-28",
-                    "name": "History_xwzo1zo3 28",
+                    "name": "History_yzyma5ew 28",
                     "response": [
                         {
                             "id": "rester-6",
-                            "name": "2025-03-22T11:05:51.540Z History_xwzo1zo3 28",
+                            "name": "2025-03-22T11:05:51.540Z History_yzyma5ew 28",
                             "originalRequest": {
                                 "url": "0.0.0.0:8080/api/signup",
                                 "method": "POST",
@@ -2896,11 +4240,11 @@
                         }
                     },
                     "id": "rester-history-29",
-                    "name": "History_xwzo1zo3 29",
+                    "name": "History_yzyma5ew 29",
                     "response": [
                         {
                             "id": "rester-5",
-                            "name": "2025-03-22T08:38:01.049Z History_xwzo1zo3 29",
+                            "name": "2025-03-22T08:38:01.049Z History_yzyma5ew 29",
                             "originalRequest": {
                                 "url": "0.0.0.0:8080/api/signup",
                                 "method": "POST",
@@ -2948,11 +4292,11 @@
                         ]
                     },
                     "id": "rester-history-3",
-                    "name": "History_xwzo1zo3 3",
+                    "name": "History_yzyma5ew 3",
                     "response": [
                         {
                             "id": "rester-31",
-                            "name": "2025-03-25T04:04:35.146Z History_xwzo1zo3 3",
+                            "name": "2025-03-25T04:04:35.146Z History_yzyma5ew 3",
                             "originalRequest": {
                                 "url": "0.0.0.0:3000/api/secure/citizens",
                                 "method": "GET",
@@ -3000,11 +4344,11 @@
                         }
                     },
                     "id": "rester-history-30",
-                    "name": "History_xwzo1zo3 30",
+                    "name": "History_yzyma5ew 30",
                     "response": [
                         {
                             "id": "rester-4",
-                            "name": "2025-03-22T08:37:09.018Z History_xwzo1zo3 30",
+                            "name": "2025-03-22T08:37:09.018Z History_yzyma5ew 30",
                             "originalRequest": {
                                 "url": "0.0.0.0:8080/api/signup",
                                 "method": "POST",
@@ -3056,11 +4400,11 @@
                         }
                     },
                     "id": "rester-history-31",
-                    "name": "History_xwzo1zo3 31",
+                    "name": "History_yzyma5ew 31",
                     "response": [
                         {
                             "id": "rester-3",
-                            "name": "2025-03-22T08:35:10.395Z History_xwzo1zo3 31",
+                            "name": "2025-03-22T08:35:10.395Z History_yzyma5ew 31",
                             "originalRequest": {
                                 "url": "0.0.0.0:8080/api/login",
                                 "method": "POST",
@@ -3112,11 +4456,11 @@
                         }
                     },
                     "id": "rester-history-32",
-                    "name": "History_xwzo1zo3 32",
+                    "name": "History_yzyma5ew 32",
                     "response": [
                         {
                             "id": "rester-2",
-                            "name": "2025-03-22T08:33:43.130Z History_xwzo1zo3 32",
+                            "name": "2025-03-22T08:33:43.130Z History_yzyma5ew 32",
                             "originalRequest": {
                                 "url": "0.0.0.0:8080/api/signup",
                                 "method": "POST",
@@ -3168,11 +4512,11 @@
                         }
                     },
                     "id": "rester-history-33",
-                    "name": "History_xwzo1zo3 33",
+                    "name": "History_yzyma5ew 33",
                     "response": [
                         {
                             "id": "rester-1",
-                            "name": "2025-03-22T08:33:06.503Z History_xwzo1zo3 33",
+                            "name": "2025-03-22T08:33:06.503Z History_yzyma5ew 33",
                             "originalRequest": {
                                 "url": "0.0.0.0:8080/api/signup",
                                 "method": "POST",
@@ -3215,11 +4559,11 @@
                         "header": []
                     },
                     "id": "rester-history-4",
-                    "name": "History_xwzo1zo3 4",
+                    "name": "History_yzyma5ew 4",
                     "response": [
                         {
                             "id": "rester-30",
-                            "name": "2025-03-22T12:01:32.134Z History_xwzo1zo3 4",
+                            "name": "2025-03-22T12:01:32.134Z History_yzyma5ew 4",
                             "originalRequest": {
                                 "url": "0.0.0.0:8080/api/getCandidates",
                                 "method": "GET",
@@ -3262,11 +4606,11 @@
                         }
                     },
                     "id": "rester-history-5",
-                    "name": "History_xwzo1zo3 5",
+                    "name": "History_yzyma5ew 5",
                     "response": [
                         {
                             "id": "rester-29",
-                            "name": "2025-03-22T12:01:19.128Z History_xwzo1zo3 5",
+                            "name": "2025-03-22T12:01:19.128Z History_yzyma5ew 5",
                             "originalRequest": {
                                 "url": "0.0.0.0:8080/api/createCandidate",
                                 "method": "POST",
@@ -3309,11 +4653,11 @@
                         "header": []
                     },
                     "id": "rester-history-6",
-                    "name": "History_xwzo1zo3 6",
+                    "name": "History_yzyma5ew 6",
                     "response": [
                         {
                             "id": "rester-28",
-                            "name": "2025-03-22T12:01:12.700Z History_xwzo1zo3 6",
+                            "name": "2025-03-22T12:01:12.700Z History_yzyma5ew 6",
                             "originalRequest": {
                                 "url": "0.0.0.0:8080/api/getCandidates",
                                 "method": "GET",
@@ -3347,11 +4691,11 @@
                         "header": []
                     },
                     "id": "rester-history-7",
-                    "name": "History_xwzo1zo3 7",
+                    "name": "History_yzyma5ew 7",
                     "response": [
                         {
                             "id": "rester-27",
-                            "name": "2025-03-22T12:01:02.887Z History_xwzo1zo3 7",
+                            "name": "2025-03-22T12:01:02.887Z History_yzyma5ew 7",
                             "originalRequest": {
                                 "url": "0.0.0.0:8080/api/getCandidates",
                                 "method": "GET",
@@ -3402,11 +4746,11 @@
                         }
                     },
                     "id": "rester-history-8",
-                    "name": "History_xwzo1zo3 8",
+                    "name": "History_yzyma5ew 8",
                     "response": [
                         {
                             "id": "rester-26",
-                            "name": "2025-03-22T11:52:22.244Z History_xwzo1zo3 8",
+                            "name": "2025-03-22T11:52:22.244Z History_yzyma5ew 8",
                             "originalRequest": {
                                 "url": "0.0.0.0:8080/api/createCitizen",
                                 "method": "POST",
@@ -3458,11 +4802,11 @@
                         }
                     },
                     "id": "rester-history-9",
-                    "name": "History_xwzo1zo3 9",
+                    "name": "History_yzyma5ew 9",
                     "response": [
                         {
                             "id": "rester-25",
-                            "name": "2025-03-22T11:52:02.021Z History_xwzo1zo3 9",
+                            "name": "2025-03-22T11:52:02.021Z History_yzyma5ew 9",
                             "originalRequest": {
                                 "url": "0.0.0.0:8080/api/createCitizen",
                                 "method": "POST",

@@ -1,25 +1,24 @@
-16:34:51 | 200 |  202.001754ms |  | GET | /api/secure/electionsPaginated/0 | -
-2025/03/26 16:35:01 Shutting Down Server ...
-2025/03/26 16:35:01 Server Stopped.
-3131ms |  | PUT | /api/secure/election/2 | -
-16:34:04 | 200 |  110.915936ms |  | DELETE | /api/secure/election/1 | -
-16:34:18 | 404 |   55.003434ms |  | GET | /api/secure/election/1 | -
-16:34:21 | 200 |   54.800618ms |  | GET | /api/secure/election/2 | -
-2025/03/26 16:34:46 Shutting Down Server ...
-2025/03/26 16:34:46 Server Stopped.
--12334 | -
-22:00:36 | 200 |   50.404838ms |  | PUT | /api/secure/user/12-123-12334 | -
-2025/03/25 22:01:40 Error in HandleUpdate: failed to update user: failed to execute SQL:
+16:49:04 | 200 |  557.932982ms |  | GET | /api/secure/citizens/12-123-12334 | -
+16:49:43 | 200 |   57.428967ms |  | GET | /api/secure/usersPaginated/0 | -
+16:49:56 | 201 |  118.737982ms |  | POST | /api/secure/user | -
+16:49:59 | 200 |   51.460422ms |  | GET | /api/secure/usersPaginated/0 | -
+16:50:57 | 200 |   53.987272ms |  | GET | /api/secure/candidatesPaginated/0 | -
+16:51:05 | 201 |  103.493488ms |  | POST | /api/secure/candidate | -
+16:51:09 | 200 |   52.349289ms |  | GET | /api/secure/candidatesPaginated/0 | -
+16:52:28 | 200 |  478.516603ms |  | GET | /api/secure/electionsPaginated/0 | -
+2025/03/26 16:55:15 Shutting Down Server ...
+2025/03/26 16:55:15 Server Stopped.
+ion: failed to insert candidate: failed to execute SQL:
 SQLite error: FOREIGN KEY constraint failed
-22:01:40 | 500 |   53.179556ms |  | PUT | /api/secure/user/1 | -
-2025/03/25 22:02:05 Error in HandleUpdate: failed to update user: failed to execute SQL:
-SQLite error: FOREIGN KEY constraint failed
-22:02:04 | 500 |  394.034478ms |  | PUT | /api/secure/user/1 | -
-22:02:39 | 200 |  140.495256ms |  | PUT | /api/secure/user/1 | -
-22:04:37 | 200 |  213.119153ms |  | GET | /api/secure/user/1 | -
-22:04:42 | 404 |   95.032757ms |  | GET | /api/secure/user/2 | -
-22:04:45 | 200 |    54.16262ms |  | GET | /api/secure/user/1 | -
-22:05:07 | 200 |   55.686738ms |  | GET | /api/secure/user/1 | -
-22:05:26 | 405 |      41.267µs |  | DELETE | /api/secure/user/1 | Method Not Allowed
+16:44:36 | 500 |   53.468646ms |  | POST | /api/secure/candidate | -
+16:45:31 | 201 |  111.225786ms |  | POST | /api/secure/candidate | -
+16:46:06 | 405 |      43.805µs |  | POST | /api/secure/candidate/1 | Method Not Allowed
+16:46:10 | 200 |  380.811959ms |  | PUT | /api/secure/candidate/1 | -
+16:46:37 | 200 |   55.527093ms |  | GET | /api/secure/candidate/1 | -
+16:46:56 | 200 |   55.233404ms |  | GET | /api/secure/candidatesPaginated/0 | -
+16:47:19 | 200 |  108.052245ms |  | DELETE | /api/secure/candidate/1 | -
+2025/03/26 16:47:32 Shutting Down Server ...
+2025/03/26 16:47:32 Server Stopped.
+lowed
 2025/03/25 22:05:36 Shutting Down Server ...
 2025/03/25 22:05:36 Server Stopped.
