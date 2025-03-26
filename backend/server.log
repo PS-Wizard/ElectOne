@@ -1,14 +1,15 @@
-2025/03/26 17:00:14 Shutting Down Server ...
-2025/03/26 17:00:14 Server Stopped.
-6:49:43 | 200 |   57.428967ms |  | GET | /api/secure/usersPaginated/0 | -
-16:49:56 | 201 |  118.737982ms |  | POST | /api/secure/user | -
-16:49:59 | 200 |   51.460422ms |  | GET | /api/secure/usersPaginated/0 | -
-16:50:57 | 200 |   53.987272ms |  | GET | /api/secure/candidatesPaginated/0 | -
-16:51:05 | 201 |  103.493488ms |  | POST | /api/secure/candidate | -
-16:51:09 | 200 |   52.349289ms |  | GET | /api/secure/candidatesPaginated/0 | -
-16:52:28 | 200 |  478.516603ms |  | GET | /api/secure/electionsPaginated/0 | -
-2025/03/26 16:55:15 Shutting Down Server ...
-2025/03/26 16:55:15 Server Stopped.
+19:52:06 | 200 |  356.952147ms |  | POST | /api/admin/login | -
+19:52:18 | 201 |  209.183214ms |  | POST | /api/secure/user | -
+19:53:17 | 401 |   51.114212ms |  | POST | /api/userlogin | -
+19:53:39 | 200 |  158.631878ms |  | POST | /api/admin/login | -
+19:54:19 | 200 |   229.77899ms |  | DELETE | /api/secure/citizens/12-123-12334 | -
+19:54:46 | 201 |  257.905318ms |  | POST | /api/secure/citizens | -
+19:55:22 | 401 |      44.413µs |  | POST | /api/secure/user | -
+19:55:26 | 201 |  203.989908ms |  | POST | /api/secure/user | -
+19:55:46 | 200 |  143.483336ms |  | POST | /api/userlogin | -
+2025/03/26 19:56:26 Shutting Down Server ...
+2025/03/26 19:56:26 Server Stopped.
+pped.
 ion: failed to insert candidate: failed to execute SQL:
 SQLite error: FOREIGN KEY constraint failed
 16:44:36 | 500 |   53.468646ms |  | POST | /api/secure/candidate | -

@@ -38,7 +38,7 @@ func HandleGetUsersPaginated(ctx *fiber.Ctx) error {
 
 // Create a new user
 func HandleCreateNewUser(ctx *fiber.Ctx) error {
-	var u user
+	var u User
 	if err := ctx.BodyParser(&u); err != nil {
 		return ctx.Status(fiber.StatusBadRequest).JSON(fiber.Map{"error": "Invalid input"})
 	}
@@ -54,7 +54,7 @@ func HandleCreateNewUser(ctx *fiber.Ctx) error {
 // Update user details
 func HandleUpdateUserDetails(ctx *fiber.Ctx) error {
 	userID := ctx.Params("id")
-	var u user
+	var u User
 	if err := ctx.BodyParser(&u); err != nil {
 		return ctx.Status(fiber.StatusBadRequest).JSON(fiber.Map{"error": "Invalid input"})
 	}

@@ -4,11 +4,12 @@ import (
 	"database/sql"
 	"fmt"
 	"github.com/PS-Wizard/ElectOneAPI/api"
+	"golang.org/x/crypto/bcrypt"
 )
 
 // Fetch a user by ID from the database
-func getUser(userID string) (*user, error) {
-	var u user
+func getUser(userID string) (*User, error) {
+	var u User
 	query := "SELECT userID, citizenID, password FROM users WHERE userID = ?"
 	row := api.DB.QueryRow(query, userID)
 	err := row.Scan(&u.UserID, &u.CitizenID, &u.Password)
@@ -22,8 +23,8 @@ func getUser(userID string) (*user, error) {
 }
 
 // Get users with pagination
-func getUsersPaginated(offset int) ([]user, error) {
-	var users []user
+func getUsersPaginated(offset int) ([]User, error) {
+	var users []User
 	query := "SELECT userID, citizenID, password FROM users LIMIT 10 OFFSET ?"
 	rows, err := api.DB.Query(query, offset)
 	if err != nil {
@@ -32,7 +33,7 @@ func getUsersPaginated(offset int) ([]user, error) {
 	defer rows.Close()
 
 	for rows.Next() {
-		var u user
+		var u User
 		err := rows.Scan(&u.UserID, &u.CitizenID, &u.Password)
 		if err != nil {
 			return nil, fmt.Errorf("failed to scan user: %v", err)
@@ -46,9 +47,13 @@ func getUsersPaginated(offset int) ([]user, error) {
 }
 
 // Create a new user in the database
-func createNewUser(u user) error {
+func createNewUser(u User) error {
+	hashedPassword, err := bcrypt.GenerateFromPassword([]byte(u.Password), bcrypt.DefaultCost)
+	if err != nil {
+		return fmt.Errorf("failed to hash password: %v", err)
+	}
 	query := "INSERT INTO users (citizenID, password) VALUES (?, ?)"
-	_, err := api.DB.Exec(query, u.CitizenID, u.Password)
+	_, err = api.DB.Exec(query, u.CitizenID, string(hashedPassword))
 	if err != nil {
 		return fmt.Errorf("failed to insert user: %v", err)
 	}
@@ -56,7 +61,7 @@ func createNewUser(u user) error {
 }
 
 // Update user details in the database
-func updateUserDetails(u user, userID string) error {
+func updateUserDetails(u User, userID string) error {
 	query := "UPDATE users SET citizenID = ?, password = ? WHERE userID = ?"
 	_, err := api.DB.Exec(query, u.CitizenID, u.Password, userID)
 	if err != nil {
