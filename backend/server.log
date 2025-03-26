@@ -1,12 +1,13 @@
-2025/03/26 09:35:02 Shutting Down Server ...
-2025/03/26 09:35:02 Server Stopped.
-:05:43 Shutting Down Server ...
-2025/03/25 22:05:43 Server Stopped.
-  501.033974ms |  | POST | /api/secure/user | -
-21:57:53 | 201 |  129.358162ms |  | POST | /api/secure/user | -
-21:58:03 | 200 |    52.11495ms |  | GET | /api/secure/usersPaginated/0 | -
-21:59:25 | 405 |      44.143µs |  | POST | /api/secure/user/12-123-12334 | Method Not Allowed
-21:59:31 | 200 |   49.533427ms |  | PUT | /api/secure/user/12-123-12334 | -
+16:34:51 | 200 |  202.001754ms |  | GET | /api/secure/electionsPaginated/0 | -
+2025/03/26 16:35:01 Shutting Down Server ...
+2025/03/26 16:35:01 Server Stopped.
+3131ms |  | PUT | /api/secure/election/2 | -
+16:34:04 | 200 |  110.915936ms |  | DELETE | /api/secure/election/1 | -
+16:34:18 | 404 |   55.003434ms |  | GET | /api/secure/election/1 | -
+16:34:21 | 200 |   54.800618ms |  | GET | /api/secure/election/2 | -
+2025/03/26 16:34:46 Shutting Down Server ...
+2025/03/26 16:34:46 Server Stopped.
+-12334 | -
 22:00:36 | 200 |   50.404838ms |  | PUT | /api/secure/user/12-123-12334 | -
 2025/03/25 22:01:40 Error in HandleUpdate: failed to update user: failed to execute SQL:
 SQLite error: FOREIGN KEY constraint failed

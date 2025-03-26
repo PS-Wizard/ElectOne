@@ -1,7 +1,9 @@
 package elections
 
 type Election struct {
-	ElectionID string `json:"electionID"`
-	StartDate  string `json:"startDate"`
-	EndtDate   string `json:"endDate"`
+	ElectionID         string `json:"electionID"`
+	Title              string `json:"title"`
+	StartDate          string `json:"startDate"`
+	EndDate            string `json:"endDate"`
+	VotingRestrictions string `json:"votingRestriction"`
 }
