@@ -10,9 +10,9 @@ import (
 // Fetch a user by ID from the database
 func getUser(userID string) (*User, error) {
 	var u User
-	query := "SELECT userID, citizenID, password FROM users WHERE userID = ?"
+	query := "SELECT userID, citizenID, password, phonenumber, tag FROM users WHERE userID = ?"
 	row := api.DB.QueryRow(query, userID)
-	err := row.Scan(&u.UserID, &u.CitizenID, &u.Password)
+	err := row.Scan(&u.UserID, &u.CitizenID, &u.Password, &u.Phone, &u.Tag)
 	if err != nil {
 		if err == sql.ErrNoRows {
 			return nil, fmt.Errorf("user not found")
@@ -25,7 +25,7 @@ func getUser(userID string) (*User, error) {
 // Get users with pagination
 func getUsersPaginated(offset int) ([]User, error) {
 	var users []User
-	query := "SELECT userID, citizenID, password FROM users LIMIT 10 OFFSET ?"
+	query := "SELECT userID, citizenID, password, phonenumber, tag FROM users LIMIT 10 OFFSET ?"
 	rows, err := api.DB.Query(query, offset)
 	if err != nil {
 		return nil, fmt.Errorf("failed to fetch users: %v", err)
@@ -34,7 +34,7 @@ func getUsersPaginated(offset int) ([]User, error) {
 
 	for rows.Next() {
 		var u User
-		err := rows.Scan(&u.UserID, &u.CitizenID, &u.Password)
+		err := rows.Scan(&u.UserID, &u.CitizenID, &u.Password, &u.Phone, &u.Tag)
 		if err != nil {
 			return nil, fmt.Errorf("failed to scan user: %v", err)
 		}
@@ -52,8 +52,8 @@ func createNewUser(u User) error {
 	if err != nil {
 		return fmt.Errorf("failed to hash password: %v", err)
 	}
-	query := "INSERT INTO users (citizenID, password) VALUES (?, ?)"
-	_, err = api.DB.Exec(query, u.CitizenID, string(hashedPassword))
+	query := "INSERT INTO users (citizenID, password, phonenumber, tag) VALUES (?, ?, ?, ?)"
+	_, err = api.DB.Exec(query, u.CitizenID, string(hashedPassword), u.Phone, u.Tag)
 	if err != nil {
 		return fmt.Errorf("failed to insert user: %v", err)
 	}
@@ -62,8 +62,8 @@ func createNewUser(u User) error {
 
 // Update user details in the database
 func updateUserDetails(u User, userID string) error {
-	query := "UPDATE users SET citizenID = ?, password = ? WHERE userID = ?"
-	_, err := api.DB.Exec(query, u.CitizenID, u.Password, userID)
+	query := "UPDATE users SET citizenID = ?, password = ?, phonenumber = ?, tag = ? WHERE userID = ?"
+	_, err := api.DB.Exec(query, u.CitizenID, u.Password, u.Phone, u.Tag, userID)
 	if err != nil {
 		return fmt.Errorf("failed to update user: %v", err)
 	}
