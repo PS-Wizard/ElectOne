@@ -9,6 +9,7 @@ import (
 	"github.com/PS-Wizard/ElectOneAPI/api"
 	"github.com/PS-Wizard/ElectOneAPI/routes"
 	"github.com/gofiber/fiber/v2"
+	"github.com/gofiber/fiber/v2/middleware/cors"
 	"github.com/gofiber/fiber/v2/middleware/logger"
 )
 
@@ -50,6 +51,11 @@ func main() {
 		EnableTrustedProxyCheck: true,                                 // Only trust certain proxies
 		TrustedProxies:          []string{"127.0.0.1", "192.168.1.1"}, // Define trusted proxies
 	})
+	app.Use(cors.New(cors.Config{
+		AllowOrigins: "*",
+		AllowMethods: "GET,POST,PUT,DELETE",                         
+		AllowHeaders: "Origin, Content-Type, Accept, Authorization", 
+	}))
 	app.Use(logger.New(logger.Config{Output: f}))
 	app.Use("/api/secure/*", routes.TokenValidationAdmin)
 

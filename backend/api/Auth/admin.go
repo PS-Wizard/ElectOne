@@ -69,7 +69,7 @@ func HandleAdminLogin(ctx *fiber.Ctx) error {
 		Value:    tokenString,
 		Expires:  time.Now().Add(time.Hour * 24),
 		HTTPOnly: true,
-		Secure:   true,
+        Secure: true,
 		SameSite: "Strict",
 		Path:     "/",
 	})

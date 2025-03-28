@@ -1,8 +1,10 @@
-16:09:55 | 200 |  462.279399ms |  | POST | /api/admin/login | -
-2025/03/27 16:10:13 Error in HandleCreate: failed to insert user: failed to execute SQL:
-SQLite error: FOREIGN KEY constraint failed
-16:10:12 | 500 |  229.234753ms |  | POST | /api/secure/user | -
-16:10:25 | 201 |  140.296541ms |  | POST | /api/secure/citizens | -
+18:25:12 | 200 |   519.72581ms |  | POST | /api/admin/login | -
+18:25:22 | 401 |   54.419696ms |  | POST | /api/admin/login | -
+2025/03/28 18:28:54 Shutting Down Server ...
+2025/03/28 18:28:54 Server Stopped.
+00 Shutting Down Server ...
+2025/03/28 17:56:00 Server Stopped.
+01 |  140.296541ms |  | POST | /api/secure/citizens | -
 16:10:40 | 201 |  214.348668ms |  | POST | /api/secure/user | -
 16:10:53 | 401 |      20.098µs |  | GET | /api/secure/user/1 | -
 16:10:58 | 404 |   48.944959ms |  | GET | /api/secure/user/1 | -
