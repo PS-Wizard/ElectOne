@@ -1,10 +1,52 @@
-09:16:04 | 200 |  184.818976ms |  | GET | /api/secure/citizensPaginated/0 | -
-2025/03/29 09:17:08 Shutting Down Server ...
-2025/03/29 09:17:08 Server Stopped.
-wn Server ...
-2025/03/29 09:06:52 Server Stopped.
-2025/03/29 08:59:59 Shutting Down Server ...
-2025/03/29 08:59:59 Server Stopped.
-3:15 | 200 |  305.380041ms |  | POST | /api/admin/login | -
-2025/03/29 08:55:45 Shutting Down Server ...
-2025/03/29 08:55:45 Server Stopped.
+18:37:15 | 200 |  337.800316ms |  | GET | /api/secure/electionsPaginated/0 | -
+18:37:21 | 200 |   50.595111ms |  | GET | /api/secure/candidatesPaginated/0 | -
+18:38:05 | 200 |  132.975602ms |  | GET | /api/secure/electionsPaginated/0 | -
+18:38:47 | 200 |  111.909689ms |  | GET | /api/secure/electionsPaginated/0 | -
+18:38:53 | 200 |   51.240271ms |  | GET | /api/secure/candidatesPaginated/0 | -
+18:39:50 | 201 |    96.20946ms |  | POST | /api/secure/candidate | -
+18:39:50 | 200 |   50.929492ms |  | GET | /api/secure/candidatesPaginated/0 | -
+18:40:02 | 200 |  108.868466ms |  | PUT | /api/secure/candidate/3 | -
+18:40:02 | 200 |     49.7203ms |  | GET | /api/secure/candidatesPaginated/0 | -
+18:40:06 | 200 |   95.170969ms |  | DELETE | /api/secure/candidate/3 | -
+18:40:06 | 200 |   49.614007ms |  | GET | /api/secure/candidatesPaginated/0 | -
+18:40:10 | 200 |  220.078183ms |  | DELETE | /api/secure/election/6 | -
+18:40:10 | 200 |   48.964924ms |  | GET | /api/secure/electionsPaginated/0 | -
+2025/03/29 18:40:23 Shutting Down Server ...
+2025/03/29 18:40:23 Server Stopped.
+07.952923ms |  | GET | /api/secure/electionsPaginated/0 | -
+18:30:14 | 404 |     132.503µs |  | POST | /api/secure/elections | Cannot POST /api/secure/elections
+18:30:20 | 404 |     122.434µs |  | DELETE | /api/secure/elections/5 | Cannot DELETE /api/secure/elections/5
+18:30:29 | 404 |     124.117µs |  | PUT | /api/secure/elections/5 | Cannot PUT /api/secure/elections/5
+18:30:45 | 200 |   50.557216ms |  | GET | /api/secure/electionsPaginated/0 | -
+18:30:48 | 200 |    50.33349ms |  | GET | /api/secure/electionsPaginated/0 | -
+2025/03/29 18:31:36 Shutting Down Server ...
+2025/03/29 18:31:36 Server Stopped.
+ 200 |   46.802351ms |  | GET | /api/secure/citizensPaginated/0 | -
+2025/03/29 18:14:30 Error in HandleCreate: Failed to insert citizen details: failed to execute SQL:
+SQLite error: CHECK constraint failed: fullName LIKE '% %'
+18:14:29 | 500 |   46.958888ms |  | POST | /api/secure/citizens | -
+18:14:29 | 200 |   47.355677ms |  | GET | /api/secure/citizensPaginated/0 | -
+18:14:52 | 200 |     47.6185ms |  | GET | /api/secure/citizensPaginated/0 | -
+18:14:55 | 200 |   50.239141ms |  | GET | /api/secure/citizensPaginated/0 | -
+18:15:10 | 201 |   89.056298ms |  | POST | /api/secure/citizens | -
+18:15:10 | 200 |   47.870285ms |  | GET | /api/secure/citizensPaginated/0 | -
+18:15:17 | 200 |   51.921077ms |  | GET | /api/secure/usersPaginated/0 | -
+18:15:32 | 201 |  207.700216ms |  | POST | /api/secure/user | -
+18:15:33 | 200 |   50.761112ms |  | GET | /api/secure/usersPaginated/0 | -
+18:15:36 | 200 |   48.042197ms |  | GET | /api/secure/electionsPaginated/0 | -
+18:16:00 | 200 |   61.178175ms |  | GET | /api/secure/electionsPaginated/0 | -
+18:16:05 | 200 |   49.229681ms |  | GET | /api/secure/electionsPaginated/0 | -
+18:18:11 | 200 |   274.18064ms |  | GET | /api/secure/electionsPaginated/0 | -
+18:18:46 | 404 |     125.884µs |  | POST | /api/secure/elections | Cannot POST /api/secure/elections
+18:18:51 | 404 |     124.431µs |  | POST | /api/secure/elections | Cannot POST /api/secure/elections
+18:18:55 | 404 |     148.386µs |  | POST | /api/secure/elections | Cannot POST /api/secure/elections
+18:19:46 | 200 |  136.548219ms |  | GET | /api/secure/electionsPaginated/0 | -
+18:19:47 | 200 |   48.480921ms |  | GET | /api/secure/electionsPaginated/0 | -
+18:19:52 | 200 |   63.655236ms |  | GET | /api/secure/electionsPaginated/0 | -
+18:20:04 | 200 |   47.116499ms |  | GET | /api/secure/citizensPaginated/0 | -
+18:20:09 | 200 |   47.158737ms |  | GET | /api/secure/electionsPaginated/0 | -
+18:21:23 | 200 |   45.321017ms |  | GET | /api/secure/electionsPaginated/0 | -
+18:23:45 | 200 |  234.844313ms |  | GET | /api/secure/electionsPaginated/0 | -
+18:23:49 | 200 |   47.344034ms |  | GET | /api/secure/electionsPaginated/0 | -
+2025/03/29 18:25:30 Shutting Down Server ...
+2025/03/29 18:25:30 Server Stopped.

@@ -1,8 +1,9 @@
 package users
 
 import (
-	"github.com/gofiber/fiber/v2"
 	"log"
+
+	"github.com/gofiber/fiber/v2"
 )
 
 // Get a user by ID
@@ -70,7 +71,7 @@ func HandleUpdateUserDetails(ctx *fiber.Ctx) error {
 // Delete user
 func HandleDeleteUser(ctx *fiber.Ctx) error {
 	userID := ctx.Params("id")
-	err := deleteUser(userID)
+    err := deleteUser(userID)
 	if err != nil {
 		log.Printf("Error in HandleDelete: %v", err)
 		return ctx.Status(fiber.StatusInternalServerError).JSON(fiber.Map{"error": err.Error()})

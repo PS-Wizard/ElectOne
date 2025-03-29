@@ -3,6 +3,7 @@ package users
 import (
 	"database/sql"
 	"fmt"
+
 	"github.com/PS-Wizard/ElectOneAPI/api"
 	"golang.org/x/crypto/bcrypt"
 )
@@ -62,8 +63,13 @@ func createNewUser(u User) error {
 
 // Update user details in the database
 func updateUserDetails(u User, userID string) error {
+	hashedPassword, err := bcrypt.GenerateFromPassword([]byte(u.Password), bcrypt.DefaultCost)
+	if err != nil {
+		return fmt.Errorf("failed to hash password: %v", err)
+	}
+
 	query := "UPDATE users SET citizenID = ?, password = ?, phonenumber = ?, tag = ? WHERE userID = ?"
-	_, err := api.DB.Exec(query, u.CitizenID, u.Password, u.Phone, u.Tag, userID)
+	_, err = api.DB.Exec(query, u.CitizenID, string(hashedPassword), u.Phone, u.Tag, userID)
 	if err != nil {
 		return fmt.Errorf("failed to update user: %v", err)
 	}
