@@ -51,11 +51,12 @@ func main() {
 		EnableTrustedProxyCheck: true,                                 // Only trust certain proxies
 		TrustedProxies:          []string{"127.0.0.1", "192.168.1.1"}, // Define trusted proxies
 	})
-	app.Use(cors.New(cors.Config{
-		AllowOrigins: "*",
-		AllowMethods: "GET,POST,PUT,DELETE",                         
-		AllowHeaders: "Origin, Content-Type, Accept, Authorization", 
-	}))
+    app.Use(cors.New(cors.Config{
+        AllowOrigins:     "https://localhost:5173", // Specify your frontend origin
+        AllowMethods:     "GET,POST,PUT,DELETE",
+        AllowHeaders:     "Origin, Content-Type, Accept, Cookie",
+        AllowCredentials: true, 
+    }))
 	app.Use(logger.New(logger.Config{Output: f}))
 	app.Use("/api/secure/*", routes.TokenValidationAdmin)
 
@@ -63,7 +64,7 @@ func main() {
 
 	routes.HandleRoutes(app)
 	go func() {
-		if err := app.Listen(":3000"); err != nil {
+		if err := app.ListenTLS(":3000","../assets/certificates/localhost+2.pem","../assets/certificates/localhost+2-key.pem"); err != nil {
 			log.Fatalf("Server Failed: %v", err)
 		}
 	}()
@@ -76,5 +77,4 @@ func main() {
 		log.Fatalf("Server ShutDown Failed: %v", err)
 	}
 	log.Println("Server Stopped.")
-
 }

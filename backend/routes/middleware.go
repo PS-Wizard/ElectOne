@@ -1,6 +1,7 @@
 package routes
 
 import (
+	"fmt"
 	"log"
 
 	auth "github.com/PS-Wizard/ElectOneAPI/api/Auth"
@@ -10,6 +11,7 @@ import (
 
 func TokenValidationAdmin(ctx *fiber.Ctx) error {
 	tokenString := ctx.Cookies("admin_token")
+	fmt.Println("Got Token: ", tokenString)
 	if tokenString == "" {
 		return ctx.Status(fiber.StatusUnauthorized).JSON(fiber.Map{
 			"error": "Authorization cookie is missing",

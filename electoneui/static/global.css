@@ -3,11 +3,8 @@
 @layer theme {
   :root, :host {
     --color-red-600: oklch(0.577 0.245 27.325);
-    --color-blue-500: oklch(0.623 0.214 259.815);
-    --color-blue-600: oklch(0.546 0.245 262.881);
     --color-indigo-500: oklch(0.585 0.233 277.117);
     --color-indigo-600: oklch(0.511 0.262 276.966);
-    --color-gray-100: oklch(0.967 0.003 264.542);
     --color-gray-300: oklch(0.872 0.01 258.338);
     --color-gray-500: oklch(0.551 0.027 264.364);
     --color-gray-600: oklch(0.446 0.03 256.802);
@@ -334,6 +331,20 @@
   .mb-6 {
     margin-bottom: calc(var(--spacing) * 6);
   }
+  .status {
+    display: inline-block;
+    aspect-ratio: 1 / 1;
+    width: calc(0.25rem * 2);
+    height: calc(0.25rem * 2);
+    border-radius: var(--radius-selector);
+    background-color: color-mix(in oklab, var(--color-base-content) 20%, transparent);
+    background-position: center;
+    background-repeat: no-repeat;
+    vertical-align: middle;
+    color: color-mix(in oklab, var(--color-black) 30%, transparent);
+    background-image: radial-gradient( circle at 35% 30%, oklch(1 0 0 / calc(var(--depth) * 0.5)), #0000 );
+    box-shadow: 0 2px 3px -1px color-mix(in oklab, currentColor calc(var(--depth) * 100%), #0000);
+  }
   .block {
     display: block;
   }
@@ -411,24 +422,11 @@
     border-style: var(--tw-border-style);
     border-width: 1px;
   }
-  .border-solid {
-    --tw-border-style: solid;
-    border-style: solid;
-  }
   .border-gray-300 {
     border-color: var(--color-gray-300);
   }
   .border-transparent {
     border-color: transparent;
-  }
-  .bg-blue-500 {
-    background-color: var(--color-blue-500);
-  }
-  .bg-gray-100 {
-    background-color: var(--color-gray-100);
-  }
-  .bg-gray-500 {
-    background-color: var(--color-gray-500);
   }
   .bg-indigo-600 {
     background-color: var(--color-indigo-600);
@@ -584,13 +582,6 @@
     &:hover {
       @media (hover: hover) {
         background-color: var(--color-black);
-      }
-    }
-  }
-  .hover\:bg-blue-600 {
-    &:hover {
-      @media (hover: hover) {
-        background-color: var(--color-blue-600);
       }
     }
   }

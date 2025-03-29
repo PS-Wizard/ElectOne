@@ -1,29 +1,10 @@
-06:27:20 | 200 |  467.693888ms |  | POST | /api/admin/login | -
-2025/03/29 06:27:46 Shutting Down Server ...
-2025/03/29 06:27:46 Server Stopped.
-54 Shutting Down Server ...
-2025/03/28 18:28:54 Server Stopped.
-00 Shutting Down Server ...
-2025/03/28 17:56:00 Server Stopped.
-01 |  140.296541ms |  | POST | /api/secure/citizens | -
-16:10:40 | 201 |  214.348668ms |  | POST | /api/secure/user | -
-16:10:53 | 401 |      20.098µs |  | GET | /api/secure/user/1 | -
-16:10:58 | 404 |   48.944959ms |  | GET | /api/secure/user/1 | -
-16:11:03 | 200 |   48.011714ms |  | GET | /api/secure/user/5 | -
-16:11:15 | 200 |   46.866552ms |  | GET | /api/secure/usersPaginated/0 | -
-16:13:16 | 401 |      60.504µs |  | PUT | /api/secure/user/5 | -
-16:13:24 | 200 |  453.871869ms |  | POST | /api/admin/login | -
-16:13:34 | 200 |  286.741421ms |  | PUT | /api/secure/user/5 | -
-16:13:47 | 200 |   51.493438ms |  | DELETE | /api/secure/user/1 | -
-2025/03/27 16:13:54 Shutting Down Server ...
-2025/03/27 16:13:54 Server Stopped.
-d
-16:46:10 | 200 |  380.811959ms |  | PUT | /api/secure/candidate/1 | -
-16:46:37 | 200 |   55.527093ms |  | GET | /api/secure/candidate/1 | -
-16:46:56 | 200 |   55.233404ms |  | GET | /api/secure/candidatesPaginated/0 | -
-16:47:19 | 200 |  108.052245ms |  | DELETE | /api/secure/candidate/1 | -
-2025/03/26 16:47:32 Shutting Down Server ...
-2025/03/26 16:47:32 Server Stopped.
-lowed
-2025/03/25 22:05:36 Shutting Down Server ...
-2025/03/25 22:05:36 Server Stopped.
+09:16:04 | 200 |  184.818976ms |  | GET | /api/secure/citizensPaginated/0 | -
+2025/03/29 09:17:08 Shutting Down Server ...
+2025/03/29 09:17:08 Server Stopped.
+wn Server ...
+2025/03/29 09:06:52 Server Stopped.
+2025/03/29 08:59:59 Shutting Down Server ...
+2025/03/29 08:59:59 Server Stopped.
+3:15 | 200 |  305.380041ms |  | POST | /api/admin/login | -
+2025/03/29 08:55:45 Shutting Down Server ...
+2025/03/29 08:55:45 Server Stopped.

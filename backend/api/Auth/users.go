@@ -47,8 +47,8 @@ func HandleUserLogin(ctx *fiber.Ctx) error {
 	token := jwt.NewWithClaims(jwt.SigningMethodHS256, jwt.MapClaims{
 		"userID":    userID,
 		"citizenID": req.CitizenID,
-		"role":      "user",                                
-		"exp":       time.Now().Add(time.Hour * 24).Unix(), 
+		"role":      "user",
+		"exp":       time.Now().Add(time.Hour * 24).Unix(),
 	})
 
 	tokenString, err := token.SignedString(JWT_SECRET)
@@ -63,8 +63,8 @@ func HandleUserLogin(ctx *fiber.Ctx) error {
 		Value:    tokenString,
 		Expires:  time.Now().Add(time.Hour * 24),
 		HTTPOnly: true,
-		Secure:   true, 
-		SameSite: "Strict",
+		Secure:   true,
+		SameSite: "None",
 		Path:     "/",
 	})
 

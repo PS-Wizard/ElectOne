@@ -69,8 +69,8 @@ func HandleAdminLogin(ctx *fiber.Ctx) error {
 		Value:    tokenString,
 		Expires:  time.Now().Add(time.Hour * 24),
 		HTTPOnly: true,
-        Secure: true,
-		SameSite: "Strict",
+		Secure:   true,
+		SameSite: "None",
 		Path:     "/",
 	})
 	return ctx.JSON(fiber.Map{"message": "Login Successfull"})
