@@ -174,3 +174,7 @@ USERS }|--|| ADMINS : is_admin
 ---
 
 ![RoutesAndStuff](assets/routesAndStuff.png)
+
+--- Other Packages Installed:
+
+`ab`: Apache load tester

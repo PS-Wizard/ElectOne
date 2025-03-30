@@ -14,6 +14,7 @@ import (
 )
 
 func main() {
+	// TURSO:
 	authToken := os.Getenv("TURSO_AUTH_TOKEN")
 	if authToken == "" {
 		log.Fatal("Turso's Authentication Token Missing From Enviroment")
@@ -26,6 +27,10 @@ func main() {
 
 	api.InitializeDB(authToken, dbURL)
 	defer api.CloseDB()
+
+	// REDIS:
+	api.InitializeRedis("localhost", "6379", "")
+    defer api.CloseRedis()
 
 	f, err := os.OpenFile("server.log", os.O_CREATE|os.O_WRONLY, 0666)
 	if err != nil {
@@ -51,20 +56,19 @@ func main() {
 		EnableTrustedProxyCheck: true,                                 // Only trust certain proxies
 		TrustedProxies:          []string{"127.0.0.1", "192.168.1.1"}, // Define trusted proxies
 	})
-    app.Use(cors.New(cors.Config{
-        AllowOrigins:     "https://localhost:5173", // Specify your frontend origin
-        AllowMethods:     "GET,POST,PUT,DELETE",
-        AllowHeaders:     "Origin, Content-Type, Accept, Cookie",
-        AllowCredentials: true, 
-    }))
+	app.Use(cors.New(cors.Config{
+		AllowOrigins:     "https://localhost:5173", // Specify your frontend origin
+		AllowMethods:     "GET,POST,PUT,DELETE",
+		AllowHeaders:     "Origin, Content-Type, Accept, Cookie",
+		AllowCredentials: true,
+	}))
 	app.Use(logger.New(logger.Config{Output: f}))
 	app.Use("/api/secure/*", routes.TokenValidationAdmin)
-
-	//app.Use("/api/users/*", routes.TokenValidationUser)
+	// app.Use("/api/users/*", routes.TokenValidationUser)
 
 	routes.HandleRoutes(app)
 	go func() {
-		if err := app.ListenTLS(":3000","../assets/certificates/localhost+2.pem","../assets/certificates/localhost+2-key.pem"); err != nil {
+		if err := app.ListenTLS(":3000", "../assets/certificates/localhost+2.pem", "../assets/certificates/localhost+2-key.pem"); err != nil {
 			log.Fatalf("Server Failed: %v", err)
 		}
 	}()

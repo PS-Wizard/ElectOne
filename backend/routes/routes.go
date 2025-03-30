@@ -5,6 +5,7 @@ import (
 	candidates "github.com/PS-Wizard/ElectOneAPI/api/Candidates"
 	citizens "github.com/PS-Wizard/ElectOneAPI/api/Citizens"
 	elections "github.com/PS-Wizard/ElectOneAPI/api/Elections"
+	redis "github.com/PS-Wizard/ElectOneAPI/api/Redis"
 	users "github.com/PS-Wizard/ElectOneAPI/api/Users"
 	"github.com/gofiber/fiber/v2"
 )
@@ -43,5 +44,8 @@ func HandleRoutes(app *fiber.App) {
 	app.Post("/api/admin/login", auth.HandleAdminLogin)
 
 	app.Post("/api/userlogin", auth.HandleUserLogin)
+
+	// Cast Vote:
+	app.Post("/api/castVote", redis.HandleVoteIncrement)
 
 }
