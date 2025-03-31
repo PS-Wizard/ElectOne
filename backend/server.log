@@ -1,39 +1,40 @@
-2025/03/30 10:28:31 Incrementing vote for key: votes:1:101
-2025/03/30 10:28:31 Num: 8
-10:28:31 | 200 |     475.419µs |  | POST | /api/castVote | -
-2025/03/30 10:28:32 Incrementing vote for key: votes:1:101
-2025/03/30 10:28:32 Num: 9
-10:28:32 | 200 |     417.311µs |  | POST | /api/castVote | -
-2025/03/30 10:28:33 Incrementing vote for key: votes:1:101
-2025/03/30 10:28:33 Num: 10
-10:28:32 | 200 |     551.662µs |  | POST | /api/castVote | -
-2025/03/30 10:28:33 Incrementing vote for key: votes:1:101
-2025/03/30 10:28:33 Num: 11
-10:28:33 | 200 |     517.228µs |  | POST | /api/castVote | -
-2025/03/30 10:28:35 Incrementing vote for key: votes:1:101
-2025/03/30 10:28:35 Num: 12
-10:28:35 | 200 |     341.759µs |  | POST | /api/castVote | -
-2025/03/30 10:28:35 Incrementing vote for key: votes:1:101
-2025/03/30 10:28:35 Num: 13
-10:28:35 | 200 |     557.544µs |  | POST | /api/castVote | -
-2025/03/30 10:28:36 Incrementing vote for key: votes:1:101
-2025/03/30 10:28:36 Num: 14
-10:28:35 | 200 |     354.754µs |  | POST | /api/castVote | -
-2025/03/30 10:28:36 Incrementing vote for key: votes:1:101
-2025/03/30 10:28:36 Num: 15
-10:28:36 | 200 |     499.754µs |  | POST | /api/castVote | -
-2025/03/30 10:28:36 Incrementing vote for key: votes:1:101
-2025/03/30 10:28:36 Num: 16
-10:28:36 | 200 |     621.753µs |  | POST | /api/castVote | -
-2025/03/30 10:28:36 Incrementing vote for key: votes:1:101
-2025/03/30 10:28:36 Num: 17
-10:28:36 | 200 |     462.405µs |  | POST | /api/castVote | -
-2025/03/30 10:28:37 Incrementing vote for key: votes:1:101
-2025/03/30 10:28:37 Num: 18
-10:28:36 | 200 |     317.474µs |  | POST | /api/castVote | -
-2025/03/30 10:28:41 Incrementing vote for key: votes:1:101
-2025/03/30 10:28:41 Num: 19
-10:28:40 | 200 |     428.291µs |  | POST | /api/castVote | -
+14:44:18 | 200 |  1.447783408s |  | GET | /api/secure/citizensPaginated/0 | -
+14:44:13 | 200 |  5.920974148s |  | GET | /api/secure/usersPaginated/0 | -
+14:44:27 | 201 |  146.011353ms |  | POST | /api/secure/citizens | -
+14:44:27 | 200 |   94.532991ms |  | GET | /api/secure/citizensPaginated/0 | -
+2025/03/30 14:46:10 Shutting Down Server ...
+2025/03/30 14:46:10 Server Stopped.
+er Stopped.
+ | 200 |   97.895964ms |  | GET | /api/secure/usersPaginated/0 | -
+2025/03/30 13:54:57 Shutting Down Server ...
+2025/03/30 13:54:57 Server Stopped.
+te for key: votes:1:101
+2025/03/30 13:30:15 Incrementing vote for key: votes:1:101
+2025/03/30 13:30:15 Incrementing vote for key: votes:1:101
+2025/03/30 13:30:15 Num: 2025
+2025/03/30 13:30:15 Incrementing vote for key: votes:1:101
+2025/03/30 13:30:15 Num: 2026
+13:30:15 | 200 |    1.087262ms |  | POST | /api/castVote | -
+2025/03/30 13:30:15 Num: 2028
+2025/03/30 13:30:15 Num: 2027
+2025/03/30 13:30:15 Num: 2029
+2025/03/30 13:30:15 Num: 2030
+2025/03/30 13:30:15 Num: 2031
+13:30:15 | 200 |    1.785702ms |  | POST | /api/castVote | -
+13:30:15 | 200 |    2.180564ms |  | POST | /api/castVote | -
+13:30:15 | 200 |    2.031344ms |  | POST | /api/castVote | -
+2025/03/30 13:30:15 Num: 2032
+13:30:15 | 200 |    1.931166ms |  | POST | /api/castVote | -
+13:30:15 | 200 |    2.108739ms |  | POST | /api/castVote | -
+13:30:15 | 200 |    1.924704ms |  | POST | /api/castVote | -
+13:30:15 | 200 |    2.011817ms |  | POST | /api/castVote | -
+2025/03/30 13:30:15 Num: 2033
+2025/03/30 13:30:15 Num: 2034
+13:30:15 | 200 |    2.229175ms |  | POST | /api/castVote | -
+13:30:15 | 200 |    2.236048ms |  | POST | /api/castVote | -
+2025/03/30 13:31:51 Shutting Down Server ...
+2025/03/30 13:31:51 Server Stopped.
+ | 200 |     428.291µs |  | POST | /api/castVote | -
 2025/03/30 10:28:41 Incrementing vote for key: votes:1:101
 2025/03/30 10:28:41 Num: 20
 10:28:41 | 200 |     666.898µs |  | POST | /api/castVote | -
