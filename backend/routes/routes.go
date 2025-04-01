@@ -43,6 +43,7 @@ func HandleRoutes(app *fiber.App) {
 	app.Post("/api/admin/signup", auth.HandleCreateAdmin)
 	app.Post("/api/admin/login", auth.HandleAdminLogin)
 
+    // User Login
 	app.Post("/api/userlogin", auth.HandleUserLogin)
 
 	// Cast Vote:
