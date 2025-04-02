@@ -16,22 +16,33 @@ Document Path:          /api/castVote
 Document Length:        41 bytes
 
 Concurrency Level:      10
-Time taken for tests:   0.079 seconds
-Complete requests:      1
+Time taken for tests:   4.673 seconds
+Complete requests:      1000
 Failed requests:        0
-Total transferred:      203 bytes
-Total body sent:        2145
-HTML transferred:       41 bytes
-Requests per second:    12.60 [#/sec] (mean)
-Time per request:       793.850 [ms] (mean)
-Time per request:       79.385 [ms] (mean, across all concurrent requests)
-Transfer rate:          2.50 [Kbytes/sec] received
-                        26.39 kb/s sent
-                        28.88 kb/s total
+Total transferred:      203000 bytes
+Total body sent:        193000
+HTML transferred:       41000 bytes
+Requests per second:    214.00 [#/sec] (mean)
+Time per request:       46.730 [ms] (mean)
+Time per request:       4.673 [ms] (mean, across all concurrent requests)
+Transfer rate:          42.42 [Kbytes/sec] received
+                        40.33 kb/s sent
+                        82.76 kb/s total
 
 Connection Times (ms)
               min  mean[+/-sd] median   max
-Connect:        5    5   0.0      5       5
-Processing:    43   43   0.0     43      43
-Waiting:       42   42   0.0     42      42
-Total:         48   48   0.0     48      48
+Connect:        3    4   1.3      4      12
+Processing:    40   42   1.0     42      47
+Waiting:       40   42   1.0     41      47
+Total:         43   46   1.8     46      57
+
+Percentage of the requests served within a certain time (ms)
+  50%     46
+  66%     46
+  75%     47
+  80%     47
+  90%     48
+  95%     50
+  98%     51
+  99%     53
+ 100%     57 (longest request)
