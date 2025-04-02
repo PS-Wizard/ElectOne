@@ -29,8 +29,8 @@ func main() {
 	defer api.CloseDB()
 
 	// REDIS:
-	api.InitializeRedis("localhost", "6379", "")
-    defer api.CloseRedis()
+	// api.InitializeRedis("localhost", "6379", "")
+	//    defer api.CloseRedis()
 
 	f, err := os.OpenFile("server.log", os.O_CREATE|os.O_WRONLY, 0666)
 	if err != nil {

@@ -29,8 +29,11 @@ declare module '$env/static/private' {
 	export const SHELL: string;
 	export const npm_command: string;
 	export const COLORTERM: string;
+	export const TERM_PROGRAM_VERSION: string;
+	export const TMUX: string;
 	export const I3SOCK: string;
 	export const NODE: string;
+	export const MAKE_TERMOUT: string;
 	export const NODE_EXTRA_CA_CERTS: string;
 	export const npm_config_local_prefix: string;
 	export const XCURSOR_SIZE: string;
@@ -48,13 +51,18 @@ declare module '$env/static/private' {
 	export const SWAYSOCK: string;
 	export const WAYLAND_DISPLAY: string;
 	export const TURSO_AUTH_TOKEN: string;
+	export const MFLAGS: string;
 	export const npm_lifecycle_script: string;
+	export const MAKEFLAGS: string;
 	export const XDG_SESSION_CLASS: string;
 	export const TERM: string;
 	export const npm_package_name: string;
 	export const USER: string;
+	export const TMUX_PANE: string;
+	export const MAKE_TERMERR: string;
 	export const npm_lifecycle_event: string;
 	export const SHLVL: string;
+	export const MAKELEVEL: string;
 	export const XDG_VTNR: string;
 	export const XDG_SESSION_ID: string;
 	export const npm_config_user_agent: string;
@@ -71,6 +79,7 @@ declare module '$env/static/private' {
 	export const npm_node_execpath: string;
 	export const OLDPWD: string;
 	export const GOPATH: string;
+	export const TERM_PROGRAM: string;
 	export const NODE_ENV: string;
 }
 
@@ -106,8 +115,11 @@ declare module '$env/dynamic/private' {
 		SHELL: string;
 		npm_command: string;
 		COLORTERM: string;
+		TERM_PROGRAM_VERSION: string;
+		TMUX: string;
 		I3SOCK: string;
 		NODE: string;
+		MAKE_TERMOUT: string;
 		NODE_EXTRA_CA_CERTS: string;
 		npm_config_local_prefix: string;
 		XCURSOR_SIZE: string;
@@ -125,13 +137,18 @@ declare module '$env/dynamic/private' {
 		SWAYSOCK: string;
 		WAYLAND_DISPLAY: string;
 		TURSO_AUTH_TOKEN: string;
+		MFLAGS: string;
 		npm_lifecycle_script: string;
+		MAKEFLAGS: string;
 		XDG_SESSION_CLASS: string;
 		TERM: string;
 		npm_package_name: string;
 		USER: string;
+		TMUX_PANE: string;
+		MAKE_TERMERR: string;
 		npm_lifecycle_event: string;
 		SHLVL: string;
+		MAKELEVEL: string;
 		XDG_VTNR: string;
 		XDG_SESSION_ID: string;
 		npm_config_user_agent: string;
@@ -148,6 +165,7 @@ declare module '$env/dynamic/private' {
 		npm_node_execpath: string;
 		OLDPWD: string;
 		GOPATH: string;
+		TERM_PROGRAM: string;
 		NODE_ENV: string;
 		[key: `PUBLIC_${string}`]: undefined;
 		[key: `${string}`]: string | undefined;
