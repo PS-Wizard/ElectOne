@@ -1,26 +1,25 @@
-19:08:27 | 401 |  281.398631ms |  | POST | /api/userLogin | -
-19:09:37 | 200 |  134.222796ms |  | POST | /api/userlogin | -
-19:11:25 | 200 |  295.218395ms |  | POST | /api/userlogin | -
-2025/04/01 19:11:45 Shutting Down Server ...
-2025/04/01 19:11:45 Server Stopped.
-/userLogin | -
-19:07:44 | 401 |   49.148471ms |  | POST | /api/userLogin | -
-19:07:44 | 401 |   49.277583ms |  | POST | /api/userLogin | -
-19:07:44 | 401 |   48.251936ms |  | POST | /api/userLogin | -
-19:07:44 | 401 |    49.91904ms |  | POST | /api/userLogin | -
-19:07:44 | 401 |   49.927305ms |  | POST | /api/userLogin | -
-19:07:44 | 401 |   49.621339ms |  | POST | /api/userLogin | -
-19:07:45 | 401 |   48.922466ms |  | POST | /api/userLogin | -
-19:07:45 | 401 |   50.034005ms |  | POST | /api/userLogin | -
-2025/04/01 19:08:15 Shutting Down Server ...
-2025/04/01 19:08:15 Server Stopped.
-secure/citizensPaginated/0 | -
-19:03:57 | 201 |   98.159812ms |  | POST | /api/secure/citizens | -
-19:03:57 | 200 |   49.379809ms |  | GET | /api/secure/citizensPaginated/0 | -
-19:04:01 | 200 |   50.546633ms |  | GET | /api/secure/usersPaginated/0 | -
-19:05:18 | 201 |  196.519949ms |  | POST | /api/secure/user | -
-19:05:18 | 200 |   50.327103ms |  | GET | /api/secure/usersPaginated/0 | -
-19:05:39 | 401 |  369.272081ms |  | POST | /api/userLogin | -
-19:06:11 | 401 |    50.22356ms |  | POST | /api/userLogin | -
+2025/04/02 12:45:49 Shutting Down Server ...
+2025/04/02 12:45:49 Server Stopped.
+:40 | 200 |  760.426381ms |  | GET | /api/secure/usersPaginated/0 | -
+12:42:40 | 404 |      27.151µs |  | GET | /favicon.ico | Cannot GET /favicon.ico
+12:42:44 | 200 |  206.757465ms |  | GET | /api/secure/usersPaginated/0 | -
+2025/04/02 12:42:50 Shutting Down Server ...
+2025/04/02 12:42:50 Server Stopped.
+| -
+12:26:27 | 201 |  661.015067ms |  | POST | /api/secure/citizens | -
+12:27:20 | 201 |  420.048388ms |  | POST | /api/secure/user | -
+12:28:08 | 201 |  223.705911ms |  | POST | /api/secure/user | -
+12:29:12 | 201 |  215.912342ms |  | POST | /api/secure/user | -
+12:30:10 | 400 |     131.628µs |  | POST | /api/secure/user | -
+2025/04/02 12:30:29 Error in HandleCreate: failed to insert user: failed to execute SQL:
+SQLite error: FOREIGN KEY constraint failed
+12:30:28 | 500 |   191.82963ms |  | POST | /api/secure/user | -
+12:31:53 | 405 |     128.601µs |  | GET | /api/secure/citizens | Method Not Allowed
+12:31:53 | 404 |      18.284µs |  | GET | /favicon.ico | Cannot GET /favicon.ico
+12:33:45 | 200 |  412.628237ms |  | GET | /api/secure/citizensPaginated/0 | -
+12:34:33 | 200 |   96.755974ms |  | GET | /api/secure/usersPaginated/0 | -
+2025/04/02 12:35:46 Shutting Down Server ...
+2025/04/02 12:35:46 Server Stopped.
+6:11 | 401 |    50.22356ms |  | POST | /api/userLogin | -
 2025/04/01 19:07:02 Shutting Down Server ...
 2025/04/01 19:07:02 Server Stopped.
