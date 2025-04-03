@@ -28,6 +28,7 @@ func main() {
 	api.InitializeDB(authToken, dbURL)
 	defer api.CloseDB()
 
+    // Redis
 	api.InitializeRedis("localhost", "6379", "")
 	defer api.CloseRedis()
 
@@ -62,7 +63,8 @@ func main() {
 		AllowCredentials: true,
 	}))
 	app.Use(logger.New(logger.Config{Output: f}))
-	app.Use("/api/secure/*", routes.TokenValidationAdmin)
+
+	// app.Use("/api/secure/*", routes.TokenValidationAdmin)
 	// app.Use("/api/users/*", routes.TokenValidationUser)
 
 	routes.HandleRoutes(app)

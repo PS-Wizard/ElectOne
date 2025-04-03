@@ -12,41 +12,41 @@ import (
 
 func HandleRoutes(app *fiber.App) {
 	// Citizen Routes:
-	app.Get("/api/secure/citizens/:id", citizens.HandleSearch)
-	app.Get("/api/secure/citizensPaginated/:offset", citizens.HandleGet)
-	app.Post("/api/secure/citizens", citizens.HandleCreate)
-	app.Put("/api/secure/citizens/:id", citizens.HandleUpdate)
-	app.Delete("/api/secure/citizens/:id", citizens.HandleDelete)
+	app.Get("/api/secure/citizens/:id", TokenValidationAdmin, citizens.HandleSearch)
+	app.Get("/api/secure/citizensPaginated/:offset", TokenValidationAdmin, citizens.HandleGet)
+	app.Post("/api/secure/citizens", TokenValidationAdmin, citizens.HandleCreate)
+	app.Put("/api/secure/citizens/:id", TokenValidationAdmin, citizens.HandleUpdate)
+	app.Delete("/api/secure/citizens/:id", TokenValidationAdmin, citizens.HandleDelete)
 
 	// User Routes
-	app.Get("/api/secure/user/:id", users.HandleGetUser)
-	app.Get("/api/secure/usersPaginated/:offset", users.HandleGetUsersPaginated)
-	app.Post("/api/secure/user", users.HandleCreateNewUser)
-	app.Put("/api/secure/user/:id", users.HandleUpdateUserDetails)
-	app.Delete("/api/secure/user/:id", users.HandleDeleteUser)
+	app.Get("/api/secure/user/:id", TokenValidationBoth, users.HandleGetUser)
+	app.Get("/api/secure/usersPaginated/:offset", TokenValidationAdmin, users.HandleGetUsersPaginated)
+	app.Post("/api/secure/user", TokenValidationAdmin, users.HandleCreateNewUser)
+	app.Put("/api/secure/user/:id", TokenValidationAdmin, users.HandleUpdateUserDetails)
+	app.Delete("/api/secure/user/:id", TokenValidationAdmin, users.HandleDeleteUser)
 
 	// Election Routes
-	app.Get("/api/secure/election/:id", elections.HandleGetElection)
-	app.Get("/api/secure/electionsPaginated/:offset", elections.HandleGetElectionsPaginated)
-	app.Post("/api/secure/election", elections.HandleCreateNewElection)
-	app.Put("/api/secure/election/:id", elections.HandleUpdateElectionDetails)
-	app.Delete("/api/secure/election/:id", elections.HandleDeleteElection)
+	app.Get("/api/secure/election/:id", TokenValidationBoth, elections.HandleGetElection)
+	app.Get("/api/secure/electionsPaginated/:offset", TokenValidationBoth, elections.HandleGetElectionsPaginated)
+	app.Post("/api/secure/election", TokenValidationAdmin, elections.HandleCreateNewElection)
+	app.Put("/api/secure/election/:id", TokenValidationAdmin, elections.HandleUpdateElectionDetails)
+	app.Delete("/api/secure/election/:id", TokenValidationAdmin, elections.HandleDeleteElection)
 
 	//Candidate Routes
-	app.Get("/api/secure/candidate/:id", candidates.HandleGetCandidate)
-	app.Get("/api/secure/candidatesPaginated/:offset", candidates.HandleGetCandidatesPaginated)
-	app.Post("/api/secure/candidate", candidates.HandleCreateCandidate)
-	app.Put("/api/secure/candidate/:id", candidates.HandleUpdateCandidate)
-	app.Delete("/api/secure/candidate/:id", candidates.HandleDeleteCandidate)
+	app.Get("/api/secure/candidate/:id", TokenValidationBoth, candidates.HandleGetCandidate)
+	app.Get("/api/secure/candidatesPaginated/:offset", TokenValidationBoth, candidates.HandleGetCandidatesPaginated)
+	app.Post("/api/secure/candidate", TokenValidationAdmin, candidates.HandleCreateCandidate)
+	app.Put("/api/secure/candidate/:id", TokenValidationAdmin, candidates.HandleUpdateCandidate)
+	app.Delete("/api/secure/candidate/:id", TokenValidationAdmin, candidates.HandleDeleteCandidate)
 
 	// Admin Login Routes:
 	app.Post("/api/admin/signup", auth.HandleCreateAdmin)
 	app.Post("/api/admin/login", auth.HandleAdminLogin)
 
-    // User Login
+	// User Login
 	app.Post("/api/userlogin", auth.HandleUserLogin)
 
 	// Cast Vote:
-	app.Post("/api/castVote", redis.HandleVoteIncrement)
+	app.Post("/api/castVote", TokenValidationUser, redis.HandleVoteIncrement)
 
 }

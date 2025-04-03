@@ -13,6 +13,7 @@
         try {
             const res = await fetch("https://localhost:3000/api/userlogin", {
                 method: "POST",
+                credentials: "include",
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify({ citizenID, password }),
             });
@@ -20,6 +21,7 @@
             if (!res.ok) throw new Error("Invalid credentials");
         } catch (err) {
             error = err.message;
+            console.log(error);
         }
     };
 </script>

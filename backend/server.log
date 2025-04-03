@@ -1,19 +1,18 @@
-2025/04/02 17:39:28 Incrementing vote for key: votes:8:4
-2025/04/02 17:39:28 Num: 2
-17:39:28 | 200 |     921.568µs |  | POST | /api/castVote | -
-2025/04/02 17:39:28 Incrementing vote for key: votes:8:4
-2025/04/02 17:39:28 Num: 3
-17:39:28 | 200 |     829.745µs |  | POST | /api/castVote | -
-2025/04/02 17:39:28 Incrementing vote for key: votes:8:4
-2025/04/02 17:39:28 Incrementing vote for key: votes:8:4
-2025/04/02 17:39:28 Incrementing vote for key: votes:8:4
-2025/04/02 17:39:28 Num: 4
-17:39:28 | 200 |     369.336µs |  | POST | /api/castVote | -
-2025/04/02 17:39:28 Num: 5
-2025/04/02 17:39:28 Num: 6
-17:39:28 | 200 |    1.253814ms |  | POST | /api/castVote | -
-17:39:28 | 200 |    1.297396ms |  | POST | /api/castVote | -
-2025/04/02 17:39:28 Incrementing vote for key: votes:8:4
+17:08:46 | 200 |  195.482218ms |  | GET | /api/secure/user/17 | -
+17:08:59 | 401 |      39.675µs |  | GET | /api/secure/user/17 | -
+17:09:08 | 200 |  153.199641ms |  | POST | /api/admin/login | -
+17:09:11 | 200 |   47.482074ms |  | GET | /api/secure/user/17 | -
+17:09:28 | 200 |   50.119584ms |  | GET | /api/secure/usersPaginated/0 | -
+17:09:43 | 200 |  136.481176ms |  | POST | /api/userlogin | -
+17:09:45 | 401 |     126.027µs |  | GET | /api/secure/usersPaginated/0 | -
+2025/04/03 17:10:04 Shutting Down Server ...
+2025/04/03 17:10:04 Server Stopped.
+7:40 Incrementing vote for key: votes:8:4
+2025/04/03 17:07:40 Num: 4
+17:07:40 | 200 |     526.162µs |  | POST | /api/castVote | -
+2025/04/03 17:07:42 Shutting Down Server ...
+2025/04/03 17:07:42 Server Stopped.
+ key: votes:8:4
 2025/04/02 17:39:28 Incrementing vote for key: votes:8:4
 2025/04/02 17:39:28 Incrementing vote for key: votes:8:4
 2025/04/02 17:39:28 Incrementing vote for key: votes:8:4
