@@ -12,7 +12,7 @@ import (
 
 func HandleRoutes(app *fiber.App) {
 	// Citizen Routes:
-	app.Get("/api/secure/citizens/:id", TokenValidationAdmin, citizens.HandleSearch)
+	app.Get("/api/secure/citizens/:id", TokenValidationBoth, citizens.HandleSearch)
 	app.Get("/api/secure/citizensPaginated/:offset", TokenValidationAdmin, citizens.HandleGet)
 	app.Post("/api/secure/citizens", TokenValidationAdmin, citizens.HandleCreate)
 	app.Put("/api/secure/citizens/:id", TokenValidationAdmin, citizens.HandleUpdate)
