@@ -4,8 +4,8 @@
     import { browser } from "$app/environment";
 
     let elections = writable([]);
-    let candidatesByPost = writable({});
     let selectedCandidates = writable({}); // Track selected candidates per post
+    let candidatesByPost = writable({});
     let chart; // For storing chart instance
 
     async function fetchElections() {
@@ -146,7 +146,7 @@
 <!-- Grouped Candidates with Select Options -->
 <div class="space-y-6">
     {#each $elections as election}
-        <div class="card bg-base-200 shadow-lg p-6 rounded-lg">
+        <div class="card  shadow-lg p-6 rounded-lg">
             <h2 class="text-2xl font-semibold">{election.title}</h2>
             <p class="text-sm text-gray-500">
                 Start Date: {election.startDate} | End Date: {election.endDate}
@@ -157,21 +157,38 @@
             <h3 class="mt-6 text-lg font-semibold">Candidates:</h3>
             <div class="space-y-4">
                 {#each Object.entries($candidatesByPost) as [post, candidates]}
-                    <div>
+                    <div class="flex flex-col gap-4">
                         <h4 class="text-lg font-semibold">{post}</h4>
-                        <div class="space-y-2">
+                        <div class="flex flex-wrap gap-4">
                             {#each candidates as candidate (candidate.candidateID)}
-                                <div class="flex items-center space-x-4">
+                                <div class="relative rounded-lg transition duration-300 transform hover:scale-105">
                                     <input
                                         type="radio"
-                                        name={post}
                                         id={candidate.candidateID}
-                                        class="radio"
+                                        name={post}
+                                        class="peer hidden"
                                         bind:group={$selectedCandidates[post]}
                                         value={candidate.candidateID}
                                     />
-                                    <label for={candidate.candidateID}>
-                                        {candidate.fullName} - {candidate.group}
+                                    <label
+                                        for={candidate.candidateID}
+                                        class="card bg-base-100 w-80 shadow-md cursor-pointer group peer-checked:bg-white peer-checked:text-black peer-checked:border-black transition duration-300 transform hover:scale-105"
+                                    >
+                                        <figure>
+                                            <img
+                                                src="/profileplaceholder.jpg"
+                                                alt={candidate.fullName}
+                                                class="object-cover h-40 w-full rounded-t-lg"
+                                            />
+                                        </figure>
+                                        <div class="card-body">
+                                            <h2 class="card-title text-center">
+                                                {candidate.fullName}
+                                            </h2>
+                                            <p class="text-center text-sm opacity-70">
+                                                Group: <span class="badge badge-accent">{candidate.group}</span>
+                                            </p>
+                                        </div>
                                     </label>
                                 </div>
                             {/each}
@@ -179,10 +196,9 @@
                     </div>
                 {/each}
             </div>
-            <div class="mt-4">
-                <!-- Passing the electionID to the castVotes function -->
+            <div class="mt-6 flex justify-center">
                 <button
-                    class="btn btn-primary"
+                    class="btn btn-primary w-full sm:w-auto"
                     on:click={() => castVotes(election.electionID)}
                 >
                     Cast Vote

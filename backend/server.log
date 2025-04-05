@@ -1,448 +1,324 @@
-09:59:21 | 200 |  336.313695ms |  | GET | /api/secure/electionsPaginated/0 | -
-09:59:21 | 200 |   51.313351ms |  | GET | /api/secure/candidatesPaginated/0 | -
-09:59:21 | 200 |   47.159328ms |  | GET | /api/secure/citizens/12-123-12334 | -
-09:59:21 | 200 |   47.349098ms |  | GET | /api/secure/citizens/12-123-12335 | -
-09:59:21 | 200 |   50.259253ms |  | GET | /api/secure/citizens/12345678 | -
-09:59:28 | 200 |   51.223858ms |  | GET | /api/secure/electionsPaginated/0 | -
-09:59:28 | 200 |   47.642812ms |  | GET | /api/secure/candidatesPaginated/0 | -
-09:59:28 | 200 |   47.653383ms |  | GET | /api/secure/citizens/12-123-12334 | -
-09:59:28 | 200 |    47.74307ms |  | GET | /api/secure/citizens/12-123-12335 | -
-09:59:28 | 200 |   46.831973ms |  | GET | /api/secure/citizens/12345678 | -
-2025/04/05 09:59:32 Incrementing vote for key: votes:9:5
-2025/04/05 09:59:32 Num: 5
-09:59:32 | 200 |     710.907µs |  | POST | /api/castVote | -
-2025/04/05 09:59:32 Incrementing vote for key: votes:9:7
-2025/04/05 09:59:32 Num: 6
-09:59:32 | 200 |     413.293µs |  | POST | /api/castVote | -
-2025/04/05 09:59:42 Shutting Down Server ...
-2025/04/05 09:59:42 Server Stopped.
-e/citizens/12345678 | -
-2025/04/05 09:54:58 Incrementing vote for key: votes:9:5
-2025/04/05 09:54:58 Num: 1
-09:54:58 | 200 |     486.673µs |  | POST | /api/castVote | -
-2025/04/05 09:55:03 Incrementing vote for key: votes:9:5
-2025/04/05 09:55:03 Num: 2
-09:55:03 | 200 |     583.083µs |  | POST | /api/castVote | -
-2025/04/05 09:55:05 Incrementing vote for key: votes:9:7
-2025/04/05 09:55:05 Num: 1
-09:55:05 | 200 |     808.502µs |  | POST | /api/castVote | -
-2025/04/05 09:55:25 Incrementing vote for key: votes:9:5
-2025/04/05 09:55:25 Num: 3
-09:55:24 | 200 |     523.792µs |  | POST | /api/castVote | -
-2025/04/05 09:55:26 Incrementing vote for key: votes:9:7
-2025/04/05 09:55:26 Num: 2
-09:55:26 | 200 |     468.139µs |  | POST | /api/castVote | -
-09:56:01 | 200 |    50.62206ms |  | GET | /api/secure/electionsPaginated/0 | -
-09:56:01 | 200 |   49.163272ms |  | GET | /api/secure/candidatesPaginated/0 | -
-09:56:01 | 200 |   57.863093ms |  | GET | /api/secure/citizens/12-123-12334 | -
-09:56:01 | 200 |   49.516106ms |  | GET | /api/secure/citizens/12-123-12335 | -
-09:56:01 | 200 |  343.132453ms |  | GET | /api/secure/citizens/12345678 | -
-09:56:05 | 200 |   48.704339ms |  | GET | /api/secure/electionsPaginated/0 | -
-09:56:05 | 200 |   46.663079ms |  | GET | /api/secure/candidatesPaginated/0 | -
-09:56:05 | 200 |   48.572393ms |  | GET | /api/secure/citizens/12-123-12334 | -
-09:56:05 | 200 |   46.934433ms |  | GET | /api/secure/citizens/12-123-12335 | -
-09:56:05 | 200 |   46.477244ms |  | GET | /api/secure/citizens/12345678 | -
-09:56:07 | 200 |   69.334496ms |  | GET | /api/secure/electionsPaginated/0 | -
-09:56:07 | 200 |   46.817845ms |  | GET | /api/secure/candidatesPaginated/0 | -
-09:56:07 | 200 |   47.334565ms |  | GET | /api/secure/citizens/12-123-12334 | -
-09:56:08 | 200 |   49.822464ms |  | GET | /api/secure/citizens/12-123-12335 | -
-09:56:08 | 200 |   47.212337ms |  | GET | /api/secure/citizens/12345678 | -
-2025/04/05 09:56:19 Incrementing vote for key: votes:9:6
-2025/04/05 09:56:19 Num: 1
-09:56:18 | 200 |     444.345µs |  | POST | /api/castVote | -
-2025/04/05 09:56:19 Incrementing vote for key: votes:9:7
-2025/04/05 09:56:19 Num: 3
-09:56:18 | 200 |     797.831µs |  | POST | /api/castVote | -
-09:56:34 | 200 |   50.053475ms |  | GET | /api/secure/electionsPaginated/0 | -
-09:56:34 | 200 |   48.831959ms |  | GET | /api/secure/candidatesPaginated/0 | -
-09:56:34 | 200 |   51.183964ms |  | GET | /api/secure/citizens/12-123-12334 | -
-09:56:34 | 200 |   46.924998ms |  | GET | /api/secure/citizens/12-123-12335 | -
-09:56:34 | 200 |   47.614679ms |  | GET | /api/secure/citizens/12345678 | -
-09:56:45 | 200 |   51.639664ms |  | GET | /api/secure/electionsPaginated/0 | -
-09:56:45 | 200 |   47.478969ms |  | GET | /api/secure/candidatesPaginated/0 | -
-09:56:45 | 200 |   47.225185ms |  | GET | /api/secure/citizens/12-123-12334 | -
-09:56:45 | 200 |   47.925582ms |  | GET | /api/secure/citizens/12-123-12335 | -
-09:56:45 | 200 |   48.168204ms |  | GET | /api/secure/citizens/12345678 | -
-09:56:46 | 200 |   50.020376ms |  | GET | /api/secure/electionsPaginated/0 | -
-09:56:46 | 200 |   47.696265ms |  | GET | /api/secure/candidatesPaginated/0 | -
-09:56:46 | 200 |   48.110625ms |  | GET | /api/secure/citizens/12-123-12334 | -
-09:56:46 | 200 |   47.880605ms |  | GET | /api/secure/citizens/12-123-12335 | -
-09:56:46 | 200 |   49.006748ms |  | GET | /api/secure/citizens/12345678 | -
-09:56:54 | 200 |   51.299279ms |  | GET | /api/secure/electionsPaginated/0 | -
-09:56:54 | 200 |   48.139835ms |  | GET | /api/secure/candidatesPaginated/0 | -
-09:56:54 | 200 |   47.921729ms |  | GET | /api/secure/citizens/12-123-12334 | -
-09:56:54 | 200 |   48.108005ms |  | GET | /api/secure/citizens/12-123-12335 | -
-09:56:54 | 200 |   48.090677ms |  | GET | /api/secure/citizens/12345678 | -
-09:56:55 | 200 |   50.041126ms |  | GET | /api/secure/electionsPaginated/0 | -
-09:56:55 | 200 |   49.414812ms |  | GET | /api/secure/candidatesPaginated/0 | -
-09:56:55 | 200 |   48.175239ms |  | GET | /api/secure/citizens/12-123-12334 | -
-09:56:55 | 200 |   47.584802ms |  | GET | /api/secure/citizens/12-123-12335 | -
-09:56:55 | 200 |   48.349581ms |  | GET | /api/secure/citizens/12345678 | -
-09:57:02 | 200 |   58.909257ms |  | GET | /api/secure/electionsPaginated/0 | -
-09:57:02 | 200 |   48.315185ms |  | GET | /api/secure/candidatesPaginated/0 | -
-09:57:02 | 200 |   49.194822ms |  | GET | /api/secure/citizens/12-123-12334 | -
-09:57:02 | 200 |   49.011052ms |  | GET | /api/secure/citizens/12-123-12335 | -
-09:57:02 | 200 |   46.942156ms |  | GET | /api/secure/citizens/12345678 | -
-2025/04/05 09:57:07 Incrementing vote for key: votes:9:7
-2025/04/05 09:57:07 Num: 4
-09:57:07 | 200 |     471.328µs |  | POST | /api/castVote | -
-2025/04/05 09:57:09 Incrementing vote for key: votes:9:6
-2025/04/05 09:57:09 Num: 2
-09:57:09 | 200 |     490.153µs |  | POST | /api/castVote | -
-09:57:57 | 200 |    49.06023ms |  | GET | /api/secure/electionsPaginated/0 | -
-09:57:57 | 200 |   47.035701ms |  | GET | /api/secure/candidatesPaginated/0 | -
-09:57:57 | 200 |   47.885798ms |  | GET | /api/secure/citizens/12-123-12334 | -
-09:57:57 | 200 |   49.158898ms |  | GET | /api/secure/citizens/12-123-12335 | -
-09:57:57 | 200 |   47.764958ms |  | GET | /api/secure/citizens/12345678 | -
-09:58:00 | 200 |   48.897209ms |  | GET | /api/secure/electionsPaginated/0 | -
-09:58:00 | 200 |   46.822435ms |  | GET | /api/secure/candidatesPaginated/0 | -
-09:58:00 | 200 |   47.401345ms |  | GET | /api/secure/citizens/12-123-12334 | -
-09:58:00 | 200 |   46.735119ms |  | GET | /api/secure/citizens/12-123-12335 | -
-09:58:00 | 200 |   48.591017ms |  | GET | /api/secure/citizens/12345678 | -
-09:58:03 | 200 |   49.715984ms |  | GET | /api/secure/electionsPaginated/0 | -
-09:58:03 | 200 |   47.152612ms |  | GET | /api/secure/candidatesPaginated/0 | -
-09:58:03 | 200 |   47.147892ms |  | GET | /api/secure/citizens/12-123-12334 | -
-09:58:03 | 200 |   46.809309ms |  | GET | /api/secure/citizens/12-123-12335 | -
-09:58:03 | 200 |   48.064957ms |  | GET | /api/secure/citizens/12345678 | -
-09:58:05 | 200 |    50.58709ms |  | GET | /api/secure/electionsPaginated/0 | -
-09:58:06 | 200 |   46.109678ms |  | GET | /api/secure/candidatesPaginated/0 | -
-09:58:06 | 200 |   46.359122ms |  | GET | /api/secure/citizens/12-123-12334 | -
-09:58:06 | 200 |   47.064964ms |  | GET | /api/secure/citizens/12-123-12335 | -
-09:58:06 | 200 |   46.074341ms |  | GET | /api/secure/citizens/12345678 | -
-2025/04/05 09:58:09 Incrementing vote for key: votes:9:5
-2025/04/05 09:58:09 Num: 4
-09:58:09 | 200 |     528.093µs |  | POST | /api/castVote | -
-2025/04/05 09:58:09 Incrementing vote for key: votes:9:7
-2025/04/05 09:58:09 Num: 5
-09:58:09 | 200 |     503.597µs |  | POST | /api/castVote | -
-2025/04/05 09:58:22 Shutting Down Server ...
-2025/04/05 09:58:22 Server Stopped.
-ms |  | GET | /api/secure/citizens/12345678 | -
-09:48:21 | 200 |   44.618935ms |  | GET | /api/secure/electionsPaginated/0 | -
-09:48:21 | 200 |   44.639444ms |  | GET | /api/secure/candidatesPaginated/0 | -
-09:48:21 | 200 |   45.814282ms |  | GET | /api/secure/citizens/12-123-12334 | -
-09:48:21 | 200 |    50.10669ms |  | GET | /api/secure/citizens/12-123-12335 | -
-09:48:21 | 200 |   45.946228ms |  | GET | /api/secure/citizens/12345678 | -
-09:48:25 | 200 |   47.622324ms |  | GET | /api/secure/electionsPaginated/0 | -
-09:48:25 | 200 |   45.965859ms |  | GET | /api/secure/candidatesPaginated/0 | -
-09:48:25 | 200 |   46.696921ms |  | GET | /api/secure/citizens/12-123-12334 | -
-09:48:25 | 200 |   45.056035ms |  | GET | /api/secure/citizens/12-123-12335 | -
-09:48:26 | 200 |   45.301111ms |  | GET | /api/secure/citizens/12345678 | -
-09:48:49 | 200 |   48.819493ms |  | GET | /api/secure/electionsPaginated/0 | -
-09:48:49 | 200 |    47.13213ms |  | GET | /api/secure/candidatesPaginated/0 | -
-09:48:49 | 200 |   46.360443ms |  | GET | /api/secure/citizens/12-123-12334 | -
-09:48:49 | 200 |    46.47138ms |  | GET | /api/secure/citizens/12-123-12335 | -
-09:48:49 | 200 |   46.841039ms |  | GET | /api/secure/citizens/12345678 | -
-09:53:44 | 200 |  170.366911ms |  | GET | /api/secure/electionsPaginated/0 | -
-09:53:45 | 200 |   46.737981ms |  | GET | /api/secure/candidatesPaginated/0 | -
-09:53:45 | 200 |   45.960317ms |  | GET | /api/secure/citizens/12-123-12334 | -
-09:53:45 | 200 |   46.685394ms |  | GET | /api/secure/citizens/12-123-12335 | -
-09:53:45 | 200 |   46.642544ms |  | GET | /api/secure/citizens/12345678 | -
-09:53:47 | 200 |   50.646139ms |  | GET | /api/secure/electionsPaginated/0 | -
-09:53:47 | 200 |   46.192528ms |  | GET | /api/secure/candidatesPaginated/0 | -
-09:53:47 | 200 |   47.730654ms |  | GET | /api/secure/citizens/12-123-12334 | -
-09:53:47 | 200 |   47.015265ms |  | GET | /api/secure/citizens/12-123-12335 | -
-09:53:47 | 200 |   48.615668ms |  | GET | /api/secure/citizens/12345678 | -
-09:53:53 | 401 |      44.372µs |  | POST | /api/castVote | -
-09:53:55 | 401 |      49.993µs |  | POST | /api/castVote | -
-2025/04/05 09:53:58 Shutting Down Server ...
-2025/04/05 09:53:59 Server Stopped.
-s:8:4
-2025/04/02 17:39:28 Num: 72
-2025/04/02 17:39:28 Num: 71
-17:39:28 | 200 |     393.111µs |  | POST | /api/castVote | -
-17:39:28 | 200 |     425.773µs |  | POST | /api/castVote | -
-2025/04/02 17:39:28 Incrementing vote for key: votes:8:4
-2025/04/02 17:39:28 Num: 73
-17:39:28 | 200 |     834.634µs |  | POST | /api/castVote | -
-2025/04/02 17:39:28 Incrementing vote for key: votes:8:4
-2025/04/02 17:39:28 Num: 74
-17:39:28 | 200 |     277.182µs |  | POST | /api/castVote | -
-2025/04/02 17:39:28 Incrementing vote for key: votes:8:4
-2025/04/02 17:39:28 Num: 75
-17:39:28 | 200 |     278.335µs |  | POST | /api/castVote | -
-2025/04/02 17:39:28 Incrementing vote for key: votes:8:4
-2025/04/02 17:39:28 Num: 76
-17:39:28 | 200 |     319.112µs |  | POST | /api/castVote | -
-2025/04/02 17:39:28 Incrementing vote for key: votes:8:4
-2025/04/02 17:39:28 Num: 77
-17:39:28 | 200 |     294.987µs |  | POST | /api/castVote | -
-2025/04/02 17:39:28 Incrementing vote for key: votes:8:4
-2025/04/02 17:39:28 Num: 78
-17:39:28 | 200 |     297.541µs |  | POST | /api/castVote | -
-2025/04/02 17:39:28 Incrementing vote for key: votes:8:4
-2025/04/02 17:39:28 Incrementing vote for key: votes:8:4
-2025/04/02 17:39:28 Incrementing vote for key: votes:8:4
-2025/04/02 17:39:28 Incrementing vote for key: votes:8:4
-2025/04/02 17:39:28 Num: 80
-2025/04/02 17:39:28 Num: 79
-2025/04/02 17:39:28 Num: 82
-2025/04/02 17:39:28 Num: 81
-17:39:28 | 200 |     299.024µs |  | POST | /api/castVote | -
-17:39:28 | 200 |     334.711µs |  | POST | /api/castVote | -
-17:39:28 | 200 |     342.265µs |  | POST | /api/castVote | -
-17:39:28 | 200 |     358.926µs |  | POST | /api/castVote | -
-2025/04/02 17:39:28 Incrementing vote for key: votes:8:4
-2025/04/02 17:39:28 Num: 83
-17:39:28 | 200 |     861.554µs |  | POST | /api/castVote | -
-2025/04/02 17:39:28 Incrementing vote for key: votes:8:4
-2025/04/02 17:39:28 Num: 84
-17:39:28 | 200 |     217.931µs |  | POST | /api/castVote | -
-2025/04/02 17:39:28 Incrementing vote for key: votes:8:4
-2025/04/02 17:39:28 Num: 85
-17:39:28 | 200 |     579.743µs |  | POST | /api/castVote | -
-2025/04/02 17:39:28 Incrementing vote for key: votes:8:4
-2025/04/02 17:39:28 Num: 86
-17:39:28 | 200 |     258.567µs |  | POST | /api/castVote | -
-2025/04/02 17:39:28 Incrementing vote for key: votes:8:4
-2025/04/02 17:39:28 Num: 87
-17:39:28 | 200 |     266.171µs |  | POST | /api/castVote | -
-2025/04/02 17:39:28 Incrementing vote for key: votes:8:4
-2025/04/02 17:39:28 Num: 88
-17:39:28 | 200 |     517.385µs |  | POST | /api/castVote | -
-2025/04/02 17:39:28 Incrementing vote for key: votes:8:4
-2025/04/02 17:39:28 Num: 89
-17:39:28 | 200 |     261.563µs |  | POST | /api/castVote | -
-2025/04/02 17:39:28 Incrementing vote for key: votes:8:4
-2025/04/02 17:39:28 Incrementing vote for key: votes:8:4
-2025/04/02 17:39:28 Incrementing vote for key: votes:8:4
-2025/04/02 17:39:28 Num: 90
-2025/04/02 17:39:28 Num: 91
-2025/04/02 17:39:28 Num: 92
-17:39:28 | 200 |     468.252µs |  | POST | /api/castVote | -
-17:39:28 | 200 |      472.04µs |  | POST | /api/castVote | -
-17:39:28 | 200 |     497.738µs |  | POST | /api/castVote | -
-2025/04/02 17:39:28 Incrementing vote for key: votes:8:4
-2025/04/02 17:39:28 Num: 93
-17:39:28 | 200 |     555.016µs |  | POST | /api/castVote | -
-2025/04/02 17:39:28 Incrementing vote for key: votes:8:4
-2025/04/02 17:39:28 Num: 94
-17:39:28 | 200 |     269.958µs |  | POST | /api/castVote | -
-2025/04/02 17:39:28 Incrementing vote for key: votes:8:4
-2025/04/02 17:39:28 Num: 95
-17:39:28 | 200 |     425.071µs |  | POST | /api/castVote | -
-2025/04/02 17:39:28 Incrementing vote for key: votes:8:4
-2025/04/02 17:39:28 Num: 96
-17:39:28 | 200 |      281.34µs |  | POST | /api/castVote | -
-2025/04/02 17:39:28 Incrementing vote for key: votes:8:4
-2025/04/02 17:39:28 Num: 97
-17:39:28 | 200 |     301.178µs |  | POST | /api/castVote | -
-2025/04/02 17:39:28 Incrementing vote for key: votes:8:4
-2025/04/02 17:39:28 Num: 98
-17:39:28 | 200 |     415.724µs |  | POST | /api/castVote | -
-2025/04/02 17:39:28 Incrementing vote for key: votes:8:4
-2025/04/02 17:39:28 Num: 99
-17:39:28 | 200 |     414.271µs |  | POST | /api/castVote | -
-2025/04/02 17:39:28 Incrementing vote for key: votes:8:4
-2025/04/02 17:39:28 Num: 100
-17:39:28 | 200 |     181.753µs |  | POST | /api/castVote | -
-2025/04/02 17:39:28 Incrementing vote for key: votes:8:4
-2025/04/02 17:39:28 Incrementing vote for key: votes:8:4
-2025/04/02 17:39:28 Num: 102
-2025/04/02 17:39:28 Num: 101
-17:39:28 | 200 |     346.654µs |  | POST | /api/castVote | -
-17:39:28 | 200 |     452.974µs |  | POST | /api/castVote | -
-2025/04/02 17:39:28 Incrementing vote for key: votes:8:4
-2025/04/02 17:39:28 Num: 103
-17:39:28 | 200 |     458.384µs |  | POST | /api/castVote | -
-2025/04/02 17:39:28 Incrementing vote for key: votes:8:4
-2025/04/02 17:39:28 Num: 104
-17:39:28 | 200 |      201.94µs |  | POST | /api/castVote | -
-2025/04/02 17:39:28 Incrementing vote for key: votes:8:4
-2025/04/02 17:39:28 Num: 105
-17:39:28 | 200 |     178.597µs |  | POST | /api/castVote | -
-2025/04/02 17:39:28 Incrementing vote for key: votes:8:4
-2025/04/02 17:39:28 Num: 106
-17:39:28 | 200 |      296.85µs |  | POST | /api/castVote | -
-2025/04/02 17:39:28 Incrementing vote for key: votes:8:4
-2025/04/02 17:39:28 Num: 107
-17:39:28 | 200 |      244.05µs |  | POST | /api/castVote | -
-2025/04/02 17:39:28 Incrementing vote for key: votes:8:4
-2025/04/02 17:39:28 Num: 108
-17:39:28 | 200 |     178.917µs |  | POST | /api/castVote | -
-2025/04/02 17:39:28 Incrementing vote for key: votes:8:4
-2025/04/02 17:39:28 Num: 109
-17:39:28 | 200 |     310.204µs |  | POST | /api/castVote | -
-2025/04/02 17:39:28 Incrementing vote for key: votes:8:4
-2025/04/02 17:39:28 Num: 110
-17:39:28 | 200 |     447.483µs |  | POST | /api/castVote | -
-2025/04/02 17:39:28 Incrementing vote for key: votes:8:4
-2025/04/02 17:39:28 Num: 111
-17:39:28 | 200 |     269.408µs |  | POST | /api/castVote | -
-2025/04/02 17:39:28 Incrementing vote for key: votes:8:4
-2025/04/02 17:39:28 Num: 112
-17:39:28 | 200 |     263.146µs |  | POST | /api/castVote | -
-2025/04/02 17:39:28 Incrementing vote for key: votes:8:4
-2025/04/02 17:39:28 Num: 113
-17:39:28 | 200 |     289.205µs |  | POST | /api/castVote | -
-2025/04/02 17:39:28 Incrementing vote for key: votes:8:4
-2025/04/02 17:39:28 Num: 114
-17:39:28 | 200 |     209.184µs |  | POST | /api/castVote | -
-2025/04/02 17:39:28 Incrementing vote for key: votes:8:4
-2025/04/02 17:39:28 Num: 115
-17:39:28 | 200 |     203.284µs |  | POST | /api/castVote | -
-2025/04/02 17:39:28 Incrementing vote for key: votes:8:4
-2025/04/02 17:39:28 Num: 116
-17:39:28 | 200 |     175.731µs |  | POST | /api/castVote | -
-2025/04/02 17:39:28 Incrementing vote for key: votes:8:4
-2025/04/02 17:39:28 Num: 117
-17:39:28 | 200 |     421.945µs |  | POST | /api/castVote | -
-2025/04/02 17:39:28 Incrementing vote for key: votes:8:4
-2025/04/02 17:39:28 Num: 118
-17:39:28 | 200 |     167.246µs |  | POST | /api/castVote | -
-2025/04/02 17:39:28 Incrementing vote for key: votes:8:4
-2025/04/02 17:39:28 Num: 119
-17:39:28 | 200 |     140.305µs |  | POST | /api/castVote | -
-2025/04/02 17:39:28 Incrementing vote for key: votes:8:4
-2025/04/02 17:39:28 Num: 120
-17:39:28 | 200 |      207.14µs |  | POST | /api/castVote | -
-2025/04/02 17:39:28 Incrementing vote for key: votes:8:4
-2025/04/02 17:39:28 Num: 121
-17:39:28 | 200 |     289.596µs |  | POST | /api/castVote | -
-2025/04/02 17:39:28 Incrementing vote for key: votes:8:4
-2025/04/02 17:39:28 Num: 122
-17:39:28 | 200 |     274.457µs |  | POST | /api/castVote | -
-2025/04/02 17:39:28 Incrementing vote for key: votes:8:4
-2025/04/02 17:39:28 Num: 123
-17:39:28 | 200 |     204.676µs |  | POST | /api/castVote | -
-2025/04/02 17:39:28 Incrementing vote for key: votes:8:4
-2025/04/02 17:39:28 Num: 124
-17:39:28 | 200 |     211.769µs |  | POST | /api/castVote | -
-2025/04/02 17:39:28 Incrementing vote for key: votes:8:4
-2025/04/02 17:39:28 Num: 125
-17:39:28 | 200 |    2.330674ms |  | POST | /api/castVote | -
-2025/04/02 17:39:28 Incrementing vote for key: votes:8:4
-2025/04/02 17:39:28 Num: 126
-17:39:28 | 200 |     291.549µs |  | POST | /api/castVote | -
-2025/04/02 17:39:28 Incrementing vote for key: votes:8:4
-2025/04/02 17:39:28 Num: 127
-17:39:28 | 200 |     282.854µs |  | POST | /api/castVote | -
-2025/04/02 17:39:28 Incrementing vote for key: votes:8:4
-2025/04/02 17:39:28 Num: 128
-17:39:28 | 200 |     377.832µs |  | POST | /api/castVote | -
-2025/04/02 17:39:28 Incrementing vote for key: votes:8:4
-2025/04/02 17:39:28 Num: 129
-17:39:28 | 200 |       206.6µs |  | POST | /api/castVote | -
-2025/04/02 17:39:29 Incrementing vote for key: votes:8:4
-2025/04/02 17:39:29 Num: 130
-17:39:28 | 200 |     474.314µs |  | POST | /api/castVote | -
-2025/04/02 17:39:29 Incrementing vote for key: votes:8:4
-2025/04/02 17:39:29 Num: 131
-17:39:28 | 200 |     208.132µs |  | POST | /api/castVote | -
-2025/04/02 17:39:29 Incrementing vote for key: votes:8:4
-2025/04/02 17:39:29 Num: 132
-17:39:28 | 200 |     474.485µs |  | POST | /api/castVote | -
-2025/04/02 17:39:29 Incrementing vote for key: votes:8:4
-2025/04/02 17:39:29 Num: 133
-17:39:28 | 200 |     201.921µs |  | POST | /api/castVote | -
-2025/04/02 17:39:29 Incrementing vote for key: votes:8:4
-2025/04/02 17:39:29 Num: 134
-17:39:28 | 200 |     198.946µs |  | POST | /api/castVote | -
-2025/04/02 17:39:29 Incrementing vote for key: votes:8:4
-2025/04/02 17:39:29 Incrementing vote for key: votes:8:4
-2025/04/02 17:39:29 Num: 135
-2025/04/02 17:39:29 Num: 136
-17:39:28 | 200 |     273.115µs |  | POST | /api/castVote | -
-17:39:28 | 200 |     304.844µs |  | POST | /api/castVote | -
-2025/04/02 17:39:29 Incrementing vote for key: votes:8:4
-2025/04/02 17:39:29 Num: 137
-17:39:28 | 200 |     322.668µs |  | POST | /api/castVote | -
-2025/04/02 17:39:29 Incrementing vote for key: votes:8:4
-2025/04/02 17:39:29 Num: 138
-17:39:28 | 200 |     230.395µs |  | POST | /api/castVote | -
-2025/04/02 17:39:29 Incrementing vote for key: votes:8:4
-2025/04/02 17:39:29 Num: 139
-17:39:28 | 200 |     233.951µs |  | POST | /api/castVote | -
-2025/04/02 17:39:29 Incrementing vote for key: votes:8:4
-2025/04/02 17:39:29 Num: 140
-17:39:28 | 200 |     248.549µs |  | POST | /api/castVote | -
-2025/04/02 17:39:29 Incrementing vote for key: votes:8:4
-2025/04/02 17:39:29 Num: 141
-17:39:28 | 200 |     362.564µs |  | POST | /api/castVote | -
-2025/04/02 17:39:29 Incrementing vote for key: votes:8:4
-2025/04/02 17:39:29 Num: 142
-17:39:28 | 200 |     256.163µs |  | POST | /api/castVote | -
-2025/04/02 17:39:29 Incrementing vote for key: votes:8:4
-2025/04/02 17:39:29 Num: 143
-17:39:28 | 200 |     311.007µs |  | POST | /api/castVote | -
-2025/04/02 17:39:29 Incrementing vote for key: votes:8:4
-2025/04/02 17:39:29 Num: 144
-17:39:28 | 200 |     230.775µs |  | POST | /api/castVote | -
-2025/04/02 17:39:29 Incrementing vote for key: votes:8:4
-2025/04/02 17:39:29 Num: 145
-17:39:28 | 200 |     269.378µs |  | POST | /api/castVote | -
-2025/04/02 17:39:29 Incrementing vote for key: votes:8:4
-2025/04/02 17:39:29 Num: 146
-17:39:28 | 200 |     237.417µs |  | POST | /api/castVote | -
-2025/04/02 17:39:29 Incrementing vote for key: votes:8:4
-2025/04/02 17:39:29 Num: 147
-17:39:28 | 200 |      227.74µs |  | POST | /api/castVote | -
-2025/04/02 17:39:29 Incrementing vote for key: votes:8:4
-2025/04/02 17:39:29 Num: 148
-17:39:28 | 200 |     227.579µs |  | POST | /api/castVote | -
-2025/04/02 17:39:29 Incrementing vote for key: votes:8:4
-2025/04/02 17:39:29 Num: 149
-17:39:28 | 200 |     236.196µs |  | POST | /api/castVote | -
-2025/04/02 17:39:29 Incrementing vote for key: votes:8:4
-2025/04/02 17:39:29 Num: 150
-17:39:28 | 200 |     220.536µs |  | POST | /api/castVote | -
-2025/04/02 17:39:29 Incrementing vote for key: votes:8:4
-2025/04/02 17:39:29 Num: 151
-17:39:28 | 200 |     219.714µs |  | POST | /api/castVote | -
-2025/04/02 17:39:29 Incrementing vote for key: votes:8:4
-2025/04/02 17:39:29 Num: 152
-17:39:28 | 200 |     225.575µs |  | POST | /api/castVote | -
-2025/04/02 17:39:29 Incrementing vote for key: votes:8:4
-2025/04/02 17:39:29 Num: 153
-17:39:28 | 200 |      228.21µs |  | POST | /api/castVote | -
-2025/04/02 17:39:29 Incrementing vote for key: votes:8:4
-2025/04/02 17:39:29 Num: 154
-17:39:28 | 200 |     245.834µs |  | POST | /api/castVote | -
-2025/04/02 17:39:29 Incrementing vote for key: votes:8:4
-2025/04/02 17:39:29 Num: 155
-17:39:28 | 200 |      222.83µs |  | POST | /api/castVote | -
-2025/04/02 17:39:29 Incrementing vote for key: votes:8:4
-2025/04/02 17:39:29 Num: 156
-17:39:28 | 200 |     227.569µs |  | POST | /api/castVote | -
-2025/04/02 17:39:29 Incrementing vote for key: votes:8:4
-2025/04/02 17:39:29 Num: 157
-17:39:28 | 200 |     228.792µs |  | POST | /api/castVote | -
-2025/04/02 17:39:29 Incrementing vote for key: votes:8:4
-2025/04/02 17:39:29 Num: 158
-17:39:28 | 200 |     257.195µs |  | POST | /api/castVote | -
-2025/04/02 17:39:29 Incrementing vote for key: votes:8:4
-2025/04/02 17:39:29 Num: 159
-17:39:28 | 200 |     221.348µs |  | POST | /api/castVote | -
-2025/04/02 17:39:29 Incrementing vote for key: votes:8:4
-2025/04/02 17:39:29 Num: 160
-17:39:28 | 200 |     275.669µs |  | POST | /api/castVote | -
-2025/04/02 17:39:29 Incrementing vote for key: votes:8:4
-2025/04/02 17:39:29 Num: 161
-17:39:28 | 200 |     247.277µs |  | POST | /api/castVote | -
-2025/04/02 17:39:29 Incrementing vote for key: votes:8:4
-2025/04/02 17:39:29 Num: 162
-17:39:28 | 200 |     350.942µs |  | POST | /api/castVote | -
-2025/04/02 17:39:29 Incrementing vote for key: votes:8:4
-2025/04/02 17:39:29 Num: 163
-17:39:28 | 200 |      249.35µs |  | POST | /api/castVote | -
-2025/04/02 17:39:29 Incrementing vote for key: votes:8:4
-2025/04/02 17:39:29 Num: 164
-17:39:28 | 200 |     234.813µs |  | POST | /api/castVote | -
-2025/04/02 17:39:29 Incrementing vote for key: votes:8:4
-2025/04/02 17:39:29 Num: 165
-17:39:28 | 200 |     213.773µs |  | POST | /api/castVote | -
-2025/04/02 17:39:29 Incrementing vote for key: votes:8:4
-2025/04/02 17:39:29 Num: 166
-17:39:28 | 200 |     215.056µs |  | POST | /api/castVote | -
-2025/04/02 17:39:29 Incrementing vote for key: votes:8:4
-2025/04/02 17:39:29 Num: 167
-17:39:28 | 200 |     228.049µs |  | POST | /api/castVote | -
-2025/04/02 17:39:29 Incrementing vote for key: votes:8:4
-2025/04/02 17:39:29 Num: 168
-17:39:28 | 200 |     200.228µs |  | POST | /api/castVote | -
-2025/04/02 17:39:29 Incrementing vote for key: votes:8:4
-2025/04/02 17:39:29 Num: 169
-17:39:28 | 200 |     231.066µs |  | POST | /api/castVote | -
+10:38:05 | 200 |  384.449484ms |  | GET | /api/secure/electionsPaginated/0 | -
+10:38:05 | 200 |    51.75758ms |  | GET | /api/secure/candidatesPaginated/0 | -
+10:38:05 | 200 |    60.86576ms |  | GET | /api/secure/citizens/12-123-12334 | -
+10:38:05 | 200 |   50.889563ms |  | GET | /api/secure/citizens/12-123-12335 | -
+10:38:05 | 200 |   52.419629ms |  | GET | /api/secure/citizens/12345678 | -
+10:41:22 | 200 |  158.075752ms |  | GET | /api/secure/electionsPaginated/0 | -
+10:41:22 | 200 |  106.626287ms |  | GET | /api/secure/candidatesPaginated/0 | -
+10:41:22 | 200 |   56.857399ms |  | GET | /api/secure/citizens/12-123-12334 | -
+10:41:23 | 200 |   56.306374ms |  | GET | /api/secure/citizens/12-123-12335 | -
+10:41:23 | 200 |   54.915917ms |  | GET | /api/secure/citizens/12345678 | -
+10:41:47 | 200 |    54.07481ms |  | GET | /api/secure/electionsPaginated/0 | -
+10:41:47 | 200 |   54.926254ms |  | GET | /api/secure/candidatesPaginated/0 | -
+10:41:47 | 200 |   55.748882ms |  | GET | /api/secure/citizens/12-123-12334 | -
+10:41:47 | 200 |   53.968739ms |  | GET | /api/secure/citizens/12-123-12335 | -
+10:41:47 | 200 |   54.177675ms |  | GET | /api/secure/citizens/12345678 | -
+10:41:53 | 200 |   55.714433ms |  | GET | /api/secure/electionsPaginated/0 | -
+10:41:53 | 200 |   53.493816ms |  | GET | /api/secure/candidatesPaginated/0 | -
+10:41:54 | 200 |   54.507254ms |  | GET | /api/secure/citizens/12-123-12334 | -
+10:41:54 | 200 |   54.843432ms |  | GET | /api/secure/citizens/12-123-12335 | -
+10:41:54 | 200 |   53.883853ms |  | GET | /api/secure/citizens/12345678 | -
+10:42:26 | 200 |   55.193295ms |  | GET | /api/secure/electionsPaginated/0 | -
+10:42:27 | 200 |   54.933524ms |  | GET | /api/secure/candidatesPaginated/0 | -
+10:42:27 | 200 |   54.449287ms |  | GET | /api/secure/citizens/12-123-12334 | -
+10:42:27 | 200 |    55.88746ms |  | GET | /api/secure/citizens/12-123-12335 | -
+10:42:27 | 200 |   53.648751ms |  | GET | /api/secure/citizens/12345678 | -
+10:42:28 | 200 |   55.649397ms |  | GET | /api/secure/electionsPaginated/0 | -
+10:42:28 | 200 |   53.801187ms |  | GET | /api/secure/candidatesPaginated/0 | -
+10:42:28 | 200 |    54.41516ms |  | GET | /api/secure/citizens/12-123-12334 | -
+10:42:28 | 200 |   53.632528ms |  | GET | /api/secure/citizens/12-123-12335 | -
+10:42:28 | 200 |    53.84412ms |  | GET | /api/secure/citizens/12345678 | -
+10:42:31 | 200 |   61.989825ms |  | GET | /api/secure/electionsPaginated/0 | -
+10:42:31 | 200 |   53.168414ms |  | GET | /api/secure/candidatesPaginated/0 | -
+10:42:31 | 200 |   62.342653ms |  | GET | /api/secure/citizens/12-123-12334 | -
+10:42:31 | 200 |   79.811296ms |  | GET | /api/secure/citizens/12-123-12335 | -
+10:42:31 | 200 |   56.911751ms |  | GET | /api/secure/citizens/12345678 | -
+10:42:40 | 200 |   56.124823ms |  | GET | /api/secure/electionsPaginated/0 | -
+10:42:40 | 200 |   54.684715ms |  | GET | /api/secure/candidatesPaginated/0 | -
+10:42:41 | 200 |   59.292618ms |  | GET | /api/secure/citizens/12-123-12334 | -
+10:42:41 | 200 |   67.753543ms |  | GET | /api/secure/citizens/12-123-12335 | -
+10:42:41 | 200 |   54.572382ms |  | GET | /api/secure/citizens/12345678 | -
+10:42:42 | 200 |   56.423693ms |  | GET | /api/secure/electionsPaginated/0 | -
+10:42:42 | 200 |   53.982323ms |  | GET | /api/secure/candidatesPaginated/0 | -
+10:42:43 | 200 |   53.265414ms |  | GET | /api/secure/citizens/12-123-12334 | -
+10:42:43 | 200 |   55.158467ms |  | GET | /api/secure/citizens/12-123-12335 | -
+10:42:43 | 200 |   60.897431ms |  | GET | /api/secure/citizens/12345678 | -
+10:42:45 | 200 |    57.15906ms |  | GET | /api/secure/electionsPaginated/0 | -
+10:42:45 | 200 |   53.394815ms |  | GET | /api/secure/candidatesPaginated/0 | -
+10:42:45 | 200 |   52.838262ms |  | GET | /api/secure/citizens/12-123-12334 | -
+10:42:45 | 200 |   55.509599ms |  | GET | /api/secure/citizens/12-123-12335 | -
+10:42:45 | 200 |     53.6298ms |  | GET | /api/secure/citizens/12345678 | -
+10:47:15 | 200 |  285.708282ms |  | GET | /api/secure/electionsPaginated/0 | -
+10:47:15 | 200 |  226.659382ms |  | GET | /api/secure/candidatesPaginated/0 | -
+10:47:15 | 200 |  196.263822ms |  | GET | /api/secure/citizens/12-123-12334 | -
+10:47:16 | 200 |  200.856171ms |  | GET | /api/secure/citizens/12-123-12335 | -
+10:47:16 | 200 |  199.207523ms |  | GET | /api/secure/citizens/12345678 | -
+10:47:18 | 200 |  200.629482ms |  | GET | /api/secure/electionsPaginated/0 | -
+10:47:18 | 200 |  199.283143ms |  | GET | /api/secure/candidatesPaginated/0 | -
+10:47:19 | 200 |  181.673494ms |  | GET | /api/secure/citizens/12-123-12334 | -
+10:47:19 | 200 |  215.462816ms |  | GET | /api/secure/citizens/12-123-12335 | -
+10:47:19 | 200 |  200.843084ms |  | GET | /api/secure/citizens/12345678 | -
+10:48:01 | 200 |  240.945035ms |  | GET | /api/secure/electionsPaginated/0 | -
+10:48:01 | 200 |   146.01247ms |  | GET | /api/secure/candidatesPaginated/0 | -
+10:48:01 | 200 |  252.127974ms |  | GET | /api/secure/citizens/12-123-12334 | -
+10:48:02 | 200 |  201.658148ms |  | GET | /api/secure/citizens/12-123-12335 | -
+10:48:02 | 200 |   200.07786ms |  | GET | /api/secure/citizens/12345678 | -
+10:48:06 | 200 |  226.374737ms |  | GET | /api/secure/electionsPaginated/0 | -
+10:48:06 | 200 |  200.925181ms |  | GET | /api/secure/candidatesPaginated/0 | -
+10:48:06 | 200 |  201.058773ms |  | GET | /api/secure/citizens/12-123-12334 | -
+10:48:06 | 200 |  199.921096ms |  | GET | /api/secure/citizens/12-123-12335 | -
+10:48:06 | 200 |  201.708744ms |  | GET | /api/secure/citizens/12345678 | -
+10:48:20 | 200 |  218.124875ms |  | GET | /api/secure/electionsPaginated/0 | -
+10:48:20 | 200 |  201.529876ms |  | GET | /api/secure/candidatesPaginated/0 | -
+10:48:20 | 200 |  200.122283ms |  | GET | /api/secure/citizens/12-123-12334 | -
+10:48:21 | 200 |  207.097905ms |  | GET | /api/secure/citizens/12-123-12335 | -
+10:48:21 | 200 |  195.219595ms |  | GET | /api/secure/citizens/12345678 | -
+10:49:18 | 200 |  256.919668ms |  | GET | /api/secure/electionsPaginated/0 | -
+10:49:18 | 200 |  197.700773ms |  | GET | /api/secure/candidatesPaginated/0 | -
+10:49:18 | 200 |  200.160904ms |  | GET | /api/secure/citizens/12-123-12334 | -
+10:49:18 | 200 |  201.007117ms |  | GET | /api/secure/citizens/12-123-12335 | -
+10:49:19 | 200 |  200.827017ms |  | GET | /api/secure/citizens/12345678 | -
+10:49:38 | 200 |  163.148027ms |  | GET | /api/secure/electionsPaginated/0 | -
+10:49:38 | 200 |  200.144862ms |  | GET | /api/secure/candidatesPaginated/0 | -
+10:49:38 | 200 |  200.026058ms |  | GET | /api/secure/citizens/12-123-12334 | -
+10:49:38 | 200 |  199.281904ms |  | GET | /api/secure/citizens/12-123-12335 | -
+10:49:38 | 200 |  201.262242ms |  | GET | /api/secure/citizens/12345678 | -
+10:49:40 | 200 |  198.040484ms |  | GET | /api/secure/electionsPaginated/0 | -
+10:49:40 | 200 |  199.188194ms |  | GET | /api/secure/candidatesPaginated/0 | -
+10:49:40 | 200 |   200.39866ms |  | GET | /api/secure/citizens/12-123-12334 | -
+10:49:40 | 200 |  201.751006ms |  | GET | /api/secure/citizens/12-123-12335 | -
+10:49:41 | 200 |  199.509506ms |  | GET | /api/secure/citizens/12345678 | -
+10:49:50 | 200 |  220.627274ms |  | GET | /api/secure/electionsPaginated/0 | -
+10:49:50 | 200 |   201.10918ms |  | GET | /api/secure/candidatesPaginated/0 | -
+10:49:50 | 200 |   205.94975ms |  | GET | /api/secure/citizens/12-123-12334 | -
+10:49:50 | 200 |  195.775014ms |  | GET | /api/secure/citizens/12-123-12335 | -
+10:49:50 | 200 |  203.166009ms |  | GET | /api/secure/citizens/12345678 | -
+10:50:29 | 200 |   49.625604ms |  | GET | /api/secure/electionsPaginated/0 | -
+10:50:29 | 200 |   50.099356ms |  | GET | /api/secure/candidatesPaginated/0 | -
+10:50:29 | 200 |   51.469133ms |  | GET | /api/secure/citizens/12-123-12334 | -
+10:50:29 | 200 |   50.902026ms |  | GET | /api/secure/citizens/12-123-12335 | -
+10:50:29 | 200 |   51.964856ms |  | GET | /api/secure/citizens/12345678 | -
+10:50:31 | 200 |   50.822154ms |  | GET | /api/secure/electionsPaginated/0 | -
+10:50:31 | 200 |   49.982564ms |  | GET | /api/secure/candidatesPaginated/0 | -
+10:50:32 | 200 |   49.564828ms |  | GET | /api/secure/citizens/12-123-12334 | -
+10:50:32 | 200 |   50.420147ms |  | GET | /api/secure/citizens/12-123-12335 | -
+10:50:32 | 200 |   68.781864ms |  | GET | /api/secure/citizens/12345678 | -
+10:50:37 | 200 |   51.569475ms |  | GET | /api/secure/electionsPaginated/0 | -
+10:50:37 | 200 |   48.983121ms |  | GET | /api/secure/candidatesPaginated/0 | -
+10:50:37 | 200 |   49.370208ms |  | GET | /api/secure/citizens/12-123-12334 | -
+10:50:37 | 200 |   48.995212ms |  | GET | /api/secure/citizens/12-123-12335 | -
+10:50:37 | 200 |   50.200881ms |  | GET | /api/secure/citizens/12345678 | -
+10:50:38 | 200 |    52.95857ms |  | GET | /api/secure/electionsPaginated/0 | -
+10:50:38 | 200 |   49.848327ms |  | GET | /api/secure/candidatesPaginated/0 | -
+10:50:38 | 200 |   50.530051ms |  | GET | /api/secure/citizens/12-123-12334 | -
+10:50:38 | 200 |   51.038447ms |  | GET | /api/secure/citizens/12-123-12335 | -
+10:50:38 | 200 |    49.78057ms |  | GET | /api/secure/citizens/12345678 | -
+10:50:40 | 200 |   53.110083ms |  | GET | /api/secure/electionsPaginated/0 | -
+10:50:40 | 200 |   51.146909ms |  | GET | /api/secure/candidatesPaginated/0 | -
+10:50:40 | 200 |   49.072616ms |  | GET | /api/secure/citizens/12-123-12334 | -
+10:50:41 | 200 |   49.642548ms |  | GET | /api/secure/citizens/12-123-12335 | -
+10:50:41 | 200 |   50.248999ms |  | GET | /api/secure/citizens/12345678 | -
+10:50:41 | 200 |   52.539048ms |  | GET | /api/secure/electionsPaginated/0 | -
+10:50:41 | 200 |   50.282562ms |  | GET | /api/secure/candidatesPaginated/0 | -
+10:50:41 | 200 |   55.423676ms |  | GET | /api/secure/citizens/12-123-12334 | -
+10:50:41 | 200 |   49.062615ms |  | GET | /api/secure/citizens/12-123-12335 | -
+10:50:41 | 200 |   49.847704ms |  | GET | /api/secure/citizens/12345678 | -
+10:50:51 | 200 |   51.170466ms |  | GET | /api/secure/electionsPaginated/0 | -
+10:50:51 | 200 |   50.464858ms |  | GET | /api/secure/candidatesPaginated/0 | -
+10:50:51 | 200 |   48.959075ms |  | GET | /api/secure/citizens/12-123-12334 | -
+10:50:51 | 200 |   49.506495ms |  | GET | /api/secure/citizens/12-123-12335 | -
+10:50:51 | 200 |   49.580875ms |  | GET | /api/secure/citizens/12345678 | -
+10:51:11 | 200 |     53.1996ms |  | GET | /api/secure/electionsPaginated/0 | -
+10:51:11 | 200 |    53.50234ms |  | GET | /api/secure/candidatesPaginated/0 | -
+10:51:11 | 200 |   52.921857ms |  | GET | /api/secure/citizens/12-123-12334 | -
+10:51:11 | 200 |   50.124845ms |  | GET | /api/secure/citizens/12-123-12335 | -
+10:51:11 | 200 |   50.057828ms |  | GET | /api/secure/citizens/12345678 | -
+10:51:16 | 200 |   54.433949ms |  | GET | /api/secure/electionsPaginated/0 | -
+10:51:16 | 200 |   60.847874ms |  | GET | /api/secure/candidatesPaginated/0 | -
+10:51:16 | 200 |   49.627777ms |  | GET | /api/secure/citizens/12-123-12334 | -
+10:51:16 | 200 |   50.966756ms |  | GET | /api/secure/citizens/12-123-12335 | -
+10:51:16 | 200 |   49.742061ms |  | GET | /api/secure/citizens/12345678 | -
+10:51:20 | 200 |   51.148745ms |  | GET | /api/secure/electionsPaginated/0 | -
+10:51:20 | 200 |   49.494372ms |  | GET | /api/secure/candidatesPaginated/0 | -
+10:51:20 | 200 |   50.658863ms |  | GET | /api/secure/citizens/12-123-12334 | -
+10:51:20 | 200 |   51.254984ms |  | GET | /api/secure/citizens/12-123-12335 | -
+10:51:20 | 200 |   49.949398ms |  | GET | /api/secure/citizens/12345678 | -
+10:51:35 | 200 |   53.695436ms |  | GET | /api/secure/electionsPaginated/0 | -
+10:51:35 | 200 |   51.167941ms |  | GET | /api/secure/candidatesPaginated/0 | -
+10:51:35 | 200 |   50.467184ms |  | GET | /api/secure/citizens/12-123-12334 | -
+10:51:35 | 200 |   51.086969ms |  | GET | /api/secure/citizens/12-123-12335 | -
+10:51:35 | 200 |   50.115793ms |  | GET | /api/secure/citizens/12345678 | -
+10:51:52 | 200 |   51.917891ms |  | GET | /api/secure/electionsPaginated/0 | -
+10:51:53 | 200 |   51.249092ms |  | GET | /api/secure/candidatesPaginated/0 | -
+10:51:53 | 200 |   50.284449ms |  | GET | /api/secure/citizens/12-123-12334 | -
+10:51:53 | 200 |   49.280681ms |  | GET | /api/secure/citizens/12-123-12335 | -
+10:51:53 | 200 |   51.185474ms |  | GET | /api/secure/citizens/12345678 | -
+10:51:56 | 200 |   52.004041ms |  | GET | /api/secure/electionsPaginated/0 | -
+10:51:56 | 200 |   51.446071ms |  | GET | /api/secure/candidatesPaginated/0 | -
+10:51:56 | 200 |   50.710247ms |  | GET | /api/secure/citizens/12-123-12334 | -
+10:51:56 | 200 |   50.433035ms |  | GET | /api/secure/citizens/12-123-12335 | -
+10:51:56 | 200 |   49.878113ms |  | GET | /api/secure/citizens/12345678 | -
+10:52:01 | 200 |   51.418406ms |  | GET | /api/secure/electionsPaginated/0 | -
+10:52:01 | 200 |   49.814209ms |  | GET | /api/secure/candidatesPaginated/0 | -
+10:52:01 | 200 |   49.972377ms |  | GET | /api/secure/citizens/12-123-12334 | -
+10:52:01 | 200 |   50.152024ms |  | GET | /api/secure/citizens/12-123-12335 | -
+10:52:01 | 200 |   51.308229ms |  | GET | /api/secure/citizens/12345678 | -
+10:52:18 | 200 |   53.217579ms |  | GET | /api/secure/electionsPaginated/0 | -
+10:52:18 | 200 |   52.466457ms |  | GET | /api/secure/candidatesPaginated/0 | -
+10:52:18 | 200 |   50.864214ms |  | GET | /api/secure/citizens/12-123-12334 | -
+10:52:18 | 200 |   50.033702ms |  | GET | /api/secure/citizens/12-123-12335 | -
+10:52:18 | 200 |   51.791618ms |  | GET | /api/secure/citizens/12345678 | -
+10:52:34 | 200 |   52.917656ms |  | GET | /api/secure/electionsPaginated/0 | -
+10:52:34 | 200 |   53.332255ms |  | GET | /api/secure/candidatesPaginated/0 | -
+10:52:34 | 200 |   51.391216ms |  | GET | /api/secure/citizens/12-123-12334 | -
+10:52:34 | 200 |    52.01564ms |  | GET | /api/secure/citizens/12-123-12335 | -
+10:52:34 | 200 |   49.937842ms |  | GET | /api/secure/citizens/12345678 | -
+10:54:38 | 200 |  206.859071ms |  | GET | /api/secure/electionsPaginated/0 | -
+10:54:38 | 200 |   45.905253ms |  | GET | /api/secure/candidatesPaginated/0 | -
+10:54:38 | 200 |   49.364884ms |  | GET | /api/secure/citizens/12-123-12334 | -
+10:54:38 | 200 |   45.163078ms |  | GET | /api/secure/citizens/12-123-12335 | -
+10:54:38 | 200 |   45.121801ms |  | GET | /api/secure/citizens/12345678 | -
+10:54:40 | 200 |   46.380786ms |  | GET | /api/secure/electionsPaginated/0 | -
+10:54:40 | 200 |   44.929759ms |  | GET | /api/secure/candidatesPaginated/0 | -
+10:54:40 | 200 |   47.493486ms |  | GET | /api/secure/citizens/12-123-12334 | -
+10:54:40 | 200 |   44.503789ms |  | GET | /api/secure/citizens/12-123-12335 | -
+10:54:41 | 200 |   45.774296ms |  | GET | /api/secure/citizens/12345678 | -
+10:54:43 | 200 |   46.928984ms |  | GET | /api/secure/electionsPaginated/0 | -
+10:54:43 | 200 |   44.302981ms |  | GET | /api/secure/candidatesPaginated/0 | -
+10:54:43 | 200 |   45.194005ms |  | GET | /api/secure/citizens/12-123-12334 | -
+10:54:43 | 200 |   45.010118ms |  | GET | /api/secure/citizens/12-123-12335 | -
+10:54:44 | 200 |   44.604466ms |  | GET | /api/secure/citizens/12345678 | -
+10:55:23 | 200 |   46.732249ms |  | GET | /api/secure/electionsPaginated/0 | -
+10:55:23 | 200 |   45.699129ms |  | GET | /api/secure/candidatesPaginated/0 | -
+10:55:23 | 200 |   45.976089ms |  | GET | /api/secure/citizens/12-123-12334 | -
+10:55:23 | 200 |    45.34328ms |  | GET | /api/secure/citizens/12-123-12335 | -
+10:55:23 | 200 |   45.693989ms |  | GET | /api/secure/citizens/12345678 | -
+10:55:32 | 200 |    47.91609ms |  | GET | /api/secure/electionsPaginated/0 | -
+10:55:32 | 200 |   44.943857ms |  | GET | /api/secure/candidatesPaginated/0 | -
+10:55:32 | 200 |   44.971238ms |  | GET | /api/secure/citizens/12-123-12334 | -
+10:55:32 | 200 |    43.67341ms |  | GET | /api/secure/citizens/12-123-12335 | -
+10:55:32 | 200 |   46.220705ms |  | GET | /api/secure/citizens/12345678 | -
+10:55:38 | 200 |   46.971202ms |  | GET | /api/secure/electionsPaginated/0 | -
+10:55:38 | 200 |   47.260987ms |  | GET | /api/secure/candidatesPaginated/0 | -
+10:55:38 | 200 |   47.633647ms |  | GET | /api/secure/citizens/12-123-12334 | -
+10:55:38 | 200 |    46.35772ms |  | GET | /api/secure/citizens/12-123-12335 | -
+10:55:38 | 200 |   48.065468ms |  | GET | /api/secure/citizens/12345678 | -
+10:55:43 | 200 |   51.247906ms |  | GET | /api/secure/electionsPaginated/0 | -
+10:55:43 | 200 |   44.795344ms |  | GET | /api/secure/candidatesPaginated/0 | -
+10:55:43 | 200 |   47.397963ms |  | GET | /api/secure/citizens/12-123-12334 | -
+10:55:43 | 200 |   46.210491ms |  | GET | /api/secure/citizens/12-123-12335 | -
+10:55:43 | 200 |   45.043279ms |  | GET | /api/secure/citizens/12345678 | -
+10:55:51 | 200 |   47.820053ms |  | GET | /api/secure/electionsPaginated/0 | -
+10:55:51 | 200 |   45.356404ms |  | GET | /api/secure/candidatesPaginated/0 | -
+10:55:51 | 200 |   46.283476ms |  | GET | /api/secure/citizens/12-123-12334 | -
+10:55:51 | 200 |    46.21658ms |  | GET | /api/secure/citizens/12-123-12335 | -
+10:55:51 | 200 |   45.363348ms |  | GET | /api/secure/citizens/12345678 | -
+10:56:01 | 200 |   51.065105ms |  | GET | /api/secure/electionsPaginated/0 | -
+10:56:01 | 200 |   46.157545ms |  | GET | /api/secure/candidatesPaginated/0 | -
+10:56:01 | 200 |   45.454316ms |  | GET | /api/secure/citizens/12-123-12334 | -
+10:56:01 | 200 |   46.211228ms |  | GET | /api/secure/citizens/12-123-12335 | -
+10:56:01 | 200 |    45.33952ms |  | GET | /api/secure/citizens/12345678 | -
+10:56:08 | 200 |   47.744274ms |  | GET | /api/secure/electionsPaginated/0 | -
+10:56:08 | 200 |   44.460937ms |  | GET | /api/secure/candidatesPaginated/0 | -
+10:56:08 | 200 |   45.096229ms |  | GET | /api/secure/citizens/12-123-12334 | -
+10:56:08 | 200 |   46.327794ms |  | GET | /api/secure/citizens/12-123-12335 | -
+10:56:08 | 200 |   46.407924ms |  | GET | /api/secure/citizens/12345678 | -
+10:56:08 | 200 |      46.645ms |  | GET | /api/secure/electionsPaginated/0 | -
+10:56:08 | 200 |   45.898026ms |  | GET | /api/secure/candidatesPaginated/0 | -
+10:56:08 | 200 |   46.392284ms |  | GET | /api/secure/citizens/12-123-12334 | -
+10:56:08 | 200 |   46.491942ms |  | GET | /api/secure/citizens/12-123-12335 | -
+10:56:08 | 200 |   45.425289ms |  | GET | /api/secure/citizens/12345678 | -
+10:56:29 | 200 |   44.975016ms |  | GET | /api/secure/electionsPaginated/0 | -
+10:56:31 | 200 |   95.607336ms |  | DELETE | /api/secure/election/9 | -
+10:56:31 | 200 |   44.444869ms |  | GET | /api/secure/electionsPaginated/0 | -
+10:56:37 | 200 |   47.059999ms |  | GET | /api/secure/citizens/12-123-12334 | -
+10:56:37 | 200 |   44.659621ms |  | GET | /api/secure/citizens/12-123-12335 | -
+10:56:37 | 200 |   45.731224ms |  | GET | /api/secure/citizens/12345678 | -
+10:56:39 | 200 |   47.011798ms |  | GET | /api/secure/electionsPaginated/0 | -
+10:56:39 | 200 |   47.376053ms |  | GET | /api/secure/candidatesPaginated/0 | -
+10:56:49 | 200 |   48.103445ms |  | GET | /api/secure/electionsPaginated/0 | -
+10:57:56 | 201 |  202.564998ms |  | POST | /api/secure/election | -
+10:57:56 | 200 |   47.159531ms |  | GET | /api/secure/electionsPaginated/0 | -
+10:58:32 | 201 |   97.247893ms |  | POST | /api/secure/election | -
+10:58:32 | 200 |    47.33976ms |  | GET | /api/secure/electionsPaginated/0 | -
+10:58:44 | 200 |   56.210793ms |  | GET | /api/secure/candidatesPaginated/0 | -
+10:59:08 | 200 |   49.258483ms |  | GET | /api/secure/citizensPaginated/0 | -
+10:59:40 | 201 |   102.90574ms |  | POST | /api/secure/candidate | -
+10:59:40 | 200 |    45.12183ms |  | GET | /api/secure/candidatesPaginated/0 | -
+2025/04/05 11:00:14 Error in Candidate Creation: failed to insert candidate: failed to execute SQL:
+SQLite error: FOREIGN KEY constraint failed
+11:00:13 | 500 |   45.964485ms |  | POST | /api/secure/candidate | -
+11:00:13 | 200 |   43.510559ms |  | GET | /api/secure/candidatesPaginated/0 | -
+11:00:50 | 201 |  101.204825ms |  | POST | /api/secure/candidate | -
+11:00:50 | 200 |   47.908565ms |  | GET | /api/secure/candidatesPaginated/0 | -
+11:01:14 | 201 |     90.4602ms |  | POST | /api/secure/candidate | -
+11:01:15 | 200 |   45.467029ms |  | GET | /api/secure/candidatesPaginated/0 | -
+11:01:42 | 200 |  102.741577ms |  | PUT | /api/secure/citizens/12-123-12334 | -
+11:01:42 | 200 |   44.367991ms |  | GET | /api/secure/citizensPaginated/0 | -
+11:01:49 | 200 |  140.678967ms |  | PUT | /api/secure/citizens/12-123-12335 | -
+11:01:49 | 200 |   58.315835ms |  | GET | /api/secure/citizensPaginated/0 | -
+11:01:56 | 200 |   84.943031ms |  | PUT | /api/secure/citizens/12345678 | -
+11:01:56 | 200 |   46.172587ms |  | GET | /api/secure/citizensPaginated/0 | -
+2025/04/05 11:02:27 Error in HandleCreate: Failed to insert citizen details: failed to execute SQL:
+SQLite error: CHECK constraint failed: fullName LIKE '% %'
+11:02:26 | 500 |   51.300814ms |  | POST | /api/secure/citizens | -
+11:02:26 | 200 |   49.953205ms |  | GET | /api/secure/citizensPaginated/0 | -
+11:02:51 | 201 |  137.403419ms |  | POST | /api/secure/citizens | -
+11:02:51 | 200 |   45.650487ms |  | GET | /api/secure/citizensPaginated/0 | -
+11:03:16 | 201 |   95.883495ms |  | POST | /api/secure/citizens | -
+11:03:16 | 200 |   47.791762ms |  | GET | /api/secure/citizensPaginated/0 | -
+11:03:52 | 201 |   92.877444ms |  | POST | /api/secure/candidate | -
+11:03:52 | 200 |    44.80355ms |  | GET | /api/secure/candidatesPaginated/0 | -
+11:05:51 | 201 |  347.574571ms |  | POST | /api/secure/candidate | -
+11:05:51 | 200 |   49.116891ms |  | GET | /api/secure/candidatesPaginated/0 | -
+11:06:23 | 201 |  101.531683ms |  | POST | /api/secure/candidate | -
+11:06:23 | 200 |   48.439967ms |  | GET | /api/secure/candidatesPaginated/0 | -
+11:06:54 | 201 |  316.970651ms |  | POST | /api/secure/candidate | -
+11:06:55 | 200 |   49.269147ms |  | GET | /api/secure/candidatesPaginated/0 | -
+2025/04/05 11:07:26 Error in Candidate Creation: failed to insert candidate: failed to execute SQL:
+SQLite error: FOREIGN KEY constraint failed
+11:07:26 | 500 |   53.259661ms |  | POST | /api/secure/candidate | -
+11:07:26 | 200 |   54.575681ms |  | GET | /api/secure/candidatesPaginated/0 | -
+11:07:49 | 201 |   92.729951ms |  | POST | /api/secure/candidate | -
+11:07:50 | 200 |   49.567282ms |  | GET | /api/secure/candidatesPaginated/0 | -
+11:08:18 | 201 |  139.865207ms |  | POST | /api/secure/candidate | -
+11:08:18 | 200 |   64.841679ms |  | GET | /api/secure/candidatesPaginated/0 | -
+11:08:50 | 201 |   95.435698ms |  | POST | /api/secure/candidate | -
+11:08:50 | 200 |   48.134506ms |  | GET | /api/secure/candidatesPaginated/0 | -
+11:08:57 | 200 |   48.951754ms |  | GET | /api/secure/electionsPaginated/0 | -
+11:08:57 | 200 |   49.375103ms |  | GET | /api/secure/candidatesPaginated/0 | -
+11:08:57 | 200 |   48.420049ms |  | GET | /api/secure/citizens/12-123-12334 | -
+11:08:57 | 200 |   48.863586ms |  | GET | /api/secure/citizens/12-123-12335 | -
+11:08:57 | 200 |   49.199211ms |  | GET | /api/secure/citizens/12345678 | -
+11:08:57 | 200 |   50.467527ms |  | GET | /api/secure/citizens/12-123-12336 | -
+11:08:57 | 200 |   49.099652ms |  | GET | /api/secure/citizens/12-123-12337 | -
+11:08:57 | 200 |   48.867814ms |  | GET | /api/secure/citizens/12-123-12334 | -
+11:08:57 | 200 |   49.070037ms |  | GET | /api/secure/citizens/12-123-12335 | -
+11:08:57 | 200 |    49.10918ms |  | GET | /api/secure/citizens/12345678 | -
+11:08:57 | 200 |   51.939408ms |  | GET | /api/secure/citizens/12-123-12336 | -
+11:08:57 | 200 |   54.679485ms |  | GET | /api/secure/citizens/12-123-12337 | -
+11:09:50 | 200 |   50.049666ms |  | GET | /api/secure/electionsPaginated/0 | -
+11:09:59 | 200 |  102.406079ms |  | DELETE | /api/secure/election/10 | -
+11:09:59 | 200 |   50.534953ms |  | GET | /api/secure/electionsPaginated/0 | -
+11:10:01 | 200 |   50.796184ms |  | GET | /api/secure/electionsPaginated/0 | -
+11:10:01 | 200 |    49.01941ms |  | GET | /api/secure/candidatesPaginated/0 | -
+11:10:01 | 200 |   50.505676ms |  | GET | /api/secure/citizens/12-123-12334 | -
+11:10:01 | 200 |   50.161155ms |  | GET | /api/secure/citizens/12-123-12335 | -
+11:10:01 | 200 |    49.07789ms |  | GET | /api/secure/citizens/12345678 | -
+11:10:01 | 200 |   48.425689ms |  | GET | /api/secure/citizens/12-123-12336 | -
+11:10:01 | 200 |   47.785039ms |  | GET | /api/secure/citizens/12-123-12337 | -
+2025/04/05 11:10:09 Incrementing vote for key: votes:11:13
+2025/04/05 11:10:09 Num: 1
+11:10:09 | 200 |     1.67376ms |  | POST | /api/castVote | -
+2025/04/05 11:10:09 Incrementing vote for key: votes:11:14
+2025/04/05 11:10:09 Num: 1
+11:10:09 | 200 |     391.619µs |  | POST | /api/castVote | -
+2025/04/05 11:10:09 Incrementing vote for key: votes:11:17
+2025/04/05 11:10:09 Num: 1
+11:10:09 | 200 |     636.552µs |  | POST | /api/castVote | -
+2025/04/05 11:10:13 Shutting Down Server ...
+2025/04/05 11:10:13 Server Stopped.
+ | /api/castVote | -
 2025/04/02 17:39:29 Incrementing vote for key: votes:8:4
 2025/04/02 17:39:29 Num: 170
 17:39:28 | 200 |     188.435µs |  | POST | /api/castVote | -

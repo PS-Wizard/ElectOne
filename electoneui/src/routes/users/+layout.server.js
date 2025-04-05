@@ -10,7 +10,7 @@ export function load({ cookies, url }) {
 
     if (token && url.pathname === "/users/login") {
         console.log("User is already logged in. Redirecting to /users/dashboard");
-        throw redirect(302, "/users/dashboard");
+        throw redirect(302, "/users");
     }
 
     return {}; 
