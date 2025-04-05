@@ -1,6 +1,8 @@
 package redis
 
-import "github.com/gofiber/fiber/v2"
+import (
+	"github.com/gofiber/fiber/v2"
+)
 
 func HandleVoteIncrement(ctx *fiber.Ctx) error {
 	var voteRequest vote

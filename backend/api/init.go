@@ -49,17 +49,7 @@ func InitializeRedis(host, port, password string) {
 	if err != nil {
 		log.Fatalf("Failed To Connect To Redis: %v", err)
 	}
-	go startSubscriber()
 	log.Println("Redis Connection Established and publisher started")
-}
-
-func startSubscriber() {
-	pubsub := RDB.Subscribe(CTX, "voteUpdates")
-	defer pubsub.Close()
-	ch := pubsub.Channel()
-	for msg := range ch {
-		fmt.Printf("Received message: %s\n", msg.Payload)
-	}
 }
 
 func CloseRedis() {

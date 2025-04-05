@@ -28,7 +28,7 @@ func main() {
 	api.InitializeDB(authToken, dbURL)
 	defer api.CloseDB()
 
-    // Redis
+	// Redis
 	api.InitializeRedis("localhost", "6379", "")
 	defer api.CloseRedis()
 
@@ -57,7 +57,7 @@ func main() {
 		TrustedProxies:          []string{"127.0.0.1", "192.168.1.1"}, // Define trusted proxies
 	})
 	app.Use(cors.New(cors.Config{
-		AllowOrigins:     "https://localhost:5173", // Specify your frontend origin
+        AllowOrigins:     "https://localhost:5173,http://localhost:5173", // Specify your frontend origin
 		AllowMethods:     "GET,POST,PUT,DELETE",
 		AllowHeaders:     "Origin, Content-Type, Accept, Cookie",
 		AllowCredentials: true,

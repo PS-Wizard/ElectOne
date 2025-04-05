@@ -1,12 +1,16 @@
 package routes
 
 import (
+	"log"
+
+	"github.com/PS-Wizard/ElectOneAPI/api"
 	auth "github.com/PS-Wizard/ElectOneAPI/api/Auth"
 	candidates "github.com/PS-Wizard/ElectOneAPI/api/Candidates"
 	citizens "github.com/PS-Wizard/ElectOneAPI/api/Citizens"
 	elections "github.com/PS-Wizard/ElectOneAPI/api/Elections"
 	redis "github.com/PS-Wizard/ElectOneAPI/api/Redis"
 	users "github.com/PS-Wizard/ElectOneAPI/api/Users"
+	"github.com/gofiber/contrib/websocket"
 	"github.com/gofiber/fiber/v2"
 )
 
@@ -48,5 +52,27 @@ func HandleRoutes(app *fiber.App) {
 
 	// Cast Vote:
 	app.Post("/api/castVote", TokenValidationUser, redis.HandleVoteIncrement)
+	// Server Sent Event For Live Vote Count
+	app.Get("/api/voteStream", websocket.New(func(c *websocket.Conn) {
+		// Subscribe to Redis channel
+		pubsub := api.RDB.PSubscribe(api.CTX, "voteUpdates")
+		defer pubsub.Close()
+
+		// Listen for Redis messages and send them to the WebSocket client
+		for {
+			msg, err := pubsub.ReceiveMessage(api.CTX)
+			if err != nil {
+				log.Println("Error receiving Redis message:", err)
+				break
+			}
+
+			// Send the message to the WebSocket client
+			err = c.WriteMessage(websocket.TextMessage, []byte(msg.Payload))
+			if err != nil {
+				log.Println("Error sending WebSocket message:", err)
+				break
+			}
+		}
+	}))
 
 }

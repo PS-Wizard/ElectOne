@@ -1,9 +1,10 @@
 <script>
     import { onMount, onDestroy } from "svelte";
-    import { writable } from "svelte/store";
+    import { writable, derived } from "svelte/store";
     import { browser } from "$app/environment";
 
     let elections = writable([]);
+    let votes = writable({});
     let selectedCandidates = writable({}); // Track selected candidates per post
     let candidatesByPost = writable({});
     let chart; // For storing chart instance
@@ -38,6 +39,7 @@
             grouped[candidate.post].push({ ...candidate, ...citizenData });
         }
         candidatesByPost.set(grouped);
+        console.log("$candidatesByPost:", grouped); // Add this line
     }
 
     async function castVotes(electionID) {
@@ -73,80 +75,59 @@
         }
     }
 
-    function renderGraph() {
-        if (browser) {
-            const ctx = document
-                .getElementById("multiLineChart")
-                .getContext("2d");
+    let socket;
 
-            const data = {
-                labels: ["A", "B", "C", "D", "E"],
-                datasets: [
-                    {
-                        label: "Group 1",
-                        data: [12, 19, 3, 5, 2],
-                        borderColor: "#4F46E5",
-                        fill: false,
-                        tension: 0.1,
-                    },
-                    {
-                        label: "Group 2",
-                        data: [5, 9, 7, 8, 3],
-                        borderColor: "#F59E0B",
-                        fill: false,
-                        tension: 0.1,
-                    },
-                    {
-                        label: "Group 3",
-                        data: [10, 15, 8, 6, 9],
-                        borderColor: "#10B981",
-                        fill: false,
-                        tension: 0.1,
-                    },
-                ],
-            };
-
-            const options = {
-                responsive: true,
-                maintainAspectRatio: false,
-                scales: {
-                    y: { beginAtZero: true },
-                },
-            };
-
-            if (chart) {
-                chart.destroy();
-            }
-
-            chart = new Chart(ctx, {
-                type: "line",
-                data: data,
-                options: options,
-            });
-        }
-    }
+    const candidateVotes = derived(
+        [votes, candidatesByPost],
+        ([$votes, $candidatesByPost]) => {
+            const votesMap = {};
+            // Flatten all candidates and map their votes
+            Object.values($candidatesByPost)
+                .flat()
+                .forEach((candidate) => {
+                    votesMap[candidate.candidateID] =
+                        $votes[candidate.candidateID] || 0;
+                });
+            return votesMap;
+        },
+    );
 
     onMount(() => {
         fetchElections();
-        setTimeout(renderGraph, 500); // Delay renderGraph to make sure data is ready
+
+        // Connect to WebSocket
+        socket = new WebSocket("wss://localhost:3000/api/voteStream");
+
+        // Modify your WebSocket handler to force a new object reference
+        socket.onmessage = (event) => {
+            const data = JSON.parse(event.data);
+            console.log($votes);
+            console.log(data);
+            votes.update((v) => {
+                return { ...v, [data.candidateID]: data.votes };
+            });
+        };
+
+        socket.onerror = (err) => {
+            console.error("WebSocket error:", err);
+        };
+
+        socket.onclose = () => {
+            console.log("WebSocket connection closed");
+        };
     });
 
     onDestroy(() => {
+        if (socket) socket.close();
         if (chart) chart.destroy();
     });
 </script>
 
 <h1 class="text-3xl font-bold text-center mb-6">Users Page Dashboard</h1>
-
-<!-- Multi-line graph above -->
-<div class="w-full h-64 mb-8">
-    <canvas id="multiLineChart"></canvas>
-</div>
-
 <!-- Grouped Candidates with Select Options -->
 <div class="space-y-6">
     {#each $elections as election}
-        <div class="card  shadow-lg p-6 rounded-lg">
+        <div class="card shadow-lg p-6 rounded-lg">
             <h2 class="text-2xl font-semibold">{election.title}</h2>
             <p class="text-sm text-gray-500">
                 Start Date: {election.startDate} | End Date: {election.endDate}
@@ -161,7 +142,9 @@
                         <h4 class="text-lg font-semibold">{post}</h4>
                         <div class="flex flex-wrap gap-4">
                             {#each candidates as candidate (candidate.candidateID)}
-                                <div class="relative rounded-lg transition duration-300 transform hover:scale-105">
+                                <div
+                                    class="relative rounded-lg transition duration-300 transform hover:scale-105"
+                                >
                                     <input
                                         type="radio"
                                         id={candidate.candidateID}
@@ -185,8 +168,27 @@
                                             <h2 class="card-title text-center">
                                                 {candidate.fullName}
                                             </h2>
-                                            <p class="text-center text-sm opacity-70">
-                                                Group: <span class="badge badge-accent">{candidate.group}</span>
+                                            <p
+                                                class="text-center text-sm opacity-70"
+                                            >
+                                                Group: <span
+                                                    class="badge badge-accent"
+                                                >
+                                                    {candidate.group}</span
+                                                >
+                                            </p>
+                                            <p
+                                                class="text-center text-lg font-bold"
+                                            >
+                                                Votes: <span
+                                                    class="text-primary"
+                                                >
+                                                    {$votes[
+                                                        String(
+                                                            candidate.candidateID,
+                                                        )
+                                                    ] || 0}
+                                                </span>
                                             </p>
                                         </div>
                                     </label>
