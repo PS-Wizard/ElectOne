@@ -1,4 +1,4 @@
 node_modules
-svelte_kit
+.svelte_kit
 dump.rdb
 server.log

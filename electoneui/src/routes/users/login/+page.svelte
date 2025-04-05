@@ -45,7 +45,7 @@
         />
         <button on:click={login} class="btn btn-primary w-full">Login</button>
         <a
-            href="/forgot-password"
+            href="/users/forgot"
             class="text-sm text-blue-500 text-center block mt-2"
             >Forgot Password?</a
         >
