@@ -1,35 +1,71 @@
-body { 
-    font-family: Arial, sans-serif; 
-    text-align: center; 
-    background-color: #f4f4f4; 
-    padding: 20px; 
+/* General Styling */
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f4f4f4;
+    text-align: center;
 }
 
-.container { 
-    max-width: 700px; 
-    margin: auto; 
-    padding: 20px; 
-    background: white; 
-    border-radius: 10px; 
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); 
+/* Main Content */
+.content {
+    padding: 40px;
 }
 
-h1, h2 { 
-    color: #333; 
+/* Footer Styling */
+footer {
+    background-color: #222;
+    color: white;
+    padding: 20px 0;
+    text-align: center;
+    margin-top: 50px;
 }
 
-p, li { 
-    font-size: 18px; 
-    line-height: 1.6; 
+.footer-content {
+    max-width: 1000px;
+    margin: 0 auto;
 }
 
-.intro {
-    font-size: 20px;
+/* Footer Links */
+.footer-links {
+    list-style: none;
+    padding: 0;
+    margin: 10px 0;
+}
+
+.footer-links li {
+    display: inline;
+    margin: 0 15px;
+}
+
+.footer-links a {
+    color: white;
+    text-decoration: none;
     font-weight: bold;
 }
 
-ul, ol {
-    text-align: left;
-    display: inline-block;
+.footer-links a:hover {
+    text-decoration: underline;
+}
+
+/* Contact Information */
+.contact-info {
+    margin: 10px 0;
+}
+
+.contact-info a {
+    color: #FFD700;
+    text-decoration: none;
+}
+
+.contact-info a:hover {
+    text-decoration: underline;
+}
+
+
+/* Disclaimer */
+.disclaimer {
+    font-size: 12px;
     margin-top: 10px;
+    opacity: 0.8;
 }
