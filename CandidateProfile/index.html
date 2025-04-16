@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Candidate Profiles</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-900 text-white p-6">
+    <div class="container mx-auto">
+        <h1 class="text-3xl font-bold text-center text-blue-400 mb-6">Candidate Profiles</h1>
+        <div id="candidateList" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            <div class="bg-gray-800 p-4 rounded-lg shadow candidate" data-id="1">
+                <h3 class="text-xl font-bold">Candidate 1</h3>
+                <p class="text-gray-400">Party: Nepali Congress</p>
+                <p class="text-gray-400">Applying for: Mayor</p>
+                <div id="profile1" class="mt-2 bg-gray-700 p-2 rounded">
+                    <p>Experience: 10 years in public service.</p>
+                    <p>Agenda: Development & Transparency.</p>
+                </div>
+            </div>
+            <div class="bg-gray-800 p-4 rounded-lg shadow candidate" data-id="2">
+                <h3 class="text-xl font-bold">Candidate 2</h3>
+                <p class="text-gray-400">Party: Nepal Communist Party</p>
+                <p class="text-gray-400">Applying for: Governor</p>
+                <div id="profile2" class="mt-2 bg-gray-700 p-2 rounded">
+                    <p>Experience: 8 years in governance.</p>
+                    <p>Agenda: Economic growth & equality.</p>
+                </div>
+            </div>
+            <div class="bg-gray-800 p-4 rounded-lg shadow candidate" data-id="3">
+                <h3 class="text-xl font-bold">Candidate 3</h3>
+                <p class="text-gray-400">Party: Rastriya Swotantra Party</p>
+                <p class="text-gray-400">Applying for: Minister</p>
+                <div id="profile3" class="mt-2 bg-gray-700 p-2 rounded">
+                    <p>Experience: 5 years in policy-making.</p>
+                    <p>Agenda: Education & healthcare reforms.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
+

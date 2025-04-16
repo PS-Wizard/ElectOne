@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Terms & Conditions Alert</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        #termsModal {
+            display: none;
+        }
+    </style>
+</head>
+<body class="bg-gray-900 text-white flex items-center justify-center h-screen">
+    <!-- Terms & Conditions Modal -->
+    <div id="termsModal" class="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50">
+        <div class="bg-gray-800 p-6 rounded-lg shadow-lg max-w-md w-full relative">
+            <h2 class="text-xl font-bold text-yellow-400">Terms & Conditions</h2>
+            <div id="termsContent" class="text-sm text-gray-300 mt-2">
+                <p><strong>1. Fair Voting:</strong> Each voter can cast only one vote.</p>
+                <p><strong>2. Security:</strong> Your identity will be verified before voting.</p>
+                <p><strong>3. Confidentiality:</strong> Your vote remains private and cannot be changed once cast.</p>
+                <p><strong>4. Time Limit:</strong> Voting is open only during the designated time, and the system will automatically close once the time expires.</p>
+                <p><strong>5. Misuse:</strong> Misuse of the system will lead to disqualification from the election.</p>
+                <p><strong>6. Accurate Information:</strong> Ensure that all provided details are correct before submitting your vote.</p>
+                <p><strong>7. Unauthorized Activity:</strong> Any unauthorized activity will be flagged and reported immediately.</p>
+            </div>
+            <!-- Checkbox for accepting terms -->
+            <div class="flex items-center mt-4">
+                <input type="checkbox" id="acceptCheckbox" class="mr-2" />
+                <label for="acceptCheckbox" class="text-sm text-gray-300">
+                    I agree to the <a href="/terms" target="_blank" class="text-blue-400 underline">Terms and Conditions</a>.
+                </label>
+            </div>
+            <!-- Terms and Conditions Acceptance Message -->
+            <p class="text-sm text-gray-400 mt-2">By clicking on accept, you are accepting our Terms and Conditions.</p>
+            <div class="flex justify-between mt-4">
+                <button id="acceptBtn" class="bg-green-500 px-4 py-2 rounded-lg hover:bg-green-600 disabled:bg-gray-500" disabled>Accept</button>
+                <button id="declineBtn" class="bg-red-500 px-4 py-2 rounded-lg hover:bg-red-600">Decline</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const modal = document.getElementById("termsModal");
+        const acceptBtn = document.getElementById("acceptBtn");
+        const declineBtn = document.getElementById("declineBtn");
+        const acceptCheckbox = document.getElementById("acceptCheckbox");
+
+        // Show the modal when the page loads
+        function showModal() {
+            modal.style.display = "flex";
+        }
+
+        // Enable the accept button only when the checkbox is checked
+        acceptCheckbox.addEventListener("change", () => {
+            acceptBtn.disabled = !acceptCheckbox.checked;
+        });
+
+        // If accepted, proceed with registration (you can add additional registration logic here)
+        acceptBtn.addEventListener("click", () => {
+            modal.style.display = "none";
+            alert("Thank you for accepting the Terms & Conditions. Proceeding with registration...");
+            // Here you can add the logic for account registration, for example:
+            // window.location.href = "registrationPage.html"; (or your registration logic)
+        });
+
+        // If declined, show an alert and prevent registration
+        declineBtn.addEventListener("click", () => {
+            modal.style.display = "none";
+            alert("You cannot proceed without accepting the terms.");
+            navigator.vibrate(200); // Optional vibration feedback
+            // Prevent registration or redirect to an information page
+        });
+
+        // Trigger the modal to appear on page load
+        window.onload = showModal;
+    </script>
+</body>
+</html>
