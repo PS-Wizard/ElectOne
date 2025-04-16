@@ -1,0 +1,108 @@
+body {
+    background-color: #000;
+    color: white;
+    font-family: Arial, sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+    
+}
+
+.login-details {
+    background: rgba(255, 255, 255, 0.05);
+    padding: 25px;
+    border-radius: 12px;
+    text-align: center;
+    width: 320px;
+    box-shadow: 10px rgba(255, 255, 255, 0.2);
+    border: 1px solid rgba(255, 255, 255, 0.6);
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+.login-details h2,
+.login-details p:first-of-type {
+    align-self: flex-start;
+    margin-left: 5px;
+}
+
+.login-input {
+    margin: 15px 0;
+    text-align: left;
+    position: relative; 
+    
+}
+
+label {
+    display: block;
+    font-size: 15px;
+    margin-bottom: 10px;
+}
+label[for="password"]{
+    padding-top: 3px;
+}
+
+input {
+    width: 100%;
+    padding: 10px;
+    padding-right: 0;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 6px;
+    background: rgba(255, 255, 255, 0.1);
+    color: white;
+    outline: none;
+}
+
+button {
+    background: white;
+    color: black;
+    border: none;
+    padding: 10px;
+    width: 100%;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    margin-top: 10px;
+    font-weight: bold;
+}
+
+button:hover {
+    background: #dddddd;
+}
+
+a {
+    color: white;
+    text-decoration: none;
+    font-size: 12px;
+}
+
+.forgot-password-container {
+    position: absolute;
+    top: -20px; 
+    right: 0;
+    font-size: 12px;
+    padding-top: 25px;
+}
+
+.forgot-password-container a {
+    text-decoration: none;
+    color: white;
+    font-size: 14px;
+}
+
+.forgot-password-container a:hover {
+    text-decoration: underline;
+}
+
+p a {
+    text-decoration: none;
+    margin-left: 5px;
+    font-size: 15px;
+}
+
+p a:hover {
+    text-decoration: underline;
+}
