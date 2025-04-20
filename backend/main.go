@@ -15,12 +15,12 @@ import (
 
 func main() {
 	// TURSO:
-	authToken := os.Getenv("TURSO_AUTH_TOKEN")
+	authToken := "eyJhbGciOiJFZERTQSIsInR5cCI6IkpXVCJ9.eyJhIjoicnciLCJpYXQiOjE3NDUxMTE4NzIsImlkIjoiMTQ4NmEyZWQtNjRlMy00NzJiLTg5ODItN2EzOThhYzkwMDk0IiwicmlkIjoiNmE5ZWIzMTctODYyOC00MGZiLTgxZTUtMjVlYTFmYjUyMTY1In0.yVcKyknNuFFR-pWf8LWpiDUcoAGefv-FioUBYlvIr0hrPMkFKtMR7uJqCKhVvzsR2QGE62nC-W1_a9PI3yjIDQ"
 	if authToken == "" {
 		log.Fatal("Turso's Authentication Token Missing From Enviroment")
 	}
 
-	dbURL := os.Getenv("TURSO_DATABASE_URL")
+	dbURL := "libsql://votingsystem-wizard.turso.io"
 	if dbURL == "" {
 		log.Fatal("Turso's Database URL Missing From Enviroment")
 	}

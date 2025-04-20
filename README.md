@@ -1,180 +1,65 @@
-A more secure, and performant port of the previous API.
+<p align="center">
+  <img src="https://readme-typing-svg.demolab.com?font=Fira+Code&size=28&duration=3000&pause=500&color=00F7F7&center=true&vCenter=true&width=435&lines=ELECTONE+%E2%9C%A8;Real-time+voting+system" alt="Typing SVG" />
+</p>
 
-# TODO: 
-- some routes need to be exposed to the user too.
-- The `getCandidate`, currently responds with the `citizenID` too, if its admin thats fine, but if the request is from the user, that field needs to stay hidden
-- Authentication for `user` and `admin` seperately
-    - Different JWT tokens probably
-        - After which need to update the middlewares `TokenValidationAdmin` & `TokenValidationUser`
-            - Validation of the JWT will probably include:
-                - Expiration validation
-                - Claims validation
-                    - Which although, will probably also be handeled in the "frontend's backend", the one that's gonna handle the routes
+---
 
-```mermaid
-erDiagram
-CITIZENS {
-    VARCHAR citizenID PK "Citizen ID"
-        VARCHAR fullName "Full Name"
-        DATE dateOfBirth "Date of Birth"
-        TEXT placeOfResidence "Place of Residence"
-}
-USERS {
-    INTEGER userID PK "User ID"
-        VARCHAR citizenID FK "Citizen ID"
-        VARCHAR password "Password"
-}
-ADMINS {
-    INTEGER adminID PK "Admin ID"
-        VARCHAR email "Email"
-        VARCHAR password "Password"
-}
-ELECTIONS {
-    INTEGER electionID PK "Election ID"
-        VARCHAR title "Title"
-        DATE startDate "Start Date"
-        DATE endDate "End Date"
-        VARCHAR votingRestrictions "Voting Restrictions"
-}
-CANDIDATES {
-    INTEGER candidateID PK "Candidate ID"
-        VARCHAR citizenID FK "Citizen ID"
-        VARCHAR post "Post"
-        INTEGER electionID FK "Election ID"
-}
+<p align="center">
+<img src="https://img.shields.io/badge/Backend-Golang-blue?style=for-the-badge&logo=go" />
+<img src="https://img.shields.io/badge/Frontend-Svelte-orange?style=for-the-badge&logo=svelte" />
+<img src="https://img.shields.io/badge/Database-Turso-9cf?style=for-the-badge" />
+<img src="https://img.shields.io/badge/Realtime-Redis-red?style=for-the-badge&logo=redis" />
+<img src="https://img.shields.io/badge/Comm-WebSockets-brightgreen?style=for-the-badge" />
+</p>
 
-CITIZENS ||--o| USERS : has
-CITIZENS ||--o| CANDIDATES : is_citizen_of
-ELECTIONS ||--o| CANDIDATES : has_election
-USERS }|--|| ADMINS : is_admin
+---
+
+## 🗳️ What is Electone?
+
+**Electone** is a full-stack, real-time voting system built for scale. Users can register, view active elections, and cast votes securely. Admins can manage candidates, users, and elections with full CRUD capability. Designed as a collaborative development project, it leverages modern tech like Go, Redis, WebSockets, Turso, and Svelte.
+
+---
+
+## 🧱 Tech Stack
+
+- **Frontend**: Svelte 5 + TailwindCSS  
+- **Backend**: Go + chi router  
+- **Database**: Turso (SQLite over the edge)  
+- **Cache/Real-time**: Redis (Pub/Sub)  
+- **Communication**: WebSockets  
+- **Authentication**: JWT-based  
+- **Stress Testing**: Apache Benchmark (ab)
+
+---
+
+## 🚀 Installation & Setup
+
+### 🔧 Frontend
+
+> Requires `bun`, `node`, and optionally `tailwindcss` (standalone binary)
+
+```bash
+git clone https://github.com/PS-Wizard/Electone
+cd Electone/electoneui
+bun install
+bun run dev
 ```
 
-### Admins:
-
-| CID | NAME     | TYPE         | NOTNULL | DFLT VALUE | PK |
-| --- | -------- | ------------ | ------- | ---------- | --- |
-| 0   | adminID  | INTEGER      | 0       | NULL       | 1   |
-| 1   | email    | VARCHAR(255) | 1       | NULL       | 0   |
-| 2   | password | VARCHAR(255) | 1       | NULL       | 0   |
-
----
-
-### Citizens:
-
-| CID | NAME              | TYPE         | NOTNULL | DFLT VALUE | PK |
-| --- | ----------------- | ------------ | ------- | ---------- | --- |
-| 0   | citizenID         | VARCHAR(20)  | 0       | NULL       | 1   |
-| 1   | fullName          | VARCHAR(255) | 1       | NULL       | 0   |
-| 2   | dateOfBirth       | DATE         | 1       | NULL       | 0   |
-| 3   | placeOfResidence  | TEXT         | 1       | NULL       | 0   |
-
----
-
-### Users:
-
-| CID | NAME      | TYPE         | NOTNULL | DFLT VALUE | PK |
-| --- | --------- | ------------ | ------- | ---------- | --- |
-| 0   | userID    | INTEGER      | 0       | NULL       | 1   |
-| 1   | citizenID | VARCHAR(20)  | 1       | NULL       | 0   |
-| 2   | password  | VARCHAR(255) | 1       | NULL       | 0   |
-
----
-
-### Election:
-
-| CID | NAME               | TYPE         | NOTNULL | DFLT VALUE | PK |
-| --- | ------------------ | ------------ | ------- | ---------- | --- |
-| 0   | electionID         | INTEGER      | 0       | NULL       | 1   |
-| 1   | title              | VARCHAR(255) | 1       | NULL       | 0   |
-| 2   | startDate          | DATE         | 1       | NULL       | 0   |
-| 3   | endDate            | DATE         | 1       | NULL       | 0   |
-| 4   | votingRestrictions | VARCHAR(255) | 1       | NULL       | 0   |
-
----
-
-### Candidates:
-
-| CID | NAME        | TYPE         | NOTNULL | DFLT VALUE | PK |
-| --- | ----------- | ------------ | ------- | ---------- | --- |
-| 0   | candidateID | INTEGER      | 0       | NULL       | 1   |
-| 1   | citizenID   | VARCHAR(20)  | 1       | NULL       | 0   |
-| 2   | post        | VARCHAR(255) | 1       | NULL       | 0   |
-| 3   | electionID  | INTEGER      | 1       | NULL       | 0   |
-| 4   | GroupName   | TEXT         | 0       | NULL       | 0   |
-
----
-
-# API Routes and JSON Schema
-
-### **1. GET /api/secure/citizens/:id**
-- **Description**: Fetch a citizen by ID.
-- **Authorization**: `Bearer adminsecrettoken`
-- **URL Params**:
-- `id` (string): Citizen's unique ID.
-- **Response**:
-```json
-{
-    "citizenID": "12-123-12334",
-    "fullName": "Alice Johnson",
-    "dateOfBirth": "1995-03-22",
-    "placeOfResidence": "Chicago"
-}
-```
-
----
-
-### **2. GET /api/secure/citizensPaginated/:offset**
-- **Description**: Fetch a paginated list of citizens.
-- **Authorization**: `Bearer adminsecrettoken`
-- **URL Params**:
-- `offset` (int): The offset for pagination (e.g., `0` for first set, `10` for second, etc.).
-```json
+### 🖥 Backend
+> Requires `golang`, `redis`, and an `auth token`
+```bash
 ~
-{
 
-    "citizenID": "12-123-12334",
-    "fullName": "Alice Johnson",
-    "dateOfBirth": "1995-03-22",
-    "placeOfResidence": "Chicago"
-}
+git clone https://github.com/yourusername/Electone.git
+cd Electone/backend
+go mod tidy
+
 ```
----
+> Redis must be running locally, If you're testing without Redis, uncomment lines **32 and 33** in `main.go` to disable voting logic temporarily. 
+🧠 Request the authentication token from @PS-Wizard to enable access to the database.
 
-### **3. POST /api/secure/citizens**
-- **Description**: Create a new citizen.
-- **Authorization**: `Bearer adminsecrettoken`
-- **Request Body**:
-```json
-{
-    "citizenID": "12-123-12334",
-    "fullName": "Alice Johnson",
-    "dateOfBirth": "1995-03-22",
-    "placeOfResidence": "Chicago"
-}
-```
 
-### **4. PUT /api/secure/citizens/:id**
-- **Description**: Update a citizen's details.
-- **Authorization**: `Bearer adminsecrettoken`
-- **Request Body**:
-```json
-~
-{
-  "citizenID": "12-123-12334",
-  "fullName": "Alice Johnson Updated",
-  "dateOfBirth": "1995-03-22",
-  "placeOfResidence": "Chicago"
-}
-```
+### 🧪 API Collection
+[API Collection](./assets/rester-export-postman.json)
+[Database Schema](./assets/database.md)
 
-### **5. DELETE /api/secure/citizens/:id**
-- **Description**: delete a citizen's .
-- **Authorization**: `Bearer adminsecrettoken`
-
----
-
-![RoutesAndStuff](assets/routesAndStuff.png)
-
---- Other Packages Installed:
-
-`ab`: Apache load tester

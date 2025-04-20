@@ -50,8 +50,10 @@ func HandleRoutes(app *fiber.App) {
 	// User Login
 	app.Post("/api/userlogin", auth.HandleUserLogin)
 
+    // cast vote test
+	app.Post("/api/castVote", redis.HandleVoteIncrement)
 	// Cast Vote:
-	app.Post("/api/castVote", TokenValidationUser, redis.HandleVoteIncrement)
+	// app.Post("/api/castVote", TokenValidationUser, redis.HandleVoteIncrement)
 	// Server Sent Event For Live Vote Count
 	app.Get("/api/voteStream", websocket.New(func(c *websocket.Conn) {
 		// Subscribe to Redis channel
