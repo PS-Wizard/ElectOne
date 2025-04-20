@@ -22,13 +22,11 @@
 
 ## 🧱 Tech Stack
 
-- **Frontend**: Svelte 5 + TailwindCSS  
-- **Backend**: Go + chi router  
-- **Database**: Turso (SQLite over the edge)  
-- **Cache/Real-time**: Redis (Pub/Sub)  
-- **Communication**: WebSockets  
-- **Authentication**: JWT-based  
-- **Stress Testing**: Apache Benchmark (ab)
+- **Frontend**: Svelte 5 + TailwindCSS + Daisyui
+- **Backend**: Go + fiber 
+- **Database**: Turso, Redis
+
+**Miscellaneous**: WebSockets, JWT-based, Apache Benchmark (ab)
 
 ---
 
