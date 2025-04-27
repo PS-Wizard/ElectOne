@@ -4,6 +4,7 @@ import (
 	"log"
 
 	"github.com/PS-Wizard/ElectOneAPI/api"
+	appeals "github.com/PS-Wizard/ElectOneAPI/api/Appeals"
 	auth "github.com/PS-Wizard/ElectOneAPI/api/Auth"
 	candidates "github.com/PS-Wizard/ElectOneAPI/api/Candidates"
 	citizens "github.com/PS-Wizard/ElectOneAPI/api/Citizens"
@@ -42,6 +43,9 @@ func HandleRoutes(app *fiber.App) {
 	app.Post("/api/secure/candidate", TokenValidationAdmin, candidates.HandleCreateCandidate)
 	app.Put("/api/secure/candidate/:id", TokenValidationAdmin, candidates.HandleUpdateCandidate)
 	app.Delete("/api/secure/candidate/:id", TokenValidationAdmin, candidates.HandleDeleteCandidate)
+
+	app.Get("/api/secure/appeals/", TokenValidationAdmin, appeals.HandleGetRegistrationAppeals)
+	app.Post("/api/secure/appeals/:id", TokenValidationAdmin, appeals.HandleAppealApprove)
 
 	// Admin Login Routes:
 	app.Post("/api/admin/signup", auth.HandleCreateAdmin)

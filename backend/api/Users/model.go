@@ -7,4 +7,5 @@ type User struct {
 	Phone     string `json:"phoneNumber"`
 	Tag       string `json:"tags"`
 	OTP       string `json:"otp"`
+	Photos    string `json:"photos"`
 }

@@ -48,7 +48,7 @@ func getUsersPaginated(offset int) ([]User, error) {
 }
 
 // Create a new user in the database
-func createNewUser(u User) error {
+func CreateNewUser(u User) error {
 	hashedPassword, err := bcrypt.GenerateFromPassword([]byte(u.Password), bcrypt.DefaultCost)
 	if err != nil {
 		return fmt.Errorf("failed to hash password: %v", err)

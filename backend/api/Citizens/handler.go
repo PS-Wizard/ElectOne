@@ -38,13 +38,13 @@ func HandleGet(ctx *fiber.Ctx) error {
 }
 
 func HandleCreate(ctx *fiber.Ctx) error {
-	var citizen citizen
+	var citizen Citizen
 	if err := ctx.BodyParser(&citizen); err != nil {
 		return ctx.Status(fiber.StatusBadRequest).JSON(fiber.Map{
 			"error": "Invalid request body",
 		})
 	}
-	err := createNewCitizen(citizen)
+	err := CreateNewCitizen(citizen)
 	if err != nil {
 		log.Printf("Error in HandleCreate: %v", err)
 		return ctx.Status(fiber.StatusInternalServerError).JSON(fiber.Map{
@@ -64,7 +64,7 @@ func HandleUpdate(ctx *fiber.Ctx) error {
 		})
 	}
 
-	var citizen citizen
+	var citizen Citizen
 	if err := ctx.BodyParser(&citizen); err != nil {
 		return ctx.Status(fiber.StatusBadRequest).JSON(fiber.Map{
 			"error": "Invalid request body",

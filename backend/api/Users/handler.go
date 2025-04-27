@@ -44,7 +44,7 @@ func HandleCreateNewUser(ctx *fiber.Ctx) error {
 		return ctx.Status(fiber.StatusBadRequest).JSON(fiber.Map{"error": "Invalid input"})
 	}
 
-	err := createNewUser(u)
+	err := CreateNewUser(u)
 	if err != nil {
 		log.Printf("Error in HandleCreate: %v", err)
 		return ctx.Status(fiber.StatusInternalServerError).JSON(fiber.Map{"error": err.Error()})

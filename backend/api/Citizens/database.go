@@ -9,8 +9,8 @@ import (
 	"github.com/PS-Wizard/ElectOneAPI/api"
 )
 
-func getCitizenById(citizenID string) (*citizen, error) {
-	var citizen citizen
+func getCitizenById(citizenID string) (*Citizen, error) {
+	var citizen Citizen
 	query := "SELECT citizenID, fullName, dateOfBirth, placeOfResidence FROM citizens WHERE citizenID = ?"
 	row := api.DB.QueryRow(query, citizenID)
 	err := row.Scan(&citizen.CitizenID, &citizen.Name, &citizen.DOB, &citizen.POR)
@@ -24,8 +24,8 @@ func getCitizenById(citizenID string) (*citizen, error) {
 	return &citizen, nil
 }
 
-func getCitizensPaginated(offset int) ([]citizen, error) {
-	var citizens []citizen
+func getCitizensPaginated(offset int) ([]Citizen, error) {
+	var citizens []Citizen
 	query := "SELECT citizenID, fullName, dateOfBirth, placeOfResidence FROM citizens LIMIT ? OFFSET ?"
 	rows, err := api.DB.Query(query, 10, offset) // The 10 here is the limit of citizens to fetch each time .
 	if err != nil {
@@ -34,7 +34,7 @@ func getCitizensPaginated(offset int) ([]citizen, error) {
 	defer rows.Close()
 
 	for rows.Next() {
-		var citizen citizen
+		var citizen Citizen
 		err := rows.Scan(&citizen.CitizenID, &citizen.Name, &citizen.DOB, &citizen.POR)
 		if err != nil {
 			return nil, fmt.Errorf("Failed To Scan Citizen: %v", err)
@@ -48,7 +48,7 @@ func getCitizensPaginated(offset int) ([]citizen, error) {
 
 }
 
-func createNewCitizen(citizen citizen) error {
+func CreateNewCitizen(citizen Citizen) error {
 	query := "INSERT INTO citizens (citizenID, fullName, dateOfBirth, placeOfResidence) VALUES (?, ?, ?, ?)"
 	_, err := api.DB.Exec(query, citizen.CitizenID, citizen.Name, citizen.DOB, citizen.POR)
 	if err != nil {
@@ -57,7 +57,7 @@ func createNewCitizen(citizen citizen) error {
 	return nil
 }
 
-func updateCitizenDetails(citizen citizen, citizenID string) error {
+func updateCitizenDetails(citizen Citizen, citizenID string) error {
 	query := "UPDATE citizens SET fullName = ?, dateOfBirth = ?, placeOfResidence = ? WHERE citizenID = ?"
 	_, err := api.DB.Exec(query, citizen.Name, citizen.DOB, citizen.POR, citizenID)
 	if err != nil {
