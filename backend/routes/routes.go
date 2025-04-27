@@ -49,8 +49,10 @@ func HandleRoutes(app *fiber.App) {
 
 	// User Login
 	app.Post("/api/userlogin", auth.HandleUserLogin)
+	app.Get("/api/secure/qr/:otpURL", auth.HandleGenerateQRCode)
+	app.Get("/api/secure/verifyOTP", auth.ValidateTOTP)
 
-    // cast vote test
+	// cast vote test
 	app.Post("/api/castVote", redis.HandleVoteIncrement)
 	// Cast Vote:
 	// app.Post("/api/castVote", TokenValidationUser, redis.HandleVoteIncrement)

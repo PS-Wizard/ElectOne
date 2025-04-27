@@ -2,12 +2,10 @@ package auth
 
 import (
 	"database/sql"
-	"time"
 
 	"github.com/PS-Wizard/ElectOneAPI/api"
 	users "github.com/PS-Wizard/ElectOneAPI/api/Users"
 	"github.com/gofiber/fiber/v2"
-	"github.com/golang-jwt/jwt/v5"
 	"golang.org/x/crypto/bcrypt"
 )
 
@@ -21,11 +19,12 @@ func HandleUserLogin(ctx *fiber.Ctx) error {
 		})
 	}
 
-	// Fetch the stored password hash from the database
+	// Fetch the stored password hash and TOTP secret from the database
 	var storedHash string
 	var userID int
-	query := "SELECT userID, password FROM users WHERE citizenID = ?"
-	err := api.DB.QueryRow(query, req.CitizenID).Scan(&userID, &storedHash)
+	var totpSecret sql.NullString // Use sql.NullString to handle NULL values in the DB
+	query := "SELECT userID, password, totp_secret FROM users WHERE citizenID = ?"
+	err := api.DB.QueryRow(query, req.CitizenID).Scan(&userID, &storedHash, &totpSecret)
 	if err != nil {
 		if err == sql.ErrNoRows {
 			return ctx.Status(fiber.StatusUnauthorized).JSON(fiber.Map{
@@ -36,36 +35,42 @@ func HandleUserLogin(ctx *fiber.Ctx) error {
 			"error": "Database error",
 		})
 	}
+
 	if err := bcrypt.CompareHashAndPassword([]byte(storedHash), []byte(req.Password)); err != nil {
 		return ctx.Status(fiber.StatusUnauthorized).JSON(fiber.Map{
 			"error": "Invalid credentials",
 		})
 	}
 
-	// Generate JWT token
-	token := jwt.NewWithClaims(jwt.SigningMethodHS256, jwt.MapClaims{
-		"userID":    userID,
-		"citizenID": req.CitizenID,
-		"role":      "user",
-		"exp":       time.Now().Add(time.Hour * 24).Unix(),
-	})
+	// If TOTP is not set (NullString check), generate the secret and return it along with the login response
+	if !totpSecret.Valid {
+		// Generate the TOTP secret
+		secret, err := generateTOTPSecret(req.CitizenID)
+		if err != nil {
+			return ctx.Status(fiber.StatusInternalServerError).JSON(fiber.Map{
+				"error": "Failed to generate TOTP secret",
+			})
+		}
 
-	tokenString, err := token.SignedString(JWT_SECRET)
-	if err != nil {
-		return ctx.Status(fiber.StatusInternalServerError).JSON(fiber.Map{
-			"error": "Failed to generate token",
+		// Store the TOTP secret in the database
+		_, err = api.DB.Exec("UPDATE users SET totp_secret = ? WHERE citizenID = ?", secret, req.CitizenID)
+		if err != nil {
+			return ctx.Status(fiber.StatusInternalServerError).JSON(fiber.Map{
+				"error": "Failed to update TOTP secret in database",
+			})
+		}
+
+		// Return the TOTP setup QR code URL or other details
+		otpURL := generateTOTPQRCodeURL(req.CitizenID, secret)
+
+		return ctx.JSON(fiber.Map{
+			"message":     "Login successful, please set up your 2FA",
+			"totp_secret": otpURL, // send the QR code URL or other relevant data
 		})
 	}
 
-	ctx.Cookie(&fiber.Cookie{
-		Name:     "user_token",
-		Value:    tokenString,
-		Expires:  time.Now().Add(time.Hour * 24),
-		HTTPOnly: true,
-		Secure:   true,
-		SameSite: "None",
-		Path:     "/",
+	// If TOTP is already set, return a message indicating that OTP is required for verification
+	return ctx.JSON(fiber.Map{
+		"message": "Credentials matched, please enter your OTP to verify",
 	})
-
-	return ctx.JSON(fiber.Map{"message": "Login successful"})
 }
