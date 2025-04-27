@@ -49,15 +49,19 @@ func getUsersPaginated(offset int) ([]User, error) {
 
 // Create a new user in the database
 func CreateNewUser(u User) error {
+	// Hash the password before storing it
 	hashedPassword, err := bcrypt.GenerateFromPassword([]byte(u.Password), bcrypt.DefaultCost)
 	if err != nil {
 		return fmt.Errorf("failed to hash password: %v", err)
 	}
-	query := "INSERT INTO users (citizenID, password, phonenumber, tag) VALUES (?, ?, ?, ?)"
-	_, err = api.DB.Exec(query, u.CitizenID, string(hashedPassword), u.Phone, u.Tag)
+
+	// Prepare the query to insert user data
+	query := "INSERT INTO users (citizenID, password, phonenumber, tag, photos) VALUES (?, ?, ?, ?, ?)"
+	_, err = api.DB.Exec(query, u.CitizenID, string(hashedPassword), u.Phone, u.Tag, u.Photos)
 	if err != nil {
 		return fmt.Errorf("failed to insert user: %v", err)
 	}
+
 	return nil
 }
 
