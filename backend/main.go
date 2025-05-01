@@ -10,6 +10,7 @@ import (
 	"github.com/PS-Wizard/ElectOneAPI/routes"
 	"github.com/gofiber/fiber/v2"
 	"github.com/gofiber/fiber/v2/middleware/cors"
+	"github.com/gofiber/fiber/v2/middleware/limiter"
 	"github.com/gofiber/fiber/v2/middleware/logger"
 )
 
@@ -56,8 +57,14 @@ func main() {
 		EnableTrustedProxyCheck: true,                                 // Only trust certain proxies
 		TrustedProxies:          []string{"127.0.0.1", "192.168.1.1"}, // Define trusted proxies
 	})
+	app.Use(limiter.New(limiter.Config{
+		Max:               10,
+		Expiration:        30 * time.Second,
+		LimiterMiddleware: limiter.SlidingWindow{},
+	}))
+
 	app.Use(cors.New(cors.Config{
-        AllowOrigins:     "https://localhost:5173,http://localhost:5173", // Specify your frontend origin
+		AllowOrigins:     "https://localhost:5173,http://localhost:5173", // Specify your frontend origin
 		AllowMethods:     "GET,POST,PUT,DELETE",
 		AllowHeaders:     "Origin, Content-Type, Accept, Cookie",
 		AllowCredentials: true,
