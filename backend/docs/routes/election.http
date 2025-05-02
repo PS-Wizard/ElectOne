@@ -1,0 +1,34 @@
+### Create Election
+POST http://localhost:3000/election
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhZG1pbklEIjoyLCJlbWFpbCI6ImFkbWluMkBleGFtcGxlLmNvbSIsImV4cCI6MTc0NjQ0NTcyNywicm9sZSI6ImFkbWluIn0.9msec4uS7vVWaMIpC47jV1ne-iO_kvvC-bWJRt4UjX8
+
+{
+  "start_date": "2025-06-01",
+  "end_date": "2025-06-15",
+  "location": "Lalitpur",
+  "name": "Super Election",
+  "description": "random blah balh ugabuga asdfskdfjalksjaskdjflkasdj"
+}
+
+### Get Election By ID
+GET http://localhost:3000/election/3
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJjaXRpemVuc2hpcCI6IjEyMy00NTYiLCJleHAiOjE3NDYyNzY3MzAsInJvbGUiOiJ1c2VyIiwidXNlcl9pZCI6Mywidm90ZXJfY2FyZCI6IlZDLTAwMSJ9.Xu9QysuKdJRK_OUZ9Crx2wm4523dOKqdxjHj9H3NP-4
+
+### Update Election
+PUT http://localhost:3000/election/2
+Content-Type: application/json
+
+{
+  "start_date": "2025-06-05",
+  "end_date": "2025-06-20",
+  "location": "Pokhara"
+}
+
+### Delete Election
+DELETE http://localhost:3000/election/3
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhZG1pbklEIjoyLCJlbWFpbCI6ImFkbWluMkBleGFtcGxlLmNvbSIsImV4cCI6MTc0NjQ0NTcyNywicm9sZSI6ImFkbWluIn0.9msec4uS7vVWaMIpC47jV1ne-iO_kvvC-bWJRt4UjX8
+
+### List Elections
+GET http://localhost:3000/election?limit=10&offset=0
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJjaXRpemVuc2hpcCI6IjEyMy00NTYiLCJleHAiOjE3NDYyNzY3MzAsInJvbGUiOiJ1c2VyIiwidXNlcl9pZCI6Mywidm90ZXJfY2FyZCI6IlZDLTAwMSJ9.Xu9QysuKdJRK_OUZ9Crx2wm4523dOKqdxjHj9H3NP-4

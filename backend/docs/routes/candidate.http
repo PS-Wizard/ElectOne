@@ -1,0 +1,32 @@
+### Create Candidate
+POST http://localhost:3000/candidate
+Content-Type: application/json
+
+{
+  "citizen_id": "123-456",
+  "election_id": 2,
+  "profile_path": "/images/candidate1.png",
+  "bio": "Committed to public service.",
+  "post": "Mayor"
+}
+
+### Get Candidate by ID
+GET http://localhost:3000/candidate/1
+
+### Update Candidate
+PUT http://localhost:3000/candidate/1
+Content-Type: application/json
+
+{
+  "citizen_id": "123-456",
+  "election_id": 2,
+  "profile_path": "/images/candidate1_updated.png",
+  "bio": "Updated bio info.",
+  "post": "Mayor"
+}
+
+### Delete Candidate
+DELETE http://localhost:3000/candidate/1
+
+### List candidate
+GET http://localhost:3000/candidate?limit=10&offset=0

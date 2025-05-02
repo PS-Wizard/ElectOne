@@ -1,0 +1,19 @@
+### Create Vote
+POST http://localhost:3000/vote
+Content-Type: application/json
+
+{
+  "voter_id": 1,
+  "election_id": 2,
+  "voter_card_id": "VC-001",
+  "voted_for": "{\"candidate_id\": 5}",
+  "vote_date": "2025-05-02"
+}
+
+### Get Vote by ID
+GET http://localhost:3000/vote/1
+Accept: application/json
+
+### List Votes
+GET http://localhost:3000/vote?limit=10&offset=0
+Accept: application/json

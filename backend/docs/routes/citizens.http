@@ -1,0 +1,37 @@
+### Create Citizen
+POST http://localhost:3000/citizen
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhZG1pbklEIjoyLCJlbWFpbCI6ImFkbWluMkBleGFtcGxlLmNvbSIsImV4cCI6MTc0NjQ0NTcyNywicm9sZSI6ImFkbWluIn0.9msec4uS7vVWaMIpC47jV1ne-iO_kvvC-bWJRt4UjX8
+
+{
+  "citizenship_id": "123-457",
+  "full_name": "John Doe",
+  "date_of_birth": "1990-01-01",
+  "birth_place": "Kathmandu",
+  "permanent_address": "123 Main St, Kathmandu"
+}
+
+### Get Citizen by ID
+GET http://localhost:3000/citizen/123-459
+Accept: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJjaXRpemVuc2hpcCI6IjEyMy00NTYiLCJleHAiOjE3NDYyNzM4NjQsInJvbGUiOiJ1c2VyIiwidXNlcl9pZCI6Mywidm90ZXJfY2FyZCI6IlZDLTAwMSJ9.CW_KjGp60HZ7OCw_akrFiyMgUcMNjno_00kH7QZ8600
+
+### Update Citizen
+PUT http://localhost:3000/citizen/123-456
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhZG1pbklEIjoyLCJlbWFpbCI6ImFkbWluMkBleGFtcGxlLmNvbSIsImV4cCI6MTc0NjQ0NTcyNywicm9sZSI6ImFkbWluIn0.9msec4uS7vVWaMIpC47jV1ne-iO_kvvC-bWJRt4UjX8
+
+{
+  "full_name": "John Doe Updated",
+  "date_of_birth": "1990-01-01",
+  "birth_place": "Pokhara",
+  "permanent_address": "456 New St, Kathmandu"
+}
+
+### Delete Citizen
+DELETE http://localhost:3000/citizen/123-456
+
+### List citizen
+GET http://localhost:3000/citizen?limit=10&offset=0
+Accept: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhZG1pbklEIjoyLCJlbWFpbCI6ImFkbWluMkBleGFtcGxlLmNvbSIsImV4cCI6MTc0NjQ0NTcyNywicm9sZSI6ImFkbWluIn0.9msec4uS7vVWaMIpC47jV1ne-iO_kvvC-bWJRt4UjX8

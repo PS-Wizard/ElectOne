@@ -1,0 +1,41 @@
+### Create Appeal
+POST http://localhost:3000/appeal
+Content-Type: application/json
+
+{
+  "citizenship_details": "Citizen details here",
+  "voter_card_details": "Voter card details here",
+  "user_details": "User details here",
+  "status": "Pending"
+}
+
+### Get Appeal By ID
+GET http://localhost:3000/appeal/2
+Accept: application/json
+
+### Get All Appeals 
+GET http://localhost:3000/appeal?limit=10&offset=0
+Accept: application/json
+
+### Update Appeal
+PUT http://localhost:3000/appeal/2
+Content-Type: application/json
+
+{
+  "citizenship_details": "Updated citizenship details",
+  "voter_card_details": "Updated voter card details",
+  "user_details": "Updated user details",
+  "status": "Approved"
+}
+
+### Get Appeal By ID
+GET http://localhost:3000/appeal/2
+Accept: application/json
+
+### Delete Appeal
+DELETE http://localhost:3000/appeal/4
+
+### Get All Appeals 
+GET http://localhost:3000/appeal?limit=10&offset=0
+Accept: application/json
+

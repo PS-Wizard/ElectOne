@@ -1,0 +1,25 @@
+### Create Admin
+POST http://localhost:3000/admin
+Content-Type: application/json
+
+{
+  "email": "admin2@example.com",
+  "password": "securePassword123",
+  "totp_secret": "secret123"
+}
+
+### Get Admin by ID
+GET http://localhost:3000/admin/1
+
+### Update Admin
+PUT http://localhost:3000/admin/1
+Content-Type: application/json
+
+{
+  "email": "admin_updated@example.com",
+  "password": "newSecurePassword123",
+  "totp_secret": "newSecret123"
+}
+
+### List Admins
+GET http://localhost:3000/admin?limit=10&offset=0
