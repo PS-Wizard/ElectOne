@@ -110,3 +110,9 @@ func GetUserByCitizenAndVoterID(citizenID, voterID string) (*User, error) {
 	}
 	return &user, nil
 }
+
+func SetUserTOTPSecret(userID int, secret string) error {
+	query := `UPDATE User SET TotpSecret = ? WHERE UserID = ?`
+	_, err := db.DB.Exec(query, secret, userID)
+	return err
+}

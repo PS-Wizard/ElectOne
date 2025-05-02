@@ -101,3 +101,9 @@ func GetAdminByEmail(email string) (*Admin, error) {
 	}
 	return &admin, nil
 }
+
+func UpdateAdminTotpSecret(adminID int, secret string) error {
+	query := `UPDATE Admin SET TotpSecret = ? WHERE AdminID = ?`
+	_, err := db.DB.Exec(query, secret, adminID)
+	return err
+}

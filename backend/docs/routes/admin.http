@@ -1,11 +1,12 @@
 ### Create Admin
 POST http://localhost:3000/admin
 Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhZG1pbklEIjoyLCJlbWFpbCI6ImFkbWluMkBleGFtcGxlLmNvbSIsImV4cCI6MTc0NjQ0NTcyNywicm9sZSI6ImFkbWluIn0.9msec4uS7vVWaMIpC47jV1ne-iO_kvvC-bWJRt4UjX8
 
 {
-  "email": "admin2@example.com",
+  "email": "admin1@example.com",
   "password": "securePassword123",
-  "totp_secret": "secret123"
+  "totp_secret":""
 }
 
 ### Get Admin by ID
@@ -23,3 +24,4 @@ Content-Type: application/json
 
 ### List Admins
 GET http://localhost:3000/admin?limit=10&offset=0
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhZG1pbklEIjoyLCJlbWFpbCI6ImFkbWluMkBleGFtcGxlLmNvbSIsImV4cCI6MTc0NjQ0NTcyNywicm9sZSI6ImFkbWluIn0.9msec4uS7vVWaMIpC47jV1ne-iO_kvvC-bWJRt4UjX8

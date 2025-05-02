@@ -23,7 +23,7 @@ func CreateAdminHandler(c *fiber.Ctx) error {
 
 	id, err := operations.CreateAdmin(&admin)
 	if err != nil {
-		return fiber.NewError(fiber.StatusInternalServerError, "Could not create admin")
+		return fiber.NewError(fiber.StatusInternalServerError, err.Error())
 	}
 
 	return c.JSON(fiber.Map{"admin_id": id})
