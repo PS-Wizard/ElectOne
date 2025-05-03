@@ -1,0 +1,277 @@
+<script>
+    import { onMount } from "svelte";
+
+    let elections = [];
+    let loading = true;
+    let error = "";
+
+    let newElection = {
+        name: "",
+        description: "",
+        start_date: "",
+        end_date: "",
+        location: "",
+    };
+
+    let editingElection = null;
+    let newElectionModal;
+    let editElectionModal;
+
+    async function fetchElections() {
+        loading = true;
+        try {
+            const res = await fetch(
+                "http://localhost:3000/election?limit=100&offset=0",
+                {
+                    headers: {
+                        Authorization: `Bearer ${localStorage.getItem("token")}`,
+                    },
+                },
+            );
+            if (!res.ok) throw new Error("Failed to fetch elections");
+            const data = await res.json();
+            elections = data.map((election) => ({
+                ...election,
+                startDate: election.start_date,
+                endDate: election.end_date,
+            }));
+        } catch (err) {
+            error = err.message;
+        }
+        loading = false;
+    }
+
+    async function createElection() {
+        try {
+            const res = await fetch("http://localhost:3000/election", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                    Authorization: `Bearer ${localStorage.getItem("token")}`,
+                },
+                body: JSON.stringify(newElection),
+            });
+            if (!res.ok) throw new Error("Failed to create election");
+            await fetchElections();
+            newElection = {
+                name: "",
+                description: "",
+                start_date: "",
+                end_date: "",
+                location: "",
+            };
+            newElectionModal.close();
+        } catch (err) {
+            alert(err.message);
+        }
+    }
+
+    function openEditModal(election) {
+        editingElection = { ...election };
+        editElectionModal.showModal();
+    }
+
+    async function updateElection() {
+        if (!editingElection) return;
+        try {
+            const res = await fetch(
+                `http://localhost:3000/election/${editingElection.election_id}`,
+                {
+                    method: "PUT",
+                    headers: {
+                        "Content-Type": "application/json",
+                        Authorization: `Bearer ${localStorage.getItem("token")}`,
+                    },
+                    body: JSON.stringify(editingElection),
+                },
+            );
+            if (!res.ok) throw new Error("Failed to update election");
+            await fetchElections();
+            editingElection = null;
+            editElectionModal.close();
+        } catch (err) {
+            alert(err.message);
+        }
+    }
+
+    async function deleteElection(id) {
+        if (!confirm("Delete this election?")) return;
+        try {
+            const res = await fetch(`http://localhost:3000/election/${id}`, {
+                method: "DELETE",
+                headers: {
+                    Authorization: `Bearer ${localStorage.getItem("token")}`,
+                },
+            });
+            if (!res.ok) throw new Error("Failed to delete election");
+            await fetchElections();
+        } catch (err) {
+            alert(err.message);
+        }
+    }
+
+    onMount(fetchElections);
+</script>
+
+<button
+    class="btn btn-primary mb-4"
+    on:click={() => newElectionModal.showModal()}>New Election</button
+>
+
+<dialog bind:this={newElectionModal} id="new_election_modal" class="modal">
+    <div class="modal-box">
+        <h3 class="font-bold text-lg">New Election</h3>
+        <div class="py-2 flex flex-col gap-2">
+            <input
+                class="input input-bordered"
+                placeholder="Name"
+                bind:value={newElection.name}
+            />
+            <input
+                class="input input-bordered"
+                placeholder="Description"
+                bind:value={newElection.description}
+            />
+            <input
+                class="input input-bordered"
+                type="date"
+                placeholder="Start Date"
+                bind:value={newElection.start_date}
+            />
+            <input
+                class="input input-bordered"
+                type="date"
+                placeholder="End Date"
+                bind:value={newElection.end_date}
+            />
+            <input
+                class="input input-bordered"
+                placeholder="Location"
+                bind:value={newElection.location}
+            />
+        </div>
+        <div class="modal-action">
+            <form method="dialog" class="flex gap-2">
+                <button
+                    type="button"
+                    class="btn btn-success"
+                    on:click={createElection}>Create</button
+                >
+                <button class="btn">Cancel</button>
+            </form>
+        </div>
+    </div>
+</dialog>
+
+<dialog bind:this={editElectionModal} id="edit_election_modal" class="modal">
+    <div class="modal-box">
+        <h3 class="font-bold text-lg">Edit Election</h3>
+        {#if editingElection}
+            <div class="py-2 flex flex-col gap-2">
+                <label class="label">
+                    <span class="label-text">Name</span>
+                </label>
+                <input
+                    type="text"
+                    class="input input-bordered"
+                    bind:value={editingElection.name}
+                />
+                <label class="label">
+                    <span class="label-text">Description</span>
+                </label>
+                <input
+                    type="text"
+                    class="input input-bordered"
+                    bind:value={editingElection.description}
+                />
+                <label class="label">
+                    <span class="label-text">Start Date</span>
+                </label>
+                <input
+                    type="date"
+                    class="input input-bordered"
+                    bind:value={editingElection.start_date}
+                />
+                <label class="label">
+                    <span class="label-text">End Date</span>
+                </label>
+                <input
+                    type="date"
+                    class="input input-bordered"
+                    bind:value={editingElection.end_date}
+                />
+                <label class="label">
+                    <span class="label-text">Location</span>
+                </label>
+                <input
+                    type="text"
+                    class="input input-bordered"
+                    bind:value={editingElection.location}
+                />
+            </div>
+            <div class="modal-action">
+                <form method="dialog" class="flex gap-2">
+                    <button
+                        type="button"
+                        class="btn btn-warning"
+                        on:click={updateElection}>Update</button
+                    >
+                    <button class="btn">Cancel</button>
+                </form>
+            </div>
+        {/if}
+    </div>
+</dialog>
+
+{#if loading}
+    <p>Loading elections...</p>
+{:else if error}
+    <p class="text-red-500">{error}</p>
+{:else}
+    <div class="overflow-x-auto">
+        <table class="table w-full">
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Description</th>
+                    <th>Start Date</th>
+                    <th>End Date</th>
+                    <th>Location</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                {#each elections as election}
+                    <tr>
+                        <td>{election.name}</td>
+                        <td>{election.description}</td>
+                        <td>{election.startDate}</td>
+                        <td>{election.endDate}</td>
+                        <td>{election.location}</td>
+                        <td class="flex gap-2">
+                            <button
+                                class="btn btn-sm btn-warning"
+                                on:click={() => openEditModal(election)}
+                                >Edit</button
+                            >
+                            <button
+                                class="btn btn-sm btn-error"
+                                on:click={() =>
+                                    deleteElection(election.election_id)}
+                                >Delete</button
+                            >
+                        </td>
+                    </tr>
+                {/each}
+            </tbody>
+        </table>
+    </div>
+{/if}
+
+<style>
+    /* Optional: Add some styling for better visual appearance */
+    .modal-box {
+        max-width: 560px;
+        width: 90%;
+    }
+</style>

@@ -12,8 +12,8 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhZG1pbklEIjoyLCJlb
 }
 
 ### Get Election By ID
-GET http://localhost:3000/election/3
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJjaXRpemVuc2hpcCI6IjEyMy00NTYiLCJleHAiOjE3NDYyNzY3MzAsInJvbGUiOiJ1c2VyIiwidXNlcl9pZCI6Mywidm90ZXJfY2FyZCI6IlZDLTAwMSJ9.Xu9QysuKdJRK_OUZ9Crx2wm4523dOKqdxjHj9H3NP-4
+GET http://localhost:3000/election/1
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhZG1pbklEIjoyLCJlbWFpbCI6ImFkbWluMkBleGFtcGxlLmNvbSIsImV4cCI6MTc0NjQ0NTcyNywicm9sZSI6ImFkbWluIn0.9msec4uS7vVWaMIpC47jV1ne-iO_kvvC-bWJRt4UjX8
 
 ### Update Election
 PUT http://localhost:3000/election/2
@@ -31,4 +31,4 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhZG1pbklEIjoyLCJlb
 
 ### List Elections
 GET http://localhost:3000/election?limit=10&offset=0
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJjaXRpemVuc2hpcCI6IjEyMy00NTYiLCJleHAiOjE3NDYyNzY3MzAsInJvbGUiOiJ1c2VyIiwidXNlcl9pZCI6Mywidm90ZXJfY2FyZCI6IlZDLTAwMSJ9.Xu9QysuKdJRK_OUZ9Crx2wm4523dOKqdxjHj9H3NP-4
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhZG1pbklEIjoyLCJlbWFpbCI6ImFkbWluMkBleGFtcGxlLmNvbSIsImV4cCI6MTc0NjQ0NTcyNywicm9sZSI6ImFkbWluIn0.9msec4uS7vVWaMIpC47jV1ne-iO_kvvC-bWJRt4UjX8

@@ -75,7 +75,7 @@ func DeleteCitizenshipHandler(c *fiber.Ctx) error {
 	id := c.Params("id")
 
 	if err := operations.DeleteCitizenship(db.DB, id); err != nil {
-		return fiber.NewError(fiber.StatusInternalServerError, "Failed to delete citizenship")
+		return fiber.NewError(fiber.StatusInternalServerError, err.Error())
 	}
 
 	return c.SendStatus(fiber.StatusOK)
