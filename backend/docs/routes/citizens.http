@@ -35,5 +35,5 @@ DELETE http://localhost:3000/citizen/123-456
 ### List citizen
 GET http://localhost:3000/citizen?limit=10&offset=0
 Accept: application/json
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJjaXRpemVuc2hpcCI6IjEyMy00NTYiLCJleHAiOjE3NDYyNzM4NjQsInJvbGUiOiJ1c2VyIiwidXNlcl9pZCI6Mywidm90ZXJfY2FyZCI6IlZDLTAwMSJ9.CW_KjGp60HZ7OCw_akrFiyMgUcMNjno_00kH7QZ8600
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhZG1pbklEIjoyLCJlbWFpbCI6ImFkbWluMkBleGFtcGxlLmNvbSIsImV4cCI6MTc0NjQ0NTcyNywicm9sZSI6ImFkbWluIn0.9msec4uS7vVWaMIpC47jV1ne-iO_kvvC-bWJRt4UjX8
 
