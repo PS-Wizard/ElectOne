@@ -14,7 +14,6 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhZG1pbklEIjoyLCJlb
 ### Get Citizen by ID
 GET http://localhost:3000/citizen/123-459
 Accept: application/json
-Authorization: Bearer 
 Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJjaXRpemVuc2hpcCI6IjEyMy00NTYiLCJleHAiOjE3NDYyNzM4NjQsInJvbGUiOiJ1c2VyIiwidXNlcl9pZCI6Mywidm90ZXJfY2FyZCI6IlZDLTAwMSJ9.CW_KjGp60HZ7OCw_akrFiyMgUcMNjno_00kH7QZ8600
 
 ### Update Citizen

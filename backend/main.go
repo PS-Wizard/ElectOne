@@ -12,7 +12,11 @@ func main() {
 	app := fiber.New()
 
 	db.InitTurso()
+	db.InitRedis()
 	defer db.CloseTurso()
+
 	routes.SetupRoutes(app)
+
 	log.Fatal(app.Listen(":3000"))
 }
+

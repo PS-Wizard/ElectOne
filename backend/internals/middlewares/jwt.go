@@ -51,9 +51,27 @@ func RequireAdmin(c *fiber.Ctx) error {
 }
 
 func RequireUser(c *fiber.Ctx) error {
-	claims := c.Locals("token").(jwt.MapClaims)
-	if claims["role"] != "user" {
-		return c.Status(fiber.StatusForbidden).JSON(fiber.Map{"error": "Nuh Uh Users Only"})
+	token := c.Locals("token")
+	if token == nil {
+		// Handle missing token
+		return jwtError(c, fmt.Errorf("missing or malformed JWT"))
 	}
+
+	parsedToken, ok := token.(*jwt.Token)
+	if !ok {
+		return jwtError(c, fmt.Errorf("invalid token format"))
+	}
+
+	claims, ok := parsedToken.Claims.(jwt.MapClaims)
+	if !ok {
+		return jwtError(c, fmt.Errorf("invalid claims"))
+	}
+
+	if claims["role"] != "user" {
+		return c.Status(fiber.StatusForbidden).JSON(fiber.Map{
+			"error": "Nuh Uh Users Only",
+		})
+	}
+
 	return c.Next()
 }

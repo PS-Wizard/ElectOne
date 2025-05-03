@@ -4,6 +4,8 @@ import (
 	"github.com/PS-Wizard/Electone/internals/auth"
 	"github.com/PS-Wizard/Electone/internals/db/handlers"
 	"github.com/PS-Wizard/Electone/internals/middlewares"
+	"github.com/PS-Wizard/Electone/realtime"
+	"github.com/gofiber/contrib/websocket"
 	"github.com/gofiber/fiber/v2"
 )
 
@@ -11,6 +13,7 @@ func SetupRoutes(app *fiber.App) {
 
 	// Auth Routes ( DOESNT REQUIRE JWT)
 	authRoutes := app.Group("/auth")
+	app.Get("/vote/ws", websocket.New(realtime.HandleLivePushUpdates))
 	authRoutes.Post("/user", auth.UserLogin)
 	authRoutes.Post("/admin", auth.AdminLogin)
 
@@ -31,10 +34,6 @@ func SetupRoutes(app *fiber.App) {
 	electionRoutes := protected.Group("/election")
 	handlers.RegisterElectionRoutes(electionRoutes)
 
-	// Vote Routes
-	voteRoutes := protected.Group("/vote")
-	handlers.RegisterVoteRoutes(voteRoutes)
-
 	// Appeal Routes
 	appealRoutes := protected.Group("/appeal")
 	handlers.RegisterAppealRoutes(appealRoutes)
@@ -43,8 +42,11 @@ func SetupRoutes(app *fiber.App) {
 	candidateRoutes := protected.Group("/candidate")
 	handlers.RegisterCandidateRoutes(candidateRoutes)
 
+	// Vote Routes
+
+	protected.Post("/vote", middlewares.RequireUser, realtime.HandleVote)
+
 	//admin Routes
 	adminRoutes := protected.Group("/admin")
 	handlers.RegisterAdminRoutes(adminRoutes)
-
 }

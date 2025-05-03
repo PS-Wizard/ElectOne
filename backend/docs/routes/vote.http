@@ -1,19 +1,10 @@
 ### Create Vote
 POST http://localhost:3000/vote
 Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJjaXRpemVuc2hpcCI6IjEyMy00NTciLCJleHAiOjE3NDYzNDM5MzAsInJvbGUiOiJ1c2VyIiwidXNlcl9pZCI6OCwidm90ZXJfY2FyZCI6IlZDLTAwMiJ9.DdFsWcLfjCfCuiYQoIuON9DoK8AHPZFdE7TIq7Fp1VQ
 
 {
-  "voter_id": 1,
-  "election_id": 2,
-  "voter_card_id": "VC-001",
-  "voted_for": "{\"candidate_id\": 5}",
-  "vote_date": "2025-05-02"
+  "election_id": 4,
+  "candidate_ids": ["2", "3"] 
 }
 
-### Get Vote by ID
-GET http://localhost:3000/vote/1
-Accept: application/json
-
-### List Votes
-GET http://localhost:3000/vote?limit=10&offset=0
-Accept: application/json

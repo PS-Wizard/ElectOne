@@ -1,10 +1,11 @@
 ### Create Candidate
 POST http://localhost:3000/candidate
 Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhZG1pbklEIjoyLCJlbWFpbCI6ImFkbWluMkBleGFtcGxlLmNvbSIsImV4cCI6MTc0NjQ0NTcyNywicm9sZSI6ImFkbWluIn0.9msec4uS7vVWaMIpC47jV1ne-iO_kvvC-bWJRt4UjX8
 
 {
-  "citizen_id": "123-456",
-  "election_id": 2,
+  "citizen_id": "123-457",
+  "election_id": 4,
   "profile_path": "/images/candidate1.png",
   "bio": "Committed to public service.",
   "post": "Mayor"
@@ -30,3 +31,4 @@ DELETE http://localhost:3000/candidate/1
 
 ### List candidate
 GET http://localhost:3000/candidate?limit=10&offset=0
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhZG1pbklEIjoyLCJlbWFpbCI6ImFkbWluMkBleGFtcGxlLmNvbSIsImV4cCI6MTc0NjQ0NTcyNywicm9sZSI6ImFkbWluIn0.9msec4uS7vVWaMIpC47jV1ne-iO_kvvC-bWJRt4UjX8
