@@ -1,2 +1,2 @@
 run:
-	bun run dev & tailwindcss -i ../static/static.css -o ../static/global.css --watch
+	bun run dev & tailwindcss -i ../static/static.css -o ./global.css --watch

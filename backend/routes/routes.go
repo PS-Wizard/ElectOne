@@ -1,21 +1,29 @@
 package routes
 
 import (
+	"time"
+
 	"github.com/PS-Wizard/Electone/internals/auth"
 	"github.com/PS-Wizard/Electone/internals/db/handlers"
 	"github.com/PS-Wizard/Electone/internals/middlewares"
 	"github.com/PS-Wizard/Electone/realtime"
 	"github.com/gofiber/contrib/websocket"
 	"github.com/gofiber/fiber/v2"
+	"github.com/gofiber/fiber/v2/middleware/limiter"
 )
 
 func SetupRoutes(app *fiber.App) {
 
+	rateLimiter := limiter.New(limiter.Config{
+		Max:               10,
+		Expiration:        30 * time.Second,
+		LimiterMiddleware: limiter.SlidingWindow{},
+	})
 	// Auth Routes ( DOESNT REQUIRE JWT)
 	authRoutes := app.Group("/auth")
 	app.Get("/vote/ws", websocket.New(realtime.HandleLivePushUpdates))
-	authRoutes.Post("/user", auth.UserLogin)
-	authRoutes.Post("/admin", auth.AdminLogin)
+	authRoutes.Post("/user", rateLimiter, auth.UserLogin)
+	authRoutes.Post("/admin", rateLimiter, auth.AdminLogin)
 
 	protected := app.Group("/", middlewares.JWTMiddleware())
 	// Citizenship routes

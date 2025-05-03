@@ -1,3 +1,43 @@
+@import url('https://fonts.googleapis.com/css2?family=Geist&display=swap');
+
+* {
+    font-family: "Geist",sans-serif;
+}
+
 @import "tailwindcss";
-@import "tailwindcss";
+@plugin "@tailwindcss/typography";
 @plugin "daisyui";
+@plugin "daisyui/theme" {
+    name: "black";
+    default: true;
+    prefersdark: true;
+    color-scheme: "dark";
+    --color-base-100: white;
+    --color-base-200: white;
+    --color-base-300: white;
+    --color-base-content: oklch(12% 0.042 264.695);
+    --color-primary: black;
+    --color-primary-content: white;
+    --color-secondary: white;
+    --color-secondary-content: oklch(12% 0.042 264.695);
+    --color-accent: oklch(84% 0.238 128.85);
+    --color-accent-content: oklch(12% 0.042 264.695);
+    --color-neutral: oklch(20% 0 0);
+    --color-neutral-content: oklch(100% 0 0);
+    --color-info: oklch(60% 0.25 292.717);
+    --color-info-content: oklch(12% 0.042 264.695);
+    --color-success: oklch(50% 0.118 165.612);
+    --color-success-content: oklch(90.395% 0.035 142.495);
+    --color-warning: oklch(96.798% 0.211 109.769);
+    --color-warning-content: oklch(19.359% 0.042 109.769);
+    --color-error: oklch(62.795% 0.257 29.233);
+    --color-error-content: oklch(12.559% 0.051 29.233);
+    --radius-selector: 2rem;
+    --radius-field: 2rem;
+    --radius-box: 2rem;
+    --size-selector: 0.25rem;
+    --size-field: 0.25rem;
+    --border: 2px;
+    --depth: 0;
+    --noise: 0;
+}

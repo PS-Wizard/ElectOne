@@ -15,11 +15,12 @@ GET http://localhost:3000/admin/1
 ### Update Admin
 PUT http://localhost:3000/admin/1
 Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhZG1pbklEIjoyLCJlbWFpbCI6ImFkbWluMkBleGFtcGxlLmNvbSIsImV4cCI6MTc0NjQ0NTcyNywicm9sZSI6ImFkbWluIn0.9msec4uS7vVWaMIpC47jV1ne-iO_kvvC-bWJRt4UjX8
 
 {
-  "email": "admin_updated@example.com",
-  "password": "newSecurePassword123",
-  "totp_secret": "newSecret123"
+  "email": "admin1@example.com",
+  "password": "securepass",
+  "totp_secret": ""
 }
 
 ### List Admins

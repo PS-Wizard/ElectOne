@@ -16,22 +16,18 @@ GET http://localhost:3000/appeal/1
 Accept: application/json
 Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhZG1pbklEIjoyLCJlbWFpbCI6ImFkbWluMkBleGFtcGxlLmNvbSIsImV4cCI6MTc0NjQ0NTcyNywicm9sZSI6ImFkbWluIn0.9msec4uS7vVWaMIpC47jV1ne-iO_kvvC-bWJRt4UjX8
 
-### Get All Appeals 
-GET http://localhost:3000/appeal?limit=10&offset=0
-Accept: application/json
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhZG1pbklEIjoyLCJlbWFpbCI6ImFkbWluMkBleGFtcGxlLmNvbSIsImV4cCI6MTc0NjQ0NTcyNywicm9sZSI6ImFkbWluIn0.9msec4uS7vVWaMIpC47jV1ne-iO_kvvC-bWJRt4UjX8
 
 ### Update Appeal
-PUT http://localhost:3000/appeal/1
+PUT http://localhost:3000/appeal/2
 Content-Type: application/json
 Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhZG1pbklEIjoyLCJlbWFpbCI6ImFkbWluMkBleGFtcGxlLmNvbSIsImV4cCI6MTc0NjQ0NTcyNywicm9sZSI6ImFkbWluIn0.9msec4uS7vVWaMIpC47jV1ne-iO_kvvC-bWJRt4UjX8
 
 {
   "citizenship_id": "123-456",
-  "voter_card_id": "VC-001",
+  "voter_card_id": "VC-002",
   "password": "newpass456",
   "photos": "new_photo_url",
-  "status": "Pending"
+  "status": "pending"
 }
 
 
@@ -42,5 +38,10 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhZG1pbklEIjoyLCJlb
 
 ### Reject Appeal
 POST http://localhost:3000/appeal/2/reject
+Accept: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhZG1pbklEIjoyLCJlbWFpbCI6ImFkbWluMkBleGFtcGxlLmNvbSIsImV4cCI6MTc0NjQ0NTcyNywicm9sZSI6ImFkbWluIn0.9msec4uS7vVWaMIpC47jV1ne-iO_kvvC-bWJRt4UjX8
+
+### Get All Appeals 
+GET http://localhost:3000/appeal?limit=10&offset=0
 Accept: application/json
 Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhZG1pbklEIjoyLCJlbWFpbCI6ImFkbWluMkBleGFtcGxlLmNvbSIsImV4cCI6MTc0NjQ0NTcyNywicm9sZSI6ImFkbWluIn0.9msec4uS7vVWaMIpC47jV1ne-iO_kvvC-bWJRt4UjX8

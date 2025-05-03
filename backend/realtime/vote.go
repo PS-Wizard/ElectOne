@@ -61,7 +61,7 @@ func HandleVote(c *fiber.Ctx) error {
 		}
 	}
 
-	update := map[string]interface{}{
+	update := map[string]any{
 		"election_id":     vote.ElectionID,
 		"candidate_ids":   vote.CandidateIDs,
 		"voter_card_id":   vote.VoterCardID,
