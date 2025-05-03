@@ -22,7 +22,7 @@ func SetupRoutes(app *fiber.App) {
 	// Auth Routes ( DOESNT REQUIRE JWT)
 	authRoutes := app.Group("/auth")
 	app.Get("/vote/ws", websocket.New(realtime.HandleLivePushUpdates))
-	authRoutes.Post("/user", rateLimiter, auth.UserLogin)
+	authRoutes.Post("/user", rateLimiter, middlewares.RequireLocation, auth.UserLogin)
 	authRoutes.Post("/admin", rateLimiter, auth.AdminLogin)
 
 	protected := app.Group("/", middlewares.JWTMiddleware())

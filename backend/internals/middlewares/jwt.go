@@ -1,7 +1,9 @@
 package middlewares
 
 import (
+	"encoding/json"
 	"fmt"
+	"net/http"
 
 	"github.com/PS-Wizard/Electone/internals/auth"
 	jwtware "github.com/gofiber/contrib/jwt"
@@ -73,5 +75,29 @@ func RequireUser(c *fiber.Ctx) error {
 		})
 	}
 
+	return c.Next()
+}
+
+func RequireLocation(c *fiber.Ctx) error {
+	// TODO fix in production
+
+	// ipaddr := c.IP()
+	ipaddr := "113.199.229.49"
+	resp, err := http.Get(fmt.Sprintf("https://ipapi.co/%s/json/", ipaddr))
+	if err != nil {
+		return c.Status(fiber.StatusForbidden).JSON(fiber.Map{
+			"error": "Couldn't Validate Location",
+		})
+	}
+
+	defer resp.Body.Close()
+	var data map[string]any
+	json.NewDecoder(resp.Body).Decode(&data)
+	fmt.Println("New Login Request: ", data)
+	if data["city"] != "Kathmandu" {
+		return c.Status(fiber.StatusForbidden).JSON(fiber.Map{
+			"error": "Only Allowed Within Nepal",
+		})
+	}
 	return c.Next()
 }
