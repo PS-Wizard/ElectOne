@@ -3,10 +3,10 @@ POST http://localhost:3000/auth/user
 Content-Type: application/json
 
 {
-  "citizenship_id": "123-457",
-  "voter_card_id": "VC-002",
-  "password": "securepassword",
-  "totp_code":"762645"
+  "citizenship_id": "123-456",
+  "voter_card_id": "VC-001",
+  "password": "securepassword123",
+  "totp_code":"236409"
 }
 
 
@@ -17,7 +17,7 @@ Content-Type: application/json
 {
   "email": "admin1@example.com",
   "password": "securepass",
-  "totp_code": "526557"
+  "totp_code": "292142"
 }
 
 

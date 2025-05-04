@@ -1,7 +1,7 @@
 ### Create Vote
 POST http://localhost:3000/vote
 Content-Type: application/json
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJjaXRpemVuc2hpcCI6IjEyMy00NTciLCJleHAiOjE3NDYzNDM5MzAsInJvbGUiOiJ1c2VyIiwidXNlcl9pZCI6OCwidm90ZXJfY2FyZCI6IlZDLTAwMiJ9.DdFsWcLfjCfCuiYQoIuON9DoK8AHPZFdE7TIq7Fp1VQ
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhZG1pbklEIjoyLCJlbWFpbCI6ImFkbWluMkBleGFtcGxlLmNvbSIsImV4cCI6MTc0NjQ0NTcyNywicm9sZSI6ImFkbWluIn0.9msec4uS7vVWaMIpC47jV1ne-iO_kvvC-bWJRt4UjX8
 
 {
     "election_id":5,

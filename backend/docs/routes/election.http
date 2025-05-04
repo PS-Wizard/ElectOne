@@ -6,7 +6,7 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhZG1pbklEIjoyLCJlb
 {
   "start_date": "2025-06-01",
   "end_date": "2025-06-15",
-  "location": "Lalitpur",
+  "location": "Kathmandu",
   "name": "Super Election",
   "description": "random blah balh ugabuga asdfskdfjalksjaskdjflkasdj"
 }
@@ -26,7 +26,7 @@ Content-Type: application/json
 }
 
 ### Delete Election
-DELETE http://localhost:3000/election/3
+DELETE http://localhost:3000/election/4
 Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhZG1pbklEIjoyLCJlbWFpbCI6ImFkbWluMkBleGFtcGxlLmNvbSIsImV4cCI6MTc0NjQ0NTcyNywicm9sZSI6ImFkbWluIn0.9msec4uS7vVWaMIpC47jV1ne-iO_kvvC-bWJRt4UjX8
 
 ### List Elections
