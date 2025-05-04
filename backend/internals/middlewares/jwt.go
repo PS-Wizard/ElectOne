@@ -83,7 +83,7 @@ func RequireLocation(c *fiber.Ctx) error {
 
 	// ipaddr := c.IP()
 	ipaddr := "113.199.229.49"
-	resp, err := http.Get(fmt.Sprintf("https://ipapi.co/%s/json/", ipaddr))
+	resp, err := http.Get(fmt.Sprintf("https://ipwho.is/%s", ipaddr))
 	if err != nil {
 		return c.Status(fiber.StatusForbidden).JSON(fiber.Map{
 			"error": "Couldn't Validate Location",

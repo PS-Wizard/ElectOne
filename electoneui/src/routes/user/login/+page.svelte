@@ -48,7 +48,7 @@
 
             token = data.token;
             localStorage.setItem("token", token);
-            goto("/user/");
+            goto("/user/dashboard");
         } catch (err) {
             error = "Something went wrong.";
             console.error(err);
@@ -75,21 +75,21 @@
             <input
                 type="text"
                 placeholder="Citizenship ID"
-                class="input input-bordered w-full"
+                class="input rounded-lg input-bordered w-full"
                 bind:value={citizenship_id}
                 required
             />
             <input
                 type="text"
                 placeholder="Voter Card ID"
-                class="input input-bordered w-full"
+                class="input input-bordered w-full rounded-lg"
                 bind:value={voter_card_id}
                 required
             />
             <input
                 type="password"
                 placeholder="Password"
-                class="input input-bordered w-full"
+                class="input input-bordered w-full rounded-lg"
                 bind:value={password}
                 required
             />
@@ -109,10 +109,10 @@
                 <input
                     type="text"
                     placeholder="TOTP Code"
-                    class="input input-bordered w-full"
+                    class="rounded-lg input input-bordered w-full"
                     bind:value={totp_code}
                 />
-                <p class="text-xs text-gray-400 text-right mt-1">
+                <p class="text-xs text-gray-300 text-right mt-1">
                     If this is your first login, leave this blank.
                 </p>
             </div>
@@ -122,7 +122,7 @@
             {/if}
 
             <button
-                class="btn btn-primary w-full"
+                class="rounded-lg btn btn-primary w-full"
                 on:click|preventDefault={login}
             >
                 Login

@@ -6,10 +6,10 @@ import (
 	"github.com/PS-Wizard/Electone/internals/auth"
 	"github.com/PS-Wizard/Electone/internals/db/handlers"
 	"github.com/PS-Wizard/Electone/internals/middlewares"
-	"github.com/PS-Wizard/Electone/realtime"
+	"github.com/PS-Wizard/Electone/statistics"
 	"github.com/gofiber/contrib/websocket"
 	"github.com/gofiber/fiber/v2"
-	"github.com/gofiber/fiber/v2/middleware/cache"
+	// "github.com/gofiber/fiber/v2/middleware/cache"
 	"github.com/gofiber/fiber/v2/middleware/limiter"
 )
 
@@ -23,7 +23,9 @@ func SetupRoutes(app *fiber.App) {
 
 	// Auth Routes ( DOESNT REQUIRE JWT)
 	authRoutes := app.Group("/auth")
-	app.Get("/vote/ws", websocket.New(realtime.HandleLivePushUpdates))
+	app.Get("/vote/ws", websocket.New(statistics.HandleLivePushUpdates))
+	app.Get("/vote/history/:electionID", statistics.GetElectionHistory)
+
 	authRoutes.Post("/user", rateLimiter, middlewares.RequireLocation, auth.UserLogin)
 	authRoutes.Post("/admin", rateLimiter, auth.AdminLogin)
 
@@ -42,7 +44,8 @@ func SetupRoutes(app *fiber.App) {
 
 	// Election Routes
 	// TODO: MIGHT WANT TO DISABLE CACHE
-	electionRoutes := protected.Group("/election", cache.New())
+	// electionRoutes := protected.Group("/election", cache.New())
+	electionRoutes := protected.Group("/election")
 	handlers.RegisterElectionRoutes(electionRoutes)
 
 	// Appeal Routes
@@ -55,7 +58,7 @@ func SetupRoutes(app *fiber.App) {
 
 	// Vote Routes
 
-	protected.Post("/vote", middlewares.RequireUser, realtime.HandleVote)
+	protected.Post("/vote", middlewares.RequireUser, statistics.HandleVote)
 
 	//admin Routes
 	adminRoutes := protected.Group("/admin")

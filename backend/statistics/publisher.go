@@ -1,7 +1,8 @@
-package realtime
+package statistics
 
 import (
 	"context"
+	"fmt"
 	"log"
 
 	"github.com/PS-Wizard/Electone/internals/db"
@@ -9,6 +10,7 @@ import (
 )
 
 func HandleLivePushUpdates(c *websocket.Conn) {
+	fmt.Println("New Connection")
 	defer c.Close()
 
 	pubsub := db.RDB.Subscribe(context.Background(), "vote_updates")

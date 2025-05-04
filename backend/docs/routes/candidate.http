@@ -4,31 +4,42 @@ Content-Type: application/json
 Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhZG1pbklEIjoyLCJlbWFpbCI6ImFkbWluMkBleGFtcGxlLmNvbSIsImV4cCI6MTc0NjQ0NTcyNywicm9sZSI6ImFkbWluIn0.9msec4uS7vVWaMIpC47jV1ne-iO_kvvC-bWJRt4UjX8
 
 {
-  "citizen_id": "123-456",
-  "election_id": 1,
+  "citizen_id": "123-457",
+  "election_id": 5,
   "profile_path": "/images/candidate1.png",
   "bio": "Committed to public service.",
-  "post": "Mayor"
+  "post": "Mayor",
+  "party": "Democratic",
+  "name": "John Doe"
 }
+
 
 ### Get Candidate by ID
-GET http://localhost:3000/candidate/1
+GET http://localhost:3000/candidate/2
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhZG1pbklEIjoyLCJlbWFpbCI6ImFkbWluMkBleGFtcGxlLmNvbSIsImV4cCI6MTc0NjQ0NTcyNywicm9sZSI6ImFkbWluIn0.9msec4uS7vVWaMIpC47jV1ne-iO_kvvC-bWJRt4UjX8
+
 
 ### Update Candidate
-PUT http://localhost:3000/candidate/1
+PUT http://localhost:3000/candidate/2
 Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhZG1pbklEIjoyLCJlbWFpbCI6ImFkbWluMkBleGFtcGxlLmNvbSIsImV4cCI6MTc0NjQ0NTcyNywicm9sZSI6ImFkbWluIn0.9msec4uS7vVWaMIpC47jV1ne-iO_kvvC-bWJRt4UjX8
 
 {
-  "citizen_id": "123-456",
-  "election_id": 2,
+  "citizen_id": "123-457",
+  "election_id": 5,
   "profile_path": "/images/candidate1_updated.png",
   "bio": "Updated bio info.",
-  "post": "Mayor"
+  "post": "Mayor",
+  "party": "Republican",
+  "name": "Jane Doe"
 }
+
 
 ### Delete Candidate
 DELETE http://localhost:3000/candidate/1
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhZG1pbklEIjoyLCJlbWFpbCI6ImFkbWluMkBleGFtcGxlLmNvbSIsImV4cCI6MTc0NjQ0NTcyNywicm9sZSI6ImFkbWluIn0.9msec4uS7vVWaMIpC47jV1ne-iO_kvvC-bWJRt4UjX8
 
-### List candidate
+### Get Candidates
 GET http://localhost:3000/candidate?limit=10&offset=0
 Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhZG1pbklEIjoyLCJlbWFpbCI6ImFkbWluMkBleGFtcGxlLmNvbSIsImV4cCI6MTc0NjQ0NTcyNywicm9sZSI6ImFkbWluIn0.9msec4uS7vVWaMIpC47jV1ne-iO_kvvC-bWJRt4UjX8
+

@@ -14,13 +14,15 @@ type Candidate struct {
 	ProfilePath string `json:"profile_path"`
 	Bio         string `json:"bio"`
 	Post        string `json:"post"`
+	Party       string `json:"party"`
+	Name        string `json:"name"`
 }
 
 func CreateCandidate(candidate *Candidate) (int, error) {
 	query := `
-		INSERT INTO Candidate (CitizenID, ElectionID, ProfilePath, Bio, Post)
-		VALUES (?, ?, ?, ?, ?)`
-	_, err := db.DB.Exec(query, candidate.CitizenID, candidate.ElectionID, candidate.ProfilePath, candidate.Bio, candidate.Post)
+		INSERT INTO Candidate (CitizenID, ElectionID, ProfilePath, Bio, Post, Party, Name)
+		VALUES (?, ?, ?, ?, ?, ?, ?)`
+	_, err := db.DB.Exec(query, candidate.CitizenID, candidate.ElectionID, candidate.ProfilePath, candidate.Bio, candidate.Post, candidate.Party, candidate.Name)
 	if err != nil {
 		return 0, err
 	}
@@ -37,15 +39,15 @@ func CreateCandidate(candidate *Candidate) (int, error) {
 func UpdateCandidate(candidateID int, updatedCandidate *Candidate) error {
 	query := `
 		UPDATE Candidate
-		SET CitizenID = ?, ElectionID = ?, ProfilePath = ?, Bio = ?, Post = ?
+		SET CitizenID = ?, ElectionID = ?, ProfilePath = ?, Bio = ?, Post = ?, Party = ?, Name = ?
 		WHERE CandidateID = ?`
-	_, err := db.DB.Exec(query, updatedCandidate.CitizenID, updatedCandidate.ElectionID, updatedCandidate.ProfilePath, updatedCandidate.Bio, updatedCandidate.Post, candidateID)
+	_, err := db.DB.Exec(query, updatedCandidate.CitizenID, updatedCandidate.ElectionID, updatedCandidate.ProfilePath, updatedCandidate.Bio, updatedCandidate.Post, updatedCandidate.Party, updatedCandidate.Name, candidateID)
 	return err
 }
 
 func GetCandidates(limit, offset int) ([]Candidate, error) {
 	query := `
-		SELECT CandidateID, CitizenID, ElectionID, ProfilePath, Bio, Post
+		SELECT CandidateID, CitizenID, ElectionID, ProfilePath, Bio, Post, Party, Name
 		FROM Candidate
 		ORDER BY CandidateID DESC
 		LIMIT ? OFFSET ?`
@@ -58,7 +60,7 @@ func GetCandidates(limit, offset int) ([]Candidate, error) {
 	var candidates []Candidate
 	for rows.Next() {
 		var candidate Candidate
-		if err := rows.Scan(&candidate.CandidateID, &candidate.CitizenID, &candidate.ElectionID, &candidate.ProfilePath, &candidate.Bio, &candidate.Post); err != nil {
+		if err := rows.Scan(&candidate.CandidateID, &candidate.CitizenID, &candidate.ElectionID, &candidate.ProfilePath, &candidate.Bio, &candidate.Post, &candidate.Party, &candidate.Name); err != nil {
 			return nil, err
 		}
 		candidates = append(candidates, candidate)
@@ -68,11 +70,11 @@ func GetCandidates(limit, offset int) ([]Candidate, error) {
 
 func GetCandidateByID(candidateID int) (*Candidate, error) {
 	query := `
-		SELECT CandidateID, CitizenID, ElectionID, ProfilePath, Bio, Post
+		SELECT CandidateID, CitizenID, ElectionID, ProfilePath, Bio, Post, Party, Name
 		FROM Candidate
 		WHERE CandidateID = ?`
 	var candidate Candidate
-	err := db.DB.QueryRow(query, candidateID).Scan(&candidate.CandidateID, &candidate.CitizenID, &candidate.ElectionID, &candidate.ProfilePath, &candidate.Bio, &candidate.Post)
+	err := db.DB.QueryRow(query, candidateID).Scan(&candidate.CandidateID, &candidate.CitizenID, &candidate.ElectionID, &candidate.ProfilePath, &candidate.Bio, &candidate.Post, &candidate.Party, &candidate.Name)
 	if err != nil {
 		if err == sql.ErrNoRows {
 			return nil, fmt.Errorf("No Candidate With That ID")

@@ -56,7 +56,7 @@ func UpdateCandidateHandler(c *fiber.Ctx) error {
 	}
 
 	if err := operations.UpdateCandidate(id, &updated); err != nil {
-		return fiber.NewError(fiber.StatusInternalServerError, "Failed to update candidate")
+		return fiber.NewError(fiber.StatusInternalServerError, err.Error())
 	}
 
 	return c.SendStatus(fiber.StatusOK)

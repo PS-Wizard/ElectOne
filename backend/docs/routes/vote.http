@@ -4,7 +4,9 @@ Content-Type: application/json
 Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJjaXRpemVuc2hpcCI6IjEyMy00NTciLCJleHAiOjE3NDYzNDM5MzAsInJvbGUiOiJ1c2VyIiwidXNlcl9pZCI6OCwidm90ZXJfY2FyZCI6IlZDLTAwMiJ9.DdFsWcLfjCfCuiYQoIuON9DoK8AHPZFdE7TIq7Fp1VQ
 
 {
-  "election_id": 4,
-  "candidate_ids": ["2", "3"] 
+    "election_id":5,
+    "candidates":{
+       "Mayor":3
+    }
 }
 
