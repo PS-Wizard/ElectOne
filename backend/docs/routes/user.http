@@ -18,12 +18,13 @@ Accept: application/json
 ### Update User  
 PUT http://localhost:3000/user/3
 Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhZG1pbklEIjoyLCJlbWFpbCI6ImFkbWluMkBleGFtcGxlLmNvbSIsImV4cCI6MTc0NjQ0NTcyNywicm9sZSI6ImFkbWluIn0.9msec4uS7vVWaMIpC47jV1ne-iO_kvvC-bWJRt4UjX8
 
 {
   "citizenship_id": "123-456",
   "voter_card_id": "VC-001",
-  "password": "somethingsomething",
-  "totp_secret": "NEWSECRET789",
+  "password": "somepass",
+  "totp_secret": "",
   "photos": "{\"selfie\": \"newbase64\"}"
 }
 
