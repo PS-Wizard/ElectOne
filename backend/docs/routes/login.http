@@ -5,8 +5,8 @@ Content-Type: application/json
 {
   "citizenship_id": "123-456",
   "voter_card_id": "VC-001",
-  "password": "securepassword123",
-  "totp_code":"236409"
+  "password": "somepass",
+  "totp_code":"644685"
 }
 
 

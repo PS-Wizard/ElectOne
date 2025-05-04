@@ -1,12 +1,28 @@
-### Create Vote
+### 🗳️ Cast Vote
 POST http://localhost:3000/vote
 Content-Type: application/json
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhZG1pbklEIjoyLCJlbWFpbCI6ImFkbWluMkBleGFtcGxlLmNvbSIsImV4cCI6MTc0NjQ0NTcyNywicm9sZSI6ImFkbWluIn0.9msec4uS7vVWaMIpC47jV1ne-iO_kvvC-bWJRt4UjX8
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJjaXRpemVuc2hpcCI6IjEyMy00NTYiLCJleHAiOjE3NDY0NDY0MDYsInJvbGUiOiJ1c2VyIiwidXNlcl9pZCI6MSwidm90ZXJfY2FyZCI6IlZDLTAwMSJ9.XxV3e-kzFi4T1YlHesV0dkaABrBHwstTYHrR6qriZls
 
 {
-    "election_id":5,
-    "candidates":{
-       "Mayor":3
-    }
+  "election_id": 5,
+  "candidate_id": 3
 }
 
+###
+
+### 📋 List All Votes (Admin only)
+GET http://localhost:3000/vote?limit=10&offset=0
+Accept: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhZG1pbklEIjoyLCJlbWFpbCI6ImFkbWluMkBleGFtcGxlLmNvbSIsImV4cCI6MTc0NjQ0NTcyNywicm9sZSI6ImFkbWluIn0.9msec4uS7vVWaMIpC47jV1ne-iO_kvvC-bWJRt4UjX8
+
+###
+
+### Get Votes By Voter Card
+GET http://localhost:3000/vote/voter/VC-001
+Accept: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhZG1pbklEIjoyLCJlbWFpbCI6ImFkbWluMkBleGFtcGxlLmNvbSIsImV4cCI6MTc0NjQ0NTcyNywicm9sZSI6ImFkbWluIn0.9msec4uS7vVWaMIpC47jV1ne-iO_kvvC-bWJRt4UjX8
+
+###
+
+### ❌ Delete Vote
+DELETE http://localhost:3000/vote/12
