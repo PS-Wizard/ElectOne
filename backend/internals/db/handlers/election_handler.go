@@ -1,8 +1,8 @@
 package handlers
 
 import (
+	"fmt"
 	"strconv"
-
 	"github.com/PS-Wizard/Electone/internals/db/operations"
 	"github.com/PS-Wizard/Electone/internals/middlewares"
 	"github.com/gofiber/fiber/v2"
@@ -28,6 +28,7 @@ func CreateElectionHandler(c *fiber.Ctx) error {
 		return fiber.NewError(fiber.StatusInternalServerError, "Failed to create election")
 	}
 
+	fmt.Println("New Election Created, removing cache")
 	return c.JSON(fiber.Map{"election_id": id})
 }
 
@@ -80,6 +81,7 @@ func UpdateElectionHandler(c *fiber.Ctx) error {
 		return fiber.NewError(fiber.StatusInternalServerError, err.Error())
 	}
 
+	fmt.Println("Eleciton Updated, Refreshing Cache")
 	return c.SendStatus(fiber.StatusOK)
 }
 
@@ -93,10 +95,12 @@ func DeleteElectionHandler(c *fiber.Ctx) error {
 		return fiber.NewError(fiber.StatusInternalServerError, "Failed to delete election")
 	}
 
+	fmt.Println("Eleciton Updated, Refreshing Cache")
 	return c.SendStatus(fiber.StatusOK)
 }
 
 func ListElectionsHandler(c *fiber.Ctx) error {
+	fmt.Println("Ive been called")
 	token := c.Locals("token").(*jwt.Token)
 	claims := token.Claims.(jwt.MapClaims)
 	role := claims["role"]

@@ -9,16 +9,18 @@ import (
 	"github.com/PS-Wizard/Electone/realtime"
 	"github.com/gofiber/contrib/websocket"
 	"github.com/gofiber/fiber/v2"
+	"github.com/gofiber/fiber/v2/middleware/cache"
 	"github.com/gofiber/fiber/v2/middleware/limiter"
 )
 
 func SetupRoutes(app *fiber.App) {
 
 	rateLimiter := limiter.New(limiter.Config{
-		Max:               10,
+		Max:               5,
 		Expiration:        30 * time.Second,
 		LimiterMiddleware: limiter.SlidingWindow{},
 	})
+
 	// Auth Routes ( DOESNT REQUIRE JWT)
 	authRoutes := app.Group("/auth")
 	app.Get("/vote/ws", websocket.New(realtime.HandleLivePushUpdates))
@@ -39,7 +41,8 @@ func SetupRoutes(app *fiber.App) {
 	handlers.RegisterUserRoutes(userRoutes)
 
 	// Election Routes
-	electionRoutes := protected.Group("/election")
+	// TODO: MIGHT WANT TO DISABLE CACHE
+	electionRoutes := protected.Group("/election", cache.New())
 	handlers.RegisterElectionRoutes(electionRoutes)
 
 	// Appeal Routes

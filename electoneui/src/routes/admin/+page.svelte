@@ -1,78 +1,133 @@
-<script>
+<script lang="ts">
+    import { goto } from "$app/navigation";
+
     let email = "";
     let password = "";
-    let errorMessage = "";
+    let totp_code = "";
+    let qr_url = "";
+    let setup_done = true;
+    let token = "";
+    let error = "";
 
-    const handleLogin = async () => {
+    const login = async () => {
+        error = "";
+
         try {
-            const response = await fetch(
-                "https://localhost:3000/api/admin/login",
-                {
-                    method: "POST",
-                    credentials: "include",
-                    headers: {
-                        "Content-Type": "application/json",
-                    },
-                    body: JSON.stringify({
-                        email: email,
-                        password: password,
-                    }),
-                },
-            );
+            const res = await fetch("http://localhost:3000/auth/admin", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({ email, password, totp_code }),
+            });
 
-            const data = await response.json();
+            const text = await res.text(); // safer than res.json()
 
-            if (response.ok) {
-                // Handle successful login
-                console.log(data.message); // Redirect or show success
-            } else {
-                // Display error
-                errorMessage = data.error || "Unknown error occurred";
+            const data = (() => {
+                try {
+                    return JSON.parse(text);
+                } catch {
+                    return { message: text }; // fallback to plain text
+                }
+            })();
+
+            if (!res.ok) {
+                error = data.message || "Login failed";
+                return;
             }
-        } catch (error) {
-            errorMessage = "Network error, please try again.";
+
+            if (!data.setup_done && data.qr_url) {
+                setup_done = false;
+                qr_url = `https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=${encodeURIComponent(data.qr_url)}`;
+            } else {
+                token = data.token;
+                localStorage.setItem("token", token);
+                goto("/admin/appeals");
+            }
+        } catch (err) {
+            error = "Something went wrong. Please try again.";
+            console.error(err);
         }
     };
 </script>
 
-<div class="min-h-screen flex justify-center items-center">
-    <div class="p-8 rounded-lg shadow-lg w-96">
-        <h1 class="text-2xl font-semibold text-center mb-6">Admin Login</h1>
+<section
+    class="min-h-screen flex items-center justify-center bg-gray-100 dark:bg-gray-900"
+>
+    <div
+        class="w-full max-w-md p-8 space-y-6 bg-white rounded-xl shadow-lg dark:bg-gray-800"
+    >
+        <div class="text-center">
+            <img
+                src="https://merakiui.com/images/logo.svg"
+                class="mx-auto h-8"
+                alt="Logo"
+            />
+            <h2 class="mt-4 text-2xl font-bold text-gray-800 dark:text-white">
+                Admin Login
+            </h2>
+            <p class="text-sm text-gray-500 dark:text-gray-400">
+                Access the control panel
+            </p>
+        </div>
 
-        <!-- Error Message -->
-        {#if errorMessage}
-            <div class="text-red-600 text-sm mb-4">
-                {errorMessage}
-            </div>
-        {/if}
-
-        <div>
-            <label for="email" class="block text-gray-700">Email</label>
+        <div class="space-y-4">
             <input
-                id="email"
                 type="email"
-                class="input w-full p-3 border border-gray-300 rounded-md mt-2"
+                placeholder="Email"
+                class="input input-bordered w-full"
                 bind:value={email}
-                placeholder="Enter your email"
+                required
+            />
+            <input
+                type="password"
+                placeholder="Password"
+                class="input input-bordered w-full"
+                bind:value={password}
+                required
             />
 
-            <label for="password" class="block text-gray-700 mt-4"
-                >Password</label
-            >
-            <input
-                id="password"
-                type="password"
-                class="input w-full p-3 border border-gray-300 rounded-md mt-2"
-                bind:value={password}
-                placeholder="Enter your password"
-            />
+            {#if !setup_done}
+                <div class="text-sm text-yellow-500">
+                    Scan this QR code with your authenticator app:
+                </div>
+                <img
+                    src={qr_url}
+                    alt="QR Code"
+                    class="mx-auto my-2 rounded-md shadow-md"
+                />
+            {/if}
+
+            <div>
+                <input
+                    type="text"
+                    placeholder="TOTP Code"
+                    class="input input-bordered w-full"
+                    bind:value={totp_code}
+                />
+                <p
+                    class="text-xs text-gray-100 text-right dark:text-gray-400 mt-1"
+                >
+                    If this is your first time, leave this blank.
+                </p>
+            </div>
+
+            {#if error}
+                <div class="alert alert-error">{error}</div>
+            {/if}
 
             <button
-                on:click={handleLogin}
-                class="cursor-pointer w-full bg-white text-black p-3 rounded-md mt-6 border border-transparent hover:bg-black hover:text-white hover:border-white transition"
+                class="btn btn-primary w-full"
+                on:click|preventDefault={login}
             >
                 Login
             </button>
+
+            {#if token}
+                <div class="alert alert-success">
+                    Logged in! Token: <br /><code class="break-all"
+                        >{token}</code
+                    >
+                </div>
+            {/if}
         </div>
     </div>
-</div>
+</section>

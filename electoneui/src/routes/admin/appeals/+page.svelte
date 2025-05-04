@@ -1,100 +1,201 @@
-<script lang="ts">
+<script>
     import { onMount } from "svelte";
+    import AdminNavbar from "../../../components/AdminNavbar.svelte";
 
     let appeals = [];
-
-    onMount(async () => {
-        await fetchAppeals();
-    });
+    let loading = true;
+    let error = "";
+    let search = "";
 
     async function fetchAppeals() {
+        loading = true;
         try {
             const res = await fetch(
-                "https://localhost:3000/api/secure/appeals/",
+                "http://localhost:3000/appeal?limit=100&offset=0",
+                {
+                    headers: {
+                        Authorization: `Bearer ${localStorage.getItem("token")}`,
+                    },
+                },
             );
             if (!res.ok) throw new Error("Failed to fetch appeals");
             appeals = await res.json();
         } catch (err) {
-            console.error("Error fetching appeals:", err);
+            error = err.message;
         }
+        loading = false;
     }
 
-    async function approveAppeal(id: number) {
+    async function approveAppeal(id) {
         try {
             const res = await fetch(
-                `https://localhost:3000/api/secure/appeals/${id}`,
+                `http://localhost:3000/appeal/${id}/approve`,
                 {
                     method: "POST",
+                    headers: {
+                        Authorization: `Bearer ${localStorage.getItem("token")}`,
+                    },
                 },
             );
             if (!res.ok) throw new Error("Failed to approve appeal");
-            await fetchAppeals(); // refresh after approve
+            await fetchAppeals(); // Refresh the list after approval
         } catch (err) {
-            console.error("Error approving appeal:", err);
+            alert(err.message);
         }
     }
 
-    async function rejectAppeal(id: number) {
+    async function rejectAppeal(id) {
         try {
             const res = await fetch(
-                `https://localhost:3000/api/secure/appeals/${id}`,
+                `http://localhost:3000/appeal/${id}/reject`,
                 {
-                    method: "DELETE",
+                    method: "POST",
+                    headers: {
+                        Authorization: `Bearer ${localStorage.getItem("token")}`,
+                    },
                 },
             );
             if (!res.ok) throw new Error("Failed to reject appeal");
-            await fetchAppeals(); // refresh after reject
+            await fetchAppeals(); // Refresh the list after rejection
         } catch (err) {
-            console.error("Error rejecting appeal:", err);
+            alert(err.message);
         }
     }
+
+    onMount(fetchAppeals);
 </script>
 
-<main class="p-4">
-    <h1 class="text-2xl font-bold mb-4">Pending Appeals</h1>
+<AdminNavbar />
+<section class="flex p-12 flex-col justify-center">
+    <h1 class="text-center text-6xl uppercase font-medium tracking-wide">
+        Handle Appeals
+    </h1>
 
-    {#if appeals.length > 0}
-        {#each appeals as appeal}
-            <div class="border p-4 rounded mb-4 shadow">
-                <h2 class="text-xl font-semibold">{appeal.fullName}</h2>
-                <p><strong>Citizen ID:</strong> {appeal.citizenID}</p>
-                <p><strong>DOB:</strong> {appeal.dateOfBirth}</p>
-                <p><strong>Residence:</strong> {appeal.placeOfResidence}</p>
-                <p><strong>Phone:</strong> {appeal.phoneNumber}</p>
-                <p><strong>Tags:</strong> {appeal.tags}</p>
-                <div>
-                    <strong>Photos:</strong>
-                    <ul class="list-disc ml-6">
-                        {#each appeal.photos as photo}
-                            <li>{photo}</li>
+    <section class="flex justify-between items-center m-4">
+        <div class="form-control w-full max-w-md">
+            <input
+                type="text"
+                class="input rounded-lg w-full"
+                bind:value={search}
+                placeholder="Search appeals…"
+            />
+        </div>
+    </section>
+
+    <section class="flex justify-center m-4">
+        {#if loading}
+            <p>Loading appeals...</p>
+        {:else if error}
+            <p class="text-red-500">{error}</p>
+        {:else}
+            <div
+                class="overflow-x-auto rounded-box border border-base-content/5 bg-base-100 w-full"
+            >
+                <table class="table w-full">
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Citizenship ID</th>
+                            <th>Voter Card ID</th>
+                            <th>Photos</th>
+                            <th>Status</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {#each appeals as appeal}
+                            {#if appeal.citizenship_id
+                                .toLowerCase()
+                                .includes(search.toLowerCase()) || appeal.voter_card_id
+                                    .toLowerCase()
+                                    .includes(search.toLowerCase())}
+                                <tr>
+                                    <td>{appeal.appeal_id}</td>
+                                    <td>{appeal.citizenship_id}</td>
+                                    <td>{appeal.voter_card_id}</td>
+                                    <td>
+                                        <!-- Split the comma-separated string into an array and display each photo -->
+                                        <div class="flex gap-1">
+                                            {#each appeal.photos.split(",") as photo}
+                                                <img
+                                                    src={`http://localhost:3000/static/images/${photo}`}
+                                                    alt="Appeal Photo"
+                                                    class="w-12 h-12 object-cover rounded-full"
+                                                />
+                                            {/each}
+                                        </div>
+                                    </td>
+                                    <td>{appeal.status}</td>
+                                    <td class="p-4 flex gap-2 justify-center">
+                                        <button
+                                            class="btn btn-sm btn-success"
+                                            disabled={appeal.status !==
+                                                "Pending"}
+                                            on:click={() =>
+                                                approveAppeal(appeal.appeal_id)}
+                                        >
+                                            Approve
+                                        </button>
+                                        <button
+                                            class="btn btn-sm btn-error"
+                                            disabled={appeal.status !==
+                                                "Pending"}
+                                            on:click={() =>
+                                                rejectAppeal(appeal.appeal_id)}
+                                        >
+                                            Reject
+                                        </button>
+                                    </td>
+                                </tr>
+                            {/if}
                         {/each}
-                    </ul>
-                </div>
-
-                <div class="mt-4 flex gap-2">
-                    <button
-                        on:click={() => approveAppeal(appeal.appealID)}
-                        class="bg-green-500 hover:bg-green-600 text-white px-4 py-2 rounded"
-                    >
-                        Approve
-                    </button>
-                    <button
-                        on:click={() => rejectAppeal(appeal.appealID)}
-                        class="bg-red-500 hover:bg-red-600 text-white px-4 py-2 rounded"
-                    >
-                        Reject
-                    </button>
-                </div>
+                    </tbody>
+                </table>
             </div>
-        {/each}
-    {:else}
-        <p>No pending appeals.</p>
-    {/if}
-</main>
+        {/if}
+    </section>
+</section>
 
 <style>
-    main {
-        max-width: 800px;
-        margin: auto;
+    /* Optional: Add some custom styles for very small screens if needed */
+    @media (max-width: 640px) {
+        .filter-section {
+            flex-direction: column;
+            align-items: stretch;
+        }
+
+        .filter-section > div {
+            width: 100%;
+        }
+
+        .flex-col.sm\:flex-row > div {
+            width: 100%;
+        }
+
+        .flex-col.sm\:flex-row {
+            align-items: stretch;
+        }
+
+        .table thead th {
+            padding: 0.75rem 0.5rem;
+            font-size: 0.8rem;
+        }
+
+        .table tbody td {
+            padding: 0.75rem 0.5rem;
+            font-size: 0.9rem;
+        }
+
+        .text-right.font-semibold.uppercase.tracking-wider.text-gray-600.py-3.px-4 {
+            text-align: center;
+        }
+
+        .table tbody tr td:last-child {
+            text-align: center;
+        }
+
+        .space-x-2.flex.justify-end {
+            justify-content: center !important;
+        }
     }
 </style>

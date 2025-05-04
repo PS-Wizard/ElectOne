@@ -1,209 +1,303 @@
 <script>
     import { onMount } from "svelte";
-    import {
-        GetCandidates,
-        DeleteCandidate,
-        UpdateCandidate,
-        CreateCandidate,
-    } from "./api.js";
+    import AdminNavbar from "../../../components/AdminNavbar.svelte";
 
     let candidates = [];
-    let searchQuery = "";
+    let loading = true;
+    let error = "";
+    let search = "";
+
     let newCandidate = {
-        citizenID: "",
+        citizen_id: "",
+        election_id: "",
+        profile_path: "",
+        bio: "",
         post: "",
-        electionID: "",
-        group: "",
     };
+
     let editingCandidate = null;
 
-    async function loadCandidates() {
-        candidates = (await GetCandidates()) || [];
+    let newCandidateModal;
+    let editCandidateModal;
+
+    async function fetchCandidates() {
+        loading = true;
+        try {
+            const res = await fetch(
+                "http://localhost:3000/candidate?limit=100&offset=0",
+                {
+                    headers: {
+                        Authorization: `Bearer ${localStorage.getItem("token")}`,
+                    },
+                },
+            );
+            if (!res.ok) throw new Error("Failed to fetch candidates");
+            candidates = await res.json();
+        } catch (err) {
+            error = err.message;
+        }
+        loading = false;
     }
 
-    async function removeCandidate(id) {
-        await DeleteCandidate(id);
-        loadCandidates();
-    }
-
-    async function addCandidate() {
-        await CreateCandidate(newCandidate);
-        newCandidate = { citizenID: "", post: "", electionID: "", group: "" };
-        loadCandidates();
-        closeModal(); // Close modal after adding candidate
-    }
-
-    async function saveCandidate() {
-        if (editingCandidate?.candidateID) {
-            await UpdateCandidate(editingCandidate.candidateID, {
-                citizenID: editingCandidate.citizenID,
-                post: editingCandidate.post,
-                electionID: editingCandidate.electionID,
-                group: editingCandidate.group,
+    async function createCandidate() {
+        try {
+            const payload = {
+                ...newCandidate,
+                election_id: Number(newCandidate.election_id),
+            };
+            const res = await fetch("http://localhost:3000/candidate", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                    Authorization: `Bearer ${localStorage.getItem("token")}`,
+                },
+                body: JSON.stringify(payload),
             });
-            editingCandidate = null;
-            loadCandidates();
+            if (!res.ok) throw new Error("Failed to create candidate");
+            await fetchCandidates();
+            newCandidate = {
+                citizen_id: "",
+                election_id: "",
+                profile_path: "",
+                bio: "",
+                post: "",
+            };
+            newCandidateModal.close();
+        } catch (err) {
+            alert(err.message);
         }
     }
 
-    function startEditing(candidate) {
+    function openEditModal(candidate) {
         editingCandidate = { ...candidate };
+        editCandidateModal.showModal();
     }
 
-    function openModal() {
-        const modal = document.getElementById("showModal");
-        modal.showModal();
+    async function updateCandidate() {
+        if (!editingCandidate) return;
+        try {
+            const payload = {
+                ...editingCandidate,
+                election_id: Number(editingCandidate.election_id),
+            };
+            const res = await fetch(
+                `http://localhost:3000/candidate/${editingCandidate.candidate_id}`,
+                {
+                    method: "PUT",
+                    headers: {
+                        "Content-Type": "application/json",
+                        Authorization: `Bearer ${localStorage.getItem("token")}`,
+                    },
+                    body: JSON.stringify(payload),
+                },
+            );
+            if (!res.ok) throw new Error("Failed to update candidate");
+            await fetchCandidates();
+            editingCandidate = null;
+            editCandidateModal.close();
+        } catch (err) {
+            alert(err.message);
+        }
     }
 
-    function closeModal() {
-        const modal = document.getElementById("showModal");
-        modal.close();
+    async function deleteCandidate(id) {
+        if (!confirm("Delete this candidate?")) return;
+        try {
+            const res = await fetch(`http://localhost:3000/candidate/${id}`, {
+                method: "DELETE",
+                headers: {
+                    Authorization: `Bearer ${localStorage.getItem("token")}`,
+                },
+            });
+            if (!res.ok) throw new Error("Failed to delete candidate");
+            await fetchCandidates();
+        } catch (err) {
+            alert(err.message);
+        }
     }
 
-    onMount(loadCandidates);
+    onMount(fetchCandidates);
 </script>
 
-<main class="mx-auto p-10 bg-black text-gray-300">
-    <div class="flex justify-between items-center mb-4">
-        <input
-            type="text"
-            bind:value={searchQuery}
-            placeholder="Search by Citizen ID..."
-            class="input input-bordered bg-[#0a0a0a] text-white"
-        />
-        <button class="btn btn-primary" on:click={openModal}>
-            + New Record
-        </button>
-    </div>
+<AdminNavbar />
+<section class="flex p-12 flex-col justify-center">
+    <h1 class="text-center text-6xl uppercase font-medium tracking-wide">
+        Manage Candidates
+    </h1>
 
-    <div class="overflow-x-auto flex justify-center">
-        <table
-            class="table w-full border border-[#070707] bg-[#0a0a0a] text-white"
-        >
-            <thead>
-                <tr class="bg-[#070707]">
-                    <th class="text-center">Candidate ID</th>
-                    <th class="text-center">Citizen ID</th>
-                    <th class="text-center">Post</th>
-                    <th class="text-center">Election ID</th>
-                    <th class="text-center">Group</th>
-                    <th class="text-center">Actions</th>
-                </tr>
-            </thead>
-            <tbody>
-                {#each candidates.filter((candidate) => candidate.citizenID
-                        .toLowerCase()
-                        .includes(searchQuery.toLowerCase())) as candidate}
-                    <tr class="hover">
-                        {#if editingCandidate?.candidateID === candidate.candidateID}
-                            <td
-                                ><input
-                                    bind:value={editingCandidate.candidateID}
-                                    disabled
-                                    class="input input-bordered bg-[#0a0a0a] text-white"
-                                /></td
-                            >
-                            <td
-                                ><input
-                                    bind:value={editingCandidate.citizenID}
-                                    class="input input-bordered bg-[#0a0a0a] text-white"
-                                /></td
-                            >
-                            <td
-                                ><input
-                                    bind:value={editingCandidate.post}
-                                    class="input input-bordered bg-[#0a0a0a] text-white"
-                                /></td
-                            >
-                            <td
-                                ><input
-                                    bind:value={editingCandidate.electionID}
-                                    class="input input-bordered bg-[#0a0a0a] text-white"
-                                /></td
-                            >
-                            <td
-                                ><input
-                                    bind:value={editingCandidate.group}
-                                    class="input input-bordered bg-[#0a0a0a] text-white"
-                                /></td
-                            >
-                            <td>
-                                <button
-                                    class="btn btn-primary"
-                                    on:click={saveCandidate}>Save</button
-                                >
-                            </td>
-                        {:else}
-                            <td class="text-center border-r border-white"
-                                >{candidate.candidateID}</td
-                            >
-                            <td class="text-center border-r border-white"
-                                >{candidate.citizenID}</td
-                            >
-                            <td class="text-center border-r border-white"
-                                >{candidate.post}</td
-                            >
-                            <td class="text-center border-r border-white"
-                                >{candidate.electionID}</td
-                            >
-                            <td class="text-center border-r border-white"
-                                >{candidate.group}</td
-                            >
-                            <td>
-                                <button
-                                    class="btn btn-secondary text-black"
-                                    on:click={() => startEditing(candidate)}
-                                    >Edit</button
-                                >
-                                <button
-                                    class="btn btn-error"
-                                    on:click={() =>
-                                        removeCandidate(candidate.candidateID)}
-                                    >Delete</button
-                                >
-                            </td>
-                        {/if}
-                    </tr>
-                {/each}
-            </tbody>
-        </table>
-    </div>
-
-    <!-- Modal for New Candidate -->
-    <dialog id="showModal" class="modal">
-        <div class="modal-box bg-[#0a0a0a] text-white">
-            <h2 class="text-xl mb-4">Add New Candidate</h2>
+    <section class="flex justify-between items-center m-4">
+        <div class="form-control w-full max-w-md">
             <input
-                bind:value={newCandidate.citizenID}
-                placeholder="Citizen ID"
-                class="input input-bordered w-full bg-black text-white mb-2"
+                type="text"
+                class="input rounded-lg w-full"
+                placeholder="Search candidates…"
+                bind:value={search}
             />
-            <input
-                bind:value={newCandidate.post}
-                placeholder="Post"
-                class="input input-bordered w-full bg-black text-white mb-2"
-            />
-            <input
-                bind:value={newCandidate.electionID}
-                placeholder="Election ID"
-                class="input input-bordered w-full bg-black text-white mb-2"
-            />
-            <input
-                bind:value={newCandidate.group}
-                placeholder="Group"
-                class="input input-bordered w-full bg-black text-white mb-4"
-            />
-
-            <div class="flex justify-end space-x-2">
-                <form method="dialog">
-                    <button class="btn btn-secondary" on:click={closeModal}
-                        >Cancel</button
-                    >
-                </form>
-                <button class="btn btn-primary" on:click={addCandidate}
-                    >Create</button
-                >
-            </div>
         </div>
-    </dialog>
-</main>
+        <button
+            class="btn btn-primary ml-4 rounded-lg"
+            on:click={() => newCandidateModal.showModal()}
+        >
+            + New Candidate
+        </button>
+    </section>
+
+    <section class="flex justify-center m-4">
+        {#if loading}
+            <p>Loading candidates...</p>
+        {:else if error}
+            <p class="text-red-500">{error}</p>
+        {:else}
+            <div
+                class="overflow-x-auto rounded-box border border-base-content/5 bg-base-100 w-full"
+            >
+                <table class="table w-full">
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Citizen ID</th>
+                            <th>Election ID</th>
+                            <th>Profile</th>
+                            <th>Bio</th>
+                            <th>Post</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {#each candidates as c}
+                            {#if c.citizen_id
+                                .toLowerCase()
+                                .includes(search.toLowerCase()) || c.election_id
+                                    .toString()
+                                    .includes(search)}
+                                <tr>
+                                    <td>{c.candidate_id}</td>
+                                    <td>{c.citizen_id}</td>
+                                    <td>{c.election_id}</td>
+                                    <td>{c.profile_path}</td>
+                                    <td>{c.bio}</td>
+                                    <td>{c.post}</td>
+                                    <td class="flex gap-2">
+                                        <button
+                                            class="btn btn-sm btn-warning"
+                                            on:click={() => openEditModal(c)}
+                                        >
+                                            Edit
+                                        </button>
+                                        <button
+                                            class="btn btn-sm btn-error"
+                                            on:click={() =>
+                                                deleteCandidate(c.candidate_id)}
+                                        >
+                                            Delete
+                                        </button>
+                                    </td>
+                                </tr>
+                            {/if}
+                        {/each}
+                    </tbody>
+                </table>
+            </div>
+        {/if}
+    </section>
+</section>
+
+<!-- CREATE MODAL -->
+<dialog bind:this={newCandidateModal} class="modal">
+    <div class="modal-box">
+        <h3 class="font-bold text-lg">Create New Candidate</h3>
+        <div class="py-2 flex flex-col gap-2">
+            <input
+                class="input input-bordered w-full rounded-lg"
+                placeholder="Citizen ID"
+                bind:value={newCandidate.citizen_id}
+                required
+            />
+            <input
+                class="input input-bordered w-full rounded-lg"
+                placeholder="Election ID"
+                bind:value={newCandidate.election_id}
+                required
+            />
+            <input
+                class="input input-bordered w-full rounded-lg"
+                placeholder="Profile Path"
+                bind:value={newCandidate.profile_path}
+                required
+            />
+            <input
+                class="input input-bordered w-full rounded-lg"
+                placeholder="Bio"
+                bind:value={newCandidate.bio}
+                required
+            />
+            <input
+                class="input input-bordered w-full rounded-lg"
+                placeholder="Post"
+                bind:value={newCandidate.post}
+                required
+            />
+        </div>
+        <div class="modal-action">
+            <form method="dialog" class="flex gap-2">
+                <button
+                    type="button"
+                    class="btn btn-primary rounded-lg"
+                    on:click={createCandidate}>Create</button
+                >
+                <button class="btn btn-outline rounded-lg">Cancel</button>
+            </form>
+        </div>
+    </div>
+</dialog>
+
+<!-- EDIT MODAL -->
+<dialog bind:this={editCandidateModal} class="modal">
+    <div class="modal-box">
+        <h3 class="font-bold text-lg">Edit Candidate</h3>
+        {#if editingCandidate}
+            <div class="py-2 flex flex-col gap-2">
+                <input
+                    class="input input-bordered"
+                    value={editingCandidate.candidate_id}
+                    readonly
+                />
+                <input
+                    class="input input-bordered"
+                    placeholder="Citizen ID"
+                    bind:value={editingCandidate.citizen_id}
+                />
+                <input
+                    class="input input-bordered"
+                    placeholder="Election ID"
+                    bind:value={editingCandidate.election_id}
+                />
+                <input
+                    class="input input-bordered"
+                    placeholder="Profile Path"
+                    bind:value={editingCandidate.profile_path}
+                />
+                <input
+                    class="input input-bordered"
+                    placeholder="Bio"
+                    bind:value={editingCandidate.bio}
+                />
+                <input
+                    class="input input-bordered"
+                    placeholder="Post"
+                    bind:value={editingCandidate.post}
+                />
+            </div>
+            <div class="modal-action">
+                <form method="dialog" class="flex gap-2">
+                    <button
+                        type="button"
+                        class="btn btn-warning"
+                        on:click={updateCandidate}>Update</button
+                    >
+                    <button class="btn">Cancel</button>
+                </form>
+            </div>
+        {/if}
+    </div>
+</dialog>
