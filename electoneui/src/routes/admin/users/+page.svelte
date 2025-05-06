@@ -161,17 +161,13 @@
         const headers = {
             Authorization: `Bearer ${localStorage.getItem("admin_token")}`,
         };
-        if (!hasNewPhotos) {
-            headers["Content-Type"] = "application/json";
-        }
-
         try {
             const res = await fetch(
                 `http://localhost:3000/user/${editingUser.user_id}`,
                 {
                     method: "PUT",
                     headers: headers,
-                    body: hasNewPhotos ? formData : JSON.stringify(editingUser),
+                    body: formData,
                 },
             );
             if (!res.ok) {

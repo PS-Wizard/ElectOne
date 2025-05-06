@@ -5,8 +5,10 @@ import (
 
 	"github.com/PS-Wizard/Electone/internals/auth"
 	"github.com/PS-Wizard/Electone/internals/db/handlers"
+	"github.com/PS-Wizard/Electone/internals/db/operations"
 	"github.com/PS-Wizard/Electone/internals/middlewares"
 	"github.com/gofiber/fiber/v2"
+
 	// "github.com/gofiber/fiber/v2/middleware/cache"
 	"github.com/gofiber/fiber/v2/middleware/limiter"
 )
@@ -21,6 +23,8 @@ func SetupRoutes(app *fiber.App) {
 
 	// Auth Routes ( DOESNT REQUIRE JWT)
 	authRoutes := app.Group("/auth")
+	websocketRoutes := app.Group("/live")
+	operations.RegisterWebSocketRoutes(websocketRoutes)
 
 	authRoutes.Post("/user", rateLimiter, middlewares.RequireLocation, auth.UserLogin)
 	authRoutes.Post("/admin", rateLimiter, auth.AdminLogin)
@@ -61,10 +65,11 @@ func SetupRoutes(app *fiber.App) {
 	handlers.RegisterCandidateRoutes(candidateRoutes)
 
 	// Vote Routes
-
 	votingRoutes := protected.Group("/vote")
 	handlers.RegisterVoteRoutes(votingRoutes)
+
 	//admin Routes
 	adminRoutes := protected.Group("/admin")
 	handlers.RegisterAdminRoutes(adminRoutes)
+
 }

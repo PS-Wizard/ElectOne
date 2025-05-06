@@ -32,6 +32,7 @@
             if (!res.ok) throw new Error("Failed to fetch candidates");
 
             const data = await res.json();
+            console.log(data);
             candidates = data.filter((c) => c.election_id == electionId);
             groupCandidatesByPost(candidates);
         } catch (err) {
@@ -43,10 +44,10 @@
 
     function groupCandidatesByPost(candidates) {
         candidates.forEach((candidate) => {
-            if (!groupedCandidates[candidate.post]) {
-                groupedCandidates[candidate.post] = [];
+            if (!groupedCandidates[candidate.candidate_post]) {
+                groupedCandidates[candidate.candidate_post] = [];
             }
-            groupedCandidates[candidate.post].push(candidate);
+            groupedCandidates[candidate.candidate_post].push(candidate);
         });
     }
 
@@ -70,18 +71,33 @@
         };
 
         try {
-            const res = await fetch("http://localhost:3000/vote", {
-                method: "POST",
-                headers: {
-                    "Content-Type": "application/json",
-                    Authorization: `Bearer ${token}`,
-                },
-                body: JSON.stringify(votePayload),
-            });
+            // Iterate over selected candidates and send individual POST requests
+            for (const post in selectedCandidates) {
+                const candidateID = selectedCandidates[post];
 
-            if (!res.ok) throw new Error("Failed to submit vote");
+                const res = await fetch("http://localhost:3000/vote", {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json",
+                        Authorization: `Bearer ${token}`,
+                    },
+                    body: JSON.stringify({
+                        election_id: parseInt(electionId),
+                        candidate_id: candidateID,
+                    }),
+                });
 
-            alert("Vote submitted successfully!");
+                if (!res.ok)
+                    throw new Error(
+                        "Failed to submit vote for candidate " + candidateID,
+                    );
+
+                alert(
+                    "Vote for candidate " +
+                        candidateID +
+                        " submitted successfully!",
+                );
+            }
         } catch (err) {
             alert(err.message);
         }
@@ -120,18 +136,20 @@
                                 />
                                 <div class="flex items-center space-x-4">
                                     <img
-                                        src={candidate.profile_path}
-                                        alt={candidate.name}
+                                        src={`http://localhost:3000${candidate.candidate_photo}`}
+                                        alt={candidate.candidate_name}
                                         class="w-16 h-16 rounded-full"
                                     />
                                     <div class="text-left">
                                         <h3 class="font-semibold">
-                                            {candidate.name}
+                                            {candidate.candidate_name}
                                         </h3>
                                         <p class="text-sm text-gray-500">
-                                            {candidate.party}
+                                            {candidate.candidate_party}
                                         </p>
-                                        <p class="text-sm">{candidate.bio}</p>
+                                        <p class="text-sm">
+                                            {candidate.candidate_bio}
+                                        </p>
                                     </div>
                                 </div>
                             </label>

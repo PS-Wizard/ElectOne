@@ -15,7 +15,11 @@ GET http://localhost:3000/vote?limit=10&offset=0
 Accept: application/json
 Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhZG1pbklEIjoyLCJlbWFpbCI6ImFkbWluMkBleGFtcGxlLmNvbSIsImV4cCI6MTc0NjQ0NTcyNywicm9sZSI6ImFkbWluIn0.9msec4uS7vVWaMIpC47jV1ne-iO_kvvC-bWJRt4UjX8
 
-###
+### Vote History
+GET http://localhost:3000/vote/history/1?limit=100&offset=0
+Accept: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhZG1pbklEIjoxLCJlbWFpbCI6ImFkbWluMUBleGFtcGxlLmNvbSIsImV4cCI6MTc0Njc1OTY2Niwicm9sZSI6ImFkbWluIn0.SUtZwdDkFyoDQYyzrxaj7buz8ud4hi57FGA2weypXnU
+
 
 ### Get Votes By Voter Card
 GET http://localhost:3000/vote/voter/VC-001
@@ -23,6 +27,6 @@ Accept: application/json
 Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhZG1pbklEIjoyLCJlbWFpbCI6ImFkbWluMkBleGFtcGxlLmNvbSIsImV4cCI6MTc0NjQ0NTcyNywicm9sZSI6ImFkbWluIn0.9msec4uS7vVWaMIpC47jV1ne-iO_kvvC-bWJRt4UjX8
 
 ###
-
 ### ❌ Delete Vote
 DELETE http://localhost:3000/vote/12
+

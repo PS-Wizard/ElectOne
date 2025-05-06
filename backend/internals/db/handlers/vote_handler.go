@@ -14,6 +14,7 @@ func RegisterVoteRoutes(router fiber.Router) {
 	router.Get("/", middlewares.RequireAdmin, ListVotesHandler)
 	router.Get("/voter/:voterCardID", GetVotesByVoterCardHandler)
 	router.Delete("/:id", middlewares.RequireAdmin, DeleteVoteHandler)
+	router.Get("/history/:electionID", GetVotesByElectionIDHandler)
 }
 
 func CreateVoteHandler(c *fiber.Ctx) error {
@@ -71,4 +72,21 @@ func DeleteVoteHandler(c *fiber.Ctx) error {
 	}
 
 	return c.SendStatus(fiber.StatusOK)
+}
+
+func GetVotesByElectionIDHandler(c *fiber.Ctx) error {
+	electionID, err := strconv.Atoi(c.Params("electionID"))
+	if err != nil {
+		return fiber.NewError(fiber.StatusBadRequest, "Invalid election ID")
+	}
+
+	limit, _ := strconv.Atoi(c.Query("limit", "100"))
+	offset, _ := strconv.Atoi(c.Query("offset", "0"))
+
+	votes, err := operations.GetVotesByElectionID(electionID, limit, offset)
+	if err != nil {
+		return fiber.NewError(fiber.StatusInternalServerError, "Failed to fetch votes")
+	}
+
+	return c.JSON(votes)
 }

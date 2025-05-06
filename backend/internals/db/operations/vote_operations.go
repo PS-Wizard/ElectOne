@@ -9,6 +9,7 @@ type Vote struct {
 	VoterCardID string `json:"voter_card_id,omitempty"`
 	ElectionID  int    `json:"election_id"`
 	CandidateID int    `json:"candidate_id"`
+	CreatedAt   string `json:"created_at"`
 }
 
 func CreateVote(vote *Vote) (int64, error) {
@@ -17,6 +18,7 @@ func CreateVote(vote *Vote) (int64, error) {
 	if err != nil {
 		return 0, err
 	}
+	BroadcastVoteUpdate(*vote)
 	return result.LastInsertId()
 }
 
@@ -62,4 +64,23 @@ func DeleteVote(voteID int) error {
 	query := `DELETE FROM Votes WHERE VoteID = ?`
 	_, err := db.DB.Exec(query, voteID)
 	return err
+}
+
+func GetVotesByElectionID(electionID int, limit, offset int) ([]Vote, error) {
+	query := `SELECT VoteID, VoterCardID, ElectionID, CandidateID, created_at FROM Votes WHERE ElectionID = ? ORDER BY VoteID DESC LIMIT ? OFFSET ?`
+	rows, err := db.DB.Query(query, electionID, limit, offset)
+	if err != nil {
+		return nil, err
+	}
+	defer rows.Close()
+
+	var votes []Vote
+	for rows.Next() {
+		var vote Vote
+		if err := rows.Scan(&vote.VoteID, &vote.VoterCardID, &vote.ElectionID, &vote.CandidateID, &vote.CreatedAt); err != nil {
+			return nil, err
+		}
+		votes = append(votes, vote)
+	}
+	return votes, nil
 }

@@ -3,6 +3,7 @@ package handlers
 import (
 	"fmt"
 	"strconv"
+	"strings"
 
 	"github.com/PS-Wizard/Electone/internals/db/operations"
 	"github.com/PS-Wizard/Electone/internals/middlewares"
@@ -99,37 +100,38 @@ func UpdateUserHandler(c *fiber.Ctx) error {
 
 	form, err := c.MultipartForm()
 	if err != nil {
-		return fiber.NewError(fiber.StatusBadRequest, "Invalid form data")
-	}
-
-	files := form.File["photos"]
-	if len(files) != 4 {
-		return fiber.NewError(fiber.StatusBadRequest, "Exactly 4 photos must be uploaded")
+		return fiber.NewError(fiber.StatusBadRequest, "Invalid form data parsing")
 	}
 
 	var photoPaths []string
+	files := form.File["photos"]
 
-	for _, photo := range files {
-		uniqueName := utils.GenerateUniqueFileName(photo.Filename)
-		path := fmt.Sprintf("./uploads/photos/%s", uniqueName)
+	if len(files) > 0 {
+		// Handle new photo upload if provided
+		for _, photo := range files {
+			uniqueName := utils.GenerateUniqueFileName(photo.Filename)
+			path := fmt.Sprintf("./uploads/photos/%s", uniqueName)
 
-		if err := c.SaveFile(photo, path); err != nil {
-			return fiber.NewError(fiber.StatusInternalServerError, "Failed To Save File")
+			if err := c.SaveFile(photo, path); err != nil {
+				return fiber.NewError(fiber.StatusInternalServerError, "Failed To Save File")
+			}
+
+			photoPaths = append(photoPaths, "/uploads/photos/"+uniqueName)
 		}
-
-		photoPaths = append(photoPaths, "/uploads/photos/"+uniqueName)
+	} else {
+		// Keep existing photos
+		existingUser, err := operations.GetUserByID(id)
+		if err != nil {
+			return fiber.NewError(fiber.StatusInternalServerError, "Failed to fetch existing user data")
+		}
+		photoPaths = strings.Split(existingUser.Photos, ",")
 	}
 
 	updatedUser := operations.User{
 		CitizenshipID: c.FormValue("citizenship_id"),
 		VoterCardID:   c.FormValue("voter_card_id"),
 		Password:      c.FormValue("password"),
-		Photos:        fmt.Sprintf("%s", utils.Join(photoPaths, ",")),
-	}
-
-	err = operations.UpdateUser(id, &updatedUser)
-	if err != nil {
-		return fiber.NewError(fiber.StatusInternalServerError, fmt.Sprintf("Failed to create user %s", err))
+		Photos:        utils.Join(photoPaths, ","),
 	}
 
 	if err := operations.UpdateUser(id, &updatedUser); err != nil {
