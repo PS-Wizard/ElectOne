@@ -25,6 +25,16 @@ func SetupRoutes(app *fiber.App) {
 	authRoutes.Post("/user", rateLimiter, middlewares.RequireLocation, auth.UserLogin)
 	authRoutes.Post("/admin", rateLimiter, auth.AdminLogin)
 
+	appealRoutes := app.Group("/appeal")
+	appealRoutes.Post("/", handlers.CreateAppealHandler)
+	appealRoutes.Get("/:id", middlewares.JWTMiddleware(), middlewares.RequireAdmin, handlers.GetAppealByIDHandler)
+	appealRoutes.Put("/:id", middlewares.JWTMiddleware(), middlewares.RequireAdmin, handlers.UpdateAppealHandler)
+	appealRoutes.Delete("/:id", middlewares.JWTMiddleware(), middlewares.RequireAdmin, handlers.DeleteAppealHandler)
+	appealRoutes.Get("/", middlewares.JWTMiddleware(), middlewares.RequireAdmin, handlers.ListAppealsHandler)
+
+	appealRoutes.Post("/:id/approve", middlewares.JWTMiddleware(), middlewares.RequireAdmin, handlers.ApproveAppealHandler)
+	appealRoutes.Post("/:id/reject", middlewares.JWTMiddleware(), middlewares.RequireAdmin, handlers.RejectAppealHandler)
+
 	protected := app.Group("/", middlewares.JWTMiddleware())
 	// Citizenship routes
 	citizenshipRoutes := protected.Group("/citizen")
@@ -45,8 +55,6 @@ func SetupRoutes(app *fiber.App) {
 	handlers.RegisterElectionRoutes(electionRoutes)
 
 	// Appeal Routes
-	appealRoutes := protected.Group("/appeal")
-	handlers.RegisterAppealRoutes(appealRoutes)
 
 	// Candidate Routes
 	candidateRoutes := protected.Group("/candidate")

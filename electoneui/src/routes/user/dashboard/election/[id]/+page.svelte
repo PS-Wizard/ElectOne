@@ -13,7 +13,7 @@
     $: electionId = $page.params.id;
 
     onMount(async () => {
-        const token = localStorage.getItem("token");
+        const token = localStorage.getItem("user_token");
         if (!token) {
             error = "You're not logged in.";
             loading = false;
@@ -52,7 +52,7 @@
 
     // Function to handle voting submission
     async function submitVote() {
-        const token = localStorage.getItem("token");
+        const token = localStorage.getItem("user_token");
 
         // Make sure at least one candidate per post is selected
         if (

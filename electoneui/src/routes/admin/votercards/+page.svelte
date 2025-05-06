@@ -25,7 +25,7 @@
                 "http://localhost:3000/voter_card?limit=100&offset=0",
                 {
                     headers: {
-                        Authorization: `Bearer ${localStorage.getItem("token")}`,
+                        Authorization: `Bearer ${localStorage.getItem("admin_token")}`,
                     },
                 },
             );
@@ -55,7 +55,7 @@
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",
-                    Authorization: `Bearer ${localStorage.getItem("token")}`,
+                    Authorization: `Bearer ${localStorage.getItem("admin_token")}`,
                 },
                 body: JSON.stringify(newVoterCard),
             });
@@ -86,7 +86,7 @@
                     method: "PUT",
                     headers: {
                         "Content-Type": "application/json",
-                        Authorization: `Bearer ${localStorage.getItem("token")}`,
+                        Authorization: `Bearer ${localStorage.getItem("admin_token")}`,
                     },
                     body: JSON.stringify(editingVoterCard),
                 },
@@ -106,7 +106,7 @@
             const res = await fetch(`http://localhost:3000/voter_card/${id}`, {
                 method: "DELETE",
                 headers: {
-                    Authorization: `Bearer ${localStorage.getItem("token")}`,
+                    Authorization: `Bearer ${localStorage.getItem("admin_token")}`,
                 },
             });
             if (!res.ok) throw new Error("Failed to delete voter card");

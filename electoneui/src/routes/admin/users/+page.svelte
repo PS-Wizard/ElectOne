@@ -7,18 +7,28 @@
     let loading = true;
     let error = "";
     let search = "";
+    let selectedPhoto = "";
 
     let newUser = {
         citizenship_id: "",
         voter_card_id: "",
         password: "",
         totp_secret: "",
-        photos: "",
+        citizenship_front: null,
+        citizenship_back: null,
+        voter_card: null,
+        selfie: null,
     };
 
     let editingUser = null;
     let newUserModal;
     let editUserModal;
+    let editedPhotos = {
+        citizenship_front: null,
+        citizenship_back: null,
+        voter_card: null,
+        selfie: null,
+    };
 
     async function fetchUsers() {
         loading = true;
@@ -27,7 +37,7 @@
                 "http://localhost:3000/user?limit=100&offset=0",
                 {
                     headers: {
-                        Authorization: `Bearer ${localStorage.getItem("token")}`,
+                        Authorization: `Bearer ${localStorage.getItem("admin_token")}`,
                     },
                 },
             );
@@ -54,50 +64,120 @@
     }
 
     async function createUser() {
+        if (
+            !newUser.citizenship_front ||
+            !newUser.citizenship_back ||
+            !newUser.voter_card ||
+            !newUser.selfie
+        ) {
+            alert("Please upload all 4 required photos.");
+            return;
+        }
+
+        const formData = new FormData();
+        formData.append("citizenship_id", newUser.citizenship_id);
+        formData.append("voter_card_id", newUser.voter_card_id);
+        formData.append("password", newUser.password);
+        formData.append("photos", newUser.citizenship_front);
+        formData.append("photos", newUser.citizenship_back);
+        formData.append("photos", newUser.voter_card);
+        formData.append("photos", newUser.selfie);
+
         try {
             const res = await fetch("http://localhost:3000/user", {
                 method: "POST",
+                body: formData,
                 headers: {
-                    "Content-Type": "application/json",
-                    Authorization: `Bearer ${localStorage.getItem("token")}`,
+                    Authorization: `Bearer ${localStorage.getItem("admin_token")}`,
                 },
-                body: JSON.stringify(newUser),
             });
-            if (!res.ok) throw new Error("Failed to create user");
-            await fetchUsers();
+            const data = await res.json();
+
+            if (!res.ok) {
+                alert(
+                    data.message ||
+                        "Something went wrong during user creation.",
+                );
+                return;
+            }
+
+            alert(`User created successfully! ID: ${data.user_id}`);
+            newUserModal.close();
+            // Optionally reset the form
             newUser = {
                 citizenship_id: "",
                 voter_card_id: "",
                 password: "",
                 totp_secret: "",
-                photos: "",
+                citizenship_front: null,
+                citizenship_back: null,
+                voter_card: null,
+                selfie: null,
             };
-            newUserModal.close();
+            fetchUsers();
         } catch (err) {
-            alert(err.message);
+            alert("Error creating user: " + err.message);
         }
     }
 
     function openEditModal(user) {
         editingUser = { ...user };
+        editedPhotos = {
+            citizenship_front: null,
+            citizenship_back: null,
+            voter_card: null,
+            selfie: null,
+        };
         editUserModal.showModal();
     }
 
-    async function updateUser() {
+    async function handleUpdateUser() {
         if (!editingUser) return;
+
+        const formData = new FormData();
+        formData.append("citizenship_id", editingUser.citizenship_id);
+        formData.append("voter_card_id", editingUser.voter_card_id);
+        formData.append("password", editingUser.password);
+        formData.append("totp_secret", editingUser.totp_secret);
+
+        let hasNewPhotos = false;
+        if (editedPhotos.citizenship_front) {
+            formData.append("photos", editedPhotos.citizenship_front);
+            hasNewPhotos = true;
+        }
+        if (editedPhotos.citizenship_back) {
+            formData.append("photos", editedPhotos.citizenship_back);
+            hasNewPhotos = true;
+        }
+        if (editedPhotos.voter_card) {
+            formData.append("photos", editedPhotos.voter_card);
+            hasNewPhotos = true;
+        }
+        if (editedPhotos.selfie) {
+            formData.append("photos", editedPhotos.selfie);
+            hasNewPhotos = true;
+        }
+
+        const headers = {
+            Authorization: `Bearer ${localStorage.getItem("admin_token")}`,
+        };
+        if (!hasNewPhotos) {
+            headers["Content-Type"] = "application/json";
+        }
+
         try {
             const res = await fetch(
                 `http://localhost:3000/user/${editingUser.user_id}`,
                 {
                     method: "PUT",
-                    headers: {
-                        "Content-Type": "application/json",
-                        Authorization: `Bearer ${localStorage.getItem("token")}`,
-                    },
-                    body: JSON.stringify(editingUser),
+                    headers: headers,
+                    body: hasNewPhotos ? formData : JSON.stringify(editingUser),
                 },
             );
-            if (!res.ok) throw new Error("Failed to update user");
+            if (!res.ok) {
+                const errorData = await res.json();
+                throw new Error(errorData.message || "Failed to update user");
+            }
             await fetchUsers();
             editingUser = null;
             editUserModal.close();
@@ -112,7 +192,7 @@
             const res = await fetch(`http://localhost:3000/user/${id}`, {
                 method: "DELETE",
                 headers: {
-                    Authorization: `Bearer ${localStorage.getItem("token")}`,
+                    Authorization: `Bearer ${localStorage.getItem("admin_token")}`,
                 },
             });
             if (!res.ok) throw new Error("Failed to delete user");
@@ -175,10 +255,57 @@
                     placeholder="TOTP Secret"
                     bind:value={newUser.totp_secret}
                 />
+                <label for="citizenship_front" class="label">
+                    <span class="label-text">Citizenship ID (Front)</span>
+                </label>
                 <input
-                    class="input input-bordered"
-                    placeholder="Photos (JSON)"
-                    bind:value={newUser.photos}
+                    type="file"
+                    id="citizenship_front"
+                    class="file-input file-input-bordered w-full"
+                    accept="image/*"
+                    on:change={(e) =>
+                        (newUser.citizenship_front = e.target.files
+                            ? e.target.files.item(0)
+                            : null)}
+                />
+                <label for="citizenship_back" class="label">
+                    <span class="label-text">Citizenship ID (Back)</span>
+                </label>
+                <input
+                    type="file"
+                    id="citizenship_back"
+                    class="file-input file-input-bordered w-full"
+                    accept="image/*"
+                    on:change={(e) =>
+                        (newUser.citizenship_back = e.target.files
+                            ? e.target.files.item(0)
+                            : null)}
+                />
+                <label for="voter_card" class="label">
+                    <span class="label-text">Voter Card</span>
+                </label>
+                <input
+                    type="file"
+                    id="voter_card"
+                    class="file-input file-input-bordered w-full"
+                    accept="image/*"
+                    on:change={(e) =>
+                        (newUser.voter_card = e.target.files
+                            ? e.target.files.item(0)
+                            : null)}
+                />
+                <label for="selfie" class="label">
+                    <span class="label-text">Selfie</span>
+                </label>
+                <input
+                    type="file"
+                    id="selfie"
+                    class="file-input file-input-bordered w-full"
+                    accept="image/*"
+                    on:change={(e) =>
+                        (newUser.selfie = e.target.files
+                            ? e.target.files.item(0)
+                            : null)}
                 />
             </div>
             <div class="modal-action">
@@ -232,13 +359,61 @@
                         class="input input-bordered w-full px-4 rounded-lg"
                         bind:value={editingUser.totp_secret}
                     />
+
                     <label class="label">
-                        <span class="label-text">Photos (JSON)</span>
+                        <span class="label-text">Citizenship ID (Front)</span>
                     </label>
                     <input
-                        type="text"
-                        class="input input-bordered w-full px-4 rounded-lg"
-                        bind:value={editingUser.photos}
+                        type="file"
+                        id="edit_citizenship_front"
+                        class="file-input file-input-bordered w-full"
+                        accept="image/*"
+                        on:change={(e) =>
+                            (editedPhotos.citizenship_front = e.target.files
+                                ? e.target.files.item(0)
+                                : null)}
+                    />
+
+                    <label class="label">
+                        <span class="label-text">Citizenship ID (Back)</span>
+                    </label>
+                    <input
+                        type="file"
+                        id="edit_citizenship_back"
+                        class="file-input file-input-bordered w-full"
+                        accept="image/*"
+                        on:change={(e) =>
+                            (editedPhotos.citizenship_back = e.target.files
+                                ? e.target.files.item(0)
+                                : null)}
+                    />
+
+                    <label class="label">
+                        <span class="label-text">Voter Card</span>
+                    </label>
+                    <input
+                        type="file"
+                        id="edit_voter_card"
+                        class="file-input file-input-bordered w-full"
+                        accept="image/*"
+                        on:change={(e) =>
+                            (editedPhotos.voter_card = e.target.files
+                                ? e.target.files.item(0)
+                                : null)}
+                    />
+
+                    <label class="label">
+                        <span class="label-text">Selfie</span>
+                    </label>
+                    <input
+                        type="file"
+                        id="edit_selfie"
+                        class="file-input file-input-bordered w-full"
+                        accept="image/*"
+                        on:change={(e) =>
+                            (editedPhotos.selfie = e.target.files
+                                ? e.target.files.item(0)
+                                : null)}
                     />
                 </div>
                 <div class="modal-action">
@@ -246,7 +421,7 @@
                         <button
                             type="button"
                             class="btn btn-warning"
-                            on:click={updateUser}>Update</button
+                            on:click={handleUpdateUser}>Update</button
                         >
                         <button class="btn">Cancel</button>
                     </form>
@@ -279,7 +454,20 @@
                             <td>{user.citizenship_id}</td>
                             <td>{user.voter_card_id}</td>
                             <td>{user.totp_secret}</td>
-                            <td>{user.photos}</td>
+                            <td>
+                                <div class="flex gap-1">
+                                    {#each user.photos.split(",") as photo}
+                                        <img
+                                            src={`http://localhost:3000${photo}`}
+                                            alt="Appeal Photo"
+                                            class="w-12 h-12 object-cover rounded-full cursor-pointer hover:scale-105 transition"
+                                            on:click={() =>
+                                                (selectedPhoto = `http://localhost:3000${photo}`)}
+                                        />
+                                    {/each}
+                                </div>
+                            </td>
+
                             <td class="flex gap-2">
                                 <button
                                     class="btn btn-sm btn-warning"
@@ -299,6 +487,25 @@
         </div>
     {/if}
 </section>
+
+{#if selectedPhoto}
+    <div
+        class="fixed inset-0 bg-black/80 flex items-center justify-center z-50"
+    >
+        <div class="relative">
+            <img
+                src={selectedPhoto}
+                class="max-w-full max-h-screen rounded-lg shadow-lg"
+            />
+            <button
+                class="absolute top-2 right-2 btn btn-sm btn-circle btn-error"
+                on:click={() => (selectedPhoto = null)}
+            >
+                ✕
+            </button>
+        </div>
+    </div>
+{/if}
 
 <style>
     .modal-box {

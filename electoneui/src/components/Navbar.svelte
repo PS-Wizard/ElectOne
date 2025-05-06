@@ -5,7 +5,7 @@
 
     // Check localStorage on mount
     onMount(() => {
-        loggedIn = !!localStorage.getItem("token");
+        loggedIn = !!localStorage.getItem("user_token");
     });
 
     let mobileMenuOpen = false;

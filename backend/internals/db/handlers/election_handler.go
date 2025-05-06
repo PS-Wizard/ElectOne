@@ -28,7 +28,6 @@ func CreateElectionHandler(c *fiber.Ctx) error {
 		return fiber.NewError(fiber.StatusInternalServerError, "Failed to create election")
 	}
 
-	fmt.Println("New Election Created, removing cache")
 	return c.JSON(fiber.Map{"election_id": id})
 }
 

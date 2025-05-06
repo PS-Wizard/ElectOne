@@ -7,6 +7,7 @@
     let error = "";
     let search = "";
 
+    let selectedPhoto = null; // 🆕 track the clicked photo
     async function fetchAppeals() {
         loading = true;
         try {
@@ -14,7 +15,7 @@
                 "http://localhost:3000/appeal?limit=100&offset=0",
                 {
                     headers: {
-                        Authorization: `Bearer ${localStorage.getItem("token")}`,
+                        Authorization: `Bearer ${localStorage.getItem("admin_token")}`,
                     },
                 },
             );
@@ -33,7 +34,7 @@
                 {
                     method: "POST",
                     headers: {
-                        Authorization: `Bearer ${localStorage.getItem("token")}`,
+                        Authorization: `Bearer ${localStorage.getItem("admin_token")}`,
                     },
                 },
             );
@@ -51,7 +52,7 @@
                 {
                     method: "POST",
                     headers: {
-                        Authorization: `Bearer ${localStorage.getItem("token")}`,
+                        Authorization: `Bearer ${localStorage.getItem("admin_token")}`,
                     },
                 },
             );
@@ -118,9 +119,11 @@
                                         <div class="flex gap-1">
                                             {#each appeal.photos.split(",") as photo}
                                                 <img
-                                                    src={`http://localhost:3000/static/images/${photo}`}
+                                                    src={`http://localhost:3000${photo}`}
                                                     alt="Appeal Photo"
-                                                    class="w-12 h-12 object-cover rounded-full"
+                                                    class="w-12 h-12 object-cover rounded-full cursor-pointer hover:scale-105 transition"
+                                                    on:click={() =>
+                                                        (selectedPhoto = `http://localhost:3000${photo}`)}
                                                 />
                                             {/each}
                                         </div>
@@ -155,6 +158,25 @@
         {/if}
     </section>
 </section>
+
+{#if selectedPhoto}
+    <div
+        class="fixed inset-0 bg-black/80 flex items-center justify-center z-50"
+    >
+        <div class="relative">
+            <img
+                src={selectedPhoto}
+                class="max-w-full max-h-screen rounded-lg shadow-lg"
+            />
+            <button
+                class="absolute top-2 right-2 btn btn-sm btn-circle btn-error"
+                on:click={() => (selectedPhoto = null)}
+            >
+                ✕
+            </button>
+        </div>
+    </div>
+{/if}
 
 <style>
     /* Optional: Add some custom styles for very small screens if needed */

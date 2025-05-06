@@ -6,16 +6,17 @@
     let loading = true;
     let error = "";
     let search = "";
-
+    let selectedPhoto = "";
     let newCandidate = {
         citizen_id: "",
         election_id: "",
-        profile_path: "",
         bio: "",
         post: "",
+        photo: null, // Added for file upload
     };
 
     let editingCandidate = null;
+    let editedPhoto = null; // To hold the updated photo file
 
     let newCandidateModal;
     let editCandidateModal;
@@ -27,7 +28,7 @@
                 "http://localhost:3000/candidate?limit=100&offset=0",
                 {
                     headers: {
-                        Authorization: `Bearer ${localStorage.getItem("token")}`,
+                        Authorization: `Bearer ${localStorage.getItem("admin_token")}`,
                     },
                 },
             );
@@ -40,27 +41,29 @@
     }
 
     async function createCandidate() {
+        const formData = new FormData();
+        formData.append("citizenship_id", newCandidate.citizen_id);
+        formData.append("election_id", newCandidate.election_id);
+        formData.append("bio", newCandidate.bio);
+        formData.append("post", newCandidate.post);
+        formData.append("photo", newCandidate.photo); // Adding the photo to the form data
+
         try {
-            const payload = {
-                ...newCandidate,
-                election_id: Number(newCandidate.election_id),
-            };
             const res = await fetch("http://localhost:3000/candidate", {
                 method: "POST",
                 headers: {
-                    "Content-Type": "application/json",
-                    Authorization: `Bearer ${localStorage.getItem("token")}`,
+                    Authorization: `Bearer ${localStorage.getItem("admin_token")}`,
                 },
-                body: JSON.stringify(payload),
+                body: formData,
             });
             if (!res.ok) throw new Error("Failed to create candidate");
             await fetchCandidates();
             newCandidate = {
                 citizen_id: "",
                 election_id: "",
-                profile_path: "",
                 bio: "",
                 post: "",
+                photo: null, // Reset photo after submission
             };
             newCandidateModal.close();
         } catch (err) {
@@ -70,30 +73,36 @@
 
     function openEditModal(candidate) {
         editingCandidate = { ...candidate };
+        editedPhoto = null; // Reset edited photo when opening modal
         editCandidateModal.showModal();
     }
 
     async function updateCandidate() {
         if (!editingCandidate) return;
+        const formData = new FormData();
+        formData.append("citizenship_id", editingCandidate.citizen_id);
+        formData.append("election_id", editingCandidate.election_id);
+        formData.append("bio", editingCandidate.bio);
+        formData.append("post", editingCandidate.post);
+        if (editedPhoto) {
+            formData.append("photo", editedPhoto); // Include new photo if selected
+        }
+
         try {
-            const payload = {
-                ...editingCandidate,
-                election_id: Number(editingCandidate.election_id),
-            };
             const res = await fetch(
                 `http://localhost:3000/candidate/${editingCandidate.candidate_id}`,
                 {
                     method: "PUT",
                     headers: {
-                        "Content-Type": "application/json",
-                        Authorization: `Bearer ${localStorage.getItem("token")}`,
+                        Authorization: `Bearer ${localStorage.getItem("admin_token")}`,
                     },
-                    body: JSON.stringify(payload),
+                    body: formData,
                 },
             );
             if (!res.ok) throw new Error("Failed to update candidate");
             await fetchCandidates();
             editingCandidate = null;
+            editedPhoto = null;
             editCandidateModal.close();
         } catch (err) {
             alert(err.message);
@@ -106,7 +115,7 @@
             const res = await fetch(`http://localhost:3000/candidate/${id}`, {
                 method: "DELETE",
                 headers: {
-                    Authorization: `Bearer ${localStorage.getItem("token")}`,
+                    Authorization: `Bearer ${localStorage.getItem("admin_token")}`,
                 },
             });
             if (!res.ok) throw new Error("Failed to delete candidate");
@@ -174,7 +183,15 @@
                                     <td>{c.candidate_id}</td>
                                     <td>{c.citizen_id}</td>
                                     <td>{c.election_id}</td>
-                                    <td>{c.profile_path}</td>
+                                    <td>
+                                        <img
+                                            src={`http://localhost:3000${c.candidate_photo}`}
+                                            alt="Candidate Photo"
+                                            class="w-12 h-12 object-cover rounded-full cursor-pointer hover:scale-105 transition"
+                                            on:click={() =>
+                                                (selectedPhoto = `http://localhost:3000${c.candidate_photo}`)}
+                                        />
+                                    </td>
                                     <td>{c.bio}</td>
                                     <td>{c.post}</td>
                                     <td class="flex gap-2">
@@ -202,7 +219,6 @@
     </section>
 </section>
 
-<!-- CREATE MODAL -->
 <dialog bind:this={newCandidateModal} class="modal">
     <div class="modal-box">
         <h3 class="font-bold text-lg">Create New Candidate</h3>
@@ -219,14 +235,19 @@
                 bind:value={newCandidate.election_id}
                 required
             />
+            <label for="new_candidate_photo" class="label">
+                <span class="label-text">Profile Photo</span>
+            </label>
             <input
-                class="input input-bordered w-full rounded-lg"
-                placeholder="Profile Path"
-                bind:value={newCandidate.profile_path}
+                type="file"
+                id="new_candidate_photo"
+                class="file-input file-input-bordered w-full rounded-lg"
+                accept="image/*"
+                on:change={(e) => (newCandidate.photo = e.target.files[0])}
                 required
             />
-            <input
-                class="input input-bordered w-full rounded-lg"
+            <textarea
+                class="textarea textarea-bordered w-full rounded-lg"
                 placeholder="Bio"
                 bind:value={newCandidate.bio}
                 required
@@ -251,7 +272,6 @@
     </div>
 </dialog>
 
-<!-- EDIT MODAL -->
 <dialog bind:this={editCandidateModal} class="modal">
     <div class="modal-box">
         <h3 class="font-bold text-lg">Edit Candidate</h3>
@@ -272,13 +292,20 @@
                     placeholder="Election ID"
                     bind:value={editingCandidate.election_id}
                 />
+                <label for="edit_candidate_photo" class="label">
+                    <span class="label-text"
+                        >Update Profile Photo (Optional)</span
+                    >
+                </label>
                 <input
-                    class="input input-bordered"
-                    placeholder="Profile Path"
-                    bind:value={editingCandidate.profile_path}
+                    type="file"
+                    id="edit_candidate_photo"
+                    class="file-input file-input-bordered w-full rounded-lg"
+                    accept="image/*"
+                    on:change={(e) => (editedPhoto = e.target.files[0])}
                 />
-                <input
-                    class="input input-bordered"
+                <textarea
+                    class="textarea textarea-bordered w-full rounded-lg"
                     placeholder="Bio"
                     bind:value={editingCandidate.bio}
                 />
@@ -301,3 +328,29 @@
         {/if}
     </div>
 </dialog>
+
+{#if selectedPhoto}
+    <div
+        class="fixed inset-0 bg-black/80 flex items-center justify-center z-50"
+    >
+        <div class="relative">
+            <img
+                src={selectedPhoto}
+                class="max-w-full max-h-screen rounded-lg shadow-lg"
+            />
+            <button
+                class="absolute top-2 right-2 btn btn-sm btn-circle btn-error"
+                on:click={() => (selectedPhoto = null)}
+            >
+                ✕
+            </button>
+        </div>
+    </div>
+{/if}
+
+<style>
+    .modal-box {
+        max-width: 560px;
+        width: 90%;
+    }
+</style>

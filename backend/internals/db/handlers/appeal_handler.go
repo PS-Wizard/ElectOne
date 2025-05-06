@@ -6,11 +6,12 @@ import (
 
 	"github.com/PS-Wizard/Electone/internals/db/operations"
 	"github.com/PS-Wizard/Electone/internals/middlewares"
+	"github.com/PS-Wizard/Electone/utils"
 	"github.com/gofiber/fiber/v2"
 )
 
 func RegisterAppealRoutes(router fiber.Router) {
-	router.Post("/", middlewares.RequireAdmin, CreateAppealHandler)
+	router.Post("/", CreateAppealHandler)
 	router.Get("/:id", middlewares.RequireAdmin, GetAppealByIDHandler)
 	router.Put("/:id", middlewares.RequireAdmin, UpdateAppealHandler)
 	router.Delete("/:id", middlewares.RequireAdmin, DeleteAppealHandler)
@@ -21,13 +22,35 @@ func RegisterAppealRoutes(router fiber.Router) {
 }
 
 func CreateAppealHandler(c *fiber.Ctx) error {
-	var appeal operations.Appeal
-	if err := c.BodyParser(&appeal); err != nil {
-		return fiber.NewError(fiber.StatusBadRequest, "Invalid input")
+	form, err := c.MultipartForm()
+	if err != nil {
+		return fiber.NewError(fiber.StatusBadRequest, "Invalid form data")
 	}
 
-	if appeal.Status == "" {
-		appeal.Status = "pending" // default status on creation
+	files := form.File["photos"]
+	if len(files) != 4 {
+		return fiber.NewError(fiber.StatusBadRequest, "Exactly 4 photos must be uploaded")
+	}
+
+	var photoPaths []string
+
+	for _, photo := range files {
+		uniqueName := utils.GenerateUniqueFileName(photo.Filename)
+		path := fmt.Sprintf("./uploads/photos/%s", uniqueName)
+
+		if err := c.SaveFile(photo, path); err != nil {
+			return fiber.NewError(fiber.StatusInternalServerError, "Failed To Save File")
+		}
+
+		photoPaths = append(photoPaths, "/uploads/photos/"+uniqueName)
+	}
+
+	appeal := operations.Appeal{
+		CitizenshipID: c.FormValue("citizenship_id"),
+		VoterCardID:   c.FormValue("voter_card_id"),
+		Password:      c.FormValue("password"),
+		Photos:        fmt.Sprintf("%s", utils.Join(photoPaths, ",")),
+		Status:        "pending",
 	}
 
 	id, err := operations.CreateAppeal(&appeal)

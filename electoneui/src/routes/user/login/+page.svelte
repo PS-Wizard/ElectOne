@@ -47,7 +47,7 @@
             }
 
             token = data.token;
-            localStorage.setItem("token", token);
+            localStorage.setItem("user_token", token);
             goto("/user/dashboard");
         } catch (err) {
             error = "Something went wrong.";

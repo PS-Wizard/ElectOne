@@ -27,7 +27,7 @@
                 "http://localhost:3000/citizen?limit=100&offset=0",
                 {
                     headers: {
-                        Authorization: `Bearer ${localStorage.getItem("token")}`,
+                        Authorization: `Bearer ${localStorage.getItem("admin_token")}`,
                     },
                 },
             );
@@ -59,7 +59,7 @@
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",
-                    Authorization: `Bearer ${localStorage.getItem("token")}`,
+                    Authorization: `Bearer ${localStorage.getItem("admin_token")}`,
                 },
                 body: JSON.stringify(newCitizen),
             });
@@ -92,7 +92,7 @@
                     method: "PUT",
                     headers: {
                         "Content-Type": "application/json",
-                        Authorization: `Bearer ${localStorage.getItem("token")}`,
+                        Authorization: `Bearer ${localStorage.getItem("admin_token")}`,
                     },
                     body: JSON.stringify(editingCitizen),
                 },
@@ -112,7 +112,7 @@
             const res = await fetch(`http://localhost:3000/citizen/${id}`, {
                 method: "DELETE",
                 headers: {
-                    Authorization: `Bearer ${localStorage.getItem("token")}`,
+                    Authorization: `Bearer ${localStorage.getItem("admin_token")}`,
                 },
             });
             if (!res.ok) throw new Error("Failed to delete citizenship");

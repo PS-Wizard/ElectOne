@@ -6,6 +6,7 @@ import (
 
 	"github.com/PS-Wizard/Electone/internals/db/operations"
 	"github.com/PS-Wizard/Electone/internals/middlewares"
+	"github.com/PS-Wizard/Electone/utils"
 	"github.com/gofiber/fiber/v2"
 	"github.com/golang-jwt/jwt/v5"
 )
@@ -20,9 +21,33 @@ func RegisterUserRoutes(router fiber.Router) {
 }
 
 func CreateUserHandler(c *fiber.Ctx) error {
-	var user operations.User
-	if err := c.BodyParser(&user); err != nil {
-		return fiber.NewError(fiber.StatusBadRequest, "Invalid input")
+	form, err := c.MultipartForm()
+	if err != nil {
+		return fiber.NewError(fiber.StatusBadRequest, "Invalid form data")
+	}
+
+	files := form.File["photos"]
+	if len(files) != 4 {
+		return fiber.NewError(fiber.StatusBadRequest, "Exactly 4 photos must be uploaded")
+	}
+
+	var photoPaths []string
+	for _, photo := range files {
+		uniqueName := utils.GenerateUniqueFileName(photo.Filename)
+		path := fmt.Sprintf("./uploads/photos/%s", uniqueName)
+
+		if err := c.SaveFile(photo, path); err != nil {
+			return fiber.NewError(fiber.StatusInternalServerError, "Failed To Save File")
+		}
+
+		photoPaths = append(photoPaths, "/uploads/photos/"+uniqueName)
+	}
+
+	user := operations.User{
+		CitizenshipID: c.FormValue("citizenship_id"),
+		VoterCardID:   c.FormValue("voter_card_id"),
+		Password:      c.FormValue("password"),
+		Photos:        fmt.Sprintf("%s", utils.Join(photoPaths, ",")),
 	}
 
 	id, err := operations.CreateUser(&user)
@@ -72,12 +97,42 @@ func UpdateUserHandler(c *fiber.Ctx) error {
 		return fiber.NewError(fiber.StatusBadRequest, "Invalid user ID")
 	}
 
-	var updated operations.User
-	if err := c.BodyParser(&updated); err != nil {
-		return fiber.NewError(fiber.StatusBadRequest, "Invalid input")
+	form, err := c.MultipartForm()
+	if err != nil {
+		return fiber.NewError(fiber.StatusBadRequest, "Invalid form data")
 	}
 
-	if err := operations.UpdateUser(id, &updated); err != nil {
+	files := form.File["photos"]
+	if len(files) != 4 {
+		return fiber.NewError(fiber.StatusBadRequest, "Exactly 4 photos must be uploaded")
+	}
+
+	var photoPaths []string
+
+	for _, photo := range files {
+		uniqueName := utils.GenerateUniqueFileName(photo.Filename)
+		path := fmt.Sprintf("./uploads/photos/%s", uniqueName)
+
+		if err := c.SaveFile(photo, path); err != nil {
+			return fiber.NewError(fiber.StatusInternalServerError, "Failed To Save File")
+		}
+
+		photoPaths = append(photoPaths, "/uploads/photos/"+uniqueName)
+	}
+
+	updatedUser := operations.User{
+		CitizenshipID: c.FormValue("citizenship_id"),
+		VoterCardID:   c.FormValue("voter_card_id"),
+		Password:      c.FormValue("password"),
+		Photos:        fmt.Sprintf("%s", utils.Join(photoPaths, ",")),
+	}
+
+	err = operations.UpdateUser(id, &updatedUser)
+	if err != nil {
+		return fiber.NewError(fiber.StatusInternalServerError, fmt.Sprintf("Failed to create user %s", err))
+	}
+
+	if err := operations.UpdateUser(id, &updatedUser); err != nil {
 		return fiber.NewError(fiber.StatusInternalServerError, "Failed to update user")
 	}
 

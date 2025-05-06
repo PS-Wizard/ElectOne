@@ -8,7 +8,7 @@
     let error = null;
 
     onMount(async () => {
-        const token = localStorage.getItem("token");
+        const token = localStorage.getItem("user_token");
         if (!token) {
             error = "You're not logged in.";
             loading = false;

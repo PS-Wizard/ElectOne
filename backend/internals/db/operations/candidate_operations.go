@@ -11,7 +11,7 @@ type Candidate struct {
 	CandidateID int    `json:"candidate_id"`
 	CitizenID   string `json:"citizen_id"`
 	ElectionID  int    `json:"election_id"`
-	ProfilePath string `json:"profile_path"`
+	ProfilePath string `json:"candidate_photo"`
 	Bio         string `json:"bio"`
 	Post        string `json:"post"`
 	Party       string `json:"party"`

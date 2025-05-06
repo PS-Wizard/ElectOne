@@ -39,7 +39,7 @@
                 qr_url = `https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=${encodeURIComponent(data.qr_url)}`;
             } else {
                 token = data.token;
-                localStorage.setItem("token", token);
+                localStorage.setItem("admin_token", token);
                 goto("/admin/appeals");
             }
         } catch (err) {
