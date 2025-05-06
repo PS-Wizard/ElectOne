@@ -163,13 +163,13 @@
                     bind:value={newElection.description}
                 />
                 <input
-                    type="datetime-local"
+                    type="date"
                     class="input input-bordered"
                     placeholder="Start Date"
                     bind:value={newElection.start_date}
                 />
                 <input
-                    type="datetime-local"
+                    type="date"
                     class="input input-bordered"
                     placeholder="End Date"
                     bind:value={newElection.end_date}
@@ -222,7 +222,7 @@
                         <span class="label-text">Start Date</span>
                     </label>
                     <input
-                        type="datetime-local"
+                        type="date"
                         class="input input-bordered w-full px-4 rounded-lg"
                         bind:value={editingElection.start_date}
                     />
@@ -230,7 +230,7 @@
                         <span class="label-text">End Date</span>
                     </label>
                     <input
-                        type="datetime-local"
+                        type="date"
                         class="input input-bordered w-full px-4 rounded-lg"
                         bind:value={editingElection.end_date}
                     />

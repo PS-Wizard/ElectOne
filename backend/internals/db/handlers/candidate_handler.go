@@ -24,7 +24,7 @@ func CreateCandidateHandler(c *fiber.Ctx) error {
 		return fiber.NewError(fiber.StatusBadRequest, "Invalid form data")
 	}
 
-	candidatePhoto := form.File["photo"]
+	candidatePhoto := form.File["candidate_photo"]
 	if len(candidatePhoto) == 0 {
 		return fiber.NewError(fiber.StatusBadRequest, "No photo file provided")
 	}
@@ -42,9 +42,9 @@ func CreateCandidateHandler(c *fiber.Ctx) error {
 		CitizenID:   c.FormValue("citizenship_id"),
 		ElectionID:  election_id,
 		ProfilePath: "/uploads/photos/candidates/" + uniqueName,
-		Bio:         c.FormValue("bio"),
-		Post:        c.FormValue("post"),
-		Party:       c.FormValue("party"),
+		Bio:         c.FormValue("candidate_bio"),
+		Post:        c.FormValue("candidate_post"),
+		Party:       c.FormValue("candidate_party"),
 		Name:        c.FormValue("candidate_name"),
 	}
 	id, err := operations.CreateCandidate(&candidate)
@@ -82,7 +82,7 @@ func UpdateCandidateHandler(c *fiber.Ctx) error {
 	}
 
 	var profilePath string
-	candidatePhoto := form.File["photo"]
+	candidatePhoto := form.File["candidate_photo"]
 
 	// Check if a photo was uploaded
 	if len(candidatePhoto) > 0 {
@@ -111,9 +111,9 @@ func UpdateCandidateHandler(c *fiber.Ctx) error {
 		CitizenID:   c.FormValue("citizenship_id"),
 		ElectionID:  electionID,
 		ProfilePath: profilePath,
-		Bio:         c.FormValue("bio"),
-		Post:        c.FormValue("post"),
-		Party:       c.FormValue("party"),
+		Bio:         c.FormValue("candidate_bio"),
+		Post:        c.FormValue("candidate_post"),
+		Party:       c.FormValue("candidate_party"),
 		Name:        c.FormValue("candidate_name"),
 	}
 

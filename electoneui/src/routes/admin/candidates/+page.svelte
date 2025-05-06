@@ -10,9 +10,11 @@
     let newCandidate = {
         citizen_id: "",
         election_id: "",
-        bio: "",
-        post: "",
-        photo: null, // Added for file upload
+        candidate_bio: "",
+        candidate_post: "",
+        candidate_photo: null, // Added for file upload
+        candidate_party: "",
+        candidate_name: "",
     };
 
     let editingCandidate = null;
@@ -44,9 +46,11 @@
         const formData = new FormData();
         formData.append("citizenship_id", newCandidate.citizen_id);
         formData.append("election_id", newCandidate.election_id);
-        formData.append("bio", newCandidate.bio);
-        formData.append("post", newCandidate.post);
-        formData.append("photo", newCandidate.photo); // Adding the photo to the form data
+        formData.append("candidate_name", newCandidate.candidate_name);
+        formData.append("candidate_party", newCandidate.candidate_party);
+        formData.append("candidate_bio", newCandidate.candidate_bio);
+        formData.append("candidate_post", newCandidate.candidate_post);
+        formData.append("candidate_photo", newCandidate.candidate_photo); // Adding the photo to the form data
 
         try {
             const res = await fetch("http://localhost:3000/candidate", {
@@ -61,9 +65,9 @@
             newCandidate = {
                 citizen_id: "",
                 election_id: "",
-                bio: "",
-                post: "",
-                photo: null, // Reset photo after submission
+                candidate_bio: "",
+                candidate_post: "",
+                candidate_photo: null, // Reset photo after submission
             };
             newCandidateModal.close();
         } catch (err) {
@@ -82,8 +86,10 @@
         const formData = new FormData();
         formData.append("citizenship_id", editingCandidate.citizen_id);
         formData.append("election_id", editingCandidate.election_id);
-        formData.append("bio", editingCandidate.bio);
-        formData.append("post", editingCandidate.post);
+        formData.append("candidate_bio", editingCandidate.candidate_bio);
+        formData.append("candidate_post", editingCandidate.candidate_post);
+        formData.append("candidate_name", editingCandidate.candidate_name);
+        formData.append("candidate_party", editingCandidate.candidate_party);
         if (editedPhoto) {
             formData.append("photo", editedPhoto); // Include new photo if selected
         }
@@ -164,9 +170,13 @@
                     <thead>
                         <tr>
                             <th>ID</th>
+                            <th>Name</th>
+                            <!-- New column -->
                             <th>Citizen ID</th>
                             <th>Election ID</th>
                             <th>Profile</th>
+                            <th>Party</th>
+                            <!-- Optional, might be helpful -->
                             <th>Bio</th>
                             <th>Post</th>
                             <th>Actions</th>
@@ -181,6 +191,8 @@
                                     .includes(search)}
                                 <tr>
                                     <td>{c.candidate_id}</td>
+                                    <td>{c.candidate_name}</td>
+                                    <!-- New data cell -->
                                     <td>{c.citizen_id}</td>
                                     <td>{c.election_id}</td>
                                     <td>
@@ -192,8 +204,10 @@
                                                 (selectedPhoto = `http://localhost:3000${c.candidate_photo}`)}
                                         />
                                     </td>
-                                    <td>{c.bio}</td>
-                                    <td>{c.post}</td>
+                                    <td>{c.candidate_party}</td>
+                                    <!-- Optional -->
+                                    <td>{c.candidate_bio}</td>
+                                    <td>{c.candidate_post}</td>
                                     <td class="flex gap-2">
                                         <button
                                             class="btn btn-sm btn-warning"
@@ -225,6 +239,18 @@
         <div class="py-2 flex flex-col gap-2">
             <input
                 class="input input-bordered w-full rounded-lg"
+                placeholder="Full Name"
+                bind:value={newCandidate.candidate_name}
+                required
+            />
+            <input
+                class="input input-bordered w-full rounded-lg"
+                placeholder="Party"
+                bind:value={newCandidate.candidate_party}
+                required
+            />
+            <input
+                class="input input-bordered w-full rounded-lg"
                 placeholder="Citizen ID"
                 bind:value={newCandidate.citizen_id}
                 required
@@ -243,19 +269,20 @@
                 id="new_candidate_photo"
                 class="file-input file-input-bordered w-full rounded-lg"
                 accept="image/*"
-                on:change={(e) => (newCandidate.photo = e.target.files[0])}
+                on:change={(e) =>
+                    (newCandidate.candidate_photo = e.target.files[0])}
                 required
             />
             <textarea
                 class="textarea textarea-bordered w-full rounded-lg"
                 placeholder="Bio"
-                bind:value={newCandidate.bio}
+                bind:value={newCandidate.candidate_bio}
                 required
             />
             <input
                 class="input input-bordered w-full rounded-lg"
                 placeholder="Post"
-                bind:value={newCandidate.post}
+                bind:value={newCandidate.candidate_post}
                 required
             />
         </div>
@@ -278,17 +305,27 @@
         {#if editingCandidate}
             <div class="py-2 flex flex-col gap-2">
                 <input
-                    class="input input-bordered"
+                    class="input input-bordered w-full border-black"
                     value={editingCandidate.candidate_id}
                     readonly
                 />
                 <input
-                    class="input input-bordered"
+                    class="input input-bordered w-full rounded-lg"
+                    placeholder="Full Name"
+                    bind:value={editingCandidate.candidate_name}
+                />
+                <input
+                    class="input input-bordered w-full rounded-lg"
+                    placeholder="Party"
+                    bind:value={editingCandidate.candidate_party}
+                />
+                <input
+                    class="input input-bordered w-full rounded-lg"
                     placeholder="Citizen ID"
                     bind:value={editingCandidate.citizen_id}
                 />
                 <input
-                    class="input input-bordered"
+                    class="input input-bordered w-full rounded-lg"
                     placeholder="Election ID"
                     bind:value={editingCandidate.election_id}
                 />
@@ -307,12 +344,12 @@
                 <textarea
                     class="textarea textarea-bordered w-full rounded-lg"
                     placeholder="Bio"
-                    bind:value={editingCandidate.bio}
+                    bind:value={editingCandidate.candidate_bio}
                 />
                 <input
-                    class="input input-bordered"
+                    class="input input-bordered w-full rounded-lg"
                     placeholder="Post"
-                    bind:value={editingCandidate.post}
+                    bind:value={editingCandidate.candidate_post}
                 />
             </div>
             <div class="modal-action">

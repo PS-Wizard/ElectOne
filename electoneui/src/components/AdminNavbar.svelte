@@ -5,7 +5,7 @@
         { label: "Appeals", path: "/admin/appeals" },
         { label: "Candidates", path: "/admin/candidates" },
         { label: "Citizenships", path: "/admin/citizenships" },
-        { label: "Elections", path: "/admin/electons" },
+        { label: "Elections", path: "/admin/elections" },
         { label: "Users", path: "/admin/users" },
         { label: "Voter Cards", path: "/admin/votercards" },
     ];

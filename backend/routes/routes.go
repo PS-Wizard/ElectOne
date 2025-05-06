@@ -7,7 +7,7 @@ import (
 	"github.com/PS-Wizard/Electone/internals/db/handlers"
 	"github.com/PS-Wizard/Electone/internals/middlewares"
 	"github.com/gofiber/fiber/v2"
-	"github.com/gofiber/fiber/v2/middleware/cache"
+	// "github.com/gofiber/fiber/v2/middleware/cache"
 	"github.com/gofiber/fiber/v2/middleware/limiter"
 )
 
@@ -50,8 +50,8 @@ func SetupRoutes(app *fiber.App) {
 
 	// Election Routes
 	// TODO: MIGHT WANT TO DISABLE CACHE
-	electionRoutes := protected.Group("/election", cache.New())
-	// electionRoutes := protected.Group("/election")
+	// electionRoutes := protected.Group("/election", cache.New())
+	electionRoutes := protected.Group("/election")
 	handlers.RegisterElectionRoutes(electionRoutes)
 
 	// Appeal Routes

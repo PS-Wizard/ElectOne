@@ -12,10 +12,10 @@ type Candidate struct {
 	CitizenID   string `json:"citizen_id"`
 	ElectionID  int    `json:"election_id"`
 	ProfilePath string `json:"candidate_photo"`
-	Bio         string `json:"bio"`
-	Post        string `json:"post"`
-	Party       string `json:"party"`
-	Name        string `json:"name"`
+	Bio         string `json:"candidate_bio"`
+	Post        string `json:"candidate_post"`
+	Party       string `json:"candidate_party"`
+	Name        string `json:"candidate_name"`
 }
 
 func CreateCandidate(candidate *Candidate) (int, error) {
