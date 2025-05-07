@@ -1,0 +1,136 @@
+body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  background-color: #f0f0f0;
+  display: flex;
+  justify-content: center;
+}
+
+.profile-container {
+  width: 420px;
+  background: #fff;
+  padding: 20px;
+  margin-top: 10px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  position: relative;
+}
+
+.back-btn {
+  background: none;
+  border: none;
+  font-size: 24px;
+  cursor: pointer;
+}
+
+.title {
+  text-align: center;
+  margin: 10px 0;
+}
+
+.profile-pic-section {
+  text-align: center;
+  margin: 10px 0;
+  position: relative;
+}
+
+.profile-pic {
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 2px solid #ccc;
+}
+
+.edit-icon {
+  position: absolute;
+  bottom: 5px;
+  right: 135px;
+  background: #000;
+  color: #fff;
+  font-size: 12px;
+  padding: 4px 6px;
+  border-radius: 50%;
+  cursor: pointer;
+}
+
+input[type="file"] {
+  display: none;
+}
+
+.form-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.form-group {
+  flex: 1 1 calc(50% - 10px);
+  display: flex;
+  flex-direction: column;
+}
+
+.full-width {
+  flex: 1 1 100%;
+}
+
+.form-group label {
+  font-size: 13px;
+  margin-bottom: 4px;
+}
+
+.form-group input {
+  padding: 6px;
+  background: #eee;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+.document-details {
+  margin-top: 20px;
+}
+
+.document-details h4 {
+  margin-bottom: 8px;
+  font-weight: bold;
+}
+
+.document-row {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  font-size: 14px;
+}
+
+.upload-section {
+  margin-top: 16px;
+}
+
+.upload-section label {
+  display: block;
+  font-size: 14px;
+  margin-bottom: 5px;
+}
+
+.doc-image {
+  width: 100%;
+  height: auto;
+  max-height: 150px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  object-fit: cover;
+  background-color: #ddd;
+  cursor: pointer;
+}
+
+.logout-btn {
+  width: 100%;
+  margin-top: 20px;
+  padding: 10px;
+  background: #333;
+  color: #fff;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 15px;
+}
