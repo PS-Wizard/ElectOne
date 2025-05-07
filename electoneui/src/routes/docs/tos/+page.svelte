@@ -1,6 +1,7 @@
+
 <script>
   import Footer from "../../../components/footer.svelte";
-
+  import Navbar from "../../../components/Navbar.svelte";
     // Function to go back to the previous page
 
   </script>
@@ -11,7 +12,7 @@
 
   <!-- Full Page Layout -->
   <div class="bg-gray-100 min-h-screen flex flex-col">
-
+    <Navbar/>
     <!-- Top Navbar with Back Arrow and Title -->
     <div class="flex items-center justify-between px-6 py-4 bg-white shadow-md">
       <!-- Back Arrow with no navigation -->
