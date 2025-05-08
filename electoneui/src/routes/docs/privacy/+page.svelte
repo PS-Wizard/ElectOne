@@ -1,6 +1,7 @@
 <script>
     import Footer from "../../../components/footer.svelte";
     import Navbar from "../../../components/Navbar.svelte";
+  // import AdminNavbar from "../../../components/AdminNavbar.svelte";
   </script>
 
   <svelte:head>

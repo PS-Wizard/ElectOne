@@ -1,5 +1,6 @@
 <script lang="ts">
     import { goto } from "$app/navigation";
+    import Navbar from "../../../components/Navbar.svelte";
 
     let citizenship_id = "";
     let voter_card_id = "";
@@ -55,7 +56,7 @@
         }
     };
 </script>
-
+<Navbar/>
 <section
     class="min-h-screen flex items-center justify-center bg-gray-100 dark:bg-gray-900"
 >

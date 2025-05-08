@@ -1,57 +1,61 @@
 <script>
   import { onMount } from "svelte";
   import Footer from "../../../components/footer.svelte";
+  import Navbar from "../../../components/Navbar.svelte";
+
   let citizenship_id = "";
   let voter_card_id = "";
   let password = "";
-  let photos = ""; // Will store comma-separated filenames
 
-  const handleSubmit = async () => {
-    const passwordRegex = /^(?=.*[0-9])(?=.*[!@#$%^&*])(?=.{8,})/;
+  let citizenshipFront = null;
+  let citizenshipBack = null;
+  let voterCard = null;
+  let selfie = null;
 
-    if (!passwordRegex.test(password)) {
-      alert("Password must be at least 8 characters and include a number and a special character.");
+  let message = "";
+
+  const passwordRegex = /^(?=.*[0-9])(?=.*[!@#$%^&*])(?=.{8,})/;
+
+  async function submitAppeal() {
+    if (!citizenshipFront || !citizenshipBack || !voterCard || !selfie) {
+      message = "Please upload all 4 required photos.";
       return;
     }
 
-    const appealData = {
-      citizenship_id: citizenship_id,
-      voter_card_id: voter_card_id,
-      password: password,
-      photos: photos,
-    };
+    if (!passwordRegex.test(password)) {
+      message = "Password must be at least 8 characters and include a number and a special character.";
+      return;
+    }
 
-    const authToken =
-      "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhZG1pbklEIjoyLCJlbWFpbCI6ImFkbWluMkBleGFtcGxlLmNvbSIsImV4cCI6MTc0NjQ0NTcyNywicm9sZSI6ImFkbWluIn0.9msec4uS7vVWaMIpC47jV1ne-iO_kvvC-bWJRt4UjX8"; // Replace with actual token handling
+    const formData = new FormData();
+    formData.append("citizenship_id", citizenship_id);
+    formData.append("voter_card_id", voter_card_id);
+    formData.append("password", password);
+    formData.append("photos", citizenshipFront);
+    formData.append("photos", citizenshipBack);
+    formData.append("photos", voterCard);
+    formData.append("photos", selfie);
 
     try {
-      const response = await fetch("http://localhost:3000/appeal", {
+      const res = await fetch("http://localhost:3000/appeal", {
         method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${authToken}`,
-        },
-        body: JSON.stringify(appealData),
+        body: formData,
       });
+      const data = await res.json();
 
-      if (response.ok) {
-        alert("Appeal submitted successfully!");
-        // Optionally redirect the user
-        // window.location.href = "/appeal-submitted";
-      } else {
-        const error = await response.text();
-        alert(`Error submitting appeal: ${error}`);
+      if (!res.ok) {
+        message = data.message || "Something went wrong.";
+        return;
       }
+
+      message = `Appeal submitted! ID: ${data.appeal_id}`;
     } catch (err) {
-      console.error("Network error:", err);
-      alert("Network error. Please try again later.");
+      message = "Error: " + err.message;
     }
-  };
+  }
 </script>
 
-<svelte:head>
-  <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
-</svelte:head>
+<Navbar />
 
 <div class="min-h-screen flex items-center justify-center bg-gray-100 p-6">
   <div class="w-full max-w-md bg-white rounded-xl shadow-lg p-10">
@@ -60,68 +64,67 @@
       <p class="text-gray-600 text-sm mt-2">Submit your appeal details.</p>
     </div>
 
-    <form on:submit|preventDefault={handleSubmit} class="space-y-6">
+    <form on:submit|preventDefault={submitAppeal} class="space-y-6" enctype="multipart/form-data">
       <div>
-        <label class="block text-sm font-medium text-gray-700 mb-1"
-          >Citizenship ID</label
-        >
-        <input
-          type="text"
-          bind:value={citizenship_id}
-          required
-          placeholder="123-456"
-          class="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-black"
-        />
+        <label class="block text-sm font-medium text-gray-700 mb-1">Citizenship ID</label>
+        <input type="text" bind:value={citizenship_id} required placeholder="123-456"
+          class="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-black" />
       </div>
+
       <div>
-        <label class="block text-sm font-medium text-gray-700 mb-1"
-          >Voter Card ID</label
-        >
-        <input
-          type="text"
-          bind:value={voter_card_id}
-          required
-          placeholder="VC-001"
-          class="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-black"
-        />
+        <label class="block text-sm font-medium text-gray-700 mb-1">Voter Card ID</label>
+        <input type="text" bind:value={voter_card_id} required placeholder="VC-001"
+          class="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-black" />
       </div>
+
       <div>
-        <label class="block text-sm font-medium text-gray-700 mb-1"
-          >Password</label
-        >
-        <input
-          type="password"
-          bind:value={password}
-          required
-          placeholder="securepassword123"
-          class="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-black"
-        />
+        <label class="block text-sm font-medium text-gray-700 mb-1">Password</label>
+        <input type="password" bind:value={password} required placeholder="securepassword123"
+          class="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-black" />
         <p class="text-xs text-gray-500 mt-1">
           Must be at least 8 characters and include a number & special character.
         </p>
       </div>
+
       <div>
-        <label class="block text-sm font-medium text-gray-700 mb-1"
-          >Photo Filenames (comma-separated)</label
-        >
-        <input
-          type="text"
-          bind:value={photos}
-          required
-          placeholder="photo1.jpg,photo2.png,photo3.jpeg"
-          class="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-black"
-        />
+        <label class="block text-sm font-medium text-gray-700 mb-1">Citizenship Front</label>
+        <input type="file" accept="image/*" on:change={(e) => (citizenshipFront = e.target.files[0])} required
+          class="w-full" />
+      </div>
+
+      <div>
+        <label class="block text-sm font-medium text-gray-700 mb-1">Citizenship Back</label>
+        <input type="file" accept="image/*" on:change={(e) => (citizenshipBack = e.target.files[0])} required
+          class="w-full" />
+      </div>
+
+      <div>
+        <label class="block text-sm font-medium text-gray-700 mb-1">Voter Card</label>
+        <input type="file" accept="image/*" on:change={(e) => (voterCard = e.target.files[0])} required
+          class="w-full" />
+      </div>
+
+      <div>
+        <label class="block text-sm font-medium text-gray-700 mb-1">Selfie</label>
+        <input type="file" accept="image/*" on:change={(e) => (selfie = e.target.files[0])} required class="w-full" />
       </div>
 
       <div class="flex justify-center">
-        <button
-          type="submit"
-          class="bg-black text-white text-lg font-medium py-3 px-10 rounded-full hover:bg-gray-800 transition duration-300"
-        >
+        <button type="submit"
+          class="bg-black text-white text-lg font-medium py-3 px-10 rounded-full hover:bg-gray-800 transition duration-300">
           Submit Appeal
         </button>
       </div>
+
+      {#if message}
+        <p class="text-sm text-center mt-4 text-red-500">{message}</p>
+      {/if}
     </form>
   </div>
 </div>
+
 <Footer />
+<svelte:head>
+  <link href="https://cdn.jsdelivr.net/npm/daisyui@5" rel="stylesheet" type="text/css" />
+  <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+</svelte:head>
