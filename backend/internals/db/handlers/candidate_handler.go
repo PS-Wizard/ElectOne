@@ -29,7 +29,7 @@ func CreateCandidateHandler(c *fiber.Ctx) error {
 		return fiber.NewError(fiber.StatusBadRequest, "No photo file provided")
 	}
 	uniqueName := utils.GenerateUniqueFileName(candidatePhoto[0].Filename)
-	path := fmt.Sprintf("./uploads/photos/candidates/%s", uniqueName)
+	path := fmt.Sprintf("./uploads/photos/%s", uniqueName)
 	if err := c.SaveFile(candidatePhoto[0], path); err != nil {
 		return fiber.NewError(fiber.StatusInternalServerError, "Failed To Save File")
 	}
@@ -41,7 +41,7 @@ func CreateCandidateHandler(c *fiber.Ctx) error {
 	candidate := operations.Candidate{
 		CitizenID:   c.FormValue("citizenship_id"),
 		ElectionID:  election_id,
-		ProfilePath: "/uploads/photos/candidates/" + uniqueName,
+		ProfilePath: "/uploads/photos/" + uniqueName,
 		Bio:         c.FormValue("candidate_bio"),
 		Post:        c.FormValue("candidate_post"),
 		Party:       c.FormValue("candidate_party"),
@@ -87,11 +87,11 @@ func UpdateCandidateHandler(c *fiber.Ctx) error {
 	// Check if a photo was uploaded
 	if len(candidatePhoto) > 0 {
 		uniqueName := utils.GenerateUniqueFileName(candidatePhoto[0].Filename)
-		path := fmt.Sprintf("./uploads/photos/candidates/%s", uniqueName)
+		path := fmt.Sprintf("./uploads/photos/%s", uniqueName)
 		if err := c.SaveFile(candidatePhoto[0], path); err != nil {
 			return fiber.NewError(fiber.StatusInternalServerError, "Failed To Save File")
 		}
-		profilePath = "/uploads/photos/candidates/" + uniqueName
+		profilePath = "/uploads/photos/" + uniqueName
 	} else {
 		// If no new photo, fetch the existing candidate to preserve the old photo path
 		existingCandidate, err := operations.GetCandidateByID(id) // Assuming you have a GetCandidateByID function

@@ -91,7 +91,7 @@
         formData.append("candidate_name", editingCandidate.candidate_name);
         formData.append("candidate_party", editingCandidate.candidate_party);
         if (editedPhoto) {
-            formData.append("photo", editedPhoto); // Include new photo if selected
+            formData.append("candidate_photo", editedPhoto); // Include new photo if selected
         }
 
         try {

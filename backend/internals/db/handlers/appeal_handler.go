@@ -39,7 +39,7 @@ func CreateAppealHandler(c *fiber.Ctx) error {
 		path := fmt.Sprintf("./uploads/photos/%s", uniqueName)
 
 		if err := c.SaveFile(photo, path); err != nil {
-			return fiber.NewError(fiber.StatusInternalServerError, "Failed To Save File")
+			return fiber.NewError(fiber.StatusInternalServerError, err.Error())
 		}
 
 		photoPaths = append(photoPaths, "/uploads/photos/"+uniqueName)
