@@ -15,6 +15,7 @@ func RegisterElectionRoutes(router fiber.Router) {
 	router.Put("/:id", middlewares.RequireAdmin, UpdateElectionHandler)
 	router.Delete("/:id", middlewares.RequireAdmin, DeleteElectionHandler)
 	router.Get("/", ListElectionsHandler)
+	router.Get("/candidates/:electionID", GetCandidatesByElectionIDHandler)
 }
 
 func CreateElectionHandler(c *fiber.Ctx) error {
@@ -128,4 +129,17 @@ func ListElectionsHandler(c *fiber.Ctx) error {
 	}
 
 	return c.JSON(elections)
+}
+
+func GetCandidatesByElectionIDHandler(c *fiber.Ctx) error {
+	electionID, err := strconv.Atoi(c.Params("electionID"))
+	if err != nil {
+		return fiber.NewError(fiber.StatusBadRequest, fmt.Sprintf("Invalid ElectionID"))
+	}
+	candidates, err := operations.GetCandidatesByElectionID(electionID)
+	if err != nil {
+		return fiber.NewError(fiber.StatusInternalServerError, "Failed to fetch candidates")
+	}
+
+	return c.JSON(candidates)
 }

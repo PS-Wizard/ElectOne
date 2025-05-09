@@ -16,6 +16,15 @@ type Election struct {
 	Location    string `json:"location"`
 }
 
+type CandidateInfo struct {
+	CandidateID int    `json:"candidate_id"`
+	ProfilePath string `json:"candidate_photo"`
+	Bio         string `json:"candidate_bio"`
+	Post        string `json:"candidate_post"`
+	Party       string `json:"candidate_party"`
+	Name        string `json:"candidate_name"`
+}
+
 func CreateElection(election *Election) (int, error) {
 	query := `
 		INSERT INTO Election (Name, Description, StartDate, EndDate, Location)
@@ -113,4 +122,27 @@ func GetElectionsByLocation(location string, limit, offset int) ([]Election, err
 	}
 
 	return elections, nil
+}
+
+func GetCandidatesByElectionID(electionID int) ([]CandidateInfo, error) {
+	query := `
+		SELECT CandidateID, Name, ProfilePath, Bio, Post, Party
+		FROM Candidate
+		WHERE ElectionID = ?
+	`
+	rows, err := db.DB.Query(query, electionID)
+	if err != nil {
+		return nil, err
+	}
+	defer rows.Close()
+	var candidates []CandidateInfo
+	for rows.Next() {
+		var c CandidateInfo
+		if err := rows.Scan(&c.CandidateID, &c.Name, &c.ProfilePath, &c.Bio, &c.Post, &c.Party); err != nil {
+			return nil, err
+		}
+		candidates = append(candidates, c)
+	}
+	return candidates, nil
+
 }

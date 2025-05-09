@@ -12,7 +12,7 @@ import (
 
 func RegisterCandidateRoutes(router fiber.Router) {
 	router.Post("/", middlewares.RequireAdmin, CreateCandidateHandler)
-	router.Get("/:id", GetCandidateByIDHandler)
+	router.Get("/:id", GetCandidatesByIDHandler)
 	router.Put("/:id", middlewares.RequireAdmin, UpdateCandidateHandler)
 	router.Delete("/:id", middlewares.RequireAdmin, DeleteCandidateHandler)
 	router.Get("/", ListCandidatesHandler)
@@ -55,7 +55,7 @@ func CreateCandidateHandler(c *fiber.Ctx) error {
 	return c.JSON(fiber.Map{"candidate_id": id})
 }
 
-func GetCandidateByIDHandler(c *fiber.Ctx) error {
+func GetCandidatesByIDHandler(c *fiber.Ctx) error {
 	id, err := strconv.Atoi(c.Params("id"))
 	if err != nil {
 		return fiber.NewError(fiber.StatusBadRequest, "Invalid candidate ID")

@@ -3,42 +3,41 @@
     import { page } from "$app/stores";
     import { goto } from "$app/navigation";
     import Chart from "chart.js/auto";
+    import Navbar from "../../../components/Navbar.svelte";
 
     let electionID;
     let voteData = [];
-    let candidateNames = {};
     let chartInstances = {};
+    let candidatesMap = {}; // candidate_id -> full candidate obj
 
     $: electionID = $page.params.id;
 
-    async function fetchCandidateNames() {
+    async function fetchCandidates() {
+        const token = localStorage.getItem("user_token");
+        if (!token) {
+            error = "You're not logged in.";
+            loading = false;
+            return;
+        }
         try {
             const res = await fetch(
-                `http://localhost:3000/elections/${electionID}/candidates`,
+                `http://localhost:3000/election/candidates/${electionID}`,
+                {
+                    headers: {
+                        Authorization: `Bearer ${token}`,
+                    },
+                },
             );
             if (res.ok) {
                 const candidates = await res.json();
-                candidates.forEach((candidate) => {
-                    candidateNames[candidate.candidate_id] =
-                        candidate.name || `Candidate ${candidate.candidate_id}`;
+                candidates.forEach((c) => {
+                    candidatesMap[c.candidate_id] = c;
                 });
             } else {
-                console.warn("Failed to fetch candidate names.");
-                const uniqueCandidateIds = [
-                    ...new Set(voteData.map((vote) => vote.candidate_id)),
-                ];
-                uniqueCandidateIds.forEach(
-                    (id) => (candidateNames[id] = `Candidate ${id}`),
-                );
+                console.warn("Failed to fetch candidates.");
             }
         } catch (error) {
-            console.error("Error fetching candidate names:", error);
-            const uniqueCandidateIds = [
-                ...new Set(voteData.map((vote) => vote.candidate_id)),
-            ];
-            uniqueCandidateIds.forEach(
-                (id) => (candidateNames[id] = `Candidate ${id}`),
-            );
+            console.error("Error fetching candidates:", error);
         }
     }
 
@@ -69,7 +68,7 @@
             }
             voteData = await res.json();
             console.log("Vote Data:", voteData);
-            await fetchCandidateNames();
+            await fetchCandidates();
             createGraphs();
         } catch (error) {
             console.error(error);
@@ -78,21 +77,21 @@
 
     onMount(() => {
         fetchData();
-        const socket = new WebSocket("ws://localhost:3000/live/ws/votes");
+        //const socket = new WebSocket("ws://localhost:3000/live/ws/votes");
 
-        socket.onmessage = async (event) => {
-            const vote = JSON.parse(event.data);
-            if (vote.election_id == electionID) {
-                voteData = [...voteData, vote];
-                createGraphs(); // refresh charts
-            }
-        };
+        //socket.onmessage = async (event) => {
+        //    const vote = JSON.parse(event.data);
+        //    if (vote.election_id == electionID) {
+        //        voteData = [...voteData, vote];
+        //        createGraphs(); // refresh charts
+        //    }
+        //};
 
-        socket.onerror = (e) => console.error("WebSocket error:", e);
+        //socket.onerror = (e) => console.error("WebSocket error:", e);
 
-        return () => {
-            socket.close();
-        };
+        //return () => {
+        //    socket.close();
+        //};
     });
 
     function destroyCharts() {
@@ -107,59 +106,55 @@
     function createGraphs() {
         destroyCharts();
 
-        // 1. Candidate Vote Distribution
-        const candidateVoteCounts = {};
+        const voteCountsByPost = {};
+
         voteData.forEach((vote) => {
-            candidateVoteCounts[vote.candidate_id] =
-                (candidateVoteCounts[vote.candidate_id] || 0) + 1;
+            const candidate = candidatesMap[vote.candidate_id];
+            if (!candidate) return;
+
+            const post = candidate.candidate_post || "Unknown";
+            if (!voteCountsByPost[post]) voteCountsByPost[post] = {};
+            voteCountsByPost[post][candidate.candidate_id] =
+                (voteCountsByPost[post][candidate.candidate_id] || 0) + 1;
         });
 
-        const candidateLabels = Object.keys(candidateVoteCounts).map(
-            (id) => candidateNames[id],
-        );
-        const voteCounts = Object.values(candidateVoteCounts);
-        createBarChart(
-            "candidateVoteChart",
-            "Candidate Vote Distribution",
-            candidateLabels,
-            voteCounts,
-            "Number of Votes",
-        );
+        // 🔥 One bar chart per post
+        Object.entries(voteCountsByPost).forEach(([post, counts]) => {
+            const canvasId = `chart-${post.replace(/\s+/g, "-").toLowerCase()}`;
+            const labels = Object.keys(counts).map(
+                (id) => candidatesMap[id].candidate_name,
+            );
+            const data = Object.values(counts);
 
-        // 2. Candidate Vote Percentage
+            createBarChart(
+                canvasId,
+                `${post} Vote Distribution`,
+                labels,
+                data,
+                "Votes",
+            );
+        });
+
+        // 🔥 Pie chart per candidate (their vote %)
         const totalVotes = voteData.length;
-        const candidatePercentages = {};
-        for (const candidateId in candidateVoteCounts) {
-            candidatePercentages[candidateId] =
-                (candidateVoteCounts[candidateId] / totalVotes) * 100;
-        }
+        const votesPerCandidate = {};
 
-        const percentageLabels = Object.keys(candidatePercentages).map(
-            (id) => candidateNames[id],
-        );
-        const percentageValues = Object.values(candidatePercentages);
-        createPieChart(
-            "candidatePercentageChart",
-            "Candidate Vote Percentage",
-            percentageLabels,
-            percentageValues,
-        );
-
-        // 3. vote count by candidate id
-        const candidateIdCounts = {};
         voteData.forEach((vote) => {
-            candidateIdCounts[vote.candidate_id] =
-                (candidateIdCounts[vote.candidate_id] || 0) + 1;
+            votesPerCandidate[vote.candidate_id] =
+                (votesPerCandidate[vote.candidate_id] || 0) + 1;
         });
-        const candidateIdLabels = Object.keys(candidateIdCounts);
-        const candidateIdValues = Object.values(candidateIdCounts);
-        createBarChart(
-            "candidateIdChart",
-            "Vote Count by Candidate ID",
-            candidateIdLabels,
-            candidateIdValues,
-            "Vote Count",
-        );
+
+        Object.entries(votesPerCandidate).forEach(([id, count]) => {
+            const candidate = candidatesMap[id];
+            const canvasId = `pie-${id}`;
+            const name = candidate?.candidate_name || `Candidate ${id}`;
+            createPieChart(
+                canvasId,
+                `${name} Vote Share`,
+                [name, "Others"],
+                [count, totalVotes - count],
+            );
+        });
     }
 
     function createBarChart(canvasId, title, labels, data, yLabel) {
@@ -248,18 +243,25 @@
     <title>Election Results</title>
 </svelte:head>
 
+<Navbar />
 <h1>Election Results for ID: {electionID}</h1>
 
-<div class="chart-container">
-    <canvas id="candidateVoteChart"></canvas>
-</div>
+{#each Object.values(candidatesMap) as candidate}
+    <div class="chart-container">
+        <h3>{candidate.candidate_post} - {candidate.candidate_name}</h3>
+        <canvas
+            id={"chart-" +
+                candidate.candidate_post.replace(/\s+/g, "-").toLowerCase()}
+        ></canvas>
+    </div>
+{/each}
 
-<div class="chart-container">
-    <canvas id="candidatePercentageChart"></canvas>
-</div>
-<div class="chart-container">
-    <canvas id="candidateIdChart"></canvas>
-</div>
+{#each Object.keys(candidatesMap) as id}
+    <div class="chart-container">
+        <h3>Vote Share for {candidatesMap[id].candidate_name}</h3>
+        <canvas id={"pie-" + id}></canvas>
+    </div>
+{/each}
 
 <style>
     .chart-container {
