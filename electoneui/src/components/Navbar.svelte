@@ -64,7 +64,7 @@
                     >
                     <a
                         href="/user/login"
-                        class="text-sm/6 font-semibold bg-black text-white px-4 py-1 rounded-lg"
+                        class="text-sm/6 font-semibold btn btn-primary btn-sm rounded-lg"
                         >Login<span aria-hidden="true">&rarr;</span></a
                     >
                 </div>

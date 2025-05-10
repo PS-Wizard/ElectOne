@@ -8,6 +8,9 @@
     let error = "";
     let search = "";
 
+    let createMessage = "";
+    let editMessage = "";
+
     let newCitizen = {
         citizenship_id: "",
         full_name: "",
@@ -19,6 +22,10 @@
     let editingCitizen = null;
     let newCitizenModal;
     let editCitizenModal;
+
+    function isValidCitizenship(id) {
+        return /^\d{2}-\d{2}-\d{2}-\d{5}$/.test(id);
+    }
 
     async function fetchCitizenships() {
         loading = true;
@@ -33,7 +40,7 @@
             );
             if (!res.ok) throw new Error("Failed to fetch citizenships");
             citizens = await res.json();
-            filteredCitizens = citizens; // Initially, no filtering
+            filteredCitizens = citizens;
         } catch (err) {
             error = err.message;
         }
@@ -54,6 +61,33 @@
     }
 
     async function createCitizenship() {
+        createMessage = "";
+
+        const {
+            citizenship_id,
+            full_name,
+            date_of_birth,
+            birth_place,
+            permanent_address,
+        } = newCitizen;
+
+        if (
+            !citizenship_id ||
+            !full_name ||
+            !date_of_birth ||
+            !birth_place ||
+            !permanent_address
+        ) {
+            createMessage = "Please fill in all fields.";
+            return;
+        }
+
+        if (!isValidCitizenship(citizenship_id)) {
+            createMessage =
+                "Invalid Citizenship ID. Format must be XX-XX-XX-XXXXX";
+            return;
+        }
+
         try {
             const res = await fetch("http://localhost:3000/citizen", {
                 method: "POST",
@@ -63,7 +97,13 @@
                 },
                 body: JSON.stringify(newCitizen),
             });
-            if (!res.ok) throw new Error("Failed to create citizenship");
+
+            if (!res.ok) {
+                const err = await res.json();
+                createMessage = err.message || "Failed to create citizenship.";
+                return;
+            }
+
             await fetchCitizenships();
             newCitizen = {
                 citizenship_id: "",
@@ -72,9 +112,10 @@
                 birth_place: "",
                 permanent_address: "",
             };
+            createMessage = "";
             newCitizenModal.close();
         } catch (err) {
-            alert(err.message);
+            createMessage = err.message;
         }
     }
 
@@ -84,10 +125,37 @@
     }
 
     async function updateCitizenship() {
+        editMessage = "";
         if (!editingCitizen) return;
+
+        const {
+            citizenship_id,
+            full_name,
+            date_of_birth,
+            birth_place,
+            permanent_address,
+        } = editingCitizen;
+
+        if (
+            !citizenship_id ||
+            !full_name ||
+            !date_of_birth ||
+            !birth_place ||
+            !permanent_address
+        ) {
+            editMessage = "Please fill in all fields.";
+            return;
+        }
+
+        if (!isValidCitizenship(citizenship_id)) {
+            editMessage =
+                "Invalid Citizenship ID. Format must be XX-XX-XX-XXXXX";
+            return;
+        }
+
         try {
             const res = await fetch(
-                `http://localhost:3000/citizen/${editingCitizen.citizenship_id}`,
+                `http://localhost:3000/citizen/${citizenship_id}`,
                 {
                     method: "PUT",
                     headers: {
@@ -97,12 +165,18 @@
                     body: JSON.stringify(editingCitizen),
                 },
             );
-            if (!res.ok) throw new Error("Failed to update citizenship");
+
+            if (!res.ok) {
+                const err = await res.json();
+                editMessage = err.message || "Failed to update citizenship.";
+                return;
+            }
+
             await fetchCitizenships();
             editingCitizen = null;
             editCitizenModal.close();
         } catch (err) {
-            alert(err.message);
+            editMessage = err.message;
         }
     }
 
@@ -123,8 +197,6 @@
     }
 
     onMount(fetchCitizenships);
-
-    // Watch for search changes
     $: search, filterCitizenships();
 </script>
 
@@ -159,31 +231,42 @@
             <h3 class="font-bold text-lg">New Citizenship</h3>
             <div class="py-2 flex flex-col gap-2">
                 <input
-                    class="input input-bordered"
-                    placeholder="Citizenship ID"
+                    type="text"
+                    class="input input-bordered w-full"
+                    placeholder="XX-XX-XX-XXXXX"
+                    required
                     bind:value={newCitizen.citizenship_id}
                 />
                 <input
-                    class="input input-bordered"
-                    placeholder="Full Name"
+                    class="input input-bordered w-full"
+                    required
+                    type="text"
+                    placeholder="Jhon Doe"
                     bind:value={newCitizen.full_name}
                 />
                 <input
-                    class="input input-bordered"
+                    type="date"
+                    class="input input-bordered w-full"
+                    required
                     placeholder="Date of Birth"
                     bind:value={newCitizen.date_of_birth}
                 />
                 <input
-                    class="input input-bordered"
-                    placeholder="Birth Place"
+                    class="input input-bordered w-full"
+                    required
+                    placeholder="Kathmandu, Nepal"
                     bind:value={newCitizen.birth_place}
                 />
                 <input
-                    class="input input-bordered"
-                    placeholder="Permanent Address"
+                    class="input input-bordered w-full"
+                    required
+                    placeholder="Kathmandu, Nepal"
                     bind:value={newCitizen.permanent_address}
                 />
             </div>
+            {#if createMessage}
+                <p class="text-red-500 mt-2 text-sm">{createMessage}</p>
+            {/if}
             <div class="modal-action">
                 <form method="dialog" class="flex gap-2">
                     <button
@@ -226,7 +309,7 @@
                         <span class="label-text">Date of Birth</span>
                     </label>
                     <input
-                        type="text"
+                        type="date"
                         class="input input-bordered w-full px-4 rounded-lg"
                         bind:value={editingCitizen.date_of_birth}
                     />
@@ -247,11 +330,15 @@
                         bind:value={editingCitizen.permanent_address}
                     />
                 </div>
+                {#if editMessage}
+                    <p class="text-red-500 mt-2 text-sm">{editMessage}</p>
+                {/if}
+
                 <div class="modal-action">
                     <form method="dialog" class="flex gap-2">
                         <button
                             type="button"
-                            class="btn btn-warning"
+                            class="btn btn-primary"
                             on:click={updateCitizenship}>Update</button
                         >
                         <button class="btn">Cancel</button>
@@ -288,12 +375,12 @@
                             <td>{citizen.permanent_address}</td>
                             <td class="flex gap-2">
                                 <button
-                                    class="btn btn-sm btn-warning"
+                                    class="btn btn-sm btn-ghost"
                                     on:click={() => openEditModal(citizen)}
                                     >Edit</button
                                 >
                                 <button
-                                    class="btn btn-sm btn-error"
+                                    class="btn btn-sm text-white btn-error"
                                     on:click={() =>
                                         deleteCitizenship(
                                             citizen.citizenship_id,

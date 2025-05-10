@@ -7,6 +7,7 @@
     let loading = true;
     let error = "";
     let search = "";
+    let editMessage = "";
 
     let newVoterCard = {
         voter_card_id: "",
@@ -17,6 +18,15 @@
     let editingVoterCard = null;
     let newVoterCardModal;
     let editVoterCardModal;
+
+    function isValidVoterCardId(voterCardId) {
+        const regex = /^\d{10}$/;
+        return regex.test(voterCardId);
+    }
+
+    function isValidCitizenshipId(citizenshipId) {
+        return /^\d{2}-\d{2}-\d{2}-\d{5}$/.test(citizenshipId);
+    }
 
     async function fetchVoterCards() {
         loading = true;
@@ -50,6 +60,29 @@
     }
 
     async function createVoterCard() {
+        editMessage = ""; // Reset message before submitting
+
+        // Check for empty fields
+        if (
+            !newVoterCard.voter_card_id ||
+            !newVoterCard.citizenship_id ||
+            !newVoterCard.location
+        ) {
+            editMessage = "All fields are required.";
+            return;
+        }
+
+        // Validate fields
+        if (!isValidVoterCardId(newVoterCard.voter_card_id)) {
+            editMessage = "Invalid Voter Card ID. Must be 10 digits.";
+            return;
+        }
+
+        if (!isValidCitizenshipId(newVoterCard.citizenship_id)) {
+            editMessage = "Invalid Citizenship ID. Format: XX-XX-XX-XXXXX.";
+            return;
+        }
+
         try {
             const res = await fetch("http://localhost:3000/voter_card", {
                 method: "POST",
@@ -68,7 +101,7 @@
             };
             newVoterCardModal.close();
         } catch (err) {
-            alert(err.message);
+            editMessage = err.message;
         }
     }
 
@@ -78,7 +111,29 @@
     }
 
     async function updateVoterCard() {
-        if (!editingVoterCard) return;
+        editMessage = ""; // Reset message before submitting
+
+        // Check for empty fields
+        if (
+            !editingVoterCard.voter_card_id ||
+            !editingVoterCard.citizenship_id ||
+            !editingVoterCard.location
+        ) {
+            editMessage = "All fields are required.";
+            return;
+        }
+
+        // Validate fields
+        if (!isValidVoterCardId(editingVoterCard.voter_card_id)) {
+            editMessage = "Invalid Voter Card ID. Must be 10 digits.";
+            return;
+        }
+
+        if (!isValidCitizenshipId(editingVoterCard.citizenship_id)) {
+            editMessage = "Invalid Citizenship ID. Format: XX-XX-XX-XXXXX.";
+            return;
+        }
+
         try {
             const res = await fetch(
                 `http://localhost:3000/voter_card/${editingVoterCard.voter_card_id}`,
@@ -96,7 +151,7 @@
             editingVoterCard = null;
             editVoterCardModal.close();
         } catch (err) {
-            alert(err.message);
+            editMessage = err.message;
         }
     }
 
@@ -151,19 +206,22 @@
     >
         <div class="modal-box">
             <h3 class="font-bold text-lg">New Voter Card</h3>
+            {#if editMessage}
+                <p class="text-red-500 text-sm">{editMessage}</p>
+            {/if}
             <div class="py-2 flex flex-col gap-2">
                 <input
-                    class="input input-bordered"
-                    placeholder="Voter Card ID"
+                    class="input input-bordered w-full"
+                    placeholder="Voter Card ID (XXXXXXXXXX)"
                     bind:value={newVoterCard.voter_card_id}
                 />
                 <input
-                    class="input input-bordered"
-                    placeholder="Citizenship ID"
+                    class="input input-bordered w-full"
+                    placeholder="Citizenship ID (XX-XX-XX-XXXXX)"
                     bind:value={newVoterCard.citizenship_id}
                 />
                 <input
-                    class="input input-bordered"
+                    class="input input-bordered w-full"
                     placeholder="Location"
                     bind:value={newVoterCard.location}
                 />
@@ -189,6 +247,60 @@
         <div class="modal-box">
             <h3 class="font-bold text-lg">Edit Voter Card</h3>
             {#if editingVoterCard}
+                {#if editMessage}
+                    <p class="text-red-500 text-sm">{editMessage}</p>
+                {/if}
+                <div class="py-2 flex flex-col gap-2">
+                    <label class="label">
+                        <span class="label-text">Voter Card ID</span>
+                    </label>
+                    <input
+                        type="text"
+                        class="input input-bordered w-full px-4 rounded-lg"
+                        bind:value={editingVoterCard.voter_card_id}
+                    />
+                    <label class="label">
+                        <span class="label-text">Citizenship ID</span>
+                    </label>
+                    <input
+                        type="text"
+                        class="input input-bordered w-full px-4 rounded-lg"
+                        bind:value={editingVoterCard.citizenship_id}
+                    />
+                    <label class="label">
+                        <span class="label-text">Location</span>
+                    </label>
+                    <input
+                        type="text"
+                        class="input input-bordered w-full px-4 rounded-lg"
+                        bind:value={editingVoterCard.location}
+                    />
+                </div>
+                <div class="modal-action">
+                    <form method="dialog" class="flex gap-2">
+                        <button
+                            type="button"
+                            class="btn btn-warning"
+                            on:click={updateVoterCard}>Update</button
+                        >
+                        <button class="btn">Cancel</button>
+                    </form>
+                </div>
+            {/if}
+        </div>
+    </dialog>
+
+    <dialog
+        bind:this={editVoterCardModal}
+        id="edit_voter_card_modal"
+        class="modal"
+    >
+        <div class="modal-box">
+            <h3 class="font-bold text-lg">Edit Voter Card</h3>
+            {#if editingVoterCard}
+                {#if editMessage}
+                    <p class="text-red-500 text-sm">{editMessage}</p>
+                {/if}
                 <div class="py-2 flex flex-col gap-2">
                     <label class="label">
                         <span class="label-text">Voter Card ID</span>
