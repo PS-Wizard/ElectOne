@@ -1,5 +1,6 @@
 <script lang="ts">
     import { goto } from "$app/navigation";
+    import Navbar from "../../components/Navbar.svelte";
 
     let email = "";
     let password = "";
@@ -19,13 +20,12 @@
                 body: JSON.stringify({ email, password, totp_code }),
             });
 
-            const text = await res.text(); // safer than res.json()
-
+            const text = await res.text();
             const data = (() => {
                 try {
                     return JSON.parse(text);
                 } catch {
-                    return { message: text }; // fallback to plain text
+                    return { message: text };
                 }
             })();
 
@@ -37,56 +37,67 @@
             if (!data.setup_done && data.qr_url) {
                 setup_done = false;
                 qr_url = `https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=${encodeURIComponent(data.qr_url)}`;
-            } else {
-                token = data.token;
-                localStorage.setItem("admin_token", token);
-                goto("/admin/appeals");
+                return;
             }
+
+            token = data.token;
+            localStorage.setItem("admin_token", token);
+            goto("/admin/appeals");
         } catch (err) {
-            error = "Something went wrong. Please try again.";
+            error = "Something went wrong.";
             console.error(err);
         }
     };
 </script>
 
-<section
-    class="min-h-screen flex items-center justify-center bg-gray-100 dark:bg-gray-900"
+<Navbar />
+
+<div
+    class="absolute inset-x-0 -top-40 -z-10 transform-gpu overflow-hidden blur-3xl sm:-top-80"
+    aria-hidden="true"
 >
     <div
-        class="w-full max-w-md p-8 space-y-6 bg-white rounded-xl shadow-lg dark:bg-gray-800"
-    >
-        <div class="text-center">
-            <img
-                src="https://merakiui.com/images/logo.svg"
-                class="mx-auto h-8"
-                alt="Logo"
-            />
-            <h2 class="mt-4 text-2xl font-bold text-gray-800 dark:text-white">
-                Admin Login
-            </h2>
-            <p class="text-sm text-gray-500 dark:text-gray-400">
-                Access the control panel
-            </p>
+        class="relative left-[calc(80%-11rem)] aspect-1155/678 w-[36.125rem] -translate-x-1/2 rotate-[30deg] bg-gradient-to-tr from-[#ff80b5] to-[#9089fc] opacity-30 sm:left-[calc(50%-30rem)] sm:w-[72.1875rem]"
+        style="clip-path: polygon(74.1% 44.1%, 100% 61.6%, 97.5% 26.9%, 85.5% 0.1%, 80.7% 2%, 72.5% 32.5%, 60.2% 62.4%, 52.4% 68.1%, 47.5% 58.3%, 45.2% 34.5%, 27.5% 76.7%, 0.1% 64.9%, 17.9% 100%, 27.6% 76.8%, 76.1% 97.7%, 74.1% 44.1%)"
+    ></div>
+</div>
+
+<div class="min-h-screen flex items-center justify-center bg-transparent p-6">
+    <div class="w-full max-w-md bg-white rounded-xl shadow-lg p-10">
+        <div class="text-left mb-8">
+            <h1 class="text-3xl font-bold text-black">Admin Login</h1>
+            <p class="text-gray-600 text-sm mt-2">Access the control panel</p>
         </div>
 
-        <div class="space-y-4">
-            <input
-                type="email"
-                placeholder="Email"
-                class="input input-bordered w-full"
-                bind:value={email}
-                required
-            />
-            <input
-                type="password"
-                placeholder="Password"
-                class="input input-bordered w-full"
-                bind:value={password}
-                required
-            />
+        <form on:submit|preventDefault={login} class="space-y-6">
+            <div>
+                <label class="block text-sm font-medium text-gray-700 mb-1"
+                    >Email</label
+                >
+                <input
+                    type="email"
+                    bind:value={email}
+                    required
+                    placeholder="admin@example.com"
+                    class="input w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-black"
+                />
+            </div>
+
+            <div>
+                <label class="block text-sm font-medium text-gray-700 mb-1"
+                    >Password</label
+                >
+                <input
+                    type="password"
+                    bind:value={password}
+                    required
+                    placeholder="Password"
+                    class="input w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-black"
+                />
+            </div>
 
             {#if !setup_done}
-                <div class="text-sm text-yellow-500">
+                <div class="text-sm text-yellow-600 font-medium">
                     Scan this QR code with your authenticator app:
                 </div>
                 <img
@@ -97,37 +108,41 @@
             {/if}
 
             <div>
+                <label class="block text-sm font-medium text-gray-700 mb-1"
+                    >TOTP Code</label
+                >
                 <input
                     type="text"
-                    placeholder="TOTP Code"
-                    class="input input-bordered w-full"
                     bind:value={totp_code}
+                    placeholder="TOTP Code"
+                    class="input w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-black"
                 />
-                <p
-                    class="text-xs text-gray-100 text-right dark:text-gray-400 mt-1"
-                >
-                    If this is your first time, leave this blank.
+                <p class="text-xs text-gray-500 text-right mt-1">
+                    Leave empty if logging in for the first time.
                 </p>
             </div>
 
             {#if error}
-                <div class="alert alert-error">{error}</div>
+                <div class="text-sm text-red-500 text-center font-medium">
+                    {error}
+                </div>
             {/if}
 
             <button
-                class="btn btn-primary w-full"
-                on:click|preventDefault={login}
+                type="submit"
+                class="btn w-full uppercase tracking-wide font-bold btn-primary hover:bg-gray-800 transition duration-300"
             >
                 Login
             </button>
 
             {#if token}
-                <div class="alert alert-success">
-                    Logged in! Token: <br /><code class="break-all"
-                        >{token}</code
-                    >
+                <div
+                    class="mt-4 p-3 bg-green-100 text-green-700 text-sm rounded"
+                >
+                    Logged in! Token:<br />
+                    <code class="break-all">{token}</code>
                 </div>
             {/if}
-        </div>
+        </form>
     </div>
-</section>
+</div>

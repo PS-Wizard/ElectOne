@@ -1,10 +1,10 @@
 ### Create Admin
 POST http://localhost:3000/admin
 Content-Type: application/json
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhZG1pbklEIjoxLCJlbWFpbCI6ImFkbWluMUBleGFtcGxlLmNvbSIsImV4cCI6MTc0Njc1OTY2Niwicm9sZSI6ImFkbWluIn0.SUtZwdDkFyoDQYyzrxaj7buz8ud4hi57FGA2weypXnU
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhZG1pbklEIjoxLCJlbWFpbCI6ImFkbWluMUBleGFtcGxlLmNvbSIsImV4cCI6MTc0NzA1MDQzNSwicm9sZSI6ImFkbWluIn0.1Ts2gXWyci0rLP22ALA0FUabwRi_wjiTbQHNefYp1Ms
 
 {
-  "email": "admin1@example.com",
+  "email": "admin3@example.com",
   "password": "somepass",
   "totp_secret":""
 }
@@ -16,7 +16,7 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhZG1pbklEIjoxLCJlb
 ### Update Admin
 PUT http://localhost:3000/admin/1
 Content-Type: application/json
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhZG1pbklEIjoxLCJlbWFpbCI6ImFkbWluMUBleGFtcGxlLmNvbSIsImV4cCI6MTc0Njc1OTY2Niwicm9sZSI6ImFkbWluIn0.SUtZwdDkFyoDQYyzrxaj7buz8ud4hi57FGA2weypXnU
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhZG1pbklEIjoxLCJlbWFpbCI6ImFkbWluMUBleGFtcGxlLmNvbSIsImV4cCI6MTc0NzA1MDQzNSwicm9sZSI6ImFkbWluIn0.1Ts2gXWyci0rLP22ALA0FUabwRi_wjiTbQHNefYp1Ms
 
 {
   "email": "admin1@example.com",
@@ -26,4 +26,4 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhZG1pbklEIjoxLCJlb
 
 ### List Admins
 GET http://localhost:3000/admin?limit=10&offset=0
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhZG1pbklEIjoxLCJlbWFpbCI6ImFkbWluMUBleGFtcGxlLmNvbSIsImV4cCI6MTc0Njc1OTY2Niwicm9sZSI6ImFkbWluIn0.SUtZwdDkFyoDQYyzrxaj7buz8ud4hi57FGA2weypXnU
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhZG1pbklEIjoxLCJlbWFpbCI6ImFkbWluMUBleGFtcGxlLmNvbSIsImV4cCI6MTc0NzA1MDQzNSwicm9sZSI6ImFkbWluIn0.1Ts2gXWyci0rLP22ALA0FUabwRi_wjiTbQHNefYp1Ms
