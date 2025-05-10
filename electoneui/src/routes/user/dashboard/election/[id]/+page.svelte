@@ -105,8 +105,10 @@
 </script>
 
 <Navbar />
-<section class="m-12">
-    <h1 class="text-2xl font-bold mb-4">Election #{electionId}</h1>
+<section class="m-4 md:m-12">
+    <h1 class="text-3xl sm:text-6xl font-bold text-center mb-4">
+        Pick Your Votes:
+    </h1>
 
     {#if loading}
         <p>Loading candidates...</p>
@@ -117,12 +119,16 @@
     {:else}
         <div>
             {#each Object.entries(groupedCandidates) as [post, postCandidates]}
-                <div class="mb-6">
-                    <h2 class="text-xl font-semibold">{post}</h2>
-                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <div class="m-6">
+                    <h2 class="text-lg sm:text-xl font-semibold uppercase mb-4">
+                        {post}
+                    </h2>
+                    <div
+                        class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6"
+                    >
                         {#each postCandidates as candidate (candidate.candidate_id)}
                             <label
-                                class="card bg-base-200 shadow-lg p-4 space-y-2 cursor-pointer"
+                                class="card bg-base-200 border p-4 cursor-pointer hover:shadow-lg transition-all transform hover:scale-105"
                                 on:click={() =>
                                     (selectedCandidates[post] =
                                         candidate.candidate_id)}
@@ -132,22 +138,34 @@
                                     name={post}
                                     value={candidate.candidate_id}
                                     bind:group={selectedCandidates[post]}
-                                    class="invisible"
+                                    class="hidden"
                                 />
-                                <div class="flex items-center space-x-4">
-                                    <img
-                                        src={`http://localhost:3000${candidate.candidate_photo}`}
-                                        alt={candidate.candidate_name}
-                                        class="w-16 h-16 rounded-full"
-                                    />
-                                    <div class="text-left">
-                                        <h3 class="font-semibold">
+
+                                <div
+                                    class="flex flex-col sm:flex-row items-center sm:space-x-4"
+                                >
+                                    <!-- Profile on the left (sm:w-1/3) -->
+                                    <div
+                                        class="flex-shrink-0 sm:w-1/3 mb-4 sm:mb-0"
+                                    >
+                                        <img
+                                            src={`http://localhost:3000${candidate.candidate_photo}`}
+                                            alt={candidate.candidate_name}
+                                            class="w-full h-auto rounded-full border-2 border-primary object-cover"
+                                        />
+                                    </div>
+
+                                    <!-- Candidate info on the right (sm:w-2/3) -->
+                                    <div class="sm:w-2/3">
+                                        <h3
+                                            class="font-bold text-lg sm:text-xl"
+                                        >
                                             {candidate.candidate_name}
                                         </h3>
                                         <p class="text-sm text-gray-500">
                                             {candidate.candidate_party}
                                         </p>
-                                        <p class="text-sm">
+                                        <p class="text-sm text-gray-600 mt-2">
                                             {candidate.candidate_bio}
                                         </p>
                                     </div>
@@ -158,7 +176,10 @@
                 </div>
             {/each}
 
-            <button class="btn btn-primary mt-4" on:click={submitVote}>
+            <button
+                class="btn btn-primary mt-4 w-full sm:w-auto"
+                on:click={submitVote}
+            >
                 Submit Vote
             </button>
         </div>

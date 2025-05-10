@@ -6,10 +6,6 @@
 
   </script>
 
-  <svelte:head>
-    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
-  </svelte:head>
-
   <!-- Full Page Layout -->
   <div class="bg-gray-100 min-h-screen flex flex-col">
     <Navbar/>

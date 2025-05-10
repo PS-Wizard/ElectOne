@@ -21,6 +21,7 @@
     let editingElection = null;
     let newElectionModal;
     let editElectionModal;
+    
 
     async function fetchElections() {
         loading = true;
