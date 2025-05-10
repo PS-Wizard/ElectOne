@@ -1,4 +1,7 @@
 <script>
+    import Footer from "../../components/footer.svelte";
+    import Navbar from "../../components/Navbar.svelte";
+
     let appeal_id = "";
     let citizenship_id = "";
     let voter_card_id = "";
@@ -50,7 +53,8 @@
     }
 </script>
 
-<div class="max-w-xl mx-auto p-6 space-y-4">
+<Navbar />
+<div class="h-[90vh] flex justify-center items-center flex-col max-w-xl mx-auto p-6 space-y-4">
     <h2 class="text-2xl font-bold">Features</h2>
 
     <input
@@ -104,3 +108,4 @@
         </div>
     {/if}
 </div>
+<Footer />

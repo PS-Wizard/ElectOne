@@ -77,7 +77,7 @@ func DeleteVoterCardHandler(c *fiber.Ctx) error {
 	id := c.Params("id")
 
 	if err := operations.DeleteVoterCard(id); err != nil {
-		return fiber.NewError(fiber.StatusInternalServerError, "Failed to delete voter card")
+		return fiber.NewError(fiber.StatusInternalServerError, err.Error())
 	}
 
 	return c.SendStatus(fiber.StatusOK)

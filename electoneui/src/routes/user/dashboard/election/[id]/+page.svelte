@@ -122,7 +122,12 @@
                     >
                         {#each postCandidates as candidate (candidate.candidate_id)}
                             <label
-                                class="card bg-base-200 border p-4 cursor-pointer hover:shadow-lg transition-all transform hover:scale-105"
+                                class={` rounded-lg bg-base-200 border p-4 cursor-pointer hover:shadow-lg transition-all transform hover:scale-105 ${
+                                    selectedCandidates[post] ===
+                                    candidate.candidate_id
+                                        ? "border-3"
+                                        : ""
+                                }`}
                                 on:click={() =>
                                     (selectedCandidates[post] =
                                         candidate.candidate_id)}
