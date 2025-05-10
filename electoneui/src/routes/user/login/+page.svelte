@@ -56,7 +56,7 @@
         }
     };
 </script>
-<Navbar/>
+<Navbar />
 <section
     class="min-h-screen flex items-center justify-center bg-gray-100 dark:bg-gray-900"
 >

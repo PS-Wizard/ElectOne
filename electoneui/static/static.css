@@ -7,6 +7,8 @@
 @import "tailwindcss";
 @plugin "@tailwindcss/typography";
 @plugin "daisyui";
+
+
 @plugin "daisyui/theme" {
     name: "black";
     default: true;
@@ -16,7 +18,7 @@
     --color-base-200: white;
     --color-base-300: white;
     --color-base-content: oklch(12% 0.042 264.695);
-    --color-primary: black;
+    --color-primary: oklch(13% 0.028 261.692);
     --color-primary-content: white;
     --color-secondary: white;
     --color-secondary-content: oklch(12% 0.042 264.695);
@@ -32,12 +34,14 @@
     --color-warning-content: oklch(19.359% 0.042 109.769);
     --color-error: oklch(62.795% 0.257 29.233);
     --color-error-content: oklch(12.559% 0.051 29.233);
-    --radius-selector: 2rem;
-    --radius-field: 2rem;
-    --radius-box: 2rem;
+    --radius-selector: 0.5rem;
+    --radius-field: 0.5rem;
+    --radius-box: 0.5rem;
     --size-selector: 0.25rem;
     --size-field: 0.25rem;
     --border: 2px;
     --depth: 0;
     --noise: 0;
 }
+
+

@@ -1,6 +1,5 @@
 <script>
     import Navbar from "../../../components/Navbar.svelte";
-    // import Footer from "../../../components/footer.svelte";
 
     let citizenship_id = "";
     let voter_card_id = "";
@@ -13,7 +12,22 @@
 
     let message = "";
 
-    const passwordRegex = /^(?=.*[0-9])(?=.*[!@#$%^&*])(?=.{8,})/;
+    function isValidCitizenship(id) {
+        return /^\d{2}-\d{2}-\d{2}-\d{5}$/.test(id);
+    }
+
+    function isValidVoterCard(id) {
+        return /^\d{10}$/.test(id);
+    }
+
+    function isValidPassword(pw) {
+        return (
+            pw.length >= 8 &&
+            /[A-Z]/.test(pw) &&
+            /\d/.test(pw) &&
+            /[^A-Za-z0-9]/.test(pw)
+        );
+    }
 
     async function submitAppeal() {
         if (!citizenshipFront || !citizenshipBack || !voterCard || !selfie) {
@@ -21,9 +35,19 @@
             return;
         }
 
-        if (!passwordRegex.test(password)) {
+        if (!isValidCitizenship(citizenship_id)) {
+            message = "Invalid Citizenship ID format.";
+            return;
+        }
+
+        if (!isValidVoterCard(voter_card_id)) {
+            message = "Invalid Voter Card ID.";
+            return;
+        }
+
+        if (!isValidPassword(password)) {
             message =
-                "Password must be at least 8 characters and include a number and a special character.";
+                "Password must be at least 8 chars, include a number, uppercase, and symbol.";
             return;
         }
 
@@ -79,8 +103,8 @@
                     type="text"
                     bind:value={citizenship_id}
                     required
-                    placeholder="123-456"
-                    class="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-black"
+                    placeholder="XX-XX-XX-XXXXX"
+                    class="input w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-black"
                 />
             </div>
 
@@ -92,8 +116,8 @@
                     type="text"
                     bind:value={voter_card_id}
                     required
-                    placeholder="VC-001"
-                    class="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-black"
+                    placeholder="XXXXXXXXXX"
+                    class="input w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-black"
                 />
             </div>
 
@@ -105,71 +129,73 @@
                     type="password"
                     bind:value={password}
                     required
-                    placeholder="securepassword123"
-                    class="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-black"
+                    placeholder="Password"
+                    class="input w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-black"
                 />
-                <p class="text-xs text-gray-500 mt-1">
-                    Must be at least 8 characters and include a number & special
+                <p
+                    class="text-xs text-gray-500 font-bold block text-right mt-1"
+                >
+                    At least 8 characters and include a number & special
                     character.
                 </p>
             </div>
 
             <div>
-                <label class="block text-sm font-medium text-gray-700 mb-1"
+                <label class="block text-xs font-bold text-gray-700 mb-1"
                     >Citizenship Front</label
                 >
                 <input
                     type="file"
                     accept="image/*"
                     required
+                    class="file-input border-1 w-full"
                     on:change={(e) => (citizenshipFront = e.target.files[0])}
-                    class="w-full"
                 />
             </div>
 
             <div>
-                <label class="block text-sm font-medium text-gray-700 mb-1"
+                <label class="block text-xs font-bold text-gray-700 mb-1"
                     >Citizenship Back</label
                 >
                 <input
                     type="file"
                     accept="image/*"
                     required
+                    class="file-input border-1 w-full"
                     on:change={(e) => (citizenshipBack = e.target.files[0])}
-                    class="w-full"
                 />
             </div>
 
             <div>
-                <label class="block text-sm font-medium text-gray-700 mb-1"
+                <label class="block text-xs font-bold text-gray-700 mb-1"
                     >Voter Card</label
                 >
                 <input
                     type="file"
                     accept="image/*"
                     required
+                    class="file-input border-1 w-full"
                     on:change={(e) => (voterCard = e.target.files[0])}
-                    class="w-full"
                 />
             </div>
 
             <div>
-                <label class="block text-sm font-medium text-gray-700 mb-1"
+                <label class="block text-xs font-bold text-gray-700 mb-1"
                     >Selfie</label
                 >
                 <input
                     type="file"
                     accept="image/*"
                     required
+                    class="file-input border-1 w-full"
                     on:change={(e) => (selfie = e.target.files[0])}
-                    class="w-full"
                 />
             </div>
 
             <div class="flex justify-center">
                 <button
                     type="submit"
-                    class="bg-black text-white text-lg font-medium py-3 px-10 rounded-full hover:bg-gray-800 transition duration-300"
+                    class="btn w-full uppercase tracking-wide font-bold btn-primary hover:bg-gray-800 transition duration-300"
                 >
                     Submit Appeal
                 </button>

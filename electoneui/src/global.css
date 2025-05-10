@@ -63,7 +63,6 @@
     --radius-md: 0.375rem;
     --radius-lg: 0.5rem;
     --radius-xl: 0.75rem;
-    --ease-out: cubic-bezier(0, 0, 0.2, 1);
     --blur-3xl: 64px;
     --default-transition-duration: 150ms;
     --default-transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
@@ -1253,6 +1252,9 @@
   .left-0 {
     left: calc(var(--spacing) * 0);
   }
+  .left-\[calc\(20\%\+3rem\)\] {
+    left: calc(20% + 3rem);
+  }
   .left-\[calc\(50\%\+3rem\)\] {
     left: calc(50% + 3rem);
   }
@@ -1865,6 +1867,9 @@
   .gap-6 {
     gap: calc(var(--spacing) * 6);
   }
+  .gap-10 {
+    gap: calc(var(--spacing) * 10);
+  }
   .space-y-1 {
     :where(& > :not(:last-child)) {
       --tw-space-y-reverse: 0;
@@ -1954,6 +1959,10 @@
     border-style: var(--tw-border-style);
     border-width: 1px;
   }
+  .border-1 {
+    border-style: var(--tw-border-style);
+    border-width: 1px;
+  }
   .border-2 {
     border-style: var(--tw-border-style);
     border-width: 2px;
@@ -1967,9 +1976,6 @@
     border-color: var(--color-success);
     color: var(--color-success-content);
     --alert-color: var(--color-success);
-  }
-  .border-base-300 {
-    border-color: var(--color-base-300);
   }
   .border-base-content\/5 {
     border-color: var(--color-base-content);
@@ -2004,11 +2010,11 @@
   .bg-gray-800 {
     background-color: var(--color-gray-800);
   }
-  .bg-gray-900 {
-    background-color: var(--color-gray-900);
-  }
   .bg-indigo-600 {
     background-color: var(--color-indigo-600);
+  }
+  .bg-transparent {
+    background-color: transparent;
   }
   .bg-white {
     background-color: var(--color-white);
@@ -2070,17 +2076,14 @@
   .px-6 {
     padding-inline: calc(var(--spacing) * 6);
   }
-  .px-10 {
-    padding-inline: calc(var(--spacing) * 10);
-  }
   .py-1 {
     padding-block: calc(var(--spacing) * 1);
   }
+  .py-1\.5 {
+    padding-block: calc(var(--spacing) * 1.5);
+  }
   .py-2 {
     padding-block: calc(var(--spacing) * 2);
-  }
-  .py-3 {
-    padding-block: calc(var(--spacing) * 3);
   }
   .py-4 {
     padding-block: calc(var(--spacing) * 4);
@@ -2251,6 +2254,10 @@
   }
   .shadow-md {
     --tw-shadow: 0 4px 6px -1px var(--tw-shadow-color, rgb(0 0 0 / 0.1)), 0 2px 4px -2px var(--tw-shadow-color, rgb(0 0 0 / 0.1));
+    box-shadow: var(--tw-inset-shadow), var(--tw-inset-ring-shadow), var(--tw-ring-offset-shadow), var(--tw-ring-shadow), var(--tw-shadow);
+  }
+  .shadow-none {
+    --tw-shadow: 0 0 #0000;
     box-shadow: var(--tw-inset-shadow), var(--tw-inset-ring-shadow), var(--tw-ring-offset-shadow), var(--tw-ring-shadow), var(--tw-shadow);
   }
   .shadow-xl {
@@ -2439,11 +2446,6 @@
     @media (width >= 40rem) {
       font-size: var(--text-xl);
       line-height: calc(var(--spacing) * 8);
-    }
-  }
-  .md\:flex {
-    @media (width >= 48rem) {
-      display: flex;
     }
   }
   .md\:hidden {
@@ -2797,7 +2799,7 @@
       --color-base-200: white;
       --color-base-300: white;
       --color-base-content: oklch(12% 0.042 264.695);
-      --color-primary: black;
+      --color-primary: oklch(13% 0.028 261.692);
       --color-primary-content: white;
       --color-secondary: white;
       --color-secondary-content: oklch(12% 0.042 264.695);
@@ -2813,9 +2815,9 @@
       --color-warning-content: oklch(19.359% 0.042 109.769);
       --color-error: oklch(62.795% 0.257 29.233);
       --color-error-content: oklch(12.559% 0.051 29.233);
-      --radius-selector: 2rem;
-      --radius-field: 2rem;
-      --radius-box: 2rem;
+      --radius-selector: 0.5rem;
+      --radius-field: 0.5rem;
+      --radius-box: 0.5rem;
       --size-selector: 0.25rem;
       --size-field: 0.25rem;
       --border: 2px;
@@ -2831,7 +2833,7 @@
     --color-base-200: white;
     --color-base-300: white;
     --color-base-content: oklch(12% 0.042 264.695);
-    --color-primary: black;
+    --color-primary: oklch(13% 0.028 261.692);
     --color-primary-content: white;
     --color-secondary: white;
     --color-secondary-content: oklch(12% 0.042 264.695);
@@ -2847,9 +2849,9 @@
     --color-warning-content: oklch(19.359% 0.042 109.769);
     --color-error: oklch(62.795% 0.257 29.233);
     --color-error-content: oklch(12.559% 0.051 29.233);
-    --radius-selector: 2rem;
-    --radius-field: 2rem;
-    --radius-box: 2rem;
+    --radius-selector: 0.5rem;
+    --radius-field: 0.5rem;
+    --radius-box: 0.5rem;
     --size-selector: 0.25rem;
     --size-field: 0.25rem;
     --border: 2px;
