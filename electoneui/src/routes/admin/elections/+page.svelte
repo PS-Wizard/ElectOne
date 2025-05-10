@@ -8,6 +8,8 @@
     let error = "";
     let search = "";
 
+    let creationMessage = "";
+
     let newElection = {
         name: "",
         description: "",
@@ -51,7 +53,21 @@
         });
     }
 
+    function validateElection(election) {
+        // Basic validation to ensure no field is empty
+        return (
+            election.name.trim() !== "" &&
+            election.description.trim() !== "" &&
+            election.start_date !== "" &&
+            election.end_date !== "" &&
+            election.location.trim() !== ""
+        );
+    }
     async function createElection() {
+        if (!validateElection(newElection)) {
+            creationMessage = "Please Fill In All The Fields!";
+            return;
+        }
         try {
             const res = await fetch("http://localhost:3000/election", {
                 method: "POST",
@@ -83,6 +99,10 @@
 
     async function updateElection() {
         if (!editingElection) return;
+        if (!validateElection(editingElection)) {
+            creationMessage = "Please Fill In All The Fields!";
+            return;
+        }
         try {
             const res = await fetch(
                 `http://localhost:3000/election/${editingElection.election_id}`,
@@ -153,33 +173,41 @@
             <h3 class="font-bold text-lg">New Election</h3>
             <div class="py-2 flex flex-col gap-2">
                 <input
-                    class="input input-bordered"
+                    class="input input-bordered w-full"
                     placeholder="Election Name"
+                    required
                     bind:value={newElection.name}
                 />
                 <input
-                    class="input input-bordered"
+                    class="input input-bordered w-full"
                     placeholder="Description"
+                    required
                     bind:value={newElection.description}
                 />
                 <input
                     type="date"
-                    class="input input-bordered"
+                    class="input input-bordered w-full"
                     placeholder="Start Date"
+                    required
                     bind:value={newElection.start_date}
                 />
                 <input
                     type="date"
-                    class="input input-bordered"
+                    class="input input-bordered w-full"
                     placeholder="End Date"
+                    required
                     bind:value={newElection.end_date}
                 />
                 <input
-                    class="input input-bordered"
+                    class="input input-bordered w-full"
                     placeholder="Location"
+                    required
                     bind:value={newElection.location}
                 />
             </div>
+            {#if creationMessage}
+                <p class="text-sm text-red-700">{creationMessage}</p>
+            {/if}
             <div class="modal-action">
                 <form method="dialog" class="flex gap-2">
                     <button
@@ -243,11 +271,14 @@
                         bind:value={editingElection.location}
                     />
                 </div>
+                {#if creationMessage}
+                    <p class="text-sm text-red-700">{creationMessage}</p>
+                {/if}
                 <div class="modal-action">
                     <form method="dialog" class="flex gap-2">
                         <button
                             type="button"
-                            class="btn btn-warning"
+                            class="btn btn-primary"
                             on:click={updateElection}>Update</button
                         >
                         <button class="btn">Cancel</button>
@@ -286,12 +317,12 @@
                             <td>{election.location}</td>
                             <td class="flex gap-2">
                                 <button
-                                    class="btn btn-sm btn-warning"
+                                    class="btn btn-sm btn-ghost"
                                     on:click={() => openEditModal(election)}
                                     >Edit</button
                                 >
                                 <button
-                                    class="btn btn-sm btn-error"
+                                    class="btn btn-sm btn-error text-white"
                                     on:click={() =>
                                         deleteElection(election.election_id)}
                                     >Delete</button

@@ -7,22 +7,68 @@
     let error = "";
     let search = "";
     let selectedPhoto = "";
+    let createMessage = "";
     let newCandidate = {
         citizen_id: "",
         election_id: "",
         candidate_bio: "",
         candidate_post: "",
-        candidate_photo: null, // Added for file upload
+        candidate_photo: null,
         candidate_party: "",
         candidate_name: "",
     };
 
     let editingCandidate = null;
-    let editedPhoto = null; // To hold the updated photo file
+    let editedPhoto = null;
 
     let newCandidateModal;
     let editCandidateModal;
 
+    function isValidCitizenship(id) {
+        return /^\d{2}-\d{2}-\d{2}-\d{5}$/.test(id);
+    }
+
+    function isValidFormImageOptional(candidate) {
+        if (
+            !candidate.candidate_name ||
+            !candidate.candidate_party ||
+            !candidate.citizen_id ||
+            !candidate.election_id ||
+            !candidate.candidate_bio ||
+            !candidate.candidate_post
+        ) {
+            return { valid: false, message: "All fields must be filled in" };
+        }
+        if (!isValidCitizenship(candidate.citizen_id)) {
+            return { valid: false, message: "Invalid Citizenship ID format" };
+        }
+        return { valid: true };
+    }
+
+    // Validate all fields
+    function isValidForm(candidate) {
+        if (
+            !candidate.candidate_name ||
+            !candidate.candidate_party ||
+            !candidate.citizen_id ||
+            !candidate.election_id ||
+            !candidate.candidate_bio ||
+            !candidate.candidate_post ||
+            !candidate.candidate_photo
+        ) {
+            return { valid: false, message: "All fields must be filled in" };
+        }
+        if (!isValidCitizenship(candidate.citizen_id)) {
+            return { valid: false, message: "Invalid Citizenship ID format" };
+        }
+        return { valid: true };
+    }
+
+    function openEditModal(candidate) {
+        editingCandidate = { ...candidate };
+        editedPhoto = null;
+        editCandidateModal.showModal();
+    }
     async function fetchCandidates() {
         loading = true;
         try {
@@ -43,6 +89,12 @@
     }
 
     async function createCandidate() {
+        const validation = isValidForm(newCandidate);
+        if (!validation.valid) {
+            createMessage = validation.message;
+            return;
+        }
+
         const formData = new FormData();
         formData.append("citizenship_id", newCandidate.citizen_id);
         formData.append("election_id", newCandidate.election_id);
@@ -50,7 +102,7 @@
         formData.append("candidate_party", newCandidate.candidate_party);
         formData.append("candidate_bio", newCandidate.candidate_bio);
         formData.append("candidate_post", newCandidate.candidate_post);
-        formData.append("candidate_photo", newCandidate.candidate_photo); // Adding the photo to the form data
+        formData.append("candidate_photo", newCandidate.candidate_photo);
 
         try {
             const res = await fetch("http://localhost:3000/candidate", {
@@ -60,29 +112,33 @@
                 },
                 body: formData,
             });
-            if (!res.ok) throw new Error("Failed to create candidate");
+            if (!res.ok) {
+                const errText = await res.json();
+                throw new Error(errText.error);
+            }
             await fetchCandidates();
             newCandidate = {
                 citizen_id: "",
                 election_id: "",
                 candidate_bio: "",
                 candidate_post: "",
-                candidate_photo: null, // Reset photo after submission
+                candidate_photo: null,
             };
             newCandidateModal.close();
         } catch (err) {
-            alert(err.message);
+            createMessage = err;
         }
-    }
-
-    function openEditModal(candidate) {
-        editingCandidate = { ...candidate };
-        editedPhoto = null; // Reset edited photo when opening modal
-        editCandidateModal.showModal();
     }
 
     async function updateCandidate() {
         if (!editingCandidate) return;
+
+        const validation = isValidFormImageOptional(editingCandidate);
+        if (!validation.valid) {
+            createMessage = validation.message;
+            return;
+        }
+
         const formData = new FormData();
         formData.append("citizenship_id", editingCandidate.citizen_id);
         formData.append("election_id", editingCandidate.election_id);
@@ -91,7 +147,7 @@
         formData.append("candidate_name", editingCandidate.candidate_name);
         formData.append("candidate_party", editingCandidate.candidate_party);
         if (editedPhoto) {
-            formData.append("candidate_photo", editedPhoto); // Include new photo if selected
+            formData.append("candidate_photo", editedPhoto);
         }
 
         try {
@@ -105,13 +161,16 @@
                     body: formData,
                 },
             );
-            if (!res.ok) throw new Error("Failed to update candidate");
+            if (!res.ok) {
+                const errText = await res.json();
+                throw new Error(errText.error);
+            }
             await fetchCandidates();
             editingCandidate = null;
             editedPhoto = null;
             editCandidateModal.close();
         } catch (err) {
-            alert(err.message);
+            createMessage = err;
         }
     }
 
@@ -286,6 +345,9 @@
                 required
             />
         </div>
+        {#if createMessage}
+            <p class="text-sm text-red-700">{createMessage}</p>
+        {/if}
         <div class="modal-action">
             <form method="dialog" class="flex gap-2">
                 <button
@@ -352,6 +414,9 @@
                     bind:value={editingCandidate.candidate_post}
                 />
             </div>
+            {#if createMessage}
+                <p class="text-red-700 text-sm">{createMessage}</p>
+            {/if}
             <div class="modal-action">
                 <form method="dialog" class="flex gap-2">
                     <button

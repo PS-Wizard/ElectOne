@@ -39,7 +39,10 @@
                     },
                 },
             );
-            if (!res.ok) throw new Error("Failed to fetch voter cards");
+            if (!res.ok) {
+                const errText = await res.json();
+                throw new Error(errText.error);
+            }
             voterCards = await res.json();
             filteredVoterCards = voterCards; // Initially, no filtering
         } catch (err) {
@@ -60,7 +63,7 @@
     }
 
     async function createVoterCard() {
-        editMessage = ""; // Reset message before submitting
+        editMessage = "";
 
         // Check for empty fields
         if (
@@ -92,7 +95,11 @@
                 },
                 body: JSON.stringify(newVoterCard),
             });
-            if (!res.ok) throw new Error("Failed to create voter card");
+            if (!res.ok) {
+                const errText = await res.json();
+                throw new Error(errText.error);
+            }
+
             await fetchVoterCards();
             newVoterCard = {
                 voter_card_id: "",
@@ -146,7 +153,12 @@
                     body: JSON.stringify(editingVoterCard),
                 },
             );
-            if (!res.ok) throw new Error("Failed to update voter card");
+            console.log(res);
+
+            if (!res.ok) {
+                const errText = await res.json();
+                throw new Error(errText.error);
+            }
             await fetchVoterCards();
             editingVoterCard = null;
             editVoterCardModal.close();
@@ -331,7 +343,7 @@
                     <form method="dialog" class="flex gap-2">
                         <button
                             type="button"
-                            class="btn btn-warning"
+                            class="btn btn-primary"
                             on:click={updateVoterCard}>Update</button
                         >
                         <button class="btn">Cancel</button>
@@ -364,12 +376,12 @@
                             <td>{voterCard.location}</td>
                             <td class="flex gap-2">
                                 <button
-                                    class="btn btn-sm btn-warning"
+                                    class="btn btn-sm btn-ghost"
                                     on:click={() => openEditModal(voterCard)}
                                     >Edit</button
                                 >
                                 <button
-                                    class="btn btn-sm btn-error"
+                                    class="btn btn-sm btn-error text-white"
                                     on:click={() =>
                                         deleteVoterCard(
                                             voterCard.voter_card_id,

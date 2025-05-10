@@ -6,14 +6,31 @@
     let filteredUsers = [];
     let loading = true;
     let error = "";
+    let creationMessage = "";
     let search = "";
     let selectedPhoto = "";
+
+    function isValidCitizenship(id) {
+        return /^\d{2}-\d{2}-\d{2}-\d{5}$/.test(id);
+    }
+
+    function isValidVoterCard(id) {
+        return /^\d{10}$/.test(id);
+    }
+
+    function isValidPassword(pw) {
+        return (
+            pw.length >= 8 &&
+            /[A-Z]/.test(pw) &&
+            /\d/.test(pw) &&
+            /[^A-Za-z0-9]/.test(pw)
+        );
+    }
 
     let newUser = {
         citizenship_id: "",
         voter_card_id: "",
         password: "",
-        totp_secret: "",
         citizenship_front: null,
         citizenship_back: null,
         voter_card: null,
@@ -70,7 +87,23 @@
             !newUser.voter_card ||
             !newUser.selfie
         ) {
-            alert("Please upload all 4 required photos.");
+            creationMessage = "Please upload all 4 required photos.";
+            return;
+        }
+
+        if (!isValidCitizenship(newUser.citizenship_id)) {
+            creationMessage = "Invalid Citizenship ID format.";
+            return;
+        }
+
+        if (!isValidVoterCard(newUser.voter_card_id)) {
+            creationMessage = "Invalid Voter Card ID.";
+            return;
+        }
+
+        if (!isValidPassword(newUser.password)) {
+            creationMessage =
+                "Password must be at least 8 chars, include a number, uppercase, and symbol.";
             return;
         }
 
@@ -108,7 +141,6 @@
                 citizenship_id: "",
                 voter_card_id: "",
                 password: "",
-                totp_secret: "",
                 citizenship_front: null,
                 citizenship_back: null,
                 voter_card: null,
@@ -133,6 +165,22 @@
 
     async function handleUpdateUser() {
         if (!editingUser) return;
+
+        if (!isValidCitizenship(editingUser.citizenship_id)) {
+            creationMessage = "Invalid Citizenship ID format.";
+            return;
+        }
+
+        if (!isValidVoterCard(editingUser.voter_card_id)) {
+            creationMessage = "Invalid Voter Card ID.";
+            return;
+        }
+
+        if (!isValidPassword(editingUser.password)) {
+            creationMessage =
+                "Password must be at least 8 chars, include a number, uppercase, and symbol.";
+            return;
+        }
 
         const formData = new FormData();
         formData.append("citizenship_id", editingUser.citizenship_id);
@@ -231,28 +279,23 @@
             <h3 class="font-bold text-lg">New User</h3>
             <div class="py-2 flex flex-col gap-2">
                 <input
-                    class="input input-bordered"
+                    class="input input-bordered w-full"
                     placeholder="Citizenship ID"
                     bind:value={newUser.citizenship_id}
                 />
                 <input
-                    class="input input-bordered"
+                    class="input input-bordered w-full"
                     placeholder="Voter Card ID"
                     bind:value={newUser.voter_card_id}
                 />
                 <input
                     type="password"
-                    class="input input-bordered"
+                    class="input input-bordered w-full"
                     placeholder="Password"
                     bind:value={newUser.password}
                 />
-                <input
-                    class="input input-bordered"
-                    placeholder="TOTP Secret"
-                    bind:value={newUser.totp_secret}
-                />
                 <label for="citizenship_front" class="label">
-                    <span class="label-text">Citizenship ID (Front)</span>
+                    <span class="label-text">Citizenship ID (Front) (Optional)</span>
                 </label>
                 <input
                     type="file"
@@ -265,7 +308,7 @@
                             : null)}
                 />
                 <label for="citizenship_back" class="label">
-                    <span class="label-text">Citizenship ID (Back)</span>
+                    <span class="label-text">Citizenship ID (Back) (Optional)</span>
                 </label>
                 <input
                     type="file"
@@ -278,7 +321,7 @@
                             : null)}
                 />
                 <label for="voter_card" class="label">
-                    <span class="label-text">Voter Card</span>
+                    <span class="label-text">Voter Card (Optional)</span>
                 </label>
                 <input
                     type="file"
@@ -291,7 +334,7 @@
                             : null)}
                 />
                 <label for="selfie" class="label">
-                    <span class="label-text">Selfie</span>
+                    <span class="label-text">Selfie (Optional)</span>
                 </label>
                 <input
                     type="file"
@@ -304,6 +347,9 @@
                             : null)}
                 />
             </div>
+            {#if creationMessage}
+                <p class="text-sm text-red-700">{creationMessage}</p>
+            {/if}
             <div class="modal-action">
                 <form method="dialog" class="flex gap-2">
                     <button
@@ -412,11 +458,14 @@
                                 : null)}
                     />
                 </div>
+                {#if creationMessage}
+                    <p class="text-sm text-red-700">{creationMessage}</p>
+                {/if}
                 <div class="modal-action">
                     <form method="dialog" class="flex gap-2">
                         <button
                             type="button"
-                            class="btn btn-warning"
+                            class="btn btn-primary"
                             on:click={handleUpdateUser}>Update</button
                         >
                         <button class="btn">Cancel</button>
@@ -466,12 +515,12 @@
 
                             <td class="flex gap-2">
                                 <button
-                                    class="btn btn-sm btn-warning"
+                                    class="btn btn-sm btn-ghost "
                                     on:click={() => openEditModal(user)}
                                     >Edit</button
                                 >
                                 <button
-                                    class="btn btn-sm btn-error"
+                                    class="btn btn-sm btn-error text-white"
                                     on:click={() => deleteUser(user.user_id)}
                                     >Delete</button
                                 >

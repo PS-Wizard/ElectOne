@@ -65,7 +65,9 @@ func UpdateVoterCardHandler(c *fiber.Ctx) error {
 	}
 
 	if err := operations.UpdateVoterCard(id, &updated); err != nil {
-		return fiber.NewError(fiber.StatusInternalServerError, fmt.Sprintf("Failed to update voter card: %s", err.Error()))
+		return c.Status(fiber.StatusBadRequest).JSON(fiber.Map{
+			"error": fmt.Sprintf("Failed to update voter card: %s", err.Error()),
+		})
 	}
 
 	return c.SendStatus(fiber.StatusOK)

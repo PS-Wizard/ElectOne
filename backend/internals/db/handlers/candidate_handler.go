@@ -49,7 +49,9 @@ func CreateCandidateHandler(c *fiber.Ctx) error {
 	}
 	id, err := operations.CreateCandidate(&candidate)
 	if err != nil {
-		return fiber.NewError(fiber.StatusInternalServerError, err.Error())
+		return c.Status(fiber.StatusBadRequest).JSON(fiber.Map{
+			"error": fmt.Sprintf("Failed to Create Candidate: %s", err.Error()),
+		})
 	}
 
 	return c.JSON(fiber.Map{"candidate_id": id})
@@ -118,7 +120,9 @@ func UpdateCandidateHandler(c *fiber.Ctx) error {
 	}
 
 	if err := operations.UpdateCandidate(id, &updatedCandidate); err != nil {
-		return fiber.NewError(fiber.StatusInternalServerError, err.Error())
+		return c.Status(fiber.StatusBadRequest).JSON(fiber.Map{
+			"error": fmt.Sprintf("Failed to update Candidate: %s", err.Error()),
+		})
 	}
 
 	return c.SendStatus(fiber.StatusOK)
