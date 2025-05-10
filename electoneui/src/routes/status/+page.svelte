@@ -51,7 +51,7 @@
 </script>
 
 <div class="max-w-xl mx-auto p-6 space-y-4">
-    <h2 class="text-2xl font-bold">Check Appeal Status</h2>
+    <h2 class="text-2xl font-bold">Features</h2>
 
     <input
         class="input input-bordered w-full"

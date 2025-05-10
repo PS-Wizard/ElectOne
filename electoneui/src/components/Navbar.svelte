@@ -14,7 +14,10 @@
     }
 </script>
 
-<nav class="flex items-center justify-between p-4 lg:px-8" aria-label="Global">
+<nav
+    class="flex items-center justify-between z-50 p-4 lg:px-8"
+    aria-label="Global"
+>
     <div class="flex lg:flex-1">
         <a href={loggedIn ? "/user/dashboard" : "/"} class="-m-1.5 p-1.5">
             <span class="sr-only">ElectOne</span>
@@ -29,9 +32,6 @@
     <!-- Desktop Nav -->
     <div class="hidden lg:flex lg:gap-x-12">
         {#if loggedIn}
-            <a href="/user/dashboard" class="text-sm font-medium text-black"
-                >News</a
-            >
             <a
                 href="/user/dashboard/election"
                 class="text-sm font-medium text-black">Elections</a
@@ -116,3 +116,9 @@
         {/if}
     </div>
 {/if}
+
+<style>
+    nav {
+        z-index: 50;
+    }
+</style>
