@@ -5,7 +5,6 @@ import (
 
 	"github.com/PS-Wizard/Electone/internals/auth"
 	"github.com/PS-Wizard/Electone/internals/db/handlers"
-	"github.com/PS-Wizard/Electone/internals/db/operations"
 	"github.com/PS-Wizard/Electone/internals/middlewares"
 	"github.com/gofiber/fiber/v2"
 

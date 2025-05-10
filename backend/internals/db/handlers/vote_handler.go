@@ -30,6 +30,18 @@ func CreateVoteHandler(c *fiber.Ctx) error {
 		return fiber.NewError(fiber.StatusUnauthorized, "Invalid voter card ID")
 	}
 	vote.VoterCardID = voterCardID
+
+	// Check if vote already exists
+	exists, err := operations.HasAlreadyVoted(vote.VoterCardID, vote.ElectionID)
+	if err != nil {
+		return fiber.NewError(fiber.StatusInternalServerError, "Failed to check vote status")
+	}
+	if exists {
+		return c.Status(fiber.StatusConflict).JSON(fiber.Map{
+			"error": "You have already voted in this election",
+		})
+	}
+
 	id, err := operations.CreateVote(&vote)
 	if err != nil {
 		return fiber.NewError(fiber.StatusInternalServerError, err.Error())

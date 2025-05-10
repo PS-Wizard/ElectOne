@@ -18,7 +18,7 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhZG1pbklEIjoyLCJlb
 ### Vote History
 GET http://localhost:3000/vote/history/1?limit=100&offset=0
 Accept: application/json
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhZG1pbklEIjoxLCJlbWFpbCI6ImFkbWluMUBleGFtcGxlLmNvbSIsImV4cCI6MTc0Njc1OTY2Niwicm9sZSI6ImFkbWluIn0.SUtZwdDkFyoDQYyzrxaj7buz8ud4hi57FGA2weypXnU
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhZG1pbklEIjoxLCJlbWFpbCI6ImFkbWluMUBleGFtcGxlLmNvbSIsImV4cCI6MTc0NzA1MDQzNSwicm9sZSI6ImFkbWluIn0.1Ts2gXWyci0rLP22ALA0FUabwRi_wjiTbQHNefYp1Ms
 
 
 ### Get Votes By Voter Card

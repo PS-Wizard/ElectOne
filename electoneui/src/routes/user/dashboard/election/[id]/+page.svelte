@@ -55,7 +55,6 @@
     async function submitVote() {
         const token = localStorage.getItem("user_token");
 
-        // Make sure at least one candidate per post is selected
         if (
             Object.keys(selectedCandidates).length === 0 ||
             Object.keys(selectedCandidates).length !==
@@ -65,13 +64,7 @@
             return;
         }
 
-        const votePayload = {
-            election_id: parseInt(electionId),
-            candidates: selectedCandidates, // candidates as a map
-        };
-
         try {
-            // Iterate over selected candidates and send individual POST requests
             for (const post in selectedCandidates) {
                 const candidateID = selectedCandidates[post];
 
@@ -87,10 +80,11 @@
                     }),
                 });
 
-                if (!res.ok)
-                    throw new Error(
-                        "Failed to submit vote for candidate " + candidateID,
-                    );
+                const data = await res.json();
+
+                if (!res.ok) {
+                    throw new Error(data.error || "Failed to submit vote.");
+                }
 
                 alert(
                     "Vote for candidate " +
@@ -117,7 +111,7 @@
     {:else if Object.keys(groupedCandidates).length === 0}
         <p>No candidates found for this election.</p>
     {:else}
-        <div>
+        <div class="flex flex-col items-center">
             {#each Object.entries(groupedCandidates) as [post, postCandidates]}
                 <div class="m-6">
                     <h2 class="text-lg sm:text-xl font-semibold uppercase mb-4">
@@ -177,7 +171,7 @@
             {/each}
 
             <button
-                class="btn btn-primary mt-4 w-full sm:w-auto"
+                class="btn btn-primary mt-4 min-w-1/2 sm:w-auto"
                 on:click={submitVote}
             >
                 Submit Vote

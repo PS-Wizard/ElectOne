@@ -18,7 +18,7 @@ func CreateVote(vote *Vote) (int64, error) {
 	if err != nil {
 		return 0, err
 	}
-	BroadcastVoteUpdate(*vote)
+	// BroadcastVoteUpdate(*vote)
 	return result.LastInsertId()
 }
 
@@ -83,4 +83,14 @@ func GetVotesByElectionID(electionID int, limit, offset int) ([]Vote, error) {
 		votes = append(votes, vote)
 	}
 	return votes, nil
+}
+
+func HasAlreadyVoted(voterCardID string, electionID int) (bool, error) {
+	query := `SELECT COUNT(1) FROM Votes WHERE VoterCardID = ? AND ElectionID = ?`
+	var count int
+	err := db.DB.QueryRow(query, voterCardID, electionID).Scan(&count)
+	if err != nil {
+		return false, err
+	}
+	return count > 0, nil
 }

@@ -7,6 +7,9 @@
     let loading = true;
     let error = null;
 
+    function hasElectionEnded(endDate) {
+        return new Date(endDate) < new Date();
+    }
     onMount(async () => {
         const token = localStorage.getItem("user_token");
         if (!token) {
@@ -49,21 +52,32 @@
         <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6 cursor-pointer">
             {#each elections as e}
                 <div
-                    class="card bg-base-100 shadow-xl"
+                    class="card border-2 border-black"
                     on:click={() =>
+                        !hasElectionEnded(e.end_date) &&
                         goto(`/user/dashboard/election/${e.election_id}`)}
                 >
                     <div class="card-body">
                         <h2 class="card-title">{e.name}</h2>
                         <p class="text-sm text-gray-500">{e.location}</p>
                         <p class="text-sm text-gray-600">{e.description}</p>
-                        <div class="mt-2">
+                        <div class="mt-2 flex flex-wrap gap-2 items-center">
                             <span class="badge badge-outline"
                                 >Start: {e.start_date}</span
                             >
-                            <span class="badge badge-outline ml-2"
+                            <span class="badge badge-outline"
                                 >End: {e.end_date}</span
                             >
+
+                            {#if hasElectionEnded(e.end_date)}
+                                <a
+                                    href={`/results/${e.election_id}/`}
+                                    class="badge bg-blue-500 text-white hover:bg-blue-600"
+                                    on:click|stopPropagation
+                                >
+                                    View Election Analytics
+                                </a>
+                            {/if}
                         </div>
                     </div>
                 </div>
