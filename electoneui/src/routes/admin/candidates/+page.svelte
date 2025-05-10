@@ -269,13 +269,13 @@
                                     <td>{c.candidate_post}</td>
                                     <td class="flex gap-2">
                                         <button
-                                            class="btn btn-sm btn-warning"
+                                            class="btn btn-sm btn-ghost"
                                             on:click={() => openEditModal(c)}
                                         >
                                             Edit
                                         </button>
                                         <button
-                                            class="btn btn-sm btn-error"
+                                            class="btn btn-sm btn-error text-white"
                                             on:click={() =>
                                                 deleteCandidate(c.candidate_id)}
                                         >
@@ -421,7 +421,7 @@
                 <form method="dialog" class="flex gap-2">
                     <button
                         type="button"
-                        class="btn btn-warning"
+                        class="btn btn-primary"
                         on:click={updateCandidate}>Update</button
                     >
                     <button class="btn">Cancel</button>
