@@ -2,6 +2,7 @@
     import { onMount } from "svelte";
     import { goto } from "$app/navigation";
     import Navbar from "../../../components/Navbar.svelte";
+    import Footer from "../../../components/footer.svelte";
 
     let elections = [];
     let loading = true;
@@ -160,3 +161,4 @@
         </div>
     </section>
 </section>
+<Footer />

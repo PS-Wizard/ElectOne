@@ -12,6 +12,7 @@
         Tooltip,
         Legend,
     } from "chart.js";
+    import Navbar from "../../../components/Navbar.svelte";
 
     // Register Chart.js components
     Chart.register(
@@ -333,6 +334,7 @@
     <title>Election Results - {election.name}</title>
 </svelte:head>
 
+<Navbar />
 <div class="container mx-auto px-4 py-8">
     {#if loading}
         <div class="text-center py-8">

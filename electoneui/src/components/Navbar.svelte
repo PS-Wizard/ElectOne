@@ -43,10 +43,7 @@
     <div class="flex lg:flex-1">
         <a href={loggedIn ? "/user/dashboard" : "/"} class="-m-1.5 p-1.5">
             <span class="sr-only">ElectOne</span>
-            <img
-                class="h-8 w-auto"
-                src="/favicon.png"
-            />
+            <img class="h-8 w-auto" src="/favicon.png" />
         </a>
     </div>
 
@@ -55,10 +52,8 @@
         {#if loggedIn}
             <!-- Could Be Anything Here? Deleted The Elections Nav As It Was Shifted -->
         {:else}
-            <a href="#features" class="text-sm font-medium text-black"
-                >Features</a
-            >
-            <a href="#about" class="text-sm font-medium text-black">About</a>
+            <a href="/status" class="text-sm font-medium text-black">Status</a>
+            <a href="/docs/about" class="text-sm font-medium text-black">About</a>
         {/if}
     </div>
 
@@ -137,7 +132,7 @@
                 >Log Out</button
             >
         {:else}
-            <a href="#features" class="block text-sm text-black">Features</a>
+            <a href="/status" class="block text-sm text-black">Status</a>
             <a href="#about" class="block text-sm text-black">About</a>
             <a href="/user/signup" class="block text-sm text-black mt-2"
                 >Signup</a

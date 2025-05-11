@@ -35,6 +35,7 @@ func SetupRoutes(app *fiber.App) {
 
 	appealRoutes := app.Group("/appeal")
 	appealRoutes.Post("/", handlers.CreateAppealHandler)
+	appealRoutes.Get("/count", middlewares.JWTMiddleware(), middlewares.RequireAdmin, handlers.GetAppealsCountHandler)
 	appealRoutes.Get("/:id", middlewares.JWTMiddleware(), middlewares.RequireAdmin, handlers.GetAppealByIDHandler)
 	appealRoutes.Put("/:id", middlewares.JWTMiddleware(), middlewares.RequireAdmin, handlers.UpdateAppealHandler)
 	appealRoutes.Delete("/:id", middlewares.JWTMiddleware(), middlewares.RequireAdmin, handlers.DeleteAppealHandler)

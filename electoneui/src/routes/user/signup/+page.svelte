@@ -1,4 +1,5 @@
 <script>
+    import Footer from "../../../components/footer.svelte";
     import Navbar from "../../../components/Navbar.svelte";
 
     let citizenship_id = "";
@@ -218,3 +219,4 @@
 </div>
 
 <!-- <Footer /> -->
+<Footer />

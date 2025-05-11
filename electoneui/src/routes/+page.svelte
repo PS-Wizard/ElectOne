@@ -1,6 +1,15 @@
 <script>
+    import { onMount } from "svelte";
     import Footer from "../components/footer.svelte";
     import Navbar from "../components/Navbar.svelte";
+    import { goto } from "$app/navigation";
+
+    onMount(() => {
+        const token = localStorage.getItem("user_token");
+        if (token) {
+            goto("/user/dashboard");
+        }
+    });
 </script>
 
 <section>

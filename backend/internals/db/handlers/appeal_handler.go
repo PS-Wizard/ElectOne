@@ -5,21 +5,9 @@ import (
 	"strconv"
 
 	"github.com/PS-Wizard/Electone/internals/db/operations"
-	"github.com/PS-Wizard/Electone/internals/middlewares"
 	"github.com/PS-Wizard/Electone/utils"
 	"github.com/gofiber/fiber/v2"
 )
-
-func RegisterAppealRoutes(router fiber.Router) {
-	router.Post("/", CreateAppealHandler)
-	router.Get("/:id", middlewares.RequireAdmin, GetAppealByIDHandler)
-	router.Put("/:id", middlewares.RequireAdmin, UpdateAppealHandler)
-	router.Delete("/:id", middlewares.RequireAdmin, DeleteAppealHandler)
-	router.Get("/", middlewares.RequireAdmin, ListAppealsHandler)
-
-	router.Post("/:id/approve", middlewares.RequireAdmin, ApproveAppealHandler)
-	router.Post("/:id/reject", middlewares.RequireAdmin, RejectAppealHandler)
-}
 
 func CreateAppealHandler(c *fiber.Ctx) error {
 	form, err := c.MultipartForm()
@@ -120,6 +108,14 @@ func ListAppealsHandler(c *fiber.Ctx) error {
 	}
 
 	return c.JSON(appeals)
+}
+
+func GetAppealsCountHandler(c *fiber.Ctx) error {
+	count, err := operations.GetAppealsCount()
+	if err != nil {
+		return fiber.NewError(fiber.StatusInternalServerError, "Failed to get appeals count")
+	}
+	return c.JSON(fiber.Map{"count": count})
 }
 
 func ApproveAppealHandler(c *fiber.Ctx) error {

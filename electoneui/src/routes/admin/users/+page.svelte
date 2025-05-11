@@ -9,6 +9,9 @@
     let creationMessage = "";
     let search = "";
     let selectedPhoto = "";
+    let offset = 0;
+    const limit = 10;
+    let hasMore = true;
 
     function isValidCitizenship(id) {
         return /^\d{2}-\d{2}-\d{2}-\d{5}$/.test(id);
@@ -51,7 +54,7 @@
         loading = true;
         try {
             const res = await fetch(
-                "http://localhost:3000/user?limit=100&offset=0",
+                `http://localhost:3000/user?limit=${limit}&offset=${offset}`,
                 {
                     headers: {
                         Authorization: `Bearer ${localStorage.getItem("admin_token")}`,
@@ -59,8 +62,10 @@
                 },
             );
             if (!res.ok) throw new Error("Failed to fetch users");
-            users = await res.json();
-            filteredUsers = users; // Initially, no filtering
+            const data = await res.json();
+            users = data;
+            filteredUsers = data;
+            hasMore = data.length === limit;
         } catch (err) {
             error = err.message;
         }
@@ -78,6 +83,20 @@
                 (user.photos && user.photos.toLowerCase().includes(searchLower))
             );
         });
+    }
+
+    function nextPage() {
+        offset += limit;
+        fetchUsers();
+    }
+
+    function prevPage() {
+        if (offset >= limit) {
+            offset -= limit;
+        } else {
+            offset = 0;
+        }
+        fetchUsers();
     }
 
     async function createUser() {
@@ -136,7 +155,6 @@
 
             alert(`User created successfully! ID: ${data.user_id}`);
             newUserModal.close();
-            // Optionally reset the form
             newUser = {
                 citizenship_id: "",
                 voter_card_id: "",
@@ -480,55 +498,76 @@
     {:else if error}
         <p class="text-red-500">{error}</p>
     {:else}
-        <div class="overflow-x-auto">
-            <table class="table w-full">
-                <thead>
-                    <tr>
-                        <th>User ID</th>
-                        <th>Citizenship ID</th>
-                        <th>Voter Card ID</th>
-                        <th>TOTP Secret</th>
-                        <th>Photos</th>
-                        <th>Actions</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {#each filteredUsers as user}
+        <div class="flex flex-col w-full">
+            <div class="overflow-x-auto">
+                <table class="table w-full">
+                    <thead>
                         <tr>
-                            <td>{user.user_id}</td>
-                            <td>{user.citizenship_id}</td>
-                            <td>{user.voter_card_id}</td>
-                            <td>{user.totp_secret}</td>
-                            <td>
-                                <div class="flex gap-1">
-                                    {#each user.photos.split(",") as photo}
-                                        <img
-                                            src={`http://localhost:3000${photo}`}
-                                            alt="Appeal Photo"
-                                            class="w-12 h-12 object-cover rounded-full cursor-pointer hover:scale-105 transition"
-                                            on:click={() =>
-                                                (selectedPhoto = `http://localhost:3000${photo}`)}
-                                        />
-                                    {/each}
-                                </div>
-                            </td>
-
-                            <td class="flex gap-2">
-                                <button
-                                    class="btn btn-sm btn-ghost "
-                                    on:click={() => openEditModal(user)}
-                                    >Edit</button
-                                >
-                                <button
-                                    class="btn btn-sm btn-error text-white"
-                                    on:click={() => deleteUser(user.user_id)}
-                                    >Delete</button
-                                >
-                            </td>
+                            <th>User ID</th>
+                            <th>Citizenship ID</th>
+                            <th>Voter Card ID</th>
+                            <th>TOTP Secret</th>
+                            <th>Photos</th>
+                            <th>Actions</th>
                         </tr>
-                    {/each}
-                </tbody>
-            </table>
+                    </thead>
+                    <tbody>
+                        {#each filteredUsers as user}
+                            <tr>
+                                <td>{user.user_id}</td>
+                                <td>{user.citizenship_id}</td>
+                                <td>{user.voter_card_id}</td>
+                                <td>{user.totp_secret}</td>
+                                <td>
+                                    <div class="flex gap-1">
+                                        {#each user.photos.split(",") as photo}
+                                            <img
+                                                src={`http://localhost:3000${photo}`}
+                                                alt="Appeal Photo"
+                                                class="w-12 h-12 object-cover rounded-full cursor-pointer hover:scale-105 transition"
+                                                on:click={() =>
+                                                    (selectedPhoto = `http://localhost:3000${photo}`)}
+                                            />
+                                        {/each}
+                                    </div>
+                                </td>
+
+                                <td class="flex gap-2">
+                                    <button
+                                        class="btn btn-sm btn-ghost"
+                                        on:click={() => openEditModal(user)}
+                                        >Edit</button
+                                    >
+                                    <button
+                                        class="btn btn-sm btn-error text-white"
+                                        on:click={() =>
+                                            deleteUser(user.user_id)}
+                                        >Delete</button
+                                    >
+                                </td>
+                            </tr>
+                        {/each}
+                    </tbody>
+                </table>
+            </div>
+
+            <!-- Pagination controls -->
+            <div class="flex justify-between items-center mt-4">
+                <button
+                    class="btn btn-sm"
+                    disabled={offset === 0}
+                    on:click={prevPage}
+                >
+                    Previous
+                </button>
+                <button
+                    class="btn btn-sm"
+                    disabled={!hasMore}
+                    on:click={nextPage}
+                >
+                    Next
+                </button>
+            </div>
         </div>
     {/if}
 </section>

@@ -67,6 +67,15 @@ func GetAppealByID(appealID int) (*Appeal, error) {
 	return &a, nil
 }
 
+func GetAppealsCount() (int, error) {
+	var count int
+	err := db.DB.QueryRow("SELECT COUNT(*) FROM Appeals").Scan(&count)
+	if err != nil {
+		return 0, err
+	}
+	return count, nil
+}
+
 func ApproveAppeal(appealID int) error {
 	appeal, err := GetAppealByID(appealID)
 	if err != nil {

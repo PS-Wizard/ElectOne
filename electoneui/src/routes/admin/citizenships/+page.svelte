@@ -11,6 +11,10 @@
     let createMessage = "";
     let editMessage = "";
 
+    let offset = 0;
+    let limit = 10;
+    let hasMore = true;
+
     let newCitizen = {
         citizenship_id: "",
         full_name: "",
@@ -31,7 +35,7 @@
         loading = true;
         try {
             const res = await fetch(
-                "http://localhost:3000/citizen?limit=100&offset=0",
+                `http://localhost:3000/citizen?limit=${limit}&offset=${offset}`,
                 {
                     headers: {
                         Authorization: `Bearer ${localStorage.getItem("admin_token")}`,
@@ -41,10 +45,25 @@
             if (!res.ok) throw new Error("Failed to fetch citizenships");
             citizens = await res.json();
             filteredCitizens = citizens;
+            hasMore = citizens.length === limit;
         } catch (err) {
             error = err.message;
         }
         loading = false;
+    }
+
+    function nextPage() {
+        offset += limit;
+        fetchCitizenships();
+    }
+
+    function prevPage() {
+        if (offset >= limit) {
+            offset -= limit;
+        } else {
+            offset = 0;
+        }
+        fetchCitizenships();
     }
 
     function filterCitizenships() {
@@ -391,6 +410,19 @@
                     {/each}
                 </tbody>
             </table>
+        </div>
+
+        <div class="flex justify-between items-center mt-4">
+            <button
+                class="btn btn-sm"
+                disabled={offset === 0}
+                on:click={prevPage}
+            >
+                Previous
+            </button>
+            <button class="btn btn-sm" disabled={!hasMore} on:click={nextPage}>
+                Next
+            </button>
         </div>
     {/if}
 </section>

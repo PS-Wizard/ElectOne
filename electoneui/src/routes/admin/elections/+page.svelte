@@ -8,6 +8,10 @@
     let error = "";
     let search = "";
 
+    let offset = 0;
+    let limit = 10;
+    let hasMore = true;
+
     let creationMessage = "";
 
     let newElection = {
@@ -27,7 +31,7 @@
         loading = true;
         try {
             const res = await fetch(
-                "http://localhost:3000/election?limit=100&offset=0",
+                `http://localhost:3000/election?limit=${limit}&offset=${offset}`,
                 {
                     headers: {
                         Authorization: `Bearer ${localStorage.getItem("admin_token")}`,
@@ -37,10 +41,24 @@
             if (!res.ok) throw new Error("Failed to fetch elections");
             elections = await res.json();
             filteredElections = elections; // Initially, no filtering
+            hasMore = elections.length === limit;
         } catch (err) {
             error = err.message;
         }
         loading = false;
+    }
+    function nextPage() {
+        offset += limit;
+        fetchElections();
+    }
+
+    function prevPage() {
+        if (offset >= limit) {
+            offset -= limit;
+        } else {
+            offset = 0;
+        }
+        fetchElections();
     }
 
     function filterElections() {
@@ -348,6 +366,19 @@
                     {/each}
                 </tbody>
             </table>
+        </div>
+
+        <div class="flex justify-between items-center mt-4">
+            <button
+                class="btn btn-sm"
+                disabled={offset === 0}
+                on:click={prevPage}
+            >
+                Previous
+            </button>
+            <button class="btn btn-sm" disabled={!hasMore} on:click={nextPage}>
+                Next
+            </button>
         </div>
     {/if}
 </section>

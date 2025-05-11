@@ -2,6 +2,7 @@
     import { onMount } from "svelte";
     import { page } from "$app/stores";
     import Navbar from "../../../../../components/Navbar.svelte";
+    import Footer from "../../../../../components/footer.svelte";
 
     let electionId;
     let candidates = [];

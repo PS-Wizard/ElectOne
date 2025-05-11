@@ -9,6 +9,10 @@
     let search = "";
     let editMessage = "";
 
+    let offset = 0;
+    let limit = 10;
+    let hasMore = true;
+
     let newVoterCard = {
         voter_card_id: "",
         citizenship_id: "",
@@ -33,7 +37,7 @@
         loading = true;
         try {
             const res = await fetch(
-                "http://localhost:3000/voter_card?limit=100&offset=0",
+                `http://localhost:3000/voter_card?limit=${limit}&offset=${offset}`,
                 {
                     headers: {
                         Authorization: `Bearer ${localStorage.getItem("admin_token")}`,
@@ -46,12 +50,26 @@
             }
             voterCards = await res.json();
             filteredVoterCards = voterCards; // Initially, no filtering
+            hasMore = voterCards.length === limit;
         } catch (err) {
             error = err.message;
         }
         loading = false;
     }
 
+    function nextPage() {
+        offset += limit;
+        fetchVoterCards();
+    }
+
+    function prevPage() {
+        if (offset >= limit) {
+            offset -= limit;
+        } else {
+            offset = 0;
+        }
+        fetchVoterCards();
+    }
     function filterVoterCards() {
         filteredVoterCards = voterCards.filter((voterCard) => {
             const searchLower = search.toLowerCase();
@@ -297,63 +315,12 @@
                         bind:value={editingVoterCard.location}
                     />
                     <label class="label">
-                        <span class="label-text">Additional Privileges</span>
+                        <span class="label-text">Privileges</span>
                     </label>
                     <input
-                        type="text"
-                        class="input input-bordered w-full px-4 rounded-lg"
+                        class="input input-bordered w-full"
+                        placeholder="Additional Privileges"
                         bind:value={editingVoterCard.voting_privileges}
-                    />
-                </div>
-                <div class="modal-action">
-                    <form method="dialog" class="flex gap-2">
-                        <button
-                            type="button"
-                            class="btn btn-warning"
-                            on:click={updateVoterCard}>Update</button
-                        >
-                        <button class="btn">Cancel</button>
-                    </form>
-                </div>
-            {/if}
-        </div>
-    </dialog>
-
-    <dialog
-        bind:this={editVoterCardModal}
-        id="edit_voter_card_modal"
-        class="modal"
-    >
-        <div class="modal-box">
-            <h3 class="font-bold text-lg">Edit Voter Card</h3>
-            {#if editingVoterCard}
-                {#if editMessage}
-                    <p class="text-red-500 text-sm">{editMessage}</p>
-                {/if}
-                <div class="py-2 flex flex-col gap-2">
-                    <label class="label">
-                        <span class="label-text">Voter Card ID</span>
-                    </label>
-                    <input
-                        type="text"
-                        class="input input-bordered w-full px-4 rounded-lg"
-                        bind:value={editingVoterCard.voter_card_id}
-                    />
-                    <label class="label">
-                        <span class="label-text">Citizenship ID</span>
-                    </label>
-                    <input
-                        type="text"
-                        class="input input-bordered w-full px-4 rounded-lg"
-                        bind:value={editingVoterCard.citizenship_id}
-                    />
-                    <label class="label">
-                        <span class="label-text">Location</span>
-                    </label>
-                    <input
-                        type="text"
-                        class="input input-bordered w-full px-4 rounded-lg"
-                        bind:value={editingVoterCard.location}
                     />
                 </div>
                 <div class="modal-action">
@@ -411,6 +378,18 @@
                     {/each}
                 </tbody>
             </table>
+        </div>
+        <div class="flex justify-between items-center mt-4">
+            <button
+                class="btn btn-sm"
+                disabled={offset === 0}
+                on:click={prevPage}
+            >
+                Previous
+            </button>
+            <button class="btn btn-sm" disabled={!hasMore} on:click={nextPage}>
+                Next
+            </button>
         </div>
     {/if}
 </section>

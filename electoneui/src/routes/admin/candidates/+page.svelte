@@ -2,6 +2,10 @@
     import { onMount } from "svelte";
     import AdminNavbar from "../../../components/AdminNavbar.svelte";
 
+    let offset = 0;
+    let limit = 10;
+    let hasMore = true;
+
     let candidates = [];
     let loading = true;
     let error = "";
@@ -73,7 +77,7 @@
         loading = true;
         try {
             const res = await fetch(
-                "http://localhost:3000/candidate?limit=100&offset=0",
+                `http://localhost:3000/candidate?limit=${limit}&offset=${offset}`,
                 {
                     headers: {
                         Authorization: `Bearer ${localStorage.getItem("admin_token")}`,
@@ -82,10 +86,25 @@
             );
             if (!res.ok) throw new Error("Failed to fetch candidates");
             candidates = await res.json();
+            hasMore = candidates.length === limit;
         } catch (err) {
             error = err.message;
         }
         loading = false;
+    }
+
+    function nextPage() {
+        offset += limit;
+        fetchCandidates();
+    }
+
+    function prevPage() {
+        if (offset >= limit) {
+            offset -= limit;
+        } else {
+            offset = 0;
+        }
+        fetchCandidates();
     }
 
     async function createCandidate() {
@@ -290,6 +309,14 @@
             </div>
         {/if}
     </section>
+    <div class="flex justify-between items-center mt-4">
+        <button class="btn btn-sm" disabled={offset === 0} on:click={prevPage}>
+            Previous
+        </button>
+        <button class="btn btn-sm" disabled={!hasMore} on:click={nextPage}>
+            Next
+        </button>
+    </div>
 </section>
 
 <dialog bind:this={newCandidateModal} class="modal">

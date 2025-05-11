@@ -1,6 +1,7 @@
 <script>
     import { onMount } from "svelte";
     import Navbar from "../../../../components/Navbar.svelte";
+    import Footer from "../../../../components/footer.svelte";
 
     let user = null;
     let citizenship = null;
@@ -75,7 +76,7 @@
         </div>
 
         <!-- Citizenship Accordion -->
-        <details class="collapse collapse-arrow bg-base-200">
+        <details class="collapse collapse-arrow bg-base-200 border-2">
             <summary class="collapse-title text-xl font-medium"
                 >Citizenship Details</summary
             >
@@ -100,7 +101,7 @@
         </details>
 
         <!-- Voter Card Accordion -->
-        <details class="collapse collapse-arrow bg-base-200">
+        <details class="collapse collapse-arrow bg-base-200 border-2">
             <summary class="collapse-title text-xl font-medium"
                 >Voter Card</summary
             >
@@ -146,3 +147,4 @@
         ></div>
     </div>
 </section>
+<Footer />

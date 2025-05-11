@@ -1,5 +1,6 @@
 <script lang="ts">
     import { goto } from "$app/navigation";
+    import { onMount } from "svelte";
     import Navbar from "../../../components/Navbar.svelte";
 
     let citizenship_id = "";
@@ -10,6 +11,13 @@
     let setup_done = true;
     let token = "";
     let error = "";
+
+    onMount(() => {
+        const token = localStorage.getItem("user_token");
+        if (token) {
+            goto("/user/dashboard");
+        }
+    });
 
     const login = async () => {
         error = "";

@@ -1,18 +1,23 @@
 <script>
     import { onMount } from "svelte";
     import AdminNavbar from "../../../components/AdminNavbar.svelte";
+    import Footer from "../../../components/footer.svelte";
 
     let appeals = [];
     let loading = true;
     let error = "";
     let search = "";
+    let offset = 0;
+    const limit = 10;
+    let hasMore = true;
 
-    let selectedPhoto = null; // 🆕 track the clicked photo
+    let selectedPhoto = null;
+
     async function fetchAppeals() {
         loading = true;
         try {
             const res = await fetch(
-                "http://localhost:3000/appeal?limit=100&offset=0",
+                `http://localhost:3000/appeal?limit=${limit}&offset=${offset}`,
                 {
                     headers: {
                         Authorization: `Bearer ${localStorage.getItem("admin_token")}`,
@@ -20,7 +25,9 @@
                 },
             );
             if (!res.ok) throw new Error("Failed to fetch appeals");
-            appeals = await res.json();
+            const data = await res.json();
+            appeals = data;
+            hasMore = data.length === limit; // If we got less than limit, there are no more records
         } catch (err) {
             error = err.message;
         }
@@ -39,7 +46,7 @@
                 },
             );
             if (!res.ok) throw new Error("Failed to approve appeal");
-            await fetchAppeals(); // Refresh the list after approval
+            await fetchAppeals();
         } catch (err) {
             alert(err.message);
         }
@@ -57,10 +64,24 @@
                 },
             );
             if (!res.ok) throw new Error("Failed to reject appeal");
-            await fetchAppeals(); // Refresh the list after rejection
+            await fetchAppeals();
         } catch (err) {
             alert(err.message);
         }
+    }
+
+    function nextPage() {
+        offset += limit;
+        fetchAppeals();
+    }
+
+    function prevPage() {
+        if (offset >= limit) {
+            offset -= limit;
+        } else {
+            offset = 0;
+        }
+        fetchAppeals();
     }
 
     onMount(fetchAppeals);
@@ -89,71 +110,96 @@
         {:else if error}
             <p class="text-red-500">{error}</p>
         {:else}
-            <div
-                class="overflow-x-auto rounded-box border border-base-content/5 bg-base-100 w-full"
-            >
-                <table class="table w-full">
-                    <thead>
-                        <tr>
-                            <th>ID</th>
-                            <th>Citizenship ID</th>
-                            <th>Voter Card ID</th>
-                            <th>Photos</th>
-                            <th>Status</th>
-                            <th>Actions</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {#each appeals as appeal}
-                            {#if appeal.citizenship_id
-                                .toLowerCase()
-                                .includes(search.toLowerCase()) || appeal.voter_card_id
+            <div class="flex flex-col w-full">
+                <div
+                    class="overflow-x-auto rounded-box border border-base-content/5 bg-base-100 w-full"
+                >
+                    <table class="table w-full">
+                        <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>Citizenship ID</th>
+                                <th>Voter Card ID</th>
+                                <th>Photos</th>
+                                <th>Status</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {#each appeals as appeal}
+                                {#if appeal.citizenship_id
                                     .toLowerCase()
-                                    .includes(search.toLowerCase())}
-                                <tr>
-                                    <td>{appeal.appeal_id}</td>
-                                    <td>{appeal.citizenship_id}</td>
-                                    <td>{appeal.voter_card_id}</td>
-                                    <td>
-                                        <!-- Split the comma-separated string into an array and display each photo -->
-                                        <div class="flex gap-1">
-                                            {#each appeal.photos.split(",") as photo}
-                                                <img
-                                                    src={`http://localhost:3000${photo}`}
-                                                    alt="Appeal Photo"
-                                                    class="w-12 h-12 object-cover rounded-full cursor-pointer hover:scale-105 transition"
-                                                    on:click={() =>
-                                                        (selectedPhoto = `http://localhost:3000${photo}`)}
-                                                />
-                                            {/each}
-                                        </div>
-                                    </td>
-                                    <td>{appeal.status}</td>
-                                    <td class="p-4 flex gap-2 justify-center">
-                                        <button
-                                            class="btn btn-sm btn-primary"
-                                            disabled={appeal.status !==
-                                                "Pending"}
-                                            on:click={() =>
-                                                approveAppeal(appeal.appeal_id)}
+                                    .includes(search.toLowerCase()) || appeal.voter_card_id
+                                        .toLowerCase()
+                                        .includes(search.toLowerCase())}
+                                    <tr>
+                                        <td>{appeal.appeal_id}</td>
+                                        <td>{appeal.citizenship_id}</td>
+                                        <td>{appeal.voter_card_id}</td>
+                                        <td>
+                                            <div class="flex gap-1">
+                                                {#each appeal.photos.split(",") as photo}
+                                                    <img
+                                                        src={`http://localhost:3000${photo}`}
+                                                        alt="Appeal Photo"
+                                                        class="w-12 h-12 object-cover rounded-full cursor-pointer hover:scale-105 transition"
+                                                        on:click={() =>
+                                                            (selectedPhoto = `http://localhost:3000${photo}`)}
+                                                    />
+                                                {/each}
+                                            </div>
+                                        </td>
+                                        <td>{appeal.status}</td>
+                                        <td
+                                            class="p-4 flex gap-2 justify-center"
                                         >
-                                            Approve
-                                        </button>
-                                        <button
-                                            class="btn btn-sm btn-ghost"
-                                            disabled={appeal.status !==
-                                                "Pending"}
-                                            on:click={() =>
-                                                rejectAppeal(appeal.appeal_id)}
-                                        >
-                                            Reject
-                                        </button>
-                                    </td>
-                                </tr>
-                            {/if}
-                        {/each}
-                    </tbody>
-                </table>
+                                            <button
+                                                class="btn btn-sm btn-primary"
+                                                disabled={appeal.status !==
+                                                    "Pending"}
+                                                on:click={() =>
+                                                    approveAppeal(
+                                                        appeal.appeal_id,
+                                                    )}
+                                            >
+                                                Approve
+                                            </button>
+                                            <button
+                                                class="btn btn-sm btn-ghost"
+                                                disabled={appeal.status !==
+                                                    "Pending"}
+                                                on:click={() =>
+                                                    rejectAppeal(
+                                                        appeal.appeal_id,
+                                                    )}
+                                            >
+                                                Reject
+                                            </button>
+                                        </td>
+                                    </tr>
+                                {/if}
+                            {/each}
+                        </tbody>
+                    </table>
+                </div>
+
+                <!-- Pagination controls -->
+                <div class="flex justify-between items-center mt-4">
+                    <button
+                        class="btn btn-sm"
+                        disabled={offset === 0}
+                        on:click={prevPage}
+                    >
+                        Previous
+                    </button>
+                    <button
+                        class="btn btn-sm"
+                        disabled={!hasMore}
+                        on:click={nextPage}
+                    >
+                        Next
+                    </button>
+                </div>
             </div>
         {/if}
     </section>
@@ -221,3 +267,4 @@
         }
     }
 </style>
+
