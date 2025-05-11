@@ -2,11 +2,13 @@ package handlers
 
 import (
 	"fmt"
+	"strconv"
+	"strings"
+
 	"github.com/PS-Wizard/Electone/internals/db/operations"
 	"github.com/PS-Wizard/Electone/internals/middlewares"
 	"github.com/gofiber/fiber/v2"
 	"github.com/golang-jwt/jwt/v5"
-	"strconv"
 )
 
 func RegisterElectionRoutes(router fiber.Router) {
@@ -116,7 +118,7 @@ func ListElectionsHandler(c *fiber.Ctx) error {
 	limit, _ := strconv.Atoi(c.Query("limit", "10"))
 	offset, _ := strconv.Atoi(c.Query("offset", "0"))
 
-	// If the role is admin, return all elections without any restrictions
+	// Admin: return all elections
 	if role == "admin" {
 		elections, err := operations.GetElections(limit, offset)
 		if err != nil {
@@ -125,33 +127,53 @@ func ListElectionsHandler(c *fiber.Ctx) error {
 		return c.JSON(elections)
 	}
 
-	// For users, apply location-based and privilege-based validation
+	// User: apply voterCard filters
 	voterCardID, ok := claims["voter_card"].(string)
 	if !ok {
 		return fiber.NewError(fiber.StatusUnauthorized, "Invalid voter card ID in token")
 	}
 
-	// Fetch the voter card data
 	voterCard, err := operations.GetVoterCardByID(voterCardID)
 	if err != nil {
 		return fiber.NewError(fiber.StatusInternalServerError, "Could not fetch voter card")
 	}
 
-	// Fetch elections based on the voter's location
-	elections, err := operations.GetElectionsByLocation(voterCard.Location, limit, offset)
+	// Fetch ALL elections
+	elections, err := operations.GetElections(limit, offset)
 	if err != nil {
 		return fiber.NewError(fiber.StatusInternalServerError, err.Error())
 	}
 
-	// Filter elections by checking if the user's privileges match the election type
+	// Filter by location and privilege
 	var filteredElections []operations.Election
+	// voterLocations := []string{strings.TrimSpace(voterCard.Location)}
+	voterPrivileges := strings.Split(voterCard.Privileges, ",")
+
 	for _, election := range elections {
-		if election.Type == voterCard.Privileges {
+		allowedLocations := strings.Split(election.Location, ",")
+		requiredType := strings.TrimSpace(election.Type)
+
+		locationMatch := false
+		for _, loc := range allowedLocations {
+			if strings.TrimSpace(loc) == voterCard.Location {
+				locationMatch = true
+				break
+			}
+		}
+
+		privilegeMatch := false
+		for _, priv := range voterPrivileges {
+			if strings.TrimSpace(priv) == requiredType {
+				privilegeMatch = true
+				break
+			}
+		}
+
+		if locationMatch && privilegeMatch {
 			filteredElections = append(filteredElections, election)
 		}
 	}
 
-	// Return the filtered elections
 	return c.JSON(filteredElections)
 }
 
