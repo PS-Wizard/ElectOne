@@ -62,15 +62,29 @@ func GetElectionByIDHandler(c *fiber.Ctx) error {
 			return fiber.NewError(fiber.StatusInternalServerError, "Could not fetch voter card")
 		}
 
-		// Check if the election's location matches the voter's location
-		if election.Location != voterCard.Location {
+		// Check location match
+		locationMatch := false
+		allowedLocations := strings.Split(election.Location, ",")
+		for _, loc := range allowedLocations {
+			if strings.TrimSpace(loc) == voterCard.Location {
+				locationMatch = true
+				break
+			}
+		}
+		if !locationMatch {
 			return fiber.NewError(fiber.StatusForbidden, "You are not allowed to access this election due to location mismatch")
 		}
 
-		// Check if the election type matches the voter's privileges
-		fmt.Println("Location: ", election.Location, voterCard.Location)
-		fmt.Println("Privileges: ", election.Type, voterCard.Privileges)
-		if election.Type != voterCard.Privileges {
+		// Check privilege match
+		privilegeMatch := false
+		voterPrivileges := strings.Split(voterCard.Privileges, ",")
+		for _, priv := range voterPrivileges {
+			if strings.TrimSpace(priv) == strings.TrimSpace(election.Type) {
+				privilegeMatch = true
+				break
+			}
+		}
+		if !privilegeMatch {
 			return fiber.NewError(fiber.StatusForbidden, "You are not allowed to vote in this election due to privilege mismatch")
 		}
 	}

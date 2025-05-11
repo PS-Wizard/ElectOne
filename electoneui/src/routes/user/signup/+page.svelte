@@ -5,6 +5,7 @@
     let citizenship_id = "";
     let voter_card_id = "";
     let password = "";
+    let acceptedTerms = false;
 
     let citizenshipFront = null;
     let citizenshipBack = null;
@@ -49,6 +50,11 @@
         if (!isValidPassword(password)) {
             message =
                 "Password must be at least 8 chars, include a number, uppercase, and symbol.";
+            return;
+        }
+
+        if (!acceptedTerms) {
+            message = "Please Accept The Terms And Conditions";
             return;
         }
 
@@ -200,6 +206,30 @@
                     class="file-input border-1 w-full"
                     on:change={(e) => (selfie = e.target.files[0])}
                 />
+            </div>
+
+            <!-- After Selfie input -->
+            <div class="flex items-center mt-4 justify-start">
+                <input
+                    type="checkbox"
+                    bind:group={acceptedTerms}
+                    required
+                    class="mr-2 mt-1 checkbox checkbox-sm rounded-sm"
+                />
+                <label class="text-xs text-gray-600">
+                    I agree to the
+                    <a
+                        href="/docs/tos"
+                        target="_blank"
+                        class="text-blue-600 underline">Terms & Conditions</a
+                    >
+                    and
+                    <a
+                        href="/docs/cookies"
+                        target="_blank"
+                        class="text-blue-600 underline">Cookie Policy</a
+                    >.
+                </label>
             </div>
 
             <div class="flex justify-center">
