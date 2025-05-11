@@ -1,285 +1,432 @@
 <script>
     import { onMount } from "svelte";
-    import { page } from "$app/stores";
-    import { goto } from "$app/navigation";
-    import Chart from "chart.js/auto";
-    import Navbar from "../../../components/Navbar.svelte";
+    import { fade } from "svelte/transition";
+    import {
+        Chart,
+        BarController,
+        CategoryScale,
+        LinearScale,
+        BarElement,
+        PieController,
+        ArcElement,
+        Tooltip,
+        Legend,
+    } from "chart.js";
 
-    let electionID;
-    let voteData = [];
-    let chartInstances = {};
-    let candidatesMap = {};
-    let electionInfo = null;
-    let showResults = false;
+    // Register Chart.js components
+    Chart.register(
+        BarController,
+        CategoryScale,
+        LinearScale,
+        BarElement,
+        PieController,
+        ArcElement,
+        Tooltip,
+        Legend,
+    );
 
-    let selectedPost = "";
-    let selectedParty = "";
+    const API_BASE_URL = "http://localhost:3000";
 
-    let posts = new Set();
-    let parties = new Set();
+    // Sample data structure
+    let election = {
+        election_id: 1,
+        name: "Loading...",
+        description: "",
+        start_date: "",
+        end_date: "",
+        location: "",
+        type: "",
+    };
 
-    $: electionID = $page.params.id;
+    let candidates = [];
+    let votes = [];
+    let loading = true;
+    let error = null;
+    let posts = [];
+    let charts = []; // To store chart instances for cleanup
 
-    $: filteredCandidates = Object.values(candidatesMap).filter((c) => {
-        return (
-            (selectedPost ? c.candidate_post === selectedPost : true) &&
-            (selectedParty ? c.candidate_party === selectedParty : true)
-        );
-    });
-
-    async function fetchElectionInfo() {
-        const token = localStorage.getItem("user_token");
-        const res = await fetch(
-            `http://localhost:3000/election/${electionID}`,
-            {
-                headers: { Authorization: `Bearer ${token}` },
-            },
-        );
-        if (!res.ok) throw new Error("Could not fetch election details");
-        electionInfo = await res.json();
-
-        const now = new Date();
-        const endDate = new Date(electionInfo.end_date);
-        showResults = now >= endDate;
-    }
-
-    async function fetchCandidates() {
-        const token = localStorage.getItem("user_token");
-        if (!token) return;
-
-        try {
-            const res = await fetch(
-                `http://localhost:3000/candidate?limit=10&offset=0`,
-                {
-                    headers: { Authorization: `Bearer ${token}` },
-                },
-            );
-            if (res.ok) {
-                const candidates = await res.json();
-                candidates.forEach((c) => {
-                    candidatesMap[c.candidate_id] = c;
-                    posts.add(c.candidate_post);
-                    parties.add(c.candidate_party);
-                });
-            } else {
-                console.warn("Failed to fetch candidates.");
-            }
-        } catch (error) {
-            console.error("Error fetching candidates:", error);
-        }
-    }
-
-    async function fetchData() {
-        const token = localStorage.getItem("user_token");
-        if (!token) return goto("/");
-        if (!electionID) return console.error("Election ID is missing!");
-
-        try {
-            const res = await fetch(
-                `http://localhost:3000/vote/history/${electionID}?limit=1000&offset=0`,
-                { headers: { Authorization: `Bearer ${token}` } },
-            );
-            if (!res.ok) throw new Error("Failed to fetch votes");
-
-            voteData = await res.json();
-            await fetchCandidates();
-            createGraphs();
-        } catch (error) {
-            console.error(error);
-        }
-    }
-
+    // Fetch data on mount
     onMount(async () => {
         try {
-            await fetchElectionInfo();
-            if (showResults) await fetchData();
+            // Fetch election details
+            const electionRes = await fetch(`${API_BASE_URL}/election/1`, {
+                headers: {
+                    Authorization: `Bearer ${localStorage.getItem("user_token")}`,
+                },
+            });
+            election = await electionRes.json();
+
+            // Fetch candidates
+            const candidatesRes = await fetch(
+                `${API_BASE_URL}/election/candidates/1`,
+                {
+                    headers: {
+                        Authorization: `Bearer ${localStorage.getItem("user_token")}`,
+                    },
+                },
+            );
+            candidates = await candidatesRes.json();
+
+            // Fetch votes
+            const votesRes = await fetch(
+                `${API_BASE_URL}/vote/history/1?limit=100&offset=0`,
+                {
+                    headers: {
+                        Authorization: `Bearer ${localStorage.getItem("user_token")}`,
+                    },
+                },
+            );
+            votes = await votesRes.json();
+
+            // Process data
+            processData();
         } catch (err) {
-            console.error("Error:", err);
+            error = err.message;
+            console.error("Error fetching data:", err);
+        } finally {
+            loading = false;
         }
+
+        // Cleanup charts when component is destroyed
+        return () => {
+            charts.forEach((chart) => chart.destroy());
+        };
     });
 
-    function destroyCharts() {
-        for (const chartId in chartInstances) {
-            chartInstances[chartId]?.destroy();
-        }
-        chartInstances = {};
+    // Process data
+    function processData() {
+        // Group votes by candidate_id
+        const voteCounts = {};
+        votes.forEach((vote) => {
+            voteCounts[vote.candidate_id] =
+                (voteCounts[vote.candidate_id] || 0) + 1;
+        });
+
+        // Add vote counts to candidates
+        candidates.forEach((candidate) => {
+            candidate.votes = voteCounts[candidate.candidate_id] || 0;
+        });
+
+        // Find unique posts
+        posts = [...new Set(candidates.map((c) => c.candidate_post))];
+
+        // Render charts after a small delay to ensure DOM is ready
+        setTimeout(renderCharts, 100);
     }
 
-    function createGraphs() {
-        destroyCharts();
-        const voteCountsByPost = {};
-
-        voteData.forEach((vote) => {
-            const candidate = candidatesMap[vote.candidate_id];
-            if (!candidate) return;
-            const post = candidate.candidate_post || "Unknown";
-
-            if (!voteCountsByPost[post]) voteCountsByPost[post] = {};
-            voteCountsByPost[post][candidate.candidate_id] =
-                (voteCountsByPost[post][candidate.candidate_id] || 0) + 1;
-        });
-
-        Object.entries(voteCountsByPost).forEach(([post, counts]) => {
-            const canvasId = `chart-${post.replace(/\s+/g, "-").toLowerCase()}`;
-            const labels = Object.keys(counts).map(
-                (id) => candidatesMap[id].candidate_name,
+    // Render all charts
+    function renderCharts() {
+        posts.forEach((post) => {
+            const postCandidates = candidates.filter(
+                (c) => c.candidate_post === post,
             );
-            const data = Object.values(counts);
-
-            createBarChart(
-                canvasId,
-                `${post} Vote Distribution`,
-                labels,
-                data,
-                "Votes",
-            );
-        });
-
-        const totalVotes = voteData.length;
-        const votesPerCandidate = {};
-
-        voteData.forEach((vote) => {
-            votesPerCandidate[vote.candidate_id] =
-                (votesPerCandidate[vote.candidate_id] || 0) + 1;
-        });
-
-        Object.entries(votesPerCandidate).forEach(([id, count]) => {
-            const candidate = candidatesMap[id];
-            const canvasId = `pie-${id}`;
-            const name = candidate?.candidate_name || `Candidate ${id}`;
-            createPieChart(
-                canvasId,
-                `${name} Vote Share`,
-                [name, "Others"],
-                [count, totalVotes - count],
-            );
+            renderBarChart(post, postCandidates);
+            renderPieCharts(post, postCandidates);
         });
     }
 
-    function createBarChart(canvasId, title, labels, data, yLabel) {
-        const ctx = document.getElementById(canvasId);
-        if (ctx) {
-            chartInstances[canvasId] = new Chart(ctx, {
-                type: "bar",
-                data: {
-                    labels,
-                    datasets: [
-                        {
-                            label: title,
-                            data,
-                            backgroundColor: "rgba(54, 162, 235, 0.8)",
-                            borderColor: "rgba(54, 162, 235, 1)",
-                            borderWidth: 1,
-                        },
-                    ],
-                },
-                options: {
-                    responsive: true,
-                    scales: {
-                        y: {
-                            beginAtZero: true,
-                            title: { display: true, text: yLabel },
+    // Render bar chart for a specific post
+    function renderBarChart(post, postCandidates) {
+        // Sort by votes descending
+        postCandidates.sort((a, b) => b.votes - a.votes);
+
+        // Find the winner
+        const winner = postCandidates[0];
+
+        const ctx = document.getElementById(
+            `bar-chart-${post.replace(/\s+/g, "-")}`,
+        );
+        if (!ctx) return;
+
+        // Destroy previous chart if it exists
+        const existingChart = Chart.getChart(ctx);
+        if (existingChart) existingChart.destroy();
+
+        const chart = new Chart(ctx, {
+            type: "bar",
+            data: {
+                labels: postCandidates.map((c) => c.candidate_name),
+                datasets: [
+                    {
+                        label: "Votes",
+                        data: postCandidates.map((c) => c.votes),
+                        backgroundColor: postCandidates.map((c) =>
+                            c.candidate_id === winner.candidate_id
+                                ? "rgba(255, 215, 0, 0.7)"
+                                : "rgba(75, 192, 192, 0.7)",
+                        ),
+                        borderColor: postCandidates.map((c) =>
+                            c.candidate_id === winner.candidate_id
+                                ? "rgb(255, 215, 0)"
+                                : "rgb(75, 192, 192)",
+                        ),
+                        borderWidth: 1,
+                    },
+                ],
+            },
+            options: {
+                responsive: true,
+                plugins: {
+                    title: {
+                        display: true,
+                        text: `Vote Results for ${post}`,
+                        font: {
+                            size: 16,
                         },
                     },
-                    plugins: {
-                        title: { display: true, text: title },
-                        legend: { display: false },
+                    tooltip: {
+                        callbacks: {
+                            label: function (context) {
+                                return `Votes: ${context.raw}`;
+                            },
+                        },
                     },
                 },
-            });
-        }
+                scales: {
+                    y: {
+                        beginAtZero: true,
+                        title: {
+                            display: true,
+                            text: "Number of Votes",
+                        },
+                    },
+                    x: {
+                        title: {
+                            display: true,
+                            text: "Candidates",
+                        },
+                    },
+                },
+            },
+        });
+
+        charts.push(chart);
     }
 
-    function createPieChart(canvasId, title, labels, data) {
-        const ctx = document.getElementById(canvasId);
-        if (ctx) {
-            chartInstances[canvasId] = new Chart(ctx, {
+    // Render pie charts for each candidate in a post
+    function renderPieCharts(post, postCandidates) {
+        const container = document.getElementById(
+            `pie-charts-${post.replace(/\s+/g, "-")}`,
+        );
+        if (!container) return;
+
+        // Clear previous content
+        container.innerHTML = "";
+
+        // Calculate total votes for this post
+        const totalVotes = postCandidates.reduce((sum, c) => sum + c.votes, 0);
+
+        // Create a chart for each candidate
+        postCandidates.forEach((candidate) => {
+            const percentage =
+                totalVotes > 0
+                    ? ((candidate.votes / totalVotes) * 100).toFixed(1)
+                    : 0;
+
+            const card = document.createElement("div");
+            card.className = "candidate-card";
+            card.style.width = "250px";
+            card.style.margin = "10px";
+            card.style.padding = "15px";
+            card.style.borderRadius = "8px";
+            card.style.boxShadow = "0 2px 8px rgba(0,0,0,0.1)";
+            card.style.textAlign = "center";
+
+            // Candidate image
+            const img = document.createElement("img");
+            img.src = `${API_BASE_URL}${candidate.candidate_photo}`;
+            img.alt = candidate.candidate_name;
+            img.style.width = "80px";
+            img.style.height = "80px";
+            img.style.borderRadius = "50%";
+            img.style.objectFit = "cover";
+            img.style.marginBottom = "10px";
+            card.appendChild(img);
+
+            // Candidate name
+            const name = document.createElement("h3");
+            name.textContent = candidate.candidate_name;
+            name.style.margin = "5px 0";
+            name.style.fontSize = "16px";
+            card.appendChild(name);
+
+            // Candidate party
+            const party = document.createElement("p");
+            party.textContent = candidate.candidate_party;
+            party.style.margin = "5px 0";
+            party.style.fontSize = "14px";
+            party.style.color = "#666";
+            card.appendChild(party);
+
+            // Vote percentage
+            const percent = document.createElement("div");
+            percent.textContent = `${percentage}% of votes`;
+            percent.style.margin = "10px 0";
+            percent.style.fontSize = "18px";
+            percent.style.fontWeight = "bold";
+            card.appendChild(percent);
+
+            // Create canvas for pie chart
+            const canvas = document.createElement("canvas");
+            canvas.width = 200;
+            canvas.height = 200;
+            card.appendChild(canvas);
+
+            container.appendChild(card);
+
+            // Create pie chart
+            const ctx = canvas.getContext("2d");
+            const chart = new Chart(ctx, {
                 type: "pie",
                 data: {
-                    labels,
+                    labels: ["This Candidate", "Others"],
                     datasets: [
                         {
-                            data,
-                            backgroundColor: [
-                                "rgba(255, 99, 132, 0.8)",
-                                "rgba(54, 162, 235, 0.8)",
+                            data: [
+                                candidate.votes,
+                                totalVotes - candidate.votes,
                             ],
-                            borderColor: "rgba(255, 255, 255, 1)",
+                            backgroundColor: [
+                                "rgba(75, 192, 192, 0.7)",
+                                "rgba(201, 203, 207, 0.7)",
+                            ],
+                            borderColor: [
+                                "rgba(75, 192, 192, 1)",
+                                "rgba(201, 203, 207, 1)",
+                            ],
                             borderWidth: 1,
                         },
                     ],
                 },
                 options: {
-                    responsive: true,
+                    responsive: false,
                     plugins: {
-                        title: { display: true, text: title },
-                        legend: { position: "bottom" },
+                        legend: {
+                            position: "bottom",
+                        },
+                        tooltip: {
+                            callbacks: {
+                                label: function (context) {
+                                    const label = context.label || "";
+                                    const value = context.raw || 0;
+                                    const total = context.dataset.data.reduce(
+                                        (a, b) => a + b,
+                                        0,
+                                    );
+                                    const percentage = Math.round(
+                                        (value / total) * 100,
+                                    );
+                                    return `${label}: ${value} (${percentage}%)`;
+                                },
+                            },
+                        },
                     },
                 },
             });
-        }
+
+            charts.push(chart);
+        });
     }
 </script>
 
 <svelte:head>
-    <title>Election Results</title>
+    <title>Election Results - {election.name}</title>
 </svelte:head>
 
-<Navbar />
-
-<div class="max-w-5xl mx-auto p-4">
-    <h1 class="text-3xl font-bold mb-4">Election Results (ID: {electionID})</h1>
-
-    {#if !showResults}
-        <div class="alert alert-info shadow-lg mt-10">
-            <div>
-                <span>
-                    This election hasn't ended yet. Results are still being
-                    processed.
-                </span>
-            </div>
+<div class="container mx-auto px-4 py-8">
+    {#if loading}
+        <div class="text-center py-8">
+            <div
+                class="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-blue-500 mx-auto"
+            ></div>
+            <p class="mt-4 text-gray-600">Loading election data...</p>
+        </div>
+    {:else if error}
+        <div
+            class="bg-red-100 border-l-4 border-red-500 text-red-700 p-4 mb-4"
+            role="alert"
+        >
+            <p class="font-bold">Error</p>
+            <p>{error}</p>
         </div>
     {:else}
-        <div class="flex flex-col gap-4 md:flex-row mb-6">
-            <select
-                class="select select-bordered w-full"
-                bind:value={selectedPost}
-            >
-                <option value="">All Posts</option>
-                {#each Array.from(posts) as post}
-                    <option value={post}>{post}</option>
-                {/each}
-            </select>
+        <h1 class="text-3xl font-bold text-center mb-6">
+            {election.name} Results
+        </h1>
 
-            <select
-                class="select select-bordered w-full"
-                bind:value={selectedParty}
-            >
-                <option value="">All Parties</option>
-                {#each Array.from(parties) as party}
-                    <option value={party}>{party}</option>
-                {/each}
-            </select>
+        <div class="bg-white rounded-lg shadow-md p-6 mb-8">
+            <h2 class="text-xl font-semibold mb-4">Election Details</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <div>
+                    <p>
+                        <span class="font-medium">Location:</span>
+                        {election.location}
+                    </p>
+                    <p>
+                        <span class="font-medium">Type:</span>
+                        {election.type}
+                    </p>
+                </div>
+                <div>
+                    <p>
+                        <span class="font-medium">Dates:</span>
+                        {new Date(election.start_date).toLocaleDateString()} to {new Date(
+                            election.end_date,
+                        ).toLocaleDateString()}
+                    </p>
+                    <p>
+                        <span class="font-medium">Total Votes:</span>
+                        {votes.length}
+                    </p>
+                </div>
+            </div>
+            <p class="mt-4">
+                <span class="font-medium">Description:</span>
+                {election.description}
+            </p>
         </div>
 
-        {#each filteredCandidates as candidate (candidate.candidate_id)}
-            <div class="bg-white shadow-md rounded-xl p-4 mb-8 border">
-                <h3 class="text-lg font-semibold mb-2">
-                    {candidate.candidate_post} - {candidate.candidate_name}
-                </h3>
-                <p class="text-sm mb-2 text-gray-600">
-                    Party: {candidate.candidate_party}
-                </p>
-                <canvas
-                    id={"chart-" +
-                        candidate.candidate_post
-                            .replace(/\s+/g, "-")
-                            .toLowerCase()}
-                ></canvas>
-                <div class="mt-6">
-                    <canvas id={"pie-" + candidate.candidate_id}></canvas>
+        {#each posts as post}
+            <div class="bg-white rounded-lg shadow-md p-6 mb-8" transition:fade>
+                <h2 class="text-2xl font-bold mb-6 text-center">
+                    {post} Results
+                </h2>
+
+                <!-- Bar Chart -->
+                <div class="mb-8">
+                    <h3 class="text-lg font-semibold mb-4">
+                        Vote Distribution
+                    </h3>
+                    <div class="w-full h-96">
+                        <canvas id="bar-chart-{post.replace(/\s+/g, '-')}"
+                        ></canvas>
+                    </div>
+                </div>
+
+                <!-- Pie Charts -->
+                <div class="mb-8">
+                    <h3 class="text-lg font-semibold mb-4">
+                        Candidate Performance
+                    </h3>
+                    <div
+                        id="pie-charts-{post.replace(/\s+/g, '-')}"
+                        class="flex flex-wrap justify-center gap-6"
+                    ></div>
                 </div>
             </div>
         {/each}
     {/if}
 </div>
+
+<style>
+    .candidate-card {
+        transition:
+            transform 0.2s ease,
+            box-shadow 0.2s ease;
+    }
+
+    .candidate-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    }
+</style>

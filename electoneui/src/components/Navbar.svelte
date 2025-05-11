@@ -45,8 +45,7 @@
             <span class="sr-only">ElectOne</span>
             <img
                 class="h-8 w-auto"
-                src="https://via.placeholder.com/100x50.png?text=E"
-                alt="E"
+                src="/favicon.png"
             />
         </a>
     </div>
@@ -70,7 +69,7 @@
                 <img
                     src={profilePic || "https://placehold.co/32x32"}
                     alt="Profile"
-                    class="w-8 h-8 rounded-full"
+                    class="w-12 h-12 rounded-full object-cover"
                 />
             </button>
             {#if dropdownOpen}

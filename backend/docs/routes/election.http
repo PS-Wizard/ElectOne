@@ -13,8 +13,8 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhZG1pbklEIjoxLCJlb
 }
 
 ### Get Election By ID
-GET http://localhost:3000/election/3
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhZG1pbklEIjoyLCJlbWFpbCI6ImFkbWluMkBleGFtcGxlLmNvbSIsImV4cCI6MTc0NjQ0NTcyNywicm9sZSI6ImFkbWluIn0.9msec4uS7vVWaMIpC47jV1ne-iO_kvvC-bWJRt4UjX8
+GET http://localhost:3000/election/1
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhZG1pbklEIjoxLCJlbWFpbCI6ImFkbWluMUBleGFtcGxlLmNvbSIsImV4cCI6MTc0NzA1MDQzNSwicm9sZSI6ImFkbWluIn0.1Ts2gXWyci0rLP22ALA0FUabwRi_wjiTbQHNefYp1Ms
 
 ### Update Election
 PUT http://localhost:3000/election/2
