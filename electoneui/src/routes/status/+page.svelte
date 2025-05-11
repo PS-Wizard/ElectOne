@@ -55,7 +55,7 @@
 
 <Navbar />
 <div class="h-[90vh] flex justify-center items-center flex-col max-w-xl mx-auto p-6 space-y-4">
-    <h2 class="text-2xl font-bold">Features</h2>
+    <h2 class="text-2xl font-bold">Check Status</h2>
 
     <input
         class="input input-bordered w-full"

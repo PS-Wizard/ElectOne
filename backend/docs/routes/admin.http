@@ -4,7 +4,7 @@ Content-Type: application/json
 Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhZG1pbklEIjoxLCJlbWFpbCI6ImFkbWluMUBleGFtcGxlLmNvbSIsImV4cCI6MTc0NzA1MDQzNSwicm9sZSI6ImFkbWluIn0.1Ts2gXWyci0rLP22ALA0FUabwRi_wjiTbQHNefYp1Ms
 
 {
-  "email": "admin3@example.com",
+  "email": "admin1@example.com",
   "password": "somepass",
   "totp_secret":""
 }
@@ -19,7 +19,7 @@ Content-Type: application/json
 Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhZG1pbklEIjoxLCJlbWFpbCI6ImFkbWluMUBleGFtcGxlLmNvbSIsImV4cCI6MTc0NzA1MDQzNSwicm9sZSI6ImFkbWluIn0.1Ts2gXWyci0rLP22ALA0FUabwRi_wjiTbQHNefYp1Ms
 
 {
-  "email": "admin2@example.com",
+  "email": "admin1@example.com",
   "password": "securepass",
   "totp_secret": ""
 }

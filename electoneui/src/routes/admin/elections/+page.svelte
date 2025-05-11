@@ -16,12 +16,12 @@
         start_date: "",
         end_date: "",
         location: "",
+        type: "",
     };
 
     let editingElection = null;
     let newElectionModal;
     let editElectionModal;
-    
 
     async function fetchElections() {
         loading = true;
@@ -61,6 +61,7 @@
             election.description.trim() !== "" &&
             election.start_date !== "" &&
             election.end_date !== "" &&
+            election.type !== "" &&
             election.location.trim() !== ""
         );
     }
@@ -86,6 +87,7 @@
                 start_date: "",
                 end_date: "",
                 location: "",
+                type: "",
             };
             newElectionModal.close();
         } catch (err) {
@@ -205,6 +207,12 @@
                     required
                     bind:value={newElection.location}
                 />
+                <input
+                    class="input input-bordered w-full"
+                    placeholder="Type Of Election"
+                    required
+                    bind:value={newElection.type}
+                />
             </div>
             {#if creationMessage}
                 <p class="text-sm text-red-700">{creationMessage}</p>
@@ -271,6 +279,11 @@
                         class="input input-bordered w-full px-4 rounded-lg"
                         bind:value={editingElection.location}
                     />
+                    <input
+                        type="text"
+                        class="input input-bordered w-full px-4 rounded-lg"
+                        bind:value={editingElection.type}
+                    />
                 </div>
                 {#if creationMessage}
                     <p class="text-sm text-red-700">{creationMessage}</p>
@@ -304,6 +317,7 @@
                         <th>Start Date</th>
                         <th>End Date</th>
                         <th>Location</th>
+                        <th>Type</th>
                         <th>Actions</th>
                     </tr>
                 </thead>
@@ -316,6 +330,7 @@
                             <td>{election.start_date}</td>
                             <td>{election.end_date}</td>
                             <td>{election.location}</td>
+                            <td>{election.type}</td>
                             <td class="flex gap-2">
                                 <button
                                     class="btn btn-sm btn-ghost"

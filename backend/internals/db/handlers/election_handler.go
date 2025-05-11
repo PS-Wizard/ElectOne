@@ -48,21 +48,32 @@ func GetElectionByIDHandler(c *fiber.Ctx) error {
 	}
 
 	if role == "user" {
+		// Get voter card ID from claims
 		voterCardID, ok := claims["voter_card"].(string)
 		if !ok {
 			return fiber.NewError(fiber.StatusUnauthorized, "Invalid voter card ID in token")
 		}
 
+		// Fetch the voter card data
 		voterCard, err := operations.GetVoterCardByID(voterCardID)
 		if err != nil {
 			return fiber.NewError(fiber.StatusInternalServerError, "Could not fetch voter card")
 		}
 
+		// Check if the election's location matches the voter's location
 		if election.Location != voterCard.Location {
-			return fiber.NewError(fiber.StatusForbidden, "You are not allowed to access this election")
+			return fiber.NewError(fiber.StatusForbidden, "You are not allowed to access this election due to location mismatch")
+		}
+
+		// Check if the election type matches the voter's privileges
+		fmt.Println("Location: ", election.Location, voterCard.Location)
+		fmt.Println("Privileges: ", election.Type, voterCard.Privileges)
+		if election.Type != voterCard.Privileges {
+			return fiber.NewError(fiber.StatusForbidden, "You are not allowed to vote in this election due to privilege mismatch")
 		}
 	}
 
+	// Return the election details as JSON if all checks pass
 	return c.JSON(election)
 }
 
@@ -105,6 +116,7 @@ func ListElectionsHandler(c *fiber.Ctx) error {
 	limit, _ := strconv.Atoi(c.Query("limit", "10"))
 	offset, _ := strconv.Atoi(c.Query("offset", "0"))
 
+	// If the role is admin, return all elections without any restrictions
 	if role == "admin" {
 		elections, err := operations.GetElections(limit, offset)
 		if err != nil {
@@ -113,22 +125,34 @@ func ListElectionsHandler(c *fiber.Ctx) error {
 		return c.JSON(elections)
 	}
 
+	// For users, apply location-based and privilege-based validation
 	voterCardID, ok := claims["voter_card"].(string)
 	if !ok {
 		return fiber.NewError(fiber.StatusUnauthorized, "Invalid voter card ID in token")
 	}
 
+	// Fetch the voter card data
 	voterCard, err := operations.GetVoterCardByID(voterCardID)
 	if err != nil {
 		return fiber.NewError(fiber.StatusInternalServerError, "Could not fetch voter card")
 	}
 
+	// Fetch elections based on the voter's location
 	elections, err := operations.GetElectionsByLocation(voterCard.Location, limit, offset)
 	if err != nil {
 		return fiber.NewError(fiber.StatusInternalServerError, err.Error())
 	}
 
-	return c.JSON(elections)
+	// Filter elections by checking if the user's privileges match the election type
+	var filteredElections []operations.Election
+	for _, election := range elections {
+		if election.Type == voterCard.Privileges {
+			filteredElections = append(filteredElections, election)
+		}
+	}
+
+	// Return the filtered elections
+	return c.JSON(filteredElections)
 }
 
 func GetCandidatesByElectionIDHandler(c *fiber.Ctx) error {

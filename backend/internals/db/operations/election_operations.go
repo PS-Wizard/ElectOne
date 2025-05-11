@@ -14,6 +14,7 @@ type Election struct {
 	StartDate   string `json:"start_date"`
 	EndDate     string `json:"end_date"`
 	Location    string `json:"location"`
+	Type        string `json:"type"`
 }
 
 type CandidateInfo struct {
@@ -27,9 +28,9 @@ type CandidateInfo struct {
 
 func CreateElection(election *Election) (int, error) {
 	query := `
-		INSERT INTO Election (Name, Description, StartDate, EndDate, Location)
-		VALUES (?, ?, ?, ?, ?)`
-	_, err := db.DB.Exec(query, election.Name, election.Description, election.StartDate, election.EndDate, election.Location)
+	INSERT INTO Election (Name, Description, StartDate, EndDate, Location, Type)
+	VALUES (?, ?, ?, ?, ?, ?)`
+	_, err := db.DB.Exec(query, election.Name, election.Description, election.StartDate, election.EndDate, election.Location, election.Type)
 	if err != nil {
 		return 0, err
 	}
@@ -45,19 +46,19 @@ func CreateElection(election *Election) (int, error) {
 
 func UpdateElection(electionID int, updatedElection *Election) error {
 	query := `
-		UPDATE Election
-		SET Name = ?, Description = ?, StartDate = ?, EndDate = ?, Location = ?
-		WHERE ElectionID = ?`
-	_, err := db.DB.Exec(query, updatedElection.Name, updatedElection.Description, updatedElection.StartDate, updatedElection.EndDate, updatedElection.Location, electionID)
+	UPDATE Election
+	SET Name = ?, Description = ?, StartDate = ?, EndDate = ?, Location = ?, Type = ?
+	WHERE ElectionID = ?`
+	_, err := db.DB.Exec(query, updatedElection.Name, updatedElection.Description, updatedElection.StartDate, updatedElection.EndDate, updatedElection.Location, updatedElection.Type, electionID)
 	return err
 }
 
 func GetElections(limit, offset int) ([]Election, error) {
 	query := `
-		SELECT ElectionID, Name, Description, StartDate, EndDate, Location
-		FROM Election
-		ORDER BY ElectionID DESC
-		LIMIT ? OFFSET ?`
+	SELECT ElectionID, Name, Description, StartDate, EndDate, Location, Type
+	FROM Election
+	ORDER BY ElectionID DESC
+	LIMIT ? OFFSET ?`
 	rows, err := db.DB.Query(query, limit, offset)
 	if err != nil {
 		return nil, err
@@ -67,7 +68,7 @@ func GetElections(limit, offset int) ([]Election, error) {
 	var elections []Election
 	for rows.Next() {
 		var election Election
-		if err := rows.Scan(&election.ElectionID, &election.Name, &election.Description, &election.StartDate, &election.EndDate, &election.Location); err != nil {
+		if err := rows.Scan(&election.ElectionID, &election.Name, &election.Description, &election.StartDate, &election.EndDate, &election.Location, &election.Type); err != nil {
 			return nil, err
 		}
 		elections = append(elections, election)
@@ -77,11 +78,11 @@ func GetElections(limit, offset int) ([]Election, error) {
 
 func GetElectionByID(electionID int) (*Election, error) {
 	query := `
-		SELECT ElectionID, Name, Description, StartDate, EndDate, Location
-		FROM Election
-		WHERE ElectionID = ?`
+	SELECT ElectionID, Name, Description, StartDate, EndDate, Location, Type
+	FROM Election
+	WHERE ElectionID = ?`
 	var election Election
-	err := db.DB.QueryRow(query, electionID).Scan(&election.ElectionID, &election.Name, &election.Description, &election.StartDate, &election.EndDate, &election.Location)
+	err := db.DB.QueryRow(query, electionID).Scan(&election.ElectionID, &election.Name, &election.Description, &election.StartDate, &election.EndDate, &election.Location, &election.Type)
 	if err != nil {
 		if err == sql.ErrNoRows {
 			return nil, fmt.Errorf("No Election With That ID")
@@ -99,7 +100,7 @@ func DeleteElection(electionID int) error {
 
 func GetElectionsByLocation(location string, limit, offset int) ([]Election, error) {
 	query := `
-		SELECT ElectionID, Name, Description, StartDate, EndDate, Location
+		SELECT ElectionID, Name, Description, StartDate, EndDate, Location, Type
 		FROM Election
 		WHERE Location = ?
 		ORDER BY ElectionID DESC
@@ -115,7 +116,7 @@ func GetElectionsByLocation(location string, limit, offset int) ([]Election, err
 	var elections []Election
 	for rows.Next() {
 		var e Election
-		if err := rows.Scan(&e.ElectionID, &e.Name, &e.Description, &e.StartDate, &e.EndDate, &e.Location); err != nil {
+		if err := rows.Scan(&e.ElectionID, &e.Name, &e.Description, &e.StartDate, &e.EndDate, &e.Location, &e.Type); err != nil {
 			return nil, err
 		}
 		elections = append(elections, e)

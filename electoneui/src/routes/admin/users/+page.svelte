@@ -295,7 +295,7 @@
                     bind:value={newUser.password}
                 />
                 <label for="citizenship_front" class="label">
-                    <span class="label-text">Citizenship ID (Front) (Optional)</span>
+                    <span class="label-text">Citizenship ID (Front) </span>
                 </label>
                 <input
                     type="file"
@@ -308,7 +308,7 @@
                             : null)}
                 />
                 <label for="citizenship_back" class="label">
-                    <span class="label-text">Citizenship ID (Back) (Optional)</span>
+                    <span class="label-text">Citizenship ID (Back) </span>
                 </label>
                 <input
                     type="file"
@@ -321,7 +321,7 @@
                             : null)}
                 />
                 <label for="voter_card" class="label">
-                    <span class="label-text">Voter Card (Optional)</span>
+                    <span class="label-text">Voter Card </span>
                 </label>
                 <input
                     type="file"
@@ -334,7 +334,7 @@
                             : null)}
                 />
                 <label for="selfie" class="label">
-                    <span class="label-text">Selfie (Optional)</span>
+                    <span class="label-text">Selfie </span>
                 </label>
                 <input
                     type="file"

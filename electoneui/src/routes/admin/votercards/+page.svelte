@@ -13,6 +13,7 @@
         voter_card_id: "",
         citizenship_id: "",
         location: "",
+        voting_privileges: "",
     };
 
     let editingVoterCard = null;
@@ -69,7 +70,8 @@
         if (
             !newVoterCard.voter_card_id ||
             !newVoterCard.citizenship_id ||
-            !newVoterCard.location
+            !newVoterCard.location ||
+            !newVoterCard.voting_privileges
         ) {
             editMessage = "All fields are required.";
             return;
@@ -105,6 +107,7 @@
                 voter_card_id: "",
                 citizenship_id: "",
                 location: "",
+                voting_privileges: "",
             };
             newVoterCardModal.close();
         } catch (err) {
@@ -124,7 +127,8 @@
         if (
             !editingVoterCard.voter_card_id ||
             !editingVoterCard.citizenship_id ||
-            !editingVoterCard.location
+            !editingVoterCard.location ||
+            !editingVoterCard.voting_privileges
         ) {
             editMessage = "All fields are required.";
             return;
@@ -237,6 +241,11 @@
                     placeholder="Location"
                     bind:value={newVoterCard.location}
                 />
+                <input
+                    class="input input-bordered w-full"
+                    placeholder="Additional Privileges"
+                    bind:value={newVoterCard.voting_privileges}
+                />
             </div>
             <div class="modal-action">
                 <form method="dialog" class="flex gap-2">
@@ -286,6 +295,14 @@
                         type="text"
                         class="input input-bordered w-full px-4 rounded-lg"
                         bind:value={editingVoterCard.location}
+                    />
+                    <label class="label">
+                        <span class="label-text">Additional Privileges</span>
+                    </label>
+                    <input
+                        type="text"
+                        class="input input-bordered w-full px-4 rounded-lg"
+                        bind:value={editingVoterCard.voting_privileges}
                     />
                 </div>
                 <div class="modal-action">
@@ -365,6 +382,7 @@
                         <th>Voter Card ID</th>
                         <th>Citizenship ID</th>
                         <th>Location</th>
+                        <th>Privileges</th>
                         <th>Actions</th>
                     </tr>
                 </thead>
@@ -374,6 +392,7 @@
                             <td>{voterCard.voter_card_id}</td>
                             <td>{voterCard.citizenship_id}</td>
                             <td>{voterCard.location}</td>
+                            <td>{voterCard.voting_privileges}</td>
                             <td class="flex gap-2">
                                 <button
                                     class="btn btn-sm btn-ghost"

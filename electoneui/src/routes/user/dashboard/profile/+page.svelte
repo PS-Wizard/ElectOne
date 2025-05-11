@@ -50,30 +50,36 @@
 </script>
 
 <Navbar />
-<section class="p-6 mx-auto space-y-8">
+<section class="p-6 mx-auto space-y-8 max-w-2xl">
+    <div
+        class="absolute inset-x-0 -top-40 -z-10 transform-gpu overflow-hidden blur-3xl sm:-top-80"
+        aria-hidden="true"
+    >
+        <div
+            class="relative left-[calc(50%-11rem)] aspect-1155/678 w-[36.125rem] -translate-x-1/2 rotate-[30deg] bg-linear-to-tr from-[#ff80b5] to-[#9089fc] opacity-30 sm:left-[calc(50%-30rem)] sm:w-[72.1875rem]"
+            style="clip-path: polygon(74.1% 44.1%, 100% 61.6%, 97.5% 26.9%, 85.5% 0.1%, 80.7% 2%, 72.5% 32.5%, 60.2% 62.4%, 52.4% 68.1%, 47.5% 58.3%, 45.2% 34.5%, 27.5% 76.7%, 0.1% 64.9%, 17.9% 100%, 27.6% 76.8%, 76.1% 97.7%, 74.1% 44.1%)"
+        ></div>
+    </div>
     {#if error}
-        <div class="alert alert-error">
-            <span>{error}</span>
-        </div>
+        <div class="alert alert-error"><span>{error}</span></div>
     {:else if !user || !citizenship || !voterCard}
         <div class="text-center text-lg text-gray-600">Loading...</div>
     {:else}
-        <!-- User Info -->
-        <div class="card p-6">
-            <div class="flex justify-center gap-2">
-                {#each user.photos.split(",") as photo}
-                    <img
-                        src={`http://localhost:3000${photo}`}
-                        alt="User Photo"
-                        class="rounded-xl shadow-sm object-cover aspect-[4/5]"
-                    />
-                {/each}
-            </div>
+        <!-- Profile Picture -->
+        <div class="flex justify-center">
+            <img
+                src={`http://localhost:3000${user.photos.split(",")[3]}`}
+                alt="Profile Pic"
+                class="rounded-full w-32 h-32 object-cover border-4 border-white shadow"
+            />
         </div>
 
-        <div class="card p-6">
-            <h2 class="text-2xl font-bold uppercase tracking-wide mb-4">Citizenship Details</h2>
-            <div class="grid sm:grid-cols-2 gap-4">
+        <!-- Citizenship Accordion -->
+        <details class="collapse collapse-arrow bg-base-200">
+            <summary class="collapse-title text-xl font-medium"
+                >Citizenship Details</summary
+            >
+            <div class="collapse-content space-y-2">
                 <p>
                     <span class="font-medium">Full Name:</span>
                     {citizenship.full_name}
@@ -91,13 +97,14 @@
                     {citizenship.permanent_address}
                 </p>
             </div>
-        </div>
+        </details>
 
-        <!-- Voter Card Info -->
-        <div class="card p-6">
-            <h2 class="text-2xl font-bold mb-4">Voter Card</h2>
-
-            <div class="grid sm:grid-cols-2 gap-4">
+        <!-- Voter Card Accordion -->
+        <details class="collapse collapse-arrow bg-base-200">
+            <summary class="collapse-title text-xl font-medium"
+                >Voter Card</summary
+            >
+            <div class="collapse-content space-y-2">
                 <p>
                     <span class="font-medium">Voter Card ID:</span>
                     {voterCard.voter_card_id}
@@ -111,6 +118,31 @@
                     {voterCard.location}
                 </p>
             </div>
+        </details>
+
+        <!-- Other Photos (Flex Column) -->
+        <div class="space-y-4">
+            <h2 class="text-xl font-bold">Documents</h2>
+            <div class="flex flex-col gap-4">
+                {#each user.photos
+                    .split(",")
+                    .filter((_, i) => i !== 3) as photo}
+                    <img
+                        src={`http://localhost:3000${photo}`}
+                        alt="Document Photo"
+                        class="rounded-xl shadow object-cover w-full max-h-96"
+                    />
+                {/each}
+            </div>
         </div>
     {/if}
+    <div
+        class="absolute inset-x-0 top-[calc(100%-13rem)] -z-10 transform-gpu overflow-hidden blur-3xl sm:top-[calc(100%-30rem)]"
+        aria-hidden="true"
+    >
+        <div
+            class="relative left-[calc(50%+3rem)] aspect-1155/678 w-[36.125rem] -translate-x-1/2 bg-linear-to-tr from-[#ff80b5] to-[#9089fc] opacity-30 sm:left-[calc(50%+36rem)] sm:w-[72.1875rem]"
+            style="clip-path: polygon(74.1% 44.1%, 100% 61.6%, 97.5% 26.9%, 85.5% 0.1%, 80.7% 2%, 72.5% 32.5%, 60.2% 62.4%, 52.4% 68.1%, 47.5% 58.3%, 45.2% 34.5%, 27.5% 76.7%, 0.1% 64.9%, 17.9% 100%, 27.6% 76.8%, 76.1% 97.7%, 74.1% 44.1%)"
+        ></div>
+    </div>
 </section>

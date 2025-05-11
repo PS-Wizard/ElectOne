@@ -131,7 +131,7 @@
                                     <td>{appeal.status}</td>
                                     <td class="p-4 flex gap-2 justify-center">
                                         <button
-                                            class="btn btn-sm btn-success"
+                                            class="btn btn-sm btn-primary"
                                             disabled={appeal.status !==
                                                 "Pending"}
                                             on:click={() =>
@@ -140,7 +140,7 @@
                                             Approve
                                         </button>
                                         <button
-                                            class="btn btn-sm btn-error"
+                                            class="btn btn-sm btn-ghost"
                                             disabled={appeal.status !==
                                                 "Pending"}
                                             on:click={() =>
