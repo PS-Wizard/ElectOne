@@ -12,7 +12,7 @@
 
     function logout() {
         // handle your logout logic here
-        localStorage.clear();
+        localStorage.removeItem("admin_token");
         goto("/admin");
     }
 </script>
