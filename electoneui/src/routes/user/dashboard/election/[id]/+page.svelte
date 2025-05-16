@@ -160,7 +160,7 @@
                                         <img
                                             src={`http://localhost:3000${candidate.candidate_photo}`}
                                             alt={candidate.candidate_name}
-                                            class="w-full h-auto rounded-full border-2 border-primary object-cover"
+                                            class="w-full h-full rounded-full border-2 border-primary object-cover"
                                         />
                                     </div>
 

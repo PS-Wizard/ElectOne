@@ -19,7 +19,7 @@ func HandleAppealGetStatus(ctx *fiber.Ctx) error {
 
 	appeal, err := operations.GetAppealStatus(&request)
 	if err != nil {
-		return fiber.NewError(fiber.StatusInternalServerError, err.Error()) // <-- add return here
+		return fiber.NewError(fiber.StatusInternalServerError, err.Error()) 
 	}
 
 	if appeal == nil {

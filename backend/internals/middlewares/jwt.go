@@ -79,7 +79,6 @@ func RequireUser(c *fiber.Ctx) error {
 }
 
 func RequireLocation(c *fiber.Ctx) error {
-	// TODO fix in production
 
 	// ipaddr := c.IP()
 	ipaddr := "113.199.229.49"
