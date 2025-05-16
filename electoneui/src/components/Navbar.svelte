@@ -122,9 +122,6 @@
             <a href="/user/dashboard" class="block text-sm text-black"
                 >Dashboard</a
             >
-            <a href="/user/dashboard/election" class="block text-sm text-black"
-                >Elections</a
-            >
             <a href="/user/dashboard/profile" class="block text-sm text-black"
                 >Profile</a
             >
