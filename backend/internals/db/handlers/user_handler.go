@@ -35,29 +35,29 @@ func CreateUserHandler(c *fiber.Ctx) error {
 	var photoPaths []string
 	for _, photo := range files {
 		uniqueName := utils.GenerateUniqueFileName(photo.Filename)
-		path := fmt.Sprintf("./uploads/photos/%s", uniqueName)
 
-		if err := c.SaveFile(photo, path); err != nil {
-			return fiber.NewError(fiber.StatusInternalServerError, "Failed To Save File")
+		if err := utils.UploadToS3(photo, uniqueName); err != nil {
+			return fiber.NewError(fiber.StatusInternalServerError, "Failed to upload photo")
 		}
 
-		photoPaths = append(photoPaths, "/uploads/photos/"+uniqueName)
+		photoPaths = append(photoPaths, utils.BUCKETURL+uniqueName)
 	}
 
 	user := operations.User{
 		CitizenshipID: c.FormValue("citizenship_id"),
 		VoterCardID:   c.FormValue("voter_card_id"),
 		Password:      c.FormValue("password"),
-		Photos:        fmt.Sprintf("%s", utils.Join(photoPaths, ",")),
+		Photos:        utils.Join(photoPaths, ","),
 	}
 
 	id, err := operations.CreateUser(&user)
 	if err != nil {
-		return fiber.NewError(fiber.StatusInternalServerError, fmt.Sprintf("Failed to create user %s", err))
+		return fiber.NewError(fiber.StatusInternalServerError, fmt.Sprintf("Failed to create user: %s", err))
 	}
 
 	return c.JSON(fiber.Map{"user_id": id})
 }
+
 
 func GetUserByIDHandler(c *fiber.Ctx) error {
 	var id int
