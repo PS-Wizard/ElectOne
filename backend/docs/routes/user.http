@@ -1,11 +1,11 @@
 ### Create User  
 POST http://localhost:3000/user
 Content-Type: application/json
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhZG1pbklEIjoxLCJlbWFpbCI6ImFkbWluMUBleGFtcGxlLmNvbSIsImV4cCI6MTc0Njc1OTY2Niwicm9sZSI6ImFkbWluIn0.SUtZwdDkFyoDQYyzrxaj7buz8ud4hi57FGA2weypXnU
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhZG1pbklEIjoxLCJlbWFpbCI6ImFkbWluMUBleGFtcGxlLmNvbSIsImV4cCI6MTc0NzcxNTIwMiwicm9sZSI6ImFkbWluIn0.WU_nSxmVa77d8KBc9zTxS1yoIBmb5ZGAEqFyL3ORHl0
 
 {
-  "citizenship_id": "123-456",
-  "voter_card_id": "VC-001",
+  "citizenship_id": "11-11-11-11111",
+  "voter_card_id": "1111111111",
   "password": "somepass",
   "totp_secret": "",
   "photos": ""
@@ -35,7 +35,7 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhZG1pbklEIjoyLCJlb
 ### List user  
 GET http://localhost:3000/user?limit=10&offset=0
 Accept: application/json
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhZG1pbklEIjoxLCJlbWFpbCI6ImFkbWluMUBleGFtcGxlLmNvbSIsImV4cCI6MTc0NzA1MDQzNSwicm9sZSI6ImFkbWluIn0.1Ts2gXWyci0rLP22ALA0FUabwRi_wjiTbQHNefYp1Ms
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhZG1pbklEIjoxLCJlbWFpbCI6ImFkbWluMUBleGFtcGxlLmNvbSIsImV4cCI6MTc0NzcxNTIwMiwicm9sZSI6ImFkbWluIn0.WU_nSxmVa77d8KBc9zTxS1yoIBmb5ZGAEqFyL3ORHl0
 
 # ### Lookup by CitizenshipID + VoterCardID  
 # GET http://localhost:3000/user/lookup?citizen_id=123-456&voter_card_id=

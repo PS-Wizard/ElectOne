@@ -116,3 +116,17 @@ func SetUserTOTPSecret(userID int, secret string) error {
 	_, err := db.DB.Exec(query, secret, userID)
 	return err
 }
+
+func UpdateUserPassword(userID int, newPassword string) error {
+	query := `
+		UPDATE User
+		SET Password = ?
+		WHERE UserID = ?`
+
+	hashedPass, err := bcrypt.GenerateFromPassword([]byte(newPassword), bcrypt.DefaultCost)
+	if err != nil {
+		return fmt.Errorf("Failed To Bcrypt User Password: %v", err)
+	}
+	_, err = db.DB.Exec(query, hashedPass, userID)
+	return err
+}

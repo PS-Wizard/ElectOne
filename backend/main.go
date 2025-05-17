@@ -14,9 +14,8 @@ func main() {
 	app.Static("/uploads", "./uploads/")
 
 	app.Use(cors.New(cors.Config{
-		AllowOrigins: "*",
-		// AllowOrigins: "http://localhost:5173",
-		AllowHeaders: "*",
+		AllowOrigins: "*", // or specific origin for more security
+		AllowHeaders: "Origin, Content-Type, Accept, Authorization",
 		AllowMethods: "*",
 	}))
 

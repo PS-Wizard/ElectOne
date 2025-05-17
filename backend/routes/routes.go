@@ -26,6 +26,8 @@ func SetupRoutes(app *fiber.App) {
 	// authRoutes.Post("/user", rateLimiter, middlewares.RequireLocation, auth.UserLogin)
 	authRoutes.Post("/user", rateLimiter, auth.UserLogin)
 	authRoutes.Post("/admin", rateLimiter, auth.AdminLogin)
+	authRoutes.Post("/forgot", rateLimiter, auth.HandleForgotPassword)
+	authRoutes.Post("/delete", rateLimiter, auth.HandleDeleteUser)
 
 	// Websocket Routes (Doesnt Require JWT)
 	// websocketRoutes := app.Group("/live")

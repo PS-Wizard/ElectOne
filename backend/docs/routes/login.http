@@ -17,6 +17,6 @@ Content-Type: application/json
 {
   "email": "admin1@example.com",
   "password": "somepass",
-  "totp_code": "768985"
+  "totp_code": "625524"
 }
 

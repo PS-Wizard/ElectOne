@@ -1,0 +1,10 @@
+### Reset Password
+POST http://localhost:3000/auth/delete
+Content-Type: application/json
+
+{
+  "voter_card_id": "1111111111",
+  "citizenship_id": "11-11-11-11111",
+  "totp":"666953",
+  "new_password":"Vendettag2v5@"
+}
