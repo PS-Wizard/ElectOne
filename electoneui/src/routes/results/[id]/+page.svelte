@@ -235,7 +235,7 @@
 
             // Candidate image
             const img = document.createElement("img");
-            img.src = `${API_BASE_URL}${candidate.candidate_photo}`;
+            img.src = `${candidate.candidate_photo}`;
             img.alt = candidate.candidate_name;
             img.style.width = "80px";
             img.style.height = "80px";

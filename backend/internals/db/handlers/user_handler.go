@@ -107,19 +107,14 @@ func UpdateUserHandler(c *fiber.Ctx) error {
 	files := form.File["photos"]
 
 	if len(files) > 0 {
-		// Handle new photo upload if provided
 		for _, photo := range files {
 			uniqueName := utils.GenerateUniqueFileName(photo.Filename)
-			path := fmt.Sprintf("./uploads/photos/%s", uniqueName)
-
-			if err := c.SaveFile(photo, path); err != nil {
-				return fiber.NewError(fiber.StatusInternalServerError, "Failed To Save File")
+			if err := utils.UploadToS3(photo, uniqueName); err != nil {
+				return fiber.NewError(fiber.StatusInternalServerError, "Failed to upload photo")
 			}
-
-			photoPaths = append(photoPaths, "/uploads/photos/"+uniqueName)
+			photoPaths = append(photoPaths, utils.BUCKETURL+uniqueName)
 		}
 	} else {
-		// Keep existing photos
 		existingUser, err := operations.GetUserByID(id)
 		if err != nil {
 			return fiber.NewError(fiber.StatusInternalServerError, "Failed to fetch existing user data")

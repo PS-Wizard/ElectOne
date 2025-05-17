@@ -158,7 +158,7 @@
                                         class="flex-shrink-0 sm:w-1/3 mb-4 sm:mb-0"
                                     >
                                         <img
-                                            src={`http://localhost:3000${candidate.candidate_photo}`}
+                                            src={candidate.candidate_photo}
                                             alt={candidate.candidate_name}
                                             class="w-full h-full rounded-full border-2 border-primary object-cover"
                                         />

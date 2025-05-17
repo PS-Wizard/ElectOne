@@ -30,7 +30,7 @@
             });
             const data = await res.json();
             const photoPath = data.photos?.split(",")[3];
-            profilePic = `http://localhost:3000${photoPath}`;
+            profilePic = photoPath;
         }
     });
 </script>

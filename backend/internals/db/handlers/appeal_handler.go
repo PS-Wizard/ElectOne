@@ -24,20 +24,19 @@ func CreateAppealHandler(c *fiber.Ctx) error {
 
 	for _, photo := range files {
 		uniqueName := utils.GenerateUniqueFileName(photo.Filename)
-		path := fmt.Sprintf("./uploads/photos/%s", uniqueName)
 
-		if err := c.SaveFile(photo, path); err != nil {
-			return fiber.NewError(fiber.StatusInternalServerError, err.Error())
+		if err := utils.UploadToS3(photo, uniqueName); err != nil {
+			return fiber.NewError(fiber.StatusInternalServerError, fmt.Sprintf("Failed to upload photo: %v", err))
 		}
 
-		photoPaths = append(photoPaths, "/uploads/photos/"+uniqueName)
+		photoPaths = append(photoPaths, utils.BUCKETURL+uniqueName)
 	}
 
 	appeal := operations.Appeal{
 		CitizenshipID: c.FormValue("citizenship_id"),
 		VoterCardID:   c.FormValue("voter_card_id"),
 		Password:      c.FormValue("password"),
-		Photos:        fmt.Sprintf("%s", utils.Join(photoPaths, ",")),
+		Photos:        utils.Join(photoPaths, ","),
 		Status:        "pending",
 	}
 
@@ -48,6 +47,7 @@ func CreateAppealHandler(c *fiber.Ctx) error {
 
 	return c.Status(fiber.StatusCreated).JSON(fiber.Map{"appeal_id": id})
 }
+
 
 func GetAppealByIDHandler(c *fiber.Ctx) error {
 	id, err := strconv.Atoi(c.Params("id"))

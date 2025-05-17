@@ -24,29 +24,36 @@ func CreateCandidateHandler(c *fiber.Ctx) error {
 		return fiber.NewError(fiber.StatusBadRequest, "Invalid form data")
 	}
 
-	candidatePhoto := form.File["candidate_photo"]
-	if len(candidatePhoto) == 0 {
+	files := form.File["candidate_photo"]
+	if len(files) == 0 {
 		return fiber.NewError(fiber.StatusBadRequest, "No photo file provided")
 	}
-	uniqueName := utils.GenerateUniqueFileName(candidatePhoto[0].Filename)
-	path := fmt.Sprintf("./uploads/photos/%s", uniqueName)
-	if err := c.SaveFile(candidatePhoto[0], path); err != nil {
-		return fiber.NewError(fiber.StatusInternalServerError, "Failed To Save File")
+
+	file := files[0]
+	uniqueName := utils.GenerateUniqueFileName(file.Filename)
+
+	// Upload to S3
+	if err := utils.UploadToS3(file, uniqueName); err != nil {
+		fmt.Println("S3 Upload Error:", err)
+		return fiber.NewError(fiber.StatusInternalServerError, "Failed to upload file to S3")
 	}
 
-	election_id, err := strconv.Atoi(c.FormValue("election_id"))
+	// Parse election_id
+	electionID, err := strconv.Atoi(c.FormValue("election_id"))
 	if err != nil {
 		return fiber.NewError(fiber.StatusBadRequest, "Invalid Election ID")
 	}
+
 	candidate := operations.Candidate{
 		CitizenID:   c.FormValue("citizenship_id"),
-		ElectionID:  election_id,
-		ProfilePath: "/uploads/photos/" + uniqueName,
+		ElectionID:  electionID,
+		ProfilePath: utils.BUCKETURL + uniqueName,
 		Bio:         c.FormValue("candidate_bio"),
 		Post:        c.FormValue("candidate_post"),
 		Party:       c.FormValue("candidate_party"),
 		Name:        c.FormValue("candidate_name"),
 	}
+
 	id, err := operations.CreateCandidate(&candidate)
 	if err != nil {
 		return c.Status(fiber.StatusBadRequest).JSON(fiber.Map{
@@ -56,6 +63,7 @@ func CreateCandidateHandler(c *fiber.Ctx) error {
 
 	return c.JSON(fiber.Map{"candidate_id": id})
 }
+
 
 func GetCandidatesByIDHandler(c *fiber.Ctx) error {
 	id, err := strconv.Atoi(c.Params("id"))
@@ -86,17 +94,14 @@ func UpdateCandidateHandler(c *fiber.Ctx) error {
 	var profilePath string
 	candidatePhoto := form.File["candidate_photo"]
 
-	// Check if a photo was uploaded
 	if len(candidatePhoto) > 0 {
 		uniqueName := utils.GenerateUniqueFileName(candidatePhoto[0].Filename)
-		path := fmt.Sprintf("./uploads/photos/%s", uniqueName)
-		if err := c.SaveFile(candidatePhoto[0], path); err != nil {
-			return fiber.NewError(fiber.StatusInternalServerError, "Failed To Save File")
+		if err := utils.UploadToS3(candidatePhoto[0], uniqueName); err != nil {
+			return fiber.NewError(fiber.StatusInternalServerError, "Failed to upload photo")
 		}
-		profilePath = "/uploads/photos/" + uniqueName
+		profilePath = utils.BUCKETURL + uniqueName
 	} else {
-		// If no new photo, fetch the existing candidate to preserve the old photo path
-		existingCandidate, err := operations.GetCandidateByID(id) // Assuming you have a GetCandidateByID function
+		existingCandidate, err := operations.GetCandidateByID(id)
 		if err != nil {
 			return fiber.NewError(fiber.StatusInternalServerError, "Failed to fetch existing candidate data")
 		}
@@ -127,6 +132,7 @@ func UpdateCandidateHandler(c *fiber.Ctx) error {
 
 	return c.SendStatus(fiber.StatusOK)
 }
+
 
 func DeleteCandidateHandler(c *fiber.Ctx) error {
 	id, err := strconv.Atoi(c.Params("id"))

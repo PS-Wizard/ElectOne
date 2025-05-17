@@ -275,11 +275,11 @@
                                     <td>{c.election_id}</td>
                                     <td>
                                         <img
-                                            src={`http://localhost:3000${c.candidate_photo}`}
+                                            src={c.candidate_photo}
                                             alt="Candidate Photo"
                                             class="w-12 h-12 object-cover rounded-full cursor-pointer hover:scale-105 transition"
                                             on:click={() =>
-                                                (selectedPhoto = `http://localhost:3000${c.candidate_photo}`)}
+                                                (selectedPhoto = c.candidate_photo)}
                                         />
                                     </td>
                                     <td>{c.candidate_party}</td>

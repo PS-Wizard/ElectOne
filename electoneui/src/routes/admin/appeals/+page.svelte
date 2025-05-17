@@ -140,11 +140,11 @@
                                             <div class="flex gap-1">
                                                 {#each appeal.photos.split(",") as photo}
                                                     <img
-                                                        src={`http://localhost:3000${photo}`}
+                                                        src={photo}
                                                         alt="Appeal Photo"
                                                         class="w-12 h-12 object-cover rounded-full cursor-pointer hover:scale-105 transition"
                                                         on:click={() =>
-                                                            (selectedPhoto = `http://localhost:3000${photo}`)}
+                                                            (selectedPhoto = photo)}
                                                     />
                                                 {/each}
                                             </div>
