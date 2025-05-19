@@ -1,5 +1,5 @@
 <script>
-    import { onMount } from "svelte";
+    import { onMount, onDestroy } from "svelte";
     import { fade } from "svelte/transition";
     import {
         Chart,
@@ -12,8 +12,8 @@
         Tooltip,
         Legend,
     } from "chart.js";
-    import Navbar from "../../../components/Navbar.svelte";
-
+    import Navbar from "../../../components/Navbar.svelte"; // Adjust path as needed
+    import CandidatePieChartCard from "../../../components/CandidatePieChartCard.svelte";
     // Register Chart.js components
     Chart.register(
         BarController,
@@ -28,7 +28,6 @@
 
     const API_BASE_URL = "http://localhost:3000";
 
-    // Sample data structure
     let election = {
         election_id: 1,
         name: "Loading...",
@@ -43,18 +42,22 @@
     let votes = [];
     let loading = true;
     let error = null;
-    let posts = [];
-    let charts = []; // To store chart instances for cleanup
 
-    // Fetch data on mount
+    let postsWithCandidatesAndVotes = [];
+
+    let barChartInstances = {};
+
     onMount(async () => {
         try {
-            // Fetch election details
             const electionRes = await fetch(`${API_BASE_URL}/election/1`, {
                 headers: {
                     Authorization: `Bearer ${localStorage.getItem("user_token")}`,
                 },
             });
+            if (!electionRes.ok)
+                throw new Error(
+                    `Failed to fetch election: ${electionRes.statusText}`,
+                );
             election = await electionRes.json();
 
             // Fetch candidates
@@ -66,6 +69,10 @@
                     },
                 },
             );
+            if (!candidatesRes.ok)
+                throw new Error(
+                    `Failed to fetch candidates: ${candidatesRes.statusText}`,
+                );
             candidates = await candidatesRes.json();
 
             // Fetch votes
@@ -77,10 +84,13 @@
                     },
                 },
             );
+            if (!votesRes.ok)
+                throw new Error(
+                    `Failed to fetch votes: ${votesRes.statusText}`,
+                );
             votes = await votesRes.json();
 
-            // Process data
-            processData();
+            processDataAndRenderBarCharts();
         } catch (err) {
             error = err.message;
             console.error("Error fetching data:", err);
@@ -88,60 +98,68 @@
             loading = false;
         }
 
-        // Cleanup charts when component is destroyed
         return () => {
-            charts.forEach((chart) => chart.destroy());
+            Object.values(barChartInstances).forEach((chart) => {
+                if (chart) chart.destroy();
+            });
+            barChartInstances = {};
         };
     });
 
-    // Process data
-    function processData() {
-        // Group votes by candidate_id
+    function processDataAndRenderBarCharts() {
         const voteCounts = {};
         votes.forEach((vote) => {
             voteCounts[vote.candidate_id] =
                 (voteCounts[vote.candidate_id] || 0) + 1;
         });
 
-        // Add vote counts to candidates
-        candidates.forEach((candidate) => {
-            candidate.votes = voteCounts[candidate.candidate_id] || 0;
-        });
+        const candidatesWithVotes = candidates.map((candidate) => ({
+            ...candidate,
+            votes: voteCounts[candidate.candidate_id] || 0,
+        }));
 
-        // Find unique posts
-        posts = [...new Set(candidates.map((c) => c.candidate_post))];
+        const uniquePostNames = [
+            ...new Set(candidatesWithVotes.map((c) => c.candidate_post)),
+        ];
 
-        // Render charts after a small delay to ensure DOM is ready
-        setTimeout(renderCharts, 100);
-    }
-
-    // Render all charts
-    function renderCharts() {
-        posts.forEach((post) => {
-            const postCandidates = candidates.filter(
-                (c) => c.candidate_post === post,
+        postsWithCandidatesAndVotes = uniquePostNames.map((postName) => {
+            const postCandidates = candidatesWithVotes.filter(
+                (c) => c.candidate_post === postName,
             );
-            renderBarChart(post, postCandidates);
-            renderPieCharts(post, postCandidates);
+            const totalVotesInPost = postCandidates.reduce(
+                (sum, c) => sum + c.votes,
+                0,
+            );
+
+            postCandidates.sort((a, b) => b.votes - a.votes);
+
+            return {
+                name: postName,
+                candidates: postCandidates,
+                totalVotesInPost: totalVotesInPost,
+            };
         });
+
+        setTimeout(() => {
+            postsWithCandidatesAndVotes.forEach((postData) => {
+                renderBarChart(postData.name, postData.candidates);
+            });
+        }, 100);
     }
 
-    // Render bar chart for a specific post
-    function renderBarChart(post, postCandidates) {
-        // Sort by votes descending
-        postCandidates.sort((a, b) => b.votes - a.votes);
+    function renderBarChart(postName, postCandidates) {
+        const winner = postCandidates.length > 0 ? postCandidates[0] : null;
 
-        // Find the winner
-        const winner = postCandidates[0];
+        const canvasId = `bar-chart-${postName.replace(/\s+/g, "-")}`;
+        const ctx = document.getElementById(canvasId);
+        if (!ctx) {
+            console.warn(`Canvas element not found for bar chart: ${canvasId}`);
+            return;
+        }
 
-        const ctx = document.getElementById(
-            `bar-chart-${post.replace(/\s+/g, "-")}`,
-        );
-        if (!ctx) return;
-
-        // Destroy previous chart if it exists
-        const existingChart = Chart.getChart(ctx);
-        if (existingChart) existingChart.destroy();
+        if (barChartInstances[postName]) {
+            barChartInstances[postName].destroy();
+        }
 
         const chart = new Chart(ctx, {
             type: "bar",
@@ -152,12 +170,12 @@
                         label: "Votes",
                         data: postCandidates.map((c) => c.votes),
                         backgroundColor: postCandidates.map((c) =>
-                            c.candidate_id === winner.candidate_id
+                            winner && c.candidate_id === winner.candidate_id
                                 ? "rgba(255, 215, 0, 0.7)"
                                 : "rgba(75, 192, 192, 0.7)",
                         ),
                         borderColor: postCandidates.map((c) =>
-                            c.candidate_id === winner.candidate_id
+                            winner && c.candidate_id === winner.candidate_id
                                 ? "rgb(255, 215, 0)"
                                 : "rgb(75, 192, 192)",
                         ),
@@ -167,13 +185,12 @@
             },
             options: {
                 responsive: true,
+                maintainAspectRatio: false,
                 plugins: {
                     title: {
                         display: true,
-                        text: `Vote Results for ${post}`,
-                        font: {
-                            size: 16,
-                        },
+                        text: `Vote Results for ${postName}`,
+                        font: { size: 16 },
                     },
                     tooltip: {
                         callbacks: {
@@ -186,155 +203,37 @@
                 scales: {
                     y: {
                         beginAtZero: true,
-                        title: {
-                            display: true,
-                            text: "Number of Votes",
-                        },
+                        title: { display: true, text: "Number of Votes" },
                     },
                     x: {
-                        title: {
-                            display: true,
-                            text: "Candidates",
-                        },
+                        title: { display: true, text: "Candidates" },
                     },
                 },
             },
         });
-
-        charts.push(chart);
-    }
-
-    // Render pie charts for each candidate in a post
-    function renderPieCharts(post, postCandidates) {
-        const container = document.getElementById(
-            `pie-charts-${post.replace(/\s+/g, "-")}`,
-        );
-        if (!container) return;
-
-        // Clear previous content
-        container.innerHTML = "";
-
-        // Calculate total votes for this post
-        const totalVotes = postCandidates.reduce((sum, c) => sum + c.votes, 0);
-
-        // Create a chart for each candidate
-        postCandidates.forEach((candidate) => {
-            const percentage =
-                totalVotes > 0
-                    ? ((candidate.votes / totalVotes) * 100).toFixed(1)
-                    : 0;
-
-            const card = document.createElement("div");
-            card.className = "candidate-card";
-            card.style.width = "250px";
-            card.style.margin = "10px";
-            card.style.padding = "15px";
-            card.style.borderRadius = "8px";
-            card.style.boxShadow = "0 2px 8px rgba(0,0,0,0.1)";
-            card.style.textAlign = "center";
-
-            // Candidate image
-            const img = document.createElement("img");
-            img.src = `${candidate.candidate_photo}`;
-            img.alt = candidate.candidate_name;
-            img.style.width = "80px";
-            img.style.height = "80px";
-            img.style.borderRadius = "50%";
-            img.style.objectFit = "cover";
-            img.style.marginBottom = "10px";
-            card.appendChild(img);
-
-            // Candidate name
-            const name = document.createElement("h3");
-            name.textContent = candidate.candidate_name;
-            name.style.margin = "5px 0";
-            name.style.fontSize = "16px";
-            card.appendChild(name);
-
-            // Candidate party
-            const party = document.createElement("p");
-            party.textContent = candidate.candidate_party;
-            party.style.margin = "5px 0";
-            party.style.fontSize = "14px";
-            party.style.color = "#666";
-            card.appendChild(party);
-
-            // Vote percentage
-            const percent = document.createElement("div");
-            percent.textContent = `${percentage}% of votes`;
-            percent.style.margin = "10px 0";
-            percent.style.fontSize = "18px";
-            percent.style.fontWeight = "bold";
-            card.appendChild(percent);
-
-            // Create canvas for pie chart
-            const canvas = document.createElement("canvas");
-            canvas.width = 200;
-            canvas.height = 200;
-            card.appendChild(canvas);
-
-            container.appendChild(card);
-
-            // Create pie chart
-            const ctx = canvas.getContext("2d");
-            const chart = new Chart(ctx, {
-                type: "pie",
-                data: {
-                    labels: ["This Candidate", "Others"],
-                    datasets: [
-                        {
-                            data: [
-                                candidate.votes,
-                                totalVotes - candidate.votes,
-                            ],
-                            backgroundColor: [
-                                "rgba(75, 192, 192, 0.7)",
-                                "rgba(201, 203, 207, 0.7)",
-                            ],
-                            borderColor: [
-                                "rgba(75, 192, 192, 1)",
-                                "rgba(201, 203, 207, 1)",
-                            ],
-                            borderWidth: 1,
-                        },
-                    ],
-                },
-                options: {
-                    responsive: false,
-                    plugins: {
-                        legend: {
-                            position: "bottom",
-                        },
-                        tooltip: {
-                            callbacks: {
-                                label: function (context) {
-                                    const label = context.label || "";
-                                    const value = context.raw || 0;
-                                    const total = context.dataset.data.reduce(
-                                        (a, b) => a + b,
-                                        0,
-                                    );
-                                    const percentage = Math.round(
-                                        (value / total) * 100,
-                                    );
-                                    return `${label}: ${value} (${percentage}%)`;
-                                },
-                            },
-                        },
-                    },
-                },
-            });
-
-            charts.push(chart);
-        });
+        barChartInstances[postName] = chart;
     }
 </script>
 
 <svelte:head>
-    <title>Election Results - {election.name}</title>
+    <title
+        >Election Results - {election.name === "Loading..."
+            ? "Loading"
+            : election.name}</title
+    >
 </svelte:head>
 
+<div
+    class="absolute inset-x-0 -top-40 -z-10 transform-gpu overflow-hidden blur-3xl sm:-top-80"
+    aria-hidden="true"
+>
+    <div
+        class="relative left-[calc(50%-11rem)] aspect-1155/678 w-[36.125rem] -translate-x-1/2 rotate-[30deg] bg-linear-to-tr from-[#ff80b5] to-[#9089fc] opacity-30 sm:left-[calc(50%-30rem)] sm:w-[72.1875rem]"
+        style="clip-path: polygon(74.1% 44.1%, 100% 61.6%, 97.5% 26.9%, 85.5% 0.1%, 80.7% 2%, 72.5% 32.5%, 60.2% 62.4%, 52.4% 68.1%, 47.5% 58.3%, 45.2% 34.5%, 27.5% 76.7%, 0.1% 64.9%, 17.9% 100%, 27.6% 76.8%, 76.1% 97.7%, 74.1% 44.1%)"
+    ></div>
+</div>
 <Navbar />
+
 <div class="container mx-auto px-4 py-8">
     {#if loading}
         <div class="text-center py-8">
@@ -352,11 +251,11 @@
             <p>{error}</p>
         </div>
     {:else}
-        <h1 class="text-3xl font-bold text-center mb-6">
+        <h1 class="text-3xl font-bold uppercase text-center mb-6">
             {election.name} Results
         </h1>
 
-        <div class="bg-white rounded-lg shadow-md p-6 mb-8">
+        <div class="bg-white rounded-lg p-6 mb-8 border">
             <h2 class="text-xl font-semibold mb-4">Election Details</h2>
             <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                 <div>
@@ -372,63 +271,76 @@
                 <div>
                     <p>
                         <span class="font-medium">Dates:</span>
-                        {new Date(election.start_date).toLocaleDateString()} to {new Date(
-                            election.end_date,
-                        ).toLocaleDateString()}
+                        {election.start_date
+                            ? new Date(election.start_date).toLocaleDateString()
+                            : "N/A"} to
+                        {election.end_date
+                            ? new Date(election.end_date).toLocaleDateString()
+                            : "N/A"}
                     </p>
                     <p>
-                        <span class="font-medium">Total Votes:</span>
+                        <span class="font-medium">Total Votes Cast:</span>
                         {votes.length}
                     </p>
                 </div>
             </div>
-            <p class="mt-4">
-                <span class="font-medium">Description:</span>
-                {election.description}
-            </p>
+            {#if election.description}
+                <p class="mt-4">
+                    <span class="font-medium">Description:</span>
+                    {election.description}
+                </p>
+            {/if}
         </div>
 
-        {#each posts as post}
-            <div class="bg-white rounded-lg shadow-md p-6 mb-8" transition:fade>
-                <h2 class="text-2xl font-bold mb-6 text-center">
-                    {post} Results
+        {#each postsWithCandidatesAndVotes as postData (postData.name)}
+            <div
+                class="bg-white rounded-lg p-6 mb-8 border border-2"
+                transition:fade
+            >
+                <h2 class="text-2xl uppercase font-bold mb-6 text-center">
+                    {postData.name} Results
                 </h2>
 
-                <!-- Bar Chart -->
                 <div class="mb-8">
-                    <h3 class="text-lg font-semibold mb-4">
-                        Vote Distribution
-                    </h3>
                     <div class="w-full h-96">
-                        <canvas id="bar-chart-{post.replace(/\s+/g, '-')}"
+                        <canvas
+                            id="bar-chart-{postData.name.replace(/\s+/g, '-')}"
                         ></canvas>
                     </div>
                 </div>
 
-                <!-- Pie Charts -->
                 <div class="mb-8">
-                    <h3 class="text-lg font-semibold mb-4">
-                        Candidate Performance
-                    </h3>
-                    <div
-                        id="pie-charts-{post.replace(/\s+/g, '-')}"
-                        class="flex flex-wrap justify-center gap-6"
-                    ></div>
+                    <div class="flex flex-wrap justify-center gap-6">
+                        {#each postData.candidates as candidate (candidate.candidate_id)}
+                            <CandidatePieChartCard
+                                {candidate}
+                                totalVotesInPost={postData.totalVotesInPost}
+                            />
+                        {/each}
+                        {#if postData.candidates.length === 0}
+                            <p class="text-gray-500">
+                                No candidates found for this post.
+                            </p>
+                        {/if}
+                    </div>
                 </div>
             </div>
         {/each}
+        {#if postsWithCandidatesAndVotes.length === 0 && !loading}
+            <div class="text-center py-8">
+                <p class="text-gray-600">
+                    No posts or candidate data found for this election.
+                </p>
+            </div>
+        {/if}
     {/if}
+    <div
+        class="absolute inset-x-0 top-[calc(100%-13rem)] -z-10 transform-gpu overflow-hidden blur-3xl sm:top-[calc(100%-30rem)]"
+        aria-hidden="true"
+    >
+        <div
+            class="relative left-[calc(50%+3rem)] aspect-1155/678 w-[36.125rem] -translate-x-1/2 bg-linear-to-tr from-[#ff80b5] to-[#9089fc] opacity-30 sm:left-[calc(50%+36rem)] sm:w-[72.1875rem]"
+            style="clip-path: polygon(74.1% 44.1%, 100% 61.6%, 97.5% 26.9%, 85.5% 0.1%, 80.7% 2%, 72.5% 32.5%, 60.2% 62.4%, 52.4% 68.1%, 47.5% 58.3%, 45.2% 34.5%, 27.5% 76.7%, 0.1% 64.9%, 17.9% 100%, 27.6% 76.8%, 76.1% 97.7%, 74.1% 44.1%)"
+        ></div>
+    </div>
 </div>
-
-<style>
-    .candidate-card {
-        transition:
-            transform 0.2s ease,
-            box-shadow 0.2s ease;
-    }
-
-    .candidate-card:hover {
-        transform: translateY(-5px);
-        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
-    }
-</style>

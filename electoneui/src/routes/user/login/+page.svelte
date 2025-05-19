@@ -161,6 +161,9 @@
             >
                 Login
             </button>
+            <a class="text-xs block text-blue-500 text-center mt-1" href="/user/forgotPassword">
+                Click Me If You Forgot Your Password 
+            </a>
 
             {#if token}
                 <div

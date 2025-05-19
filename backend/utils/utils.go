@@ -43,15 +43,13 @@ func UploadToS3(fileHeader *multipart.FileHeader, fileName string) error {
 		return err
 	}
 
-	// Set required headers
 	contentType := fileHeader.Header.Get("Content-Type")
 	if contentType == "" {
 		contentType = "application/octet-stream"
 	}
 	req.Header.Set("Content-Type", contentType)
 
-	// Add Content-Length header to avoid chunked encoding
-	req.ContentLength = fileHeader.Size // This is the critical fix
+	req.ContentLength = fileHeader.Size 
 
 	client := &http.Client{}
 	resp, err := client.Do(req)

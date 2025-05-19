@@ -69,7 +69,7 @@
         <!-- Profile Picture -->
         <div class="flex justify-center">
             <img
-                src={`http://localhost:3000${user.photos.split(",")[3]}`}
+                src={user.photos.split(",")[3]}
                 alt="Profile Pic"
                 class="rounded-full w-32 h-32 object-cover border-4 border-white shadow"
             />
@@ -129,7 +129,7 @@
                     .split(",")
                     .filter((_, i) => i !== 3) as photo}
                     <img
-                        src={`http://localhost:3000${photo}`}
+                        src={photo}
                         alt="Document Photo"
                         class="rounded-xl shadow object-cover w-full max-h-96"
                     />
@@ -145,6 +145,15 @@
             class="relative left-[calc(50%+3rem)] aspect-1155/678 w-[36.125rem] -translate-x-1/2 bg-linear-to-tr from-[#ff80b5] to-[#9089fc] opacity-30 sm:left-[calc(50%+36rem)] sm:w-[72.1875rem]"
             style="clip-path: polygon(74.1% 44.1%, 100% 61.6%, 97.5% 26.9%, 85.5% 0.1%, 80.7% 2%, 72.5% 32.5%, 60.2% 62.4%, 52.4% 68.1%, 47.5% 58.3%, 45.2% 34.5%, 27.5% 76.7%, 0.1% 64.9%, 17.9% 100%, 27.6% 76.8%, 76.1% 97.7%, 74.1% 44.1%)"
         ></div>
+    </div>
+
+    <div class="flex justify-center pt-6">
+        <a
+            href="http://localhost:5173/user/deleteAccount"
+            class="btn btn-error btn-outline"
+        >
+            Delete My Account
+        </a>
     </div>
 </section>
 <Footer />
