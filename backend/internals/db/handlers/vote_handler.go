@@ -13,7 +13,7 @@ func RegisterVoteRoutes(router fiber.Router) {
 	router.Post("/", CreateVoteHandler)
 	router.Get("/", middlewares.RequireAdmin, ListVotesHandler)
 	router.Get("/voter/:voterCardID", GetVotesByVoterCardHandler)
-	router.Delete("/:id", middlewares.RequireAdmin, DeleteVoteHandler)
+	// router.Delete("/:id", middlewares.RequireAdmin, DeleteVoteHandler)
 	router.Get("/history/:electionID", GetVotesByElectionIDHandler)
 }
 
@@ -26,6 +26,7 @@ func CreateVoteHandler(c *fiber.Ctx) error {
 	token := c.Locals("token").(*jwt.Token)
 	claims := token.Claims.(jwt.MapClaims)
 	voterCardID, ok := claims["voter_card"].(string)
+
 	if !ok {
 		return fiber.NewError(fiber.StatusUnauthorized, "Invalid voter card ID")
 	}

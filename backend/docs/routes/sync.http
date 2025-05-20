@@ -1,0 +1,4 @@
+### Create User  
+POST http://localhost:3000/sync/election/2/redis-to-turso
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhZG1pbklEIjoxLCJlbWFpbCI6ImFkbWluMUBleGFtcGxlLmNvbSIsImV4cCI6MTc0NzcxNTIwMiwicm9sZSI6ImFkbWluIn0.WU_nSxmVa77d8KBc9zTxS1yoIBmb5ZGAEqFyL3ORHl0

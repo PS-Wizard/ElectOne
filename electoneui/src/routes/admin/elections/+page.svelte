@@ -27,6 +27,28 @@
     let newElectionModal;
     let editElectionModal;
 
+    async function syncElection(id) {
+        if (!confirm("Sync data from Redis to Turso for this election?"))
+            return;
+        try {
+            const res = await fetch(
+                `http://localhost:3000/sync/election/${id}/redis-to-turso`,
+                {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json",
+                        Authorization: `Bearer ${localStorage.getItem("admin_token")}`,
+                    },
+                },
+            );
+            if (!res.ok) throw new Error("Failed to sync election data");
+            alert("Sync successful");
+            await fetchElections();
+        } catch (err) {
+            alert(err.message);
+        }
+    }
+
     async function fetchElections() {
         loading = true;
         try {
@@ -360,6 +382,12 @@
                                     on:click={() =>
                                         deleteElection(election.election_id)}
                                     >Delete</button
+                                >
+                                <button
+                                    class="btn btn-sm btn-info text-white"
+                                    on:click={() =>
+                                        syncElection(election.election_id)}
+                                    >Sync Election</button
                                 >
                             </td>
                         </tr>

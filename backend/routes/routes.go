@@ -5,6 +5,9 @@ import (
 
 	"github.com/PS-Wizard/Electone/internals/auth"
 	"github.com/PS-Wizard/Electone/internals/db/handlers"
+	"github.com/PS-Wizard/Electone/internals/ws"
+
+	// "github.com/PS-Wizard/Electone/internals/db/operations"
 	"github.com/PS-Wizard/Electone/internals/middlewares"
 	"github.com/gofiber/fiber/v2"
 
@@ -20,6 +23,9 @@ func SetupRoutes(app *fiber.App) {
 		LimiterMiddleware: limiter.SlidingWindow{},
 	})
 
+	hub := ws.NewHub()
+	ws.SetupWebSocketRoute(app.Group("/live"), hub)
+	handlers.Hub = hub
 	// Auth Routes ( DOESNT REQUIRE JWT)
 	authRoutes := app.Group("/auth")
 
@@ -28,10 +34,6 @@ func SetupRoutes(app *fiber.App) {
 	authRoutes.Post("/admin", rateLimiter, auth.AdminLogin)
 	authRoutes.Post("/forgot", rateLimiter, auth.HandleForgotPassword)
 	authRoutes.Post("/delete", rateLimiter, auth.HandleDeleteUser)
-
-	// Websocket Routes (Doesnt Require JWT)
-	// websocketRoutes := app.Group("/live")
-	// operations.RegisterWebSocketRoutes(websocketRoutes)
 
 	// Appeal Status Routes (Doesnt Require JWT)
 	statusAppealRoutes := app.Group("/status")
@@ -73,9 +75,20 @@ func SetupRoutes(app *fiber.App) {
 	candidateRoutes := protected.Group("/candidate")
 	handlers.RegisterCandidateRoutes(candidateRoutes)
 
-	// Vote Routes
-	votingRoutes := protected.Group("/vote")
-	handlers.RegisterVoteRoutes(votingRoutes)
+	// Turso Vote Routes
+	// votingRoutes := protected.Group("/vote")
+	// handlers.RegisterVoteRoutes(votingRoutes)
+
+	tursoVotingRoutes := protected.Group("/vote/turso")
+	handlers.RegisterVoteRoutes(tursoVotingRoutes)
+
+	// Redis Vote Routes
+	redisVotingRoutes := protected.Group("/vote/redis")
+	handlers.RegisterRedisVotingRoutes(redisVotingRoutes)
+
+	// Sync To Turso:
+	syncRoute := protected.Group("/sync")
+	handlers.RegisterSyncRoutes(syncRoute)
 
 	//admin Routes
 	adminRoutes := protected.Group("/admin")

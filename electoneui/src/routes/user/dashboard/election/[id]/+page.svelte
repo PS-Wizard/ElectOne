@@ -22,8 +22,26 @@
         }
 
         try {
+            const resp = await fetch(
+                `http://localhost:3000/election/${electionId}`,
+                {
+                    headers: {
+                        Authorization: `Bearer ${token}`,
+                    },
+                },
+            );
+
+            if (!resp.ok) throw new Error("Failed to fetch election info");
+
+            const election = await resp.json();
+
+            if (new Date(election.end_date) < new Date()) {
+                window.location.href = `/results/${electionId}`; // redirect to results page
+                return;
+            }
+
             const res = await fetch(
-                "http://localhost:3000/candidate?limit=999&offset=0",
+                `http://localhost:3000/election/candidates/${electionId}`,
                 {
                     headers: {
                         Authorization: `Bearer ${token}`,
@@ -31,10 +49,8 @@
                 },
             );
             if (!res.ok) throw new Error("Failed to fetch candidates");
-
             const data = await res.json();
-            console.log(data);
-            candidates = data.filter((c) => c.election_id == electionId);
+            candidates = data; // assign the fetched candidates to the variable
             groupCandidatesByPost(candidates);
         } catch (err) {
             error = err.message;
@@ -52,7 +68,6 @@
         });
     }
 
-    // Function to handle voting submission
     async function submitVote() {
         const token = localStorage.getItem("user_token");
 
@@ -65,34 +80,28 @@
             return;
         }
 
+        const voteArray = Object.values(selectedCandidates).map(
+            (candidateID) => ({
+                election_id: parseInt(electionId),
+                candidate_id: candidateID,
+            }),
+        );
+
         try {
-            for (const post in selectedCandidates) {
-                const candidateID = selectedCandidates[post];
+            const res = await fetch("http://localhost:3000/vote/redis", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                    Authorization: `Bearer ${token}`,
+                },
+                body: JSON.stringify(voteArray),
+            });
 
-                const res = await fetch("http://localhost:3000/vote", {
-                    method: "POST",
-                    headers: {
-                        "Content-Type": "application/json",
-                        Authorization: `Bearer ${token}`,
-                    },
-                    body: JSON.stringify({
-                        election_id: parseInt(electionId),
-                        candidate_id: candidateID,
-                    }),
-                });
+            const data = await res.json();
 
-                const data = await res.json();
+            if (!res.ok) throw new Error(data.error || "Failed to submit vote");
 
-                if (!res.ok) {
-                    throw new Error(data.error || "Failed to submit vote.");
-                }
-
-                alert(
-                    "Vote for candidate " +
-                        candidateID +
-                        " submitted successfully!",
-                );
-            }
+            alert("All votes submitted successfully!");
         } catch (err) {
             alert(err.message);
         }

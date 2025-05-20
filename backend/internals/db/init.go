@@ -5,14 +5,14 @@ import (
 	"fmt"
 	"log"
 
-	redisStore "github.com/gofiber/storage/redis"
 	"github.com/redis/go-redis/v9"
 	_ "github.com/tursodatabase/libsql-client-go/libsql"
 )
 
 var DB *sql.DB
 var RDB *redis.Client
-var REDISSTORE *redisStore.Storage
+
+// var REDISSTORE *redisStore.Storage
 
 const url string = "libsql://electone-wizard.aws-ap-south-1.turso.io"
 const token string = "eyJhbGciOiJFZERTQSIsInR5cCI6IkpXVCJ9.eyJhIjoicnciLCJpYXQiOjE3NDYxNzcyMjAsImlkIjoiOTJlNDE5NDAtZDkyZS00MzAwLTk2ZmYtNDZhZjQxODkzOGYyIiwicmlkIjoiMTUxZjI3MWUtY2U2ZC00MDQwLWE3ZTYtYjJmNzI2OTJmYWVhIn0.4PizC8s2d1-8pWw1n8K21_HCDK0hcTgJpMsQNCzy_aFKD9CTOUHfZNzJByEKRzuciDC5CYmf-cJ6oTrkI9q6Cw"

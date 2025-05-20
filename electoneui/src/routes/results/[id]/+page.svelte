@@ -1,6 +1,7 @@
 <script>
     import { onMount, onDestroy } from "svelte";
     import { fade } from "svelte/transition";
+    import { page } from "$app/stores";
     import {
         Chart,
         BarController,
@@ -12,9 +13,9 @@
         Tooltip,
         Legend,
     } from "chart.js";
-    import Navbar from "../../../components/Navbar.svelte"; // Adjust path as needed
+    import Navbar from "../../../components/Navbar.svelte";
     import CandidatePieChartCard from "../../../components/CandidatePieChartCard.svelte";
-    // Register Chart.js components
+
     Chart.register(
         BarController,
         CategoryScale,
@@ -28,8 +29,9 @@
 
     const API_BASE_URL = "http://localhost:3000";
 
+    $: electionId = $page.params.id;
     let election = {
-        election_id: 1,
+        election_id: electionId,
         name: "Loading...",
         description: "",
         start_date: "",
@@ -44,25 +46,28 @@
     let error = null;
 
     let postsWithCandidatesAndVotes = [];
-
     let barChartInstances = {};
+    let ws;
 
     onMount(async () => {
         try {
-            const electionRes = await fetch(`${API_BASE_URL}/election/1`, {
-                headers: {
-                    Authorization: `Bearer ${localStorage.getItem("user_token")}`,
+            const electionRes = await fetch(
+                `${API_BASE_URL}/election/${electionId}`,
+                {
+                    headers: {
+                        Authorization: `Bearer ${localStorage.getItem("user_token")}`,
+                    },
                 },
-            });
+            );
+
             if (!electionRes.ok)
                 throw new Error(
                     `Failed to fetch election: ${electionRes.statusText}`,
                 );
             election = await electionRes.json();
 
-            // Fetch candidates
             const candidatesRes = await fetch(
-                `${API_BASE_URL}/election/candidates/1`,
+                `${API_BASE_URL}/election/candidates/${electionId}`,
                 {
                     headers: {
                         Authorization: `Bearer ${localStorage.getItem("user_token")}`,
@@ -75,38 +80,86 @@
                 );
             candidates = await candidatesRes.json();
 
-            // Fetch votes
-            const votesRes = await fetch(
-                `${API_BASE_URL}/vote/history/1?limit=100&offset=0`,
-                {
-                    headers: {
-                        Authorization: `Bearer ${localStorage.getItem("user_token")}`,
-                    },
-                },
-            );
-            if (!votesRes.ok)
-                throw new Error(
-                    `Failed to fetch votes: ${votesRes.statusText}`,
-                );
-            votes = await votesRes.json();
+            const now = new Date();
+            const electionEnded = election.end_date
+                ? new Date(election.end_date) < now
+                : false;
 
-            processDataAndRenderBarCharts();
+            if (electionEnded) {
+                await fetchVotesAndRender();
+            } else {
+                await fetchVotesAndRender();
+                setupWebSocket();
+            }
         } catch (err) {
             error = err.message;
             console.error("Error fetching data:", err);
         } finally {
             loading = false;
         }
-
-        return () => {
-            Object.values(barChartInstances).forEach((chart) => {
-                if (chart) chart.destroy();
-            });
-            barChartInstances = {};
-        };
     });
 
+    onDestroy(() => {
+        Object.values(barChartInstances).forEach((chart) => {
+            if (chart) chart.destroy();
+        });
+        barChartInstances = {};
+
+        if (ws) {
+            ws.close();
+        }
+    });
+
+    async function fetchVotesAndRender() {
+        const electionEnded = election.end_date
+            ? new Date(election.end_date) < new Date()
+            : false;
+        const endpoint = electionEnded
+            ? `${API_BASE_URL}/vote/turso/history/${electionId}`
+            : `${API_BASE_URL}/vote/redis/history/${electionId}`;
+
+        const votesRes = await fetch(`${endpoint}?limit=100&offset=0`, {
+            headers: {
+                Authorization: `Bearer ${localStorage.getItem("user_token")}`,
+            },
+        });
+
+        if (!votesRes.ok)
+            throw new Error(`Failed to fetch votes: ${votesRes.statusText}`);
+        votes = await votesRes.json();
+
+        processDataAndRenderBarCharts();
+    }
+
+    function setupWebSocket() {
+        ws = new WebSocket("ws://localhost:3000/live/votes");
+
+        ws.onmessage = (event) => {
+            try {
+                const newVote = JSON.parse(event.data);
+                console.log(newVote);
+
+                votes.push(newVote);
+                processDataAndRenderBarCharts();
+            } catch (err) {
+                console.error("Invalid WS message", err);
+            }
+        };
+
+        ws.onerror = (err) => {
+            console.error("WebSocket error", err);
+        };
+
+        ws.onclose = () => {
+            console.log("WebSocket closed");
+        };
+    }
+
     function processDataAndRenderBarCharts() {
+        Object.values(barChartInstances).forEach((chart) => {
+            if (chart) chart.destroy();
+        });
+        barChartInstances = {};
         const voteCounts = {};
         votes.forEach((vote) => {
             voteCounts[vote.candidate_id] =
@@ -136,7 +189,7 @@
             return {
                 name: postName,
                 candidates: postCandidates,
-                totalVotesInPost: totalVotesInPost,
+                totalVotesInPost,
             };
         });
 
@@ -149,7 +202,6 @@
 
     function renderBarChart(postName, postCandidates) {
         const winner = postCandidates.length > 0 ? postCandidates[0] : null;
-
         const canvasId = `bar-chart-${postName.replace(/\s+/g, "-")}`;
         const ctx = document.getElementById(canvasId);
         if (!ctx) {
@@ -194,9 +246,7 @@
                     },
                     tooltip: {
                         callbacks: {
-                            label: function (context) {
-                                return `Votes: ${context.raw}`;
-                            },
+                            label: (context) => `Votes: ${context.raw}`,
                         },
                     },
                 },
@@ -211,6 +261,7 @@
                 },
             },
         });
+
         barChartInstances[postName] = chart;
     }
 </script>
@@ -232,6 +283,7 @@
         style="clip-path: polygon(74.1% 44.1%, 100% 61.6%, 97.5% 26.9%, 85.5% 0.1%, 80.7% 2%, 72.5% 32.5%, 60.2% 62.4%, 52.4% 68.1%, 47.5% 58.3%, 45.2% 34.5%, 27.5% 76.7%, 0.1% 64.9%, 17.9% 100%, 27.6% 76.8%, 76.1% 97.7%, 74.1% 44.1%)"
     ></div>
 </div>
+
 <Navbar />
 
 <div class="container mx-auto px-4 py-8">
@@ -285,62 +337,38 @@
                 </div>
             </div>
             {#if election.description}
-                <p class="mt-4">
-                    <span class="font-medium">Description:</span>
-                    {election.description}
-                </p>
+                <p class="mt-4">{election.description}</p>
             {/if}
         </div>
 
         {#each postsWithCandidatesAndVotes as postData (postData.name)}
-            <div
-                class="bg-white rounded-lg p-6 mb-8 border border-2"
-                transition:fade
-            >
-                <h2 class="text-2xl uppercase font-bold mb-6 text-center">
-                    {postData.name} Results
+            <div class="bg-white rounded-lg p-6 mb-8 border" in:fade out:fade>
+                <h2 class="text-xl font-semibold mb-4 uppercase tracking-wide">
+                    {postData.name}
                 </h2>
-
-                <div class="mb-8">
-                    <div class="w-full h-96">
-                        <canvas
-                            id="bar-chart-{postData.name.replace(/\s+/g, '-')}"
-                        ></canvas>
-                    </div>
+                <div class="chart-container relative h-64">
+                    <canvas
+                        id={"bar-chart-" + postData.name.replace(/\s+/g, "-")}
+                    ></canvas>
                 </div>
 
-                <div class="mb-8">
-                    <div class="flex flex-wrap justify-center gap-6">
-                        {#each postData.candidates as candidate (candidate.candidate_id)}
-                            <CandidatePieChartCard
-                                {candidate}
-                                totalVotesInPost={postData.totalVotesInPost}
-                            />
-                        {/each}
-                        {#if postData.candidates.length === 0}
-                            <p class="text-gray-500">
-                                No candidates found for this post.
-                            </p>
-                        {/if}
-                    </div>
+                <div class="mt-6 grid grid-cols-1 md:grid-cols-3 gap-6">
+                    {#each postData.candidates as candidate (candidate.candidate_id)}
+                        <CandidatePieChartCard
+                            {candidate}
+                            election_id={election.election_id}
+                            totalVotesInPost={postData.totalVotesInPost}
+                        />
+                    {/each}
                 </div>
             </div>
         {/each}
-        {#if postsWithCandidatesAndVotes.length === 0 && !loading}
-            <div class="text-center py-8">
-                <p class="text-gray-600">
-                    No posts or candidate data found for this election.
-                </p>
-            </div>
-        {/if}
     {/if}
-    <div
-        class="absolute inset-x-0 top-[calc(100%-13rem)] -z-10 transform-gpu overflow-hidden blur-3xl sm:top-[calc(100%-30rem)]"
-        aria-hidden="true"
-    >
-        <div
-            class="relative left-[calc(50%+3rem)] aspect-1155/678 w-[36.125rem] -translate-x-1/2 bg-linear-to-tr from-[#ff80b5] to-[#9089fc] opacity-30 sm:left-[calc(50%+36rem)] sm:w-[72.1875rem]"
-            style="clip-path: polygon(74.1% 44.1%, 100% 61.6%, 97.5% 26.9%, 85.5% 0.1%, 80.7% 2%, 72.5% 32.5%, 60.2% 62.4%, 52.4% 68.1%, 47.5% 58.3%, 45.2% 34.5%, 27.5% 76.7%, 0.1% 64.9%, 17.9% 100%, 27.6% 76.8%, 76.1% 97.7%, 74.1% 44.1%)"
-        ></div>
-    </div>
 </div>
+
+<style>
+    .chart-container canvas {
+        max-width: 100% !important;
+        max-height: 400px !important;
+    }
+</style>

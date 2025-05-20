@@ -20,8 +20,9 @@ func main() {
 	}))
 
 	db.InitTurso()
-	// db.InitRedis()
 	defer db.CloseTurso()
+	db.InitRedis()
+	defer db.CloseRedis()
 
 	routes.SetupRoutes(app)
 
