@@ -35,15 +35,15 @@ func CastRedisVote(c *fiber.Ctx) error {
 	}
 
 	// Check if already voted
-	exists, err := operations.HasAlreadyVotedRedis(voterCardID, votes[0].ElectionID)
-	if err != nil {
-		return fiber.NewError(fiber.StatusInternalServerError, "Failed to check vote status")
-	}
-	if exists {
-		return c.Status(fiber.StatusConflict).JSON(fiber.Map{
-			"error": "You have already voted in this election",
-		})
-	}
+	// exists, err := operations.HasAlreadyVotedRedis(voterCardID, votes[0].ElectionID)
+	// if err != nil {
+	// 	return fiber.NewError(fiber.StatusInternalServerError, "Failed to check vote status")
+	// }
+	// if exists {
+	// 	return c.Status(fiber.StatusConflict).JSON(fiber.Map{
+	// 		"error": "You have already voted in this election",
+	// 	})
+	// }
 
 	for _, vote := range votes {
 		vote.VoterCardID = voterCardID

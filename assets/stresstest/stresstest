@@ -1,0 +1,6 @@
+hey -n 50000 -c 2000 -m POST \
+  -H "Content-Type: application/json" \
+  -H "Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJjaXRpemVuc2hpcCI6IjIyLTIyLTIyLTIyMjIyIiwiZXhwIjoxNzQ3ODk1NTM1LCJyb2xlIjoidXNlciIsInVzZXJfaWQiOjIsInZvdGVyX2NhcmQiOiIyMjIyMjIyMjIyIn0.9ZVlnE97SWSNdSk57zc2Jung9HYD8z1cpthLxrOkw94" \
+  -d '[{"election_id":2,"voter_card_id":"2222222222","candidate_id":3,"cast_unix_time":1747714502},{"election_id":2,"voter_card_id":"2222222222","candidate_id":4,"cast_unix_time":1747714502}]' \
+  http://localhost:3000/vote/redis
+

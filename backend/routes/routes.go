@@ -36,7 +36,7 @@ func SetupRoutes(app *fiber.App) {
 	authRoutes.Post("/delete", rateLimiter, auth.HandleDeleteUser)
 
 	// Appeal Status Routes (Doesnt Require JWT)
-	statusAppealRoutes := app.Group("/status")
+	statusAppealRoutes := app.Group("/status", rateLimiter)
 	handlers.RegisterStatusRoutes(statusAppealRoutes)
 
 	appealRoutes := app.Group("/appeal")
